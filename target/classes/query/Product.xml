@@ -2,9 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.msix.admin.product.dao.ProductDAO">
 	
-	<!-- 상품 리스트 기본 조회 -->
+	<!-- 상품 리스트 기본 조회 
 	<select id="productList" parameterType="product" resultType="product">
-		select *
-		from product
-	</select> 
+		select product.p_no, i_thumb, p_type, p_name, to_char(p_price, 'L9,999,999') as p_price, p_cnt, p_udate
+		from product inner join p_image
+		on product.p_no = p_image.p_no
+        order by p_no desc 
+	</select> -->
+	
+	<sql id="productSearch">
+		<if test="search=='p_info'">
+			<![CDATA[p_info LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_type'">
+			<![CDATA[p_type LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_name'">
+			<![CDATA[p_name LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_udate'">
+			<![CDATA[p_udate LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_no'">
+			<![CDATA[p_no LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+	</sql>
+	
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) 쿼리문 수정해야됨 이거 보드임-->
+	<select id="productList" parameterType="product" resultType="product">
+		<![CDATA[
+		select b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, b_thumb, b_file
+		from ( select /*+ INDEX_DESC(spring_board spring_board_pk) */
+       		   rownum as rnum, b_num, b_name, b_title, b_content, b_date, b_thumb, b_file
+			   from spring_board
+			   where ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="productSearch" />
+				</trim>
+		<![CDATA[
+				rownum <= #{pageNum}*#{amount}
+			)productList
+			WHERE rnum > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+	
+	<!-- 전체 레코드 수 조회 
+	<select id="productListCnt" parameterType="product" resultType="int">
+		select count(*) from product
+		<trim prefix=" where (" suffix=")">
+			<include refid="productSearch" />
+		</trim>	
+	</select> -->
 </mapper>

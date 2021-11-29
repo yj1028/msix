@@ -16,6 +16,7 @@ public class ProductServiceImpl implements ProductService {
 	@Setter(onMethod_ = @Autowired)
 	private ProductDAO productDAO;
 	
+	// 상품목록 구현
 	@Override
 	public List<ProductVO> productList(ProductVO pvo) {
 		List<ProductVO> list = productDAO.productList(pvo);

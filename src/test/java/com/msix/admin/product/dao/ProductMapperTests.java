@@ -25,7 +25,6 @@ public class ProductMapperTests {
 	public void testProductList() {
 		ProductVO pvo = new ProductVO();
 		
-		
 		List<ProductVO> list = productDAO.productList(pvo);
 		for(ProductVO vo : list) {
 			log.info(vo);

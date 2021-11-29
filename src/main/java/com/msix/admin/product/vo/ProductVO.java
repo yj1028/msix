@@ -1,5 +1,7 @@
 package com.msix.admin.product.vo;
 
+import com.msix.common.vo.CommonVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,11 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ProductVO {
+public class ProductVO extends CommonVO{
 	private String p_no = "";
 	private String p_type = "";
 	private String p_name = "";
-	private int p_price = 0;
+	private String p_price = "";
 	private int p_cnt = 0;
 	private String p_info = "";
 	private String p_date;

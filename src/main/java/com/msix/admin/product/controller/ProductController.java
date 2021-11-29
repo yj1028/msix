@@ -22,6 +22,7 @@ public class ProductController {
 	
 	private ProductService productService;
 	
+	/* 상품목록 구현하기(페이징 처리 제외 목록 조회) */
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
 	public String productList(@ModelAttribute("data") ProductVO pvo, Model model) {
 		log.info("productList 호출 성공");
