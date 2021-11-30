@@ -10,6 +10,7 @@
         order by p_no desc 
 	</select> -->
 	
+	<!-- 검색 조건 -->
 	<sql id="productSearch">
 		<if test="search=='p_info'">
 			<![CDATA[p_info LIKE '%'||#{keyword}||'%' ]]>
@@ -28,29 +29,29 @@
 		</if>
 	</sql>
 	
-	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) 쿼리문 수정해야됨 이거 보드임-->
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
-		select b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, b_thumb, b_file
-		from ( select /*+ INDEX_DESC(spring_board spring_board_pk) */
-       		   rownum as rnum, b_num, b_name, b_title, b_content, b_date, b_thumb, b_file
-			   from spring_board
+		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, to_char(p_udate, 'YYYY-MM-DD') AS p_udate
+		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_udate
+			   from product
 			   where ]]>
 				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
 					<include refid="productSearch" />
 				</trim>
 		<![CDATA[
-				rownum <= #{pageNum}*#{amount}
+				rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
 			)productList
 			WHERE rnum > (#{pageNum}-1)*#{amount}
 		]]>
 	</select>
 	
-	<!-- 전체 레코드 수 조회 
+	<!-- 전체 레코드 수 조회  -->
 	<select id="productListCnt" parameterType="product" resultType="int">
 		select count(*) from product
 		<trim prefix=" where (" suffix=")">
 			<include refid="productSearch" />
 		</trim>	
-	</select> -->
+	</select> 
 </mapper>

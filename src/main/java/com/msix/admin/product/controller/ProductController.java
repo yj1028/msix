@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.msix.admin.product.service.ProductService;
 import com.msix.admin.product.vo.ProductVO;
+import com.msix.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -26,10 +27,28 @@ public class ProductController {
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
 	public String productList(@ModelAttribute("data") ProductVO pvo, Model model) {
 		log.info("productList 호출 성공");
-		
+		// 전체 레코드 조회
 		List<ProductVO> productList = productService.productList(pvo);
 		model.addAttribute("productList", productList);
 		
+		// 전체 레코드 수 구현
+		int total = productService.productListCnt(pvo);
+		
+		// 페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		
+		// 출력되는 글번호 제어
+		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
+		model.addAttribute("count", count);
+		
 		return "product/productList";
+	}
+	
+	/* 상품등록 폼 출력하기 */
+	@RequestMapping(value = "/insertForm")
+	public String insertForm() {
+		log.info("writeForm 호출 성공");
+		
+		return "product/insertForm";
 	}
 }

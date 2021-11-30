@@ -89,6 +89,12 @@
 					});
 					$("#detailForm").submit();
 				});
+				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
 			}); // 최상위 $종료
 			
 			/* 검색을 위한 실질적인 처리 함수 */
@@ -112,8 +118,8 @@
 			<%-- =================== 검색기능 시작 =================== --%>
 			<div id="productSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
-					<%-- <input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}" />
-					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}" /> --%>
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}" />
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}" />
 					<div class="form-group">
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
@@ -170,9 +176,30 @@
 					</tbody>
 				</table>
 			</div>
-			<%-- =================== 리스트 종료 =================== --%>	
+			<%-- =================== 리스트 종료 =================== --%>
+			<%-- ========== 페이징 출력 시작 ========== --%>
+			<div class="text-center">
+				<ul class="pagination">
+				    <c:if test="${pageMaker.prev}">
+				    	<li class="paginate_button previous">
+				    		<a href="${pageMaker.startPage - 1}">Previous</a>
+				    	</li>
+				    </c:if>
+				    <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+				    	<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
+				    		<a href="${num}">${num}</a>
+				    	</li>
+				    </c:forEach>
+				    <c:if test="${pageMaker.next}">
+				    	<li class="paginate_button next">
+				    		<a href="${pageMaker.endPage + 1}">Next</a>
+				    	</li>
+				    </c:if>
+				</ul>
+			</div>
+			<%-- ========== 페이징 출력 종료 ========== --%>	
 			<%-- ========== 글쓰기 버튼 출력 시작 ========== --%>
-			<div class="text-right">
+			<div class="text-left">
 				<input class="btn btn-default" type="button" value="상품등록" id="insertFormBtn" />
 			</div>
 			<%-- ========== 글쓰기 버튼 출력 종료 ========== --%>

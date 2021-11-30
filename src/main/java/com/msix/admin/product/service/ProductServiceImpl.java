@@ -23,5 +23,11 @@ public class ProductServiceImpl implements ProductService {
 		
 		return list;
 	}
+	
+	// 전체 레코드 수 구현
+	@Override
+	public int productListCnt(ProductVO pvo) {
+		return productDAO.productListCnt(pvo);
+	}
 
 }
