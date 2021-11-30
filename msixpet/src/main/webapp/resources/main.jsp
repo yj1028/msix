@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,30 +14,28 @@
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Font Awesome -->
-
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
      <!-- Preloader -->
-    <link rel="stylesheet" href="/resources/include/css/preloader.css" type="text/css" media="screen, print"/>
+    <link rel="stylesheet" href="/resources/include/dist2/css/preloader.css" type="text/css" media="screen, print"/>
 
     <!-- Icon Font-->
-    <link rel="stylesheet" href="/resources/include/css/style.css">
-    <link rel="stylesheet" href="/resources/include/css/owl.carousel.css">
-    <link rel="stylesheet" href="/resources/include/css/owl.theme.default.css">
+    <link rel="stylesheet" href="/resources/include/dist2/css/style.css">
+    <link rel="stylesheet" href="/resources/include/dist2/css/owl.carousel.css">
+    <link rel="stylesheet" href="/resources/include/dist2/css/owl.theme.default.css">
     <!-- Animate CSS-->
-    <link rel="stylesheet" href="/resources/include/css/animate.css">
+    <link rel="stylesheet" href="/resources/include/dist2/css/animate.css">
 
     <!-- Bootstrap -->
-    <link href="/resources/include/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/include/dist2/css/bootstrap.min.css" rel="stylesheet">
 
 
 
     <!-- Style -->
-    <link href="/resources/include/css/style.css" rel="stylesheet">
+    <link href="/resources/include/dist2/style.css" rel="stylesheet">
 
     <!-- Responsive CSS -->
-    <link href="/resources/include/css/responsive.css" rel="stylesheet">
+    <link href="/resources/include/dist2/css/responsive.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,7 +66,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                  </button>
-	                  <a class="navbar-brand" href="#"><img src="images/logo.png" alt=""></a>
+	                  <a class="navbar-brand" href="#"><img src="/resources/include/dist2/images/logo.png" alt=""></a>
 	                </div>
 
 	                <!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,13 +89,12 @@
 	                        <div class="home_text wow fadeInUp animated">
 	                            <h2>it’s abdullah noman</h2>
 	                            <p>a user interface and user experience specialist</p>
-	                            <img src="/resources/images/shape.png" alt="">                        
+	                            <img src="/resources/include/dist2/images/shape.png" alt="">                        
 	                        </div>
 	                    </div>
 	                </div>
-	            </div>
-	           
-	        </div>          
+	            </div>            
+	        </div>           
     </header>
 
 
@@ -138,7 +138,7 @@
                 <div class="col-md-12 text-center">
                     <div class="about_title">
                         <h2>About Me</h2>
-                        <img src="/resources/images/shape.png" alt="">
+                        <img src="/resources/include/dist2/images/shape.png" alt="">
                     </div>
                 </div>
             </div>
@@ -241,7 +241,7 @@
 	                    </div>
 	                    <div class="col-md-5 col-md-offset-1 wow fadeInRight animated">
 	                        <div class="imac">
-	                            <img src="/resources/images/imac.png" alt="">
+	                            <img src="/resources/include/dist2/images/imac.png" alt="">
 	                        </div>
 	                    </div>
 	                </div>
@@ -255,7 +255,7 @@
                 <div class="col-md-12 text-center">
                     <div class="work_title  wow fadeInUp animated">
                         <h1>Latest Works</h1>
-                        <img src="images/shape.png" alt="">
+                        <img src="/resources/include/dist2/images/shape.png" alt="">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna <br> aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</p>
                     </div>
                 </div>
@@ -263,49 +263,7 @@
         </div>
     </section>
     
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3  wow fadeInLeft animated">
-                    <div class="single_contact_info">
-                        <h2>Call Me</h2>
-                        <p>+88 00 123 456 01</p>
-                    </div>
-                    <div class="single_contact_info">
-                        <h2>Email Me</h2>
-                        <p>Hello@abdullahnoman.com</p>
-                    </div>
-                    <div class="single_contact_info">
-                        <h2>Address</h2>
-                        <p>216 Street Address, Barisal, BD</p>
-                    </div>
-                </div>
-                <div class="col-md-9  wow fadeInRight animated">
-                    <form class="contact-form" action="">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="name" placeholder="Name">
-                                <input type="email" class="form-control" id="email" placeholder="Email">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject">                                
-                            </div>
-                            <div class="col-md-6">
-                                <textarea class="form-control" id="message" rows="25" cols="10" placeholder="  Message Texts..."></textarea>
-                                <button type="button" class="btn btn-default submit-btn form_submit">SEND MESSAGE</button>                                
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <div class="work-with   wow fadeInUp animated">
-                        <h3>looking forward to hearing from you!</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    
 
 
 <footer>
@@ -314,7 +272,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="footer_logo   wow fadeInUp animated">
-                        <img src="/resources/images/logo.png" alt="">
+                        <img src="/resources/include/dist2/images/logo.png" alt="">
                     </div>
                 </div>
             </div>
@@ -363,11 +321,11 @@
 ============================== -->
 
 
-    <script src="/resources/include/dist/js/jquery.min.js"></script>
-    <script src="/resources/include/dist/js/bootstrap.min.js"></script>
-    <script src="/resources/include/dist/js/owl.carousel.js"></script>
-    <script src="/resources/include/dist/js/wow.js"></script>
-    <script src="/resources/include/dist/js/script.js"></script>
+    <script src="/resources/include/dist2/js/jquery.min.js"></script>
+    <script src="/resources/include/dist2/js/bootstrap.min.js"></script>
+    <script src="/resources/include/dist2/js/owl.carousel.js"></script>
+    <script src="/resources/include/dist2/js/wow.js"></script>
+    <script src="/resources/include/dist2/js/script.js"></script>
 
 
 

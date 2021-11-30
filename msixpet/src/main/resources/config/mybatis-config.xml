@@ -4,7 +4,7 @@
 
 <!-- resultType과 parameterType에 사용되는 별명 설정 -->
 	<typeAliases>
-		 
+		 <typeAlias type="com.msixpet.client.cart.vo.CartVO" alias="cart"/>
 	</typeAliases>
 	
 </configuration>

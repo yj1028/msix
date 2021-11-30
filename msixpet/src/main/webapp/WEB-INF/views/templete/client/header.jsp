@@ -23,22 +23,22 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                  </button>
-	                  <a class="navbar-brand" href="/"><img src="/resources/include/images/logo.png" alt="">MSIXpet</a>
+	                  <a class="navbar-brand" href="/"><img src="/resources/include/dist2/images/logo.png" alt="">MSIXpet</a>
 	                </div>
 
 	                <!-- Collect the nav links, forms, and other content for toggling -->
 	                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	                  <ul class="nav navbar-nav navbar-right">
-	                    <li><a href="/">Main</a></li>
+	                  	<li><a href="/">메인화면</a></li>
+	                    <li><a href="/">로그인</a></li>
 	                    <li><a href="/">회원가입</a></li>
-	                    <li><a href="/">장바구니</a></li>
 	                    <li><a href="/">마이페이지</a></li>
 	                    <li><a href="/">공지사항</a></li>
-	                    <li><a href="/">Q & A</a></li>
-	                    
-	                  <li <c:if test="${fn:containsIgnoreCase(clientUri, '/login')}">class="active"</c:if>>
-			         	<a href="/login/loginForm">로그인</a>
-			         </li>
+	                    <li><a href="/">장바구니</a></li>
+	                    <li <c:if test="${fn:containsIgnoreCase(clientUri, '/cart')}">class="active"</c:if>>
+			         	<a href="/cart/cart">장바구니</a>
+			         	</li>
+	      
 	                  </ul>
 	                </div><!-- /.navbar-collapse -->
 	              </div><!-- /.container -->
@@ -48,20 +48,14 @@
 	                <div class="row">
 	                    <div class="col-md-12 text-center">
 	                        <div class="home_text wow fadeInUp animated">
-	                            <img src="/resources/include/images/shape.png" alt="">                        
+	                            <h2>itâs abdullah noman</h2>
+	                            <p>a user interface and user experience specialist</p>
+	                            <img src="/resources/include/dist2/images/shape.png" alt="">                        
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
-
-	            <div class="container">
-	                <div class="row">
-	                    <div class="col-md-12 text-center">
-	                        <div class="scroll_down">
-                            <a href="#SERVICE"><img src="/resources/include/images/scroll.png" alt=""></a>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>            
 	        </div>          
     </header>
+    
+	            
