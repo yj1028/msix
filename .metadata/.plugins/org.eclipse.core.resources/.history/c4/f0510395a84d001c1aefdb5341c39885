@@ -1,0 +1,77 @@
+package com.spring.client.board.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.client.board.dao.BoardDAO;
+import com.spring.client.board.vo.BoardVO;
+
+import lombok.Setter;
+
+@Service//인스턴스 만들기 위한 어노테이션
+public class BoardServiceImpl implements BoardService {
+	
+	//의존객체 외부에서 주입하기
+	@Setter(onMethod_ = @Autowired )
+	private BoardDAO boardDAO;
+	
+	//글목록 구현하는 로직
+	@Override
+	public List<BoardVO> boardList(BoardVO bvo){
+		List<BoardVO> list = null;
+		list = boardDAO.boardList(bvo);
+		return list;
+	}
+	//반환형 void로 설정해도 됨(return X)
+	public int boardInsert(BoardVO bvo) {
+		int result = 0;
+		result = boardDAO.boardInsert(bvo);
+		return result;
+	}
+	//상세 게시글 구현
+	public BoardVO boardDetail(BoardVO bvo) {
+		BoardVO detail = null;
+		detail = boardDAO.boardDetail(bvo);
+		if(detail!=null) { //글 내용 줄바꿈 설정 제어 처리
+			detail.setB_content(detail.getB_content().toString().replaceAll("\n", "<br />"));
+		}
+		return detail;
+	}
+	
+	//비밀번호 확인 구현
+	@Override
+	public int pwdConfirm(BoardVO bvo) {
+		int result = 0;
+		result = boardDAO.pwdConfirm(bvo);
+		return result;
+	}
+	
+	public BoardVO updateForm(BoardVO bvo) {
+		BoardVO update = null;
+		update = boardDAO.boardDetail(bvo);
+		return update;
+		
+	}
+	//수정 확인 구현
+	public int boardUpdate(BoardVO bvo) {
+		int result = 0 ;
+		result = boardDAO.boardUpdate(bvo);
+		return result;
+	}
+	
+	//게시글 삭제 구현
+	public int boardDelete(BoardVO bvo) {
+		int result = 0;
+		result = boardDAO.boardDelete(bvo);
+		return result;
+	}
+	
+	//전체 레코드 수 구현
+	@Override
+	public int boardListCnt(BoardVO bvo) {
+		return boardDAO.boardListCnt(bvo);
+	}
+	
+}

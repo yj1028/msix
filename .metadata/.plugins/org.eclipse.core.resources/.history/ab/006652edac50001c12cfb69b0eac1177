@@ -1,0 +1,5 @@
+package com.spring.client.board.service;
+
+public class ReplyServiceImpl implements ReplyService {
+
+}

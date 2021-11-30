@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- tiles 설정파일 -->
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+  
+<tiles-definitions>
+	<definition name="content" template="/WEB-INF/views/template/admin/contents.jsp">
+		<put-attribute name="title" value="관리자 페이지" />
+		<put-attribute name="head" value="/WEB-INF/views/template/admin/head.jsp" />
+		<put-attribute name="contents" value="" />
+		<put-attribute name="side" value="/WEB-INF/views/template/admin/side.jsp" />
+	</definition>
+	
+	<definition name="product/*" extends="content"> 
+		<put-attribute name="title" value="상품관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/product/{1}.jsp" />
+	</definition>
+	
+	<definition name="main/*" extends="content"> 
+		<put-attribute name="title" value="기본페이지" />
+		<put-attribute name="contents" value="/WEB-INF/views/main/{1}.jsp" />
+	</definition>
+</tiles-definitions>

@@ -1,0 +1,11 @@
+package com.spring.client.reply.dao;
+
+import lombok.Setter;
+
+public class ReplyMapperTests {
+	
+	@Setter
+	private ReplyDAO replyDAO;
+	
+	
+}

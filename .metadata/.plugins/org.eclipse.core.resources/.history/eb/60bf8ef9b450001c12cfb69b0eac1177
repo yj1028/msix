@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.reply.dao.ReplyDAO">
+	
+	
+	<select id="replyList" resultType="reply">
+		select r_num, b_num, r_name, r_content, to_char(r_date,'YYYY-MM-DD')as r_date 
+		from spring_reply
+		order by r_num desc
+	</select> 
+	
+</mapper>

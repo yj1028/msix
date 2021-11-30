@@ -1,0 +1,5 @@
+package com.msixpet.client.cart.vo;
+
+public class CartVO {
+
+}

@@ -1,0 +1,31 @@
+package com.spring.client.reply.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.spring.client.reply.dao.ReplyDAO;
+import com.spring.client.reply.vo.ReplyVO;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor//인스턴스 가져오는 어노테이션(생성자로 주입한다.)
+public class ReplyServiceImpl implements ReplyService {
+	
+	private ReplyDAO replyDAO;
+	
+	// 댓글목록 구현
+	@Override
+	public List<ReplyVO> replyList(Integer b_num){
+		List<ReplyVO> list=null;
+		list = replyDAO.replyList(b_num);
+		return list;
+	}
+	
+	public int relpyInsert(ReplyVO rvo) {
+		int result = 0;
+		
+	}
+
+}

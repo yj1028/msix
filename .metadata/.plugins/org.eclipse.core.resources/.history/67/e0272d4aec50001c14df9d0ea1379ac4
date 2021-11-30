@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>BRANDY</title>
+	    <!-- Google Font -->
+	    <link href='http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800' rel='stylesheet' type='text/css'>
+	    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	
+	    <!-- Font Awesome -->
+	
+	
+	    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
+	     <!-- Preloader -->
+	    <link rel="stylesheet" href="/resources/include/dist/css/preloader.css" type="text/css" media="screen, print"/>
+	
+	    <!-- Icon Font-->
+	    <link rel="stylesheet" href="/resources/include/dist/style.css">
+	    <link rel="stylesheet" href="/resources/include/dist/css/owl.carousel.css">
+	    <link rel="stylesheet" href="/resources/include/dist/css/owl.theme.default.css">
+	    <!-- Animate CSS-->
+	    <link rel="stylesheet" href="/resources/include/dist/css/animate.css">
+	
+	    <!-- Bootstrap -->
+	    <link href="/resources/include/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	
+	
+	    <!-- Style -->
+	    <link href="/resources/include/dist/css/style.css" rel="stylesheet">
+	
+	    <!-- Responsive CSS -->
+	    <link href="/resources/include/dist/css/responsive.css" rel="stylesheet">
+	    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	        <script src="js/lte-ie7.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript">
+			$("#login").click(function(){
+				location.href = "/login/login";
+			});
+		</script>
+	</head>
+	
+	<body>
+	                <!-- Preloader -->
+	                <div id="preloader">
+	                    <div id="status">&nbsp;</div>
+	                </div>
+	
+	
+	
+	
+	    <header id="HOME" style="background-position: 50% -125px;">
+		        <div class="section_overlay">
+		            <nav class="navbar navbar-default navbar-fixed-top">
+		              <div class="container">
+		                <!-- Brand and toggle get grouped for better mobile display -->
+		                <div class="navbar-header">
+		                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		                    <span class="sr-only">Toggle navigation</span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                  </button>
+		                  <a class="navbar-brand" href="#"><img src="images/logo.png" alt=""></a>
+		                </div>
+	
+		                <!-- Collect the nav links, forms, and other content for toggling -->
+		                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		                  <ul class="nav navbar-nav navbar-right">
+		                    <li><a href="">Main</a></li>
+		                    <li><a href="">회원가입</a></li>
+		                    <li><a href="login">로그인</a></li>
+		                    <li><a href="">마이페이지</a></li>
+		                    <li><a href="">공지사항</a></li>
+		                    <li><a href="">Q & A</a></li>
+		                  </ul>
+		                </div><!-- /.navbar-collapse -->
+		              </div><!-- /.container -->
+		            </nav> 
+	
+		            <div class="container">
+		                <div class="row">
+		                    <div class="col-md-12 text-center">
+		                        <div class="home_text wow fadeInUp animated">
+		                            <img src="images/shape.png" alt="">                        
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+	
+		            <div class="container">
+		                <div class="row">
+		                    <div class="col-md-12 text-center">
+		                        <div class="scroll_down">
+	                            <a href="#SERVICE"><img src="images/scroll.png" alt=""></a>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>            
+		        </div>  
+		    </section>         
+	    </header>
+	
+	
+	    <section class="services" id="SERVICE">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-3 text-center">
+	                    <div class="single_service wow fadeInUp" data-wow-delay="1s">
+	                        <i class="icon-pencil"></i>
+	                        <h2>베스트상품</h2>
+	                        <p>반려동물을 직접 느껴보세요</p>
+	                    </div>
+	                </div>
+	                <div class="col-md-3 text-center">
+	                    <div class="single_service wow fadeInUp" data-wow-delay="2s">
+	                        <i class="icon-gears"></i>
+	                        <h2>신상품소개</h2>
+	                        <p>'색'다른 친구를 원한다면</p>
+	                    </div>
+	                </div>
+	                <div class="col-md-3 text-center">
+	                    <div class="single_service wow fadeInUp" data-wow-delay="3s">
+	                        <i class="icon-camera"></i>
+	                        <h2>운영자추천</h2>
+	                        <p>누구나 쉽게 새 가족을 맞이할 수 있도록 구성했습니다</p>
+	                    </div>
+	                </div>
+	                <div class="col-md-3 text-center">
+	                    <div class="single_service wow fadeInUp" data-wow-delay="4s">
+	                        <i class="icon-magnifying-glass"></i>
+	                        <h2>공지사항</h2>
+	                        <p>홈페이지 공지사항</p>
+	                    </div>
+	                </div>
+	            </div>            
+	        </div>
+	    </section>
+	    <section class="about_us_area" id="ABOUT">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-12 text-center">
+	                    <div class="about_title">
+	                        <h2>왜 더 저렴한가요?</h2>
+	                        <img src="images/shape.png" alt="">
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-4  wow fadeInLeft animated">
+	                	<img src="/resources/images/prog005.png">
+	                </div>
+	                <div class="col-md-4  wow fadeInRight animated">
+	                    <p class="about_us_p">수도 없이 들은 질문입니다.<br/>저희는 분양하는 동물과 용품을 직접 수입하고, 직접 생산합니다. <br /><br />작은 차이가 큰 변화를 만듭니다.</p>
+	                </div>
+	                <div class="col-md-4  wow fadeInRight animated">
+	                    <img src="/resources/images/prog007.png">
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    
+	
+	    <section class="testimonial text-center wow fadeInUp animated" id="TESTIMONIAL">
+	        <div class="container">
+	            <div class="icon">
+	                <i class="icon-quote"></i>
+	            </div>
+	            <div class="owl-carousel">
+	                <div class="single_testimonial text-center wow fadeInUp animated">
+	                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores<br/> eos qui ratione voluptatem sequi nesciunt.</p>
+	                    <h4>-JOHN DOE</h4>
+	                </div>
+	                <div class="single_testimonial text-center">
+	                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius<br/> modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+	                    <h4>-JOHN SMITH</h4>
+	                </div>
+	            </div>            
+	        </div>
+	    </section>
+	
+	
+	
+	
+	
+	<footer>
+	    <div class="container">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-12 text-center">
+	                    <div class="copyright_text   wow fadeInUp animated">
+	                       	 <p>COMPANY : 주식회사 줄스OWNER : 김동영BUSINESS LICENSE : 873-88-01730 MALL-ORDER LICENSE : 제 2014-서울양천-0758호
+								ADDRESS : 137841 서울특별시 서초구 서초대로 134 B1TEL : 02-6071-9253
+								CPO : 김동영 (zool_@naver.com)CONTACT US : zoophobiaa@naver.com
+								COPYRIGHT © 줄스 ALL RIGHTS RESERVED. HOSTING CAFE24 | DESIGNED By DFLOOR</p>
+	                        <p></p>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</footer>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- =========================
+	     SCRIPTS 
+	============================== -->
+	
+	
+	    <script src="/resources/include/dist/js/jquery.min.js"></script>
+	    <script src="/resources/include/dist/js/bootstrap.min.js"></script>
+	    <!-- <script src="/resources/include/dist/js/jquery.nicescroll.js"></script> -->
+	    <script src="/resources/include/dist/js/owl.carousel.js"></script>
+	    <script src="/resources/include/dist/js/wow.js"></script>
+	    <script src="/resources/include/dist/js/script.js"></script>
+	
+	
+	
+	
+	</body>
+
+</html>
