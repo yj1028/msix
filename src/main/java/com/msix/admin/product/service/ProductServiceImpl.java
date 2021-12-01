@@ -29,5 +29,26 @@ public class ProductServiceImpl implements ProductService {
 	public int productListCnt(ProductVO pvo) {
 		return productDAO.productListCnt(pvo);
 	}
+	
+	// 상품 등록 구현
+	@Override
+	public int productInsert(ProductVO pvo) {
+		int result = 0;
+		result = productDAO.productInsert(pvo);
+		
+		return result;
+	}
+	
+	// 상세페이지 구현
+	@Override
+	public ProductVO productDetail(ProductVO pvo) {
+		ProductVO detail = null;
+		detail = productDAO.productDetail(pvo);
+		if(detail != null) {
+			detail.setP_info(detail.getP_info().toString().replace("\n", "<br />"));
+		}
+		
+		return detail;
+	}
 
 }

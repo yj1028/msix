@@ -53,5 +53,20 @@
 		<trim prefix=" where (" suffix=")">
 			<include refid="productSearch" />
 		</trim>	
-	</select> 
+	</select>
+	
+	<!-- 상품 등록 --> 
+	<insert id="productInsert" parameterType="product">
+		insert into product(p_no, p_name, p_type, p_info, p_price, p_cnt)
+		values(PRODUCT_SEQ.nextval, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt})
+	</insert>
+	
+	<!-- 상세 페이지를 위한 상품 조회 -->
+	<select id="productDetail" parameterType="product" resultType="product">
+		select p_no, p_name, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') AS p_date,
+		to_char(p_udate, 'YYYY-MM-DD HH24:MI:SS') AS p_udate, p_type, p_info, p_cnt, 
+		to_char(p_price, 'L999,999,999') AS p_price
+		from product
+		where p_no = #{p_no}
+	</select>
 </mapper>

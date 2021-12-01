@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,5 +52,34 @@ public class ProductController {
 		log.info("writeForm 호출 성공");
 		
 		return "product/insertForm";
+	}
+	
+	/* 상품 등록 구현하기*/
+	@PostMapping(value = "/productInsert")
+	public String productInsert(@ModelAttribute ProductVO pvo, Model model) {
+		log.info("productInsert 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = productService.productInsert(pvo);
+		if(result == 1) {
+			url = "/product/productList";
+		} else {
+			url = "/product/insertForm";
+		}
+		
+		return "redirect:" + url;
+	}
+	
+	/* 상품 상세보기 구현 */
+	@GetMapping("/productDetail")
+	public String productDetail(@ModelAttribute("data") ProductVO pvo, Model model) {
+		log.info("productDetail 호출 성공");
+		
+		ProductVO detail = productService.productDetail(pvo);
+		model.addAttribute("detail", detail);
+		
+		return "product/productDetail";
 	}
 }

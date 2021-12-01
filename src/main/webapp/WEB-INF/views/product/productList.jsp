@@ -12,11 +12,6 @@
 		
 		<link rel="shortcut icon" href="/resources/images/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/icon.png" />
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="/resources/include/dist/css/bootstrap.min.css">
-		
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="/resources/include/dist/css/bootstrap-theme.min.css">
 		
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -29,8 +24,7 @@
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-		<script src="/resources/include/dist/js/bootstrap.min.js"></script>
+		
 		<script type="text/javascript">
 			$(function(){
 				
@@ -78,17 +72,18 @@
 					location.href="/product/insertForm"
 				});
 				
-				/* 제목 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
+				/* 상품명 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
 				$(".goDetail").click(function(){
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
+					console.log("글번호 : " + p_no);
 					// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
 					$("#detailForm").attr({
 						"method":"get",
 						"action":"/product/productDetail"
 					});
 					$("#detailForm").submit();
-				});
+				}); 
 				
 				$(".paginate_button a").click(function(e){
 					e.preventDefault();
@@ -112,7 +107,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<form id="deatailForm">
+			<form id="detailForm">
 				<input type="hidden" id="p_no" name="p_no">
 			</form>
 			<%-- =================== 검색기능 시작 =================== --%>
@@ -145,7 +140,7 @@
 							<th class="text-center">상품번호</th>
 							<!-- <th class="text-center">이미지</th> -->
 							<th class="text-center">상품분류</th>
-							<th class="text-center">상품이름</th>
+							<th class="text-center">상품명</th>
 							<th class="text-center">상품가격</th>
 							<th class="text-center">재고</th>
 							<th class="text-center">등록일</th> 
@@ -160,7 +155,7 @@
 										<td class="no text-center">${product.p_no}</td>
 										<!-- 썸네일 넣어야함 -->
 										<td class="type text-center">${product.p_type}</td>
-										<td class="goDetail text-center">${product.p_name}</td>
+										<td class="goDetail">${product.p_name}</td>
 										<td class="text-center">${product.p_price}</td>
 										<td class="text-center">${product.p_cnt}</td>
 										<td class="udate text-center">${product.p_udate}</td>

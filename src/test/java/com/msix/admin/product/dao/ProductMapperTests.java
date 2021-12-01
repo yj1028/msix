@@ -35,12 +35,34 @@ public class ProductMapperTests {
 //		}
 //	}
 	
+//	@Test
+//	public void testBoardListCnt() {
+//		ProductVO pvo = new ProductVO();
+//
+//		int result = productDAO.productListCnt(pvo);
+//		log.info("전체 레코드 수 : " + result);
+//	}
+	
+//	@Test
+//	public void testProductInsert() {
+//		ProductVO pvo = new ProductVO();
+//		pvo.setP_name("가고일게코");
+//		pvo.setP_type("Gecko");
+//		pvo.setP_info("가고일게코 입니다.");
+//		pvo.setP_price("120000");
+//		pvo.setP_cnt(3);
+//		
+//		int result = productDAO.productInsert(pvo);
+//		log.info("result : " + result);
+//	}
+	
 	@Test
-	public void testBoardListCnt() {
+	public void testProductDetail() {
 		ProductVO pvo = new ProductVO();
-
-		int result = productDAO.productListCnt(pvo);
-		log.info("전체 레코드 수 : " + result);
+		pvo.setP_no("1");
+		
+		ProductVO vo = productDAO.productDetail(pvo);
+		log.info(vo);
 	}
 	
 }

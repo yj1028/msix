@@ -9,4 +9,8 @@ public interface ProductDAO {
 	
 	public int productListCnt(ProductVO pvo); // 전체 레코드 수
 	
+	public int productInsert(ProductVO pvo); // 상품 등록
+	
+	public ProductVO productDetail(ProductVO pvo); // 상세 페이지 조회
+	
 }
