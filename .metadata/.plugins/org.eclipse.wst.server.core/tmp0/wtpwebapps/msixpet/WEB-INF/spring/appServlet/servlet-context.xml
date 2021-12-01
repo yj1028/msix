@@ -25,7 +25,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean> -->
 	
-	<context:component-scan base-package="com.spring.**" /> 
+	<context:component-scan base-package="com.msixpet.**" /> 
 	
 	<!-- 타일즈(tiles) 설정 - 타일즈를 통해서만 뷰리졸버를 처리한다. -->
 	<!-- <beans:bean id="tilesViewResolver"
