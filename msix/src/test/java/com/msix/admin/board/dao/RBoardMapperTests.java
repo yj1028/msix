@@ -33,21 +33,21 @@ public class RBoardMapperTests {
 		rvo.setQ_no(1);
 		rvo.setR_title("title");
 		rvo.setR_content("content");
-		rvo.setR_cnt(0);
 		
 		rboardDAO.replyInsert(rvo);
 	}
 	
 	public void replyupdate() {
 		RBoardVO rvo = new RBoardVO();
-		rvo.setQ_no(1);
-		rvo.setR_no(1);
+		rvo.setR_no(3);
+		rvo.setR_title("제목 수정");
+		rvo.setR_content("내용 수정");
 		
 		rboardDAO.replyupdate(rvo);
 	}
 	
 	public void replyDelete() {
-		rboardDAO.replyDelete(1);
+		rboardDAO.replyDelete(7);
 	}
 	
 }

@@ -17,27 +17,31 @@ public class RBoardServiceImpl implements RBoardService {
 	private RBoardDAO rboardDAO;
 
 	@Override
-	public List<RBoardVO> replyList(int r_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RBoardVO> replyList(int q_no) {
+		List<RBoardVO> list = null;
+		list = rboardDAO.replyList(q_no);
+		return list;
 	}
 
 	@Override
 	public int replyInsert(RBoardVO rvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result =0;
+		result = rboardDAO.replyInsert(rvo);
+		return result;
 	}
 
 	@Override
 	public int replyupdate(RBoardVO rvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result =0;
+		result = rboardDAO.replyupdate(rvo);
+		return result;
 	}
 
 	@Override
 	public int replyDelete(int r_no) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result =0;
+		result = rboardDAO.replyDelete(r_no);
+		return result;
 	}
 
 	
