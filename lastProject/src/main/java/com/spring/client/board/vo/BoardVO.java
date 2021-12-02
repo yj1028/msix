@@ -24,6 +24,7 @@ public class BoardVO extends CommonVO{
 	private String b_content = ""; // 게시판 내용
 	private String b_pwd = "";     // 게시판 비밀번호
 	private String b_date;         // 게시판 작성일
+	private int r_cnt =0;			// 댓글 개수
 	
 	private MultipartFile file;
 	private String b_thumb;

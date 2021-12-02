@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.msix.admin.product.vo.ProductVO" alias="product"/>
-		<typeAlias type="com.msix.admin.board.vo.BoardVO" alias="bulletein"/>
+		<typeAlias type="com.msix.admin.board.vo.QBoardVO" alias="qna"/>
+		<typeAlias type="com.msix.admin.board.vo.RBoardVO" alias="qnaReply"/>
 	</typeAliases>
 </configuration>

@@ -29,6 +29,7 @@
 			.required{ color: red; }
 			.table-height{ min-height: 407px;}
 			.contentBtn{ min-height: 100px; }
+			.reply_count{ color: blue; }
 		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -149,7 +150,12 @@
 								<c:forEach var="board" items="${boardList}" varStatus="status">
 									<tr class="text-center" data-num="${board.b_num}">
 										<td>${count - status.index}</td>
-										<td class="goDetail text-left">${board.b_title}</td>
+										<td class="goDetail text-left">
+											${board.b_title}
+											<c:if test="${board.r_cnt > 0 }">
+												<span class="reply_count">[${board.r_cnt}]</span>
+											</c:if>
+										</td>
 										<td class="text-left">${board.b_date}</td>
 										<td class="name">${board.b_name}</td>
 										<td>

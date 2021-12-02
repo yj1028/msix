@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<!-- 브라우저의 호환성 보기 모드를 막고, 해당 브라우저에서 지원하는 가장 최신 버전의 방식으로 HTML 보여주도록 설정.-->
@@ -14,11 +14,6 @@
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
-		<!-- 합쳐지고 최소화된 최신 CSS -->
-		<link rel="stylesheet" href="/resources/include/dist/css/bootstrap.min.css">
-		
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="/resources/include/dist/css/bootstrap-theme.min.css">
 		
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
@@ -26,14 +21,37 @@
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-		<script src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script>
-			
+			$(function(){
+				// 조회수
+				
+				// 검색 
+				
+				/*  제목 클릭시 상세 페이지로 이동 처리 이벤트 */
+				$(".goDetail").click(function(){
+					let q_no = $(this).parents("tr").attr("data-no");
+					$("#q_no").val(q_no);
+					console.log("글번호 : " + q_no);
+				 	$("#detailForm").attr({
+						"method":"get",
+						"action":"/qna/qnaDetail"
+					});
+					$("#detailForm").submit(); 
+				});
+				
+				// 페이지 처리
+				
+				// 답글 질의글 하위에 위치
+				
+			});
 		</script>
 	</head>
 	<body>
 	<div class="container">
+		<form id="detailForm">
+			<input type="hidden" id="q_no" name="q_no" />
+		</form>
+		
 	 	<div class="table-height">
 			<table summary="질의게시판 리스트" class="table table-striped">
 				<thead>
@@ -45,17 +63,15 @@
 						<th class="text-center">질의글 내용</th>
 						<th class="text-center">작성일</th>
 						<th class="text-center">조회수</th>
-						<th class="text-center">상품정보분류</th>
-						
 					</tr>
 				</thead>
 				<tbody id="" class="table-striped">
 					<!-- 데이터 출력 -->
 					<c:choose>
-						<c:when test="${not empty bulleteinList}" >
-							<c:forEach var="board" items="${bulleteinList}" varStatus="status">
-								<tr class="text-center">
-									<td>${count - status.index}</td>
+						<c:when test="${not empty qnaList}" >
+							<c:forEach var="board" items="${qnaList}" varStatus="status">
+								<tr class="text-center" data-no="${board.q_no}">
+									<!-- <td>${count - status.index}</td>-->
 									<td class="text-left">${board.q_no }</td>
 									<td class="text-left">${board.m_no }</td>
 									<td class="text-left">${board.q_tag }</td>
@@ -63,8 +79,6 @@
 									<td class="text-left">${board.q_content }</td>
 									<td class="text-left">${board.q_date }</td>
 									<td class="text-left">${q_cnt }</td>
-									<td class="text-left">${q_info }</td>
-									
 								</tr>
 							</c:forEach>
 						</c:when>

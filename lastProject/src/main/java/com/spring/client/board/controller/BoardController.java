@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -199,5 +200,16 @@ public class BoardController {
 			url = "/board/boardDetail";
 		}
 		return "redirect:"+url;
+	}
+	
+	/****************************************************
+	 * 글 삭제 전 댓글 개수 구현
+	 ****************************************************/
+	@ResponseBody
+	@RequestMapping(value = "/replyCnt")
+	public String replyCnt(@RequestParam("b_num") int b_num) {
+		int result =0;
+		result = boardService.replyCnt(b_num);
+		return String.valueOf(result);
 	}
 }

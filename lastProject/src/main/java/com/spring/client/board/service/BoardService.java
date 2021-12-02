@@ -13,4 +13,6 @@ public interface BoardService {
 	public BoardVO updateForm(BoardVO bvo);
 	public int boardUpdate(BoardVO bvo) throws Exception;
 	public int boardDelete(BoardVO bvo) throws Exception;
+	public int replyCnt(int b_num);
+	
 }

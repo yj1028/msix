@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.admin.board.dao.QBoardDAO">
+
+<select id="boardList" resultType="qna">
+	select q_no, m_no, q_tag, q_title, q_content, 
+	to_char(q_date,'YYYY-MM-DD') as q_date, q_cnt
+	from q_board
+</select>
+
+<select id="boardDetail" parameterType="qna" resultType="qna">
+	select q_no, m_no, q_tag, q_title, q_content, 
+	to_char(q_date,'YYYY-MM-DD') as q_date
+	from q_board
+	where q_no = #{q_no}
+</select>
+
+</mapper>

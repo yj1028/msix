@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.client.board.dao.BoardDAO;
 import com.spring.client.board.vo.BoardVO;
+import com.spring.client.reply.dao.ReplyDao;
 import com.spring.common.file.FileUploadUtil;
 
 import lombok.Setter;
@@ -16,6 +17,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Setter(onMethod_ = @Autowired)
 	private BoardDAO boardDAO;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReplyDao replyDao;
 	
 	// 글 목록 구현
 	@Override
@@ -95,6 +99,7 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 	
+	@Override
 	public int boardDelete(BoardVO bvo) throws Exception {
 		int result = 0;
 		
@@ -103,6 +108,13 @@ public class BoardServiceImpl implements BoardService {
 			FileUploadUtil.fileDelete(bvo.getB_thumb());
 		}
 		result = boardDAO.boardDelete(bvo);
+		return result;
+	}
+
+	@Override
+	public int replyCnt(int b_num) {
+		int result =0;
+		result = replyDao.replyCnt(b_num);
 		return result;
 	}
 }

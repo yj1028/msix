@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.msix.admin.board.vo.BoardVO;
+import com.msix.admin.board.vo.QBoardVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -16,17 +16,25 @@ import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
-public class BoardMapperTests {
+public class QBoardMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private BoardDAO boardDAO;
+	private QBoardDAO qboardDAO;
 	
-	@Test
+	
 	public void testBoardList() {
-		List<BoardVO> list = boardDAO.boardList();
-		for(BoardVO out : list) {
+		List<QBoardVO> list = qboardDAO.boardList();
+		for(QBoardVO out : list) {
 			log.info(out);
 		}
 	}
+	@Test
+	public void testBoardDetail() {
+		QBoardVO qvo = new QBoardVO();
+		qvo.setQ_no(1);
+		
+		qboardDAO.boardDetail(qvo);
+	}
+	
 	
 }

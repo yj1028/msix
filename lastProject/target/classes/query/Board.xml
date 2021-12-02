@@ -43,7 +43,8 @@
 	<select id="boardList" parameterType="board" resultType="board">
 		<![CDATA[
 			select
-			    rnum, b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, b_thumb, b_file
+			    rnum, b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, b_thumb, b_file,
+			    (select count(r_num) from spring_reply where b_num = boardlist.b_num) as r_cnt
 			from(
 			    select /*+ index_desc(spring_board spring_board_pk) */
 			        rownum as rnum, b_num, b_name, b_title, b_date, b_thumb, b_file
