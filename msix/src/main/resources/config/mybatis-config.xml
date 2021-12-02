@@ -5,5 +5,7 @@
 		<typeAlias type="com.msix.admin.product.vo.ProductVO" alias="product"/>
 		<typeAlias type="com.msix.admin.board.vo.QBoardVO" alias="qna"/>
 		<typeAlias type="com.msix.admin.board.vo.RBoardVO" alias="qnaReply"/>
+		<typeAlias type="com.msix.admin.review.vo.ReviewVO" alias="review"/>
+		<typeAlias type="com.msix.admin.review.vo.RepReviewVO" alias="revReply"/>
 	</typeAliases>
 </configuration>
