@@ -10,7 +10,7 @@
 		<!--viewport : 화면에 보이는 영역을 제어하는 기술. width는 device-width로 설정(브라우저 너비를 장치 너비에 맞추어 표시). initial-scale는 초기비율(보이는 영역과 웹 페이지를 맞춤). user-scalable는 사용자가 화면축소를 하지 못하도록 설정.-->   	
 		<meta charset="UTF-8">
 		
-		<title>boardQNA</title>
+		<title>boardReview</title>
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
@@ -25,41 +25,39 @@
 			$(function(){
 				/*  제목 클릭시 상세 페이지로 이동 처리 이벤트 */
 				$(".goDetail").click(function(){
-					let q_no = $(this).parents("tr").attr("data-no");
-					$("#q_no").val(q_no);
-					console.log("글번호 : " + q_no);
+					let rv_no = $(this).parents("tr").attr("data-no");
+					$("#rv_no").val(rv_no);
+					console.log("글번호 : " + rv_no);
 				 	$("#detailForm").attr({
 						"method":"get",
-						"action":"/qna/qnaDetail"
+						"action":"/review/reviewDetail"
 					});
 					$("#detailForm").submit(); 
 				});
-				
+
 				// 조회수
 				
 				// 검색 
 				
 				// 페이지 처리
 				
-				
 			});
 		</script>
 	</head>
 	<body>
-	<div class="container">
-		<form id="detailForm">
-			<input type="hidden" id="q_no" name="q_no" />
-		</form>
-		
-	 	<div class="table-height">
-			<table summary="질의게시판 리스트" class="table table-striped">
+		<div class="container">
+			<form id="detailForm">
+				<input type="hidden" id="rv_no" name="rv_no" />
+			</form>
+			
+			<div class="table-height">
+			<table summary="리뷰게시판 리스트" class="table table-striped">
 				<thead>
 					<tr>
 						<th class="text-center">글번호</th>
 						<th class="text-center">회원번호</th>
 						<th class="text-center">대분류</th>
-						<th class="text-center">질의글 제목</th>
-						<th class="text-center">질의글 내용</th>
+						<th class="text-center">리뷰글 제목</th>
 						<th class="text-center">작성일</th>
 						<th class="text-center">조회수</th>
 					</tr>
@@ -67,30 +65,29 @@
 				<tbody class="table-striped">
 					<!-- 데이터 출력 -->
 					<c:choose>
-						<c:when test="${not empty qnaList}" >
-							<c:forEach var="board" items="${qnaList}" varStatus="status">
-								<tr class="text-center" data-no="${board.q_no}">
+						<c:when test="${not empty boardList}" >
+							<c:forEach var="review" items="${boardList}" varStatus="status">
+								<tr class="text-center" data-no="${review.rv_no}">
 									<!-- <td>${count - status.index}</td>-->
-									<td class="text-left">${board.q_no }</td>
-									<td class="text-left">${board.m_no }</td>
-									<td class="text-left">${board.q_tag }</td>
-									<td class="goDetail text-left">${board.q_title }</td>
-									<td class="text-left">${board.q_content }</td>
-									<td class="text-left">${board.q_date }</td>
-									<td class="text-left">${q_cnt }</td>
+									<td class="text-left">${review.rv_no }</td>
+									<td class="text-left">${review.m_no }</td>
+									<td class="text-left">${review.rv_tag }</td>
+									<td class="goDetail text-left">${review.rv_title }</td>
+									<td class="text-left">${review.rv_date }</td>
+									<td class="text-left">${review.rv_cnt}</td>
 								</tr>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="8" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
+								<td colspan="6" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
 				</tbody>
 			</table>
-		</div>
- 	</div> 
-    	
+			</div>
+ 		</div> 
+ 		
 	</body>
 </html>

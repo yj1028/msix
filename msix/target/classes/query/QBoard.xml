@@ -6,6 +6,7 @@
 	select q_no, m_no, q_tag, q_title, q_content, 
 	to_char(q_date,'YYYY-MM-DD') as q_date, q_cnt
 	from q_board
+	order by q_no desc
 </select>
 
 <select id="boardDetail" parameterType="qna" resultType="qna">
