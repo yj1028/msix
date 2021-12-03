@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.msix.admin.product.service.ProductService;
 import com.msix.admin.product.vo.ProductVO;
@@ -56,8 +57,9 @@ public class ProductController {
 	
 	/* 상품 등록 구현하기*/
 	@PostMapping(value = "/productInsert")
-	public String productInsert(@ModelAttribute ProductVO pvo, Model model) {
+	public String productInsert(@ModelAttribute ProductVO pvo, Model model) throws Exception {
 		log.info("productInsert 호출 성공");
+		log.info(pvo);
 		
 		int result = 0;
 		String url = "";
@@ -81,5 +83,60 @@ public class ProductController {
 		model.addAttribute("detail", detail);
 		
 		return "product/productDetail";
+	}
+	
+	/* 상품수정 폼 출력하기 
+	 * @param : p_no
+	 * @return : PorductVO */
+	@RequestMapping(value = "/updateForm")
+	public String updateForm(@ModelAttribute("data") ProductVO pvo, Model model) {
+		log.info("updateForm 호출 성공");
+		log.info("p_no = " + pvo.getP_no());
+		
+		ProductVO updateData = productService.updateForm(pvo);
+		model.addAttribute("updateData", updateData);
+		
+		return "product/updateForm";
+	}
+	
+	/* 상품수정 구현하기 
+	 * @param : ProductVO */
+	@PostMapping(value = "/productUpdate")
+	public String productUpdate(@ModelAttribute ProductVO pvo, RedirectAttributes ras) throws Exception {
+		log.info("productUpdate 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = productService.productUpdate(pvo);
+		ras.addFlashAttribute("data", pvo);
+		
+		if(result == 1) {
+			url = "/product/productDetail";
+		} else {
+			url = "/product/updateForm";
+		}
+		
+		return "redirect:"+url;
+	}
+	
+	/* 상품삭제 구현하기 */
+	@PostMapping(value = "/productDelete")
+	public String productDelete(@ModelAttribute ProductVO pvo, RedirectAttributes ras) throws Exception {
+		log.info("productDelete 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = productService.productDelete(pvo);
+		ras.addFlashAttribute("data", pvo);
+		
+		if(result == 1) {
+			url = "/product/productList";
+		} else {
+			url = "/product/productDetail";
+		}
+		
+		return "redirect:"+url;
 	}
 }

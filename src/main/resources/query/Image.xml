@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.admin.image.dao.ImageDAO">
+
+	<!-- 상품 이미지 등록 -->
+	<insert id="imageInsert" parameterType="product">
+		insert into image(i_no, p_no, i_name, i_thumb) 
+		values(image_seq.nextval, #{p_no}, #{i_name}, #{i_thumb})
+	</insert>
+</mapper>

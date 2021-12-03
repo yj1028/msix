@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.msix.admin.image.dao.ImageDAO;
+import com.msix.admin.image.vo.ImageVO;
 import com.msix.admin.product.dao.ProductDAO;
 import com.msix.admin.product.vo.ProductVO;
+import com.msix.common.file.FileUploadUtil;
 
 import lombok.Setter;
 
@@ -15,6 +18,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ProductDAO productDAO;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ImageDAO imageDAO;
 	
 	// 상품목록 구현
 	@Override
@@ -32,9 +38,23 @@ public class ProductServiceImpl implements ProductService {
 	
 	// 상품 등록 구현
 	@Override
-	public int productInsert(ProductVO pvo) {
+	public int productInsert(ProductVO pvo) throws Exception {
 		int result = 0;
-		result = productDAO.productInsert(pvo);
+		
+		System.out.println(pvo.getList().size());
+		//result = productDAO.productInsert(pvo);
+		
+		ImageVO vo= pvo.getList().get(0);
+		
+		 /* if(vo.getFile().getSize() > 0) { 
+			String fileName = FileUploadUtil.fileUpload(vo.getFile(), "product"); 
+			 vo.setP_file(fileName);
+			 
+			 String thumbName = FileUploadUtil.makeThumbnail(fileName);
+			 vo.setP_thumb(thumbName); 
+			 imageDAO.
+		} */
+		
 		
 		return result;
 	}
@@ -50,5 +70,48 @@ public class ProductServiceImpl implements ProductService {
 		
 		return detail;
 	}
-
+	
+	// 상품수정 폼 구현
+	@Override
+	public ProductVO updateForm(ProductVO pvo) {
+		ProductVO update = null;
+		update = productDAO.productUpdateForm(pvo);
+		
+		return update;
+	}
+	
+	// 상품수정 구현
+	@Override
+	public int productUpdate(ProductVO pvo) throws Exception {
+		int result = 0;
+		
+//		if(!pvo.getFile().isEmpty()) {
+//			if(!pvo.getP_file().isEmpty()) {
+//				FileUploadUtil.fileDelete(pvo.getP_file());
+//				FileUploadUtil.fileDelete(pvo.getP_thumb());
+//			}
+//			String fileName = FileUploadUtil.fileUpload(pvo.getFile(), "product");
+//			pvo.setP_file(fileName);
+//			
+//			String thumbName = FileUploadUtil.makeThumbnail(fileName);
+//			pvo.setP_thumb(thumbName);
+//		}
+		result = productDAO.productUpdate(pvo);
+		
+		return result;
+	}
+	
+	// 상품삭제 구현
+	@Override
+	public int productDelete(ProductVO pvo) throws Exception{
+		int result = 0;
+		
+//		if(!pvo.getP_file().isEmpty()) {
+//			FileUploadUtil.fileDelete(pvo.getP_file());
+//			FileUploadUtil.fileDelete(pvo.getP_thumb());
+//		}
+		result = productDAO.productDelete(pvo);
+		
+		return result;
+	}
 }

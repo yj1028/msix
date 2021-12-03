@@ -18,8 +18,9 @@
 		<![endif]-->
 		
 		<style type="text/css">
-			#detailTable{width:80%;}
-			.table-heigth{min-height: 500px;}
+			 #detailTable{width:80%;}
+			.table-height{height: 500px;}
+			.img img{width: 100px; height: 100px;}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -65,34 +66,29 @@
 					<%-- 수정 및 삭제 시 글번호, 원본파일명, 썸네일파일명을 전달하는 폼--%>
 					<form name="f_data" id="f_data" method="post"> 
 						<input type="hidden" name="p_no" value="${detail.p_no}" />
-						<%-- <input type="hidden" name="b_file" value="${detail.b_file}" />
-						<input type="hidden" name="b_thumb" value="${detail.b_thumb}" /> --%>
+						<input type="hidden" name="p_file" value="${detail.p_file}" />
+						<input type="hidden" name="p_thumb" value="${detail.p_thumb}" /> 
 					</form>
-					<%-- ========== 비밀번호 확인 및 버튼 추가 시작 ========== 
-					<form name="f_pwd" id="f_pwd"> 
-						<input type="hidden" name="b_num" id="b_num" value="${detail.b_num}" />
-						<label>비밀번호:</label>
-						<input type="password" name="b_pwd" id="b_pwd" maxlength="12" />
-						<input type="button" value="확인" id="pwdBtn" />
-						<span id="msg"></span>
-					</form> --%>
 				</div>
 			</div>
-			<div>
-				<img alt="" src="" class="img-thumbnail">
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">상품이미지</label>
+			    <div class="select_img text-left">
+			    	<img src="/uploadStorage/product/${detail.p_file}" />
+			    </div>    
 			</div>
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
 				<tr>
 					<td>상품번호</td>
 					<td>${detail.p_no}</td>
 					<td>상품명</td>
-					<td>${detail.p_name}</td>
+					<td>${detail.p_name}</td> 
 				</tr> 
 				<tr>
 					<td>등록일</td>
 					<td>${detail.p_date}</td>
 					<td>수정일</td>
-					<td>${detail.p_udate}</td>
+					<td>${detail.p_update}</td>
 				</tr>
 				<tr>
 					<td>상품분류</td>
@@ -102,16 +98,10 @@
 					<td>재고</td>
 					<td>${detail.p_cnt}</td>
 				</tr>
-				<tr class="table-heigth">
+				<tr class="table-height">
 					<td>상품정보</td>
 					<td colspan="5" class="text-left">${detail.p_info}</td>
 				</tr>
-				<%-- <c:if test="${not empty detail.b_file}">
-					<td>이미지</td>
-					<td colspan="3">
-						<img src="/uploadStorage/board/${detail.b_file}" />	
-					</td>
-				</c:if> --%>
 			</table>
 			<div class="text-center">
 					<input type="button" class="btn btn-default" value="상품수정" id="updateFormBtn" />			

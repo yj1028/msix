@@ -23,6 +23,7 @@
 			#p_content {resize:none;}
 			#p_price {width:100px;}
 			#p_cnt {width:80px;}
+			.select_img img {margin: 20px 120px;}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -55,12 +56,14 @@
 					else if($("#p_cnt").val() <= 0 || $("#p_cnt").val() >= 100){
 						alert("수량은 1~99까지의 숫자만 입력 가능합니다.");
 						$("#p_cnt").val("");
-						$("#p_cnt").focus();
-					/* 이미지 파일 업로드 유효성체크 해야함 */	
-					}else{
+						$("#p_cnt").focus();	
+					}
+					/* else if(!chkData("#file", "업로드할 이미지 파일을")) return;
+					else if(!chkFile($("#file"))) return; */
+					else{
 						$("#f_writeForm").attr({
 							method:"post",
-							/* enctype:"multipart/form-data",*/
+							enctype:"multipart/form-data",
 							action:"/product/productInsert"
 						});
 						$("#f_writeForm").submit();
@@ -85,13 +88,6 @@
 		<div class="container">
 			<form class="form-horizontal" id="f_writeForm">
 				<input type="hidden" name="p_code" id="p_code /">
-			  <div class="form-group">
-			    <label class="col-sm-2 control-label">상품이미지</label>
-			    <div class="col-sm-10">
-			      <input type="file" name="file" id="file" />
-			    </div>
-			  </div>
-			  <br />
 			  <div class="form-group">
 			    <label for="p_name" class="col-sm-2 control-label">상품명</label>
 			    <div class="col-sm-10">
@@ -135,6 +131,27 @@
 			    </div>
 			  </div>
 			  <br />
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label">상품이미지</label>
+			    <div class="col-sm-10">
+			      <input type="file" name="list[0].file" id="list[0].file" />
+			      <input type="file" name="list[1].file" id="list[1].file" />
+			      <input type="file" name="list[2].file" id="list[2].file" />
+			    </div>
+			    <div class="select_img text-left"><img src=""></div>
+			    
+			    <script type="text/javascript">
+				    $("#file").change(function(){
+						if(this.files && this.files[0]){
+							var reader = new FileReader;
+							reader.onload = function(data){
+								$(".select_img img").attr("src", data.target.result).width(300);
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					});
+			    </script>
+			  </div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10 text-left">
 			      <button type="button" class="btn btn-default" id="productInsertBtn">등록</button>

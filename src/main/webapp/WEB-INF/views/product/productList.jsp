@@ -19,7 +19,9 @@
 		
 		<style type="text/css">
 			.required{ color:red; }
-			.table-height{min-height: 407px;}
+			.table-height{min-height: 500px;}
+			.view_img img {width: 70px; height: 70px;}
+			#listTable th, td {text-align: center;}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -27,7 +29,8 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				
+				//$("#type").css("visibility", "hidden");
+				$("#type").css("display", "none");
 				/* 검색 후 검색 대상과 검색 단어 출력 */
 				let word="<c:out value='${data.keyword}' />";
 				let value="";
@@ -51,17 +54,24 @@
 				}
 				/* 검색 대상이 변경될 때마다 처리 이벤트 */
 				$("#search").change(function(){
-					if($("#search").val() == "all"){
-						$("#keyword").val("전체 데이터 조회합니다.");
-					}else if($("#search").val() != "all"){
+					if($("#search").val() == "p_type"){
+						//$("#type").css("visibility", "visible");
+						$("#type").css("display", "inline");
+					}else if($("#search").val() != "p_type"){
+						$("#type").css("display", "none");
 						$("#keyword").val("");
 						$("#keyword").focus();
 					}
+				
+				});
+				
+				$("#type").change(function(){
+					$("#keyword").val($("#type").val());
 				});
 				
 				/* 검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchData").click(function(){
-					if($("#search").val() != "all"){
+					if($("#search").val() != "p_type"){
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
@@ -72,6 +82,9 @@
 					location.href="/product/insertForm"
 				});
 				
+				$("#searchDataAll").click(function(){
+					location.href="/product/productList"
+				});
 				/* 상품명 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
 				$(".goDetail").click(function(){
 					let p_no = $(this).parents("tr").attr("data-num");
@@ -94,8 +107,8 @@
 			
 			/* 검색을 위한 실질적인 처리 함수 */
 			function goPage(){
-				if($("#search").val() == "all"){
-					$("#keyword").val("");
+				if($("#search").val() != "p_type"){
+					$("#type").val("");
 				}
 				$("#f_search").attr({
 					"method":"get",
@@ -118,27 +131,36 @@
 					<div class="form-group">
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
-							<option value="all">전체</option>
-							<option value="p_type">상품분류</option>
 							<option value="p_name">상품이름</option>
+							<option value="p_type">상품분류</option>
 							<option value="p_info">상품정보</option>
 							<option value="p_udate">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
+						<select class="form-control" name="type" id="type">
+				      		<option>---선택---</option>
+							<option value="Gecko">Gecko</option>
+							<option value="Lizard">Lizard</option>
+							<option value="Turtle">Turtle</option>
+							<option value="Amphibian">Amphibian</option> 
+							<option value="Food">Food</option>
+							<option value="Supplies">Supplies</option>                  	
+						</select>
 						<!-- 키워드 != null : 검색함.  키워드 == null : 검색안함 -->
-						<input class="form-control" type="text" name="keyword" id="keyword" value="검색어를 입력하세요" />
+						<input class="form-control" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" />
 						<button class="btn btn-default" type="button" id="searchData">검색</button>
+						<button class="btn btn-default" type="button" id="searchDataAll">전체검색</button>
 					</div>
 				</form>
 			</div>
 			<%-- =================== 검색기능 종료 =================== --%>
 			<%-- =================== 리스트 시작 =================== --%>
 			<div class="table-height">
-				<table class="table table-bordered" style="margin-top:20px;">
+				<table class="table table-bordered" style="margin-top:20px;" id="listTable">
 					<thead>
 						<tr>
 							<th class="text-center">상품번호</th>
-							<!-- <th class="text-center">이미지</th> -->
+							<th class="text-center">상품이미지</th>
 							<th class="text-center">상품분류</th>
 							<th class="text-center">상품명</th>
 							<th class="text-center">상품가격</th>
@@ -153,12 +175,16 @@
 								<c:forEach var="product" items="${productList}" varStatus="status">
 									<tr data-num="${product.p_no}">
 										<td class="no text-center">${product.p_no}</td>
-										<!-- 썸네일 넣어야함 -->
+										<%-- <td class="view_img text-center">
+											<c:if test="${not empty product.p_thumb}">
+												<img src="/uploadStorage/product/thumbnail/${product.p_thumb}">
+											</c:if>
+										</td> --%>
 										<td class="type text-center">${product.p_type}</td>
 										<td class="goDetail">${product.p_name}</td>
 										<td class="text-center">${product.p_price}</td>
 										<td class="text-center">${product.p_cnt}</td>
-										<td class="udate text-center">${product.p_udate}</td>
+										<td class="udate text-center">${product.p_update}</td>
 									</tr>
 								</c:forEach>
 							</c:when>

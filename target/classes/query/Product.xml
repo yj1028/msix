@@ -32,9 +32,10 @@
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, to_char(p_udate, 'YYYY-MM-DD') AS p_udate
+		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update, p_file, p_thumb
 		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
-       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_udate
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update, p_file, p_thumb
 			   from product
 			   where ]]>
 				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
@@ -55,18 +56,47 @@
 		</trim>	
 	</select>
 	
+	<!-- 상품 번호 추출 
+	<select id="productNumber" resultType="int">
+		select PRODUCT_SEQ.nextval from dual
+	</select> -->
+	
 	<!-- 상품 등록 --> 
 	<insert id="productInsert" parameterType="product">
-		insert into product(p_no, p_name, p_type, p_info, p_price, p_cnt)
-		values(PRODUCT_SEQ.nextval, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt})
+		insert into product(p_no, p_name, p_type, p_info, p_price, p_cnt, p_file, p_thumb)
+		values(product_seq.nextval, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt}, #{p_file}, #{p_thumb})
 	</insert>
 	
 	<!-- 상세 페이지를 위한 상품 조회 -->
 	<select id="productDetail" parameterType="product" resultType="product">
 		select p_no, p_name, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') AS p_date,
-		to_char(p_udate, 'YYYY-MM-DD HH24:MI:SS') AS p_udate, p_type, p_info, p_cnt, 
-		to_char(p_price, 'L999,999,999') AS p_price
+		to_char(p_update, 'YYYY-MM-DD HH24:MI:SS') AS p_update, p_type, p_info, p_cnt, 
+		to_char(p_price, 'L999,999,999') AS p_price, p_file, p_thumb
 		from product
 		where p_no = #{p_no}
 	</select>
+	
+	<!-- 상품 수정폼을 위한 조회 -->
+	<select id="productUpdateForm" parameterType="product" resultType="product">
+		select p_no, p_name, p_type, p_price, p_cnt, p_info, p_file, p_thumb
+		from product
+		where p_no = #{p_no}
+	</select>
+		
+	<!-- 상품 수정 -->
+	<update id="productUpdate" parameterType="product">
+		update product set p_name = #{p_name}, p_type = #{p_type}, p_price = #{p_price}, p_info = #{p_info}, p_update = sysdate
+		<if test="p_thumb != ''">
+			, p_thumb = #{p_thumb}
+		</if>
+		<if test="p_file != ''">
+			, p_file = #{p_file}
+		</if>
+		where p_no = #{p_no}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<update id="productDelete" parameterType="product">
+		update product set p_isdelete = 'Y' where p_no = #{p_no}
+	</update>
 </mapper>
