@@ -67,24 +67,9 @@
 					
 					let currLi = $(this).parents("li");
 					replyNum = currLi.attr("data-no");		// c_no
+					let rv_no = $("#rv_no").val();
+					deleteBtn(rv_no);
 					
-					if(confirm("댓글을 삭제하시겠습니까?")){
-						$.ajax({
-							url : "/comments/"+replyNum,
-							type : "post",
-							data : "c_no="+replyNum,
-							dataType : "text",
-							error : function(){
-								alert('시스템오류입니다. 관리자에게 문의하세요.');
-							},
-							success : function(resultData){
-								console.log("resultData : "+ resultData);
-								if(resultData == "SUCCESS"){
-									deleteBtn(rv_no);		//rv_no
-								}
-							}
-						})
-					}
 				});
 				
 			}); //최상위 끝.
@@ -115,7 +100,10 @@
 				let new_li = $("<li>");
 				new_li.attr("data-no", c_no);
 				
-				let writer_p = $("<p>");
+				let writer_p = $("<p class="text-center">");
+				
+				let name_span = $("<span>");
+				name_span.html(r_name + "님");
 				
 				let date_span = $("<span>");
 				date_span.html(" [ "+ c_date + " ] ");
@@ -129,7 +117,7 @@
 				content_p.html(c_comment);
 				
 				//조립하기
-				writer_p.append(date_span).append(del_input)
+				writer_p.append(name_span).append(date_span).append(del_input)
 				new_li.append(writer_p).append(content_p);
 				$("#comment_list").append(new_li);
 			}
@@ -186,7 +174,7 @@
 					<!-- 파일 업로드 작업이 되어있어야 가능함. -->
 					<c:if test="${not empty detail.rv_image }">
 						<td>이미지</td>
-						<td><img src="/uploadStorage/${detail.rv_image }"></td>
+						<td><img src="/uploadStorage/${detail.rv_image }" class="img-fluid"></td>
 					</c:if>
 					<tr>
 						<td>작성일</td>

@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class RepReviewServiceImpl implements RepReviewService {
-	
+
 	private RepReviewService repReviewService;
 	
 	@Override
