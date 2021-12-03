@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+
+
 <c:set var="clientUri" value='${requestScope["javax.servlet.forward.request_uri"]}' />  
 
 
@@ -33,10 +35,9 @@
 	                    <li><a href="/">로그인</a></li>
 	                    <li><a href="/">회원가입</a></li>
 	                    <li><a href="/">마이페이지</a></li>
-	                    <li><a href="/">공지사항</a></li>
-	                    <li><a href="/">장바구니</a></li>
+	                    <li><a href="/">공지사항</a></li> 
 	                    <li <c:if test="${fn:containsIgnoreCase(clientUri, '/cart')}">class="active"</c:if>>
-			         	<a href="/cart/cart">장바구니</a>
+			         	<a href="/cart/cartList">장바구니</a>
 			         	</li>
 	      
 	                  </ul>
@@ -44,17 +45,6 @@
 	              </div><!-- /.container -->
 	            </nav> 
 
-	            <div class="container">
-	                <div class="row">
-	                    <div class="col-md-12 text-center">
-	                        <div class="home_text wow fadeInUp animated">
-	                            <h2>itâs abdullah noman</h2>
-	                            <p>a user interface and user experience specialist</p>
-	                            <img src="/resources/include/dist2/images/shape.png" alt="">                        
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
 	        </div>          
     </header>
     

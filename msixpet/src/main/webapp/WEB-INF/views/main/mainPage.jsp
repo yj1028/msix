@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page trimDirectiveWhitespaces="true" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,8 +53,7 @@
                     <div id="status">&nbsp;</div>
                 </div>
 
-
-
+                
 
     <header id="HOME" style="background-position: 50% -125px;">
 	        <div class="section_overlay">
@@ -66,18 +67,21 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                  </button>
-	                  <a class="navbar-brand" href="#"><img src="/resources/include/dist2/images/logo.png" alt=""></a>
+	                  <a class="navbar-brand" href="/"><img src="/resources/include/dist2/images/logo.png" alt="">MSIXpet</a>
 	                </div>
 
 	                <!-- Collect the nav links, forms, and other content for toggling -->
 	                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	                  <ul class="nav navbar-nav navbar-right">
-	                    <li><a href="#HOME">Home</a></li>
-	                    <li><a href="#SERVICE">Services</a></li>
-	                    <li><a href="#ABOUT">About</a></li>
-	                    <li><a href="#TESTIMONIAL">Testimonial</a></li>
-	                    <li><a href="#WORK">Work</a></li>
-	                    <li><a href="#CONTACT">Contact</a></li>
+	                  	<li><a href="/">메인화면</a></li>
+	                    <li><a href="/">로그인</a></li>
+	                    <li><a href="/">회원가입</a></li>
+	                    <li><a href="/">마이페이지</a></li>
+	                    <li><a href="/">공지사항</a></li>
+	                    <li <c:if test="${fn:containsIgnoreCase(clientUri, '/cart')}">class="active"</c:if>>
+			         	<a href="/cart/cartList">장바구니</a>
+			         	</li>
+	      
 	                  </ul>
 	                </div><!-- /.navbar-collapse -->
 	              </div><!-- /.container -->
@@ -87,16 +91,16 @@
 	                <div class="row">
 	                    <div class="col-md-12 text-center">
 	                        <div class="home_text wow fadeInUp animated">
-	                            <h2>it’s abdullah noman</h2>
+	                            <h2>itâs abdullah noman</h2>
 	                            <p>a user interface and user experience specialist</p>
 	                            <img src="/resources/include/dist2/images/shape.png" alt="">                        
 	                        </div>
 	                    </div>
 	                </div>
-	            </div>            
-	        </div>           
+	            </div>
+	        </div>          
     </header>
-
+    
 
     <section class="services" id="SERVICE">
         <div class="container">
@@ -262,8 +266,6 @@
             </div>
         </div>
     </section>
-    
-    
 
 
 <footer>

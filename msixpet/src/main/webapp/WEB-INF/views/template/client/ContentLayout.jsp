@@ -13,6 +13,9 @@
     <!-- Google Font -->
     <link href='http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    
+    <!-- left css -->
+    <link rel="stylesheet" href="/resources/include/dist2/css/styles.css" type="text/css" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -23,7 +26,7 @@
     <!-- Icon Font-->
     <link rel="stylesheet" href="/resources/include/dist2/css/style.css">
     <link rel="stylesheet" href="/resources/include/dist2/css/owl.carousel.css">
-    <link rel="stylesheet" href="/resources/include/dist2/css/dist/owl.theme.default.css">
+    <link rel="stylesheet" href="/resources/include/dist2/css/owl.theme.default.css">
     <!-- Animate CSS-->
     <link rel="stylesheet" href="/resources/include/dist2/css/animate.css">
 
@@ -42,15 +45,31 @@
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<style type="text/css">
+			html {
+			    position: relative;
+			    min-height: 100%;
+			    margin: 0;
+			}
+			
+			body {
+			    min-height: 100%;
+			}
+			.footer {
+			    position: absolute;
+			    left: 0;
+			    bottom: 0;
+			    width: 100%;
+				padding: 15px 0;
+				text-align: center;
+				color: black;
+			}
+		</style>
+	
 </head>
 
 	<body>
-                <!-- Preloader -->
-                <div id="preloader">
-                    <div id="status">&nbsp;</div>
-                </div>
-
-
+                
     <header id="HOME" style="background-position: 50% -125px;">
 	        <div class="section_overlay">
 	            <nav class="navbar navbar-default navbar-fixed-top">
@@ -58,25 +77,22 @@
 	            </nav> 
 	        </div>          
     </header>
+   
+     <div class="container">
+	      <div class="page-header">
+	        <h1><tiles:getAsString name="title" /></h1>
+	      </div>
+	      <tiles:insertAttribute name="body"/>
+	    </div>
+   
+	  <div id="menu">
+			<tiles:insertAttribute name="left"/>
+		</div>
 
 
-    
-        <div class="container">
-            <tiles:insertAttribute name="body" />
-        </div>
-    
-
-
-
-<footer class="footer">
-    <tiles:insertAttribute name="footer" />
-</footer>
-
-
-
-
-
-
+	<footer class="footer">
+	    <tiles:insertAttribute name="footer" />
+	</footer>
 
 
 

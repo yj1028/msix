@@ -7,19 +7,20 @@
 <tiles-definitions>
 	
 	<definition name="content" template="/WEB-INF/views/template/client/ContentLayout.jsp">
-		<put-attribute name="title" value="msixpet" />
+		<put-attribute name="title"  value="msixpet" /> 
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/template/client/left.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
 	</definition>
-	<!-- header와 footer는 고정이지만 body는 계속 바뀌므로 여기서 설정불가능. -->
 	
 	
 	<!-- name은 게시판 화면을 보여주기 위한 것이므로 컨트롤러가 반환해주는 값으로 잡아야함. 
 	extends는 헤더와 푸터는 고정값이므로 위의 설정을 그대로 가져와 확장하여 사용한다는 뜻임.-->
 	<!-- board/*으로 주면, board에 있는 jsp는 모두 헤더와 푸터를 적용하겠다는 설정. -->
-	<definition name="client/*" extends="content">
-		<put-attribute name="title" value="장바구니" />
-		<put-attribute name="body" value="/WEB-INF/views/client/{1}.jsp" />
-	</definition>
+	<definition name="cart/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/cart/{1}.jsp" />
+	</definition> 
+	
 </tiles-definitions>

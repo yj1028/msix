@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("client/*")
+@RequestMapping("cart/*")
 @Log4j
 @AllArgsConstructor
 public class CartController {
@@ -28,6 +28,6 @@ public class CartController {
 		List<CartVO> cartList = cartService.cartList(cvo);
 		model.addAttribute("cartList", cartList);
 		
-		return "client/cartList";
+		return "cart/cartList";
 	}
 }

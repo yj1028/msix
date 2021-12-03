@@ -8,6 +8,7 @@ public class CartVO {
 	private int m_no = 0;
 	private String p_no = "";
 	private int cart_cnt =0;
+	private String cart_price = "";
 	private String cart_delivery = "";
 	private int cart_pay =0;
 	private String cart_date ="";
