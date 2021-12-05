@@ -29,6 +29,15 @@
 			$(function(){
 				$("#pwdChk").css("visibility", "hidden");
 				
+				/*상품이미지 버튼 클릭 시 처리 이벤트 */
+				$("#productImgBtn").click(function(){
+					$("#f_data").attr({
+						"method":"get",
+						"action":"/product/imageDetail"
+					});
+					$("#f_data").submit();
+				});
+				
 				/* 수정 버튼 클릭 시 처리 이벤트 */
 				$("#updateFormBtn").click(function(){
 					$("#f_data").attr({
@@ -40,11 +49,13 @@
 				
 				/* 삭제 버튼 클릭 시 처리 이벤트 */
 				$("#productDeleteBtn").click(function(){
-					$("#f_data").attr({
-						method:"post",
-						action:"/product/productDelete"
-					});
-					$("#f_data").submit();
+					if(confirm("등록된 상품을 삭제 하시겠습니까?")){
+						$("#f_data").attr({
+							method:"post",
+							action:"/product/productDelete"
+						});
+						$("#f_data").submit();
+					}
 				});
 				
 				/* 상품등록 버튼 클릭 시 처리 이벤트 */
@@ -66,29 +77,33 @@
 					<%-- 수정 및 삭제 시 글번호, 원본파일명, 썸네일파일명을 전달하는 폼--%>
 					<form name="f_data" id="f_data" method="post"> 
 						<input type="hidden" name="p_no" value="${detail.p_no}" />
-						<input type="hidden" name="p_file" value="${detail.p_file}" />
-						<input type="hidden" name="p_thumb" value="${detail.p_thumb}" /> 
+						<%-- <input type="hidden" name="list[0].file" value="${detail.list[0].file}" />
+						<input type="hidden" name="list[1].file" value="${detail.list[1].file}" />
+						<input type="hidden" name="list[2].file" value="${detail.list[2].file}" />
+						<input type="hidden" name="list[0].i_thumb" value="${detail.list[0].i_thumb}" />  --%>
 					</form>
 				</div>
 			</div>
-			<div class="form-group">
+			<%-- <div class="form-group">
 			    <label class="col-sm-2 control-label">상품이미지</label>
 			    <div class="select_img text-left">
-			    	<img src="/uploadStorage/product/${detail.p_file}" />
+			    	<c:forEach var="image" items="${detail.list}">
+			    		<img src="/uploadStorage/product/${image.i_name}" />
+			    	</c:forEach>
 			    </div>    
-			</div>
+			</div> --%>
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
 				<tr>
 					<td>상품번호</td>
-					<td>${detail.p_no}</td>
+					<td colspan="2">${detail.p_no}</td>
 					<td>상품명</td>
-					<td>${detail.p_name}</td> 
+					<td colspan="2">${detail.p_name}</td> 
 				</tr> 
 				<tr>
 					<td>등록일</td>
-					<td>${detail.p_date}</td>
+					<td colspan="2">${detail.p_date}</td>
 					<td>수정일</td>
-					<td>${detail.p_update}</td>
+					<td colspan="2">${detail.p_update}</td>
 				</tr>
 				<tr>
 					<td>상품분류</td>
@@ -104,11 +119,12 @@
 				</tr>
 			</table>
 			<div class="text-center">
-					<input type="button" class="btn btn-default" value="상품수정" id="updateFormBtn" />			
-					<input type="button" class="btn btn-default" value="상품삭제" id="productDeleteBtn" />
-					<input type="button" class="btn btn-default" value="상품등록" id="insertFormBtn" />
-					<input type="button" class="btn btn-default" value="목록" id="productListBtn" />
-				</div>
+				<input type="button" class="btn btn-default" value="상품이미지" id="productImgBtn" />	
+				<input type="button" class="btn btn-default" value="상품수정" id="updateFormBtn" />			
+				<input type="button" class="btn btn-default" value="상품삭제" id="productDeleteBtn" />
+				<input type="button" class="btn btn-default" value="상품등록" id="insertFormBtn" />
+				<input type="button" class="btn btn-default" value="목록" id="productListBtn" />
+			</div>
 		</div>
 	</body>
 </html>

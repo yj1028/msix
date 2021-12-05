@@ -2,6 +2,7 @@ package com.msix.admin.product.service;
 
 import java.util.List;
 
+import com.msix.admin.image.vo.ImageVO;
 import com.msix.admin.product.vo.ProductVO;
 
 public interface ProductService {
@@ -18,4 +19,6 @@ public interface ProductService {
 	public int productUpdate(ProductVO pvo) throws Exception; // 상품 수정
 	
 	public int productDelete(ProductVO pvo) throws Exception; // 상품 삭제
+	
+	public List<ImageVO> imageDetail(ProductVO pvo); // 상품이미지 조회
 }

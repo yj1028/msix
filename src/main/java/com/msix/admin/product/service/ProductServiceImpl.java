@@ -1,5 +1,6 @@
 package com.msix.admin.product.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,36 +41,56 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productInsert(ProductVO pvo) throws Exception {
 		int result = 0;
+		//System.out.println(pvo.getList().size());
+		int p_no = productDAO.productNumber();
+		pvo.setP_no(p_no);
+		result = productDAO.productInsert(pvo);
 		
-		System.out.println(pvo.getList().size());
-		//result = productDAO.productInsert(pvo);
-		
-		ImageVO vo= pvo.getList().get(0);
-		
-		 /* if(vo.getFile().getSize() > 0) { 
-			String fileName = FileUploadUtil.fileUpload(vo.getFile(), "product"); 
-			 vo.setP_file(fileName);
-			 
-			 String thumbName = FileUploadUtil.makeThumbnail(fileName);
-			 vo.setP_thumb(thumbName); 
-			 imageDAO.
-		} */
-		
-		
+		for(ImageVO ivo : pvo.getList()) {
+			ivo.setP_no(p_no);
+			if(ivo.getFile().getSize() > 0) {
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product"); 
+				 ivo.setI_name(fileName);
+				 if(ivo.getFile() == pvo.getList().get(0).getFile()) {
+					 String thumbName = FileUploadUtil.makeThumbnail(fileName);
+					 ivo.setI_thumb(thumbName);
+					 imageDAO.imageInsert(ivo);
+				 }else {
+					 imageDAO.imageInsert(ivo); 
+				 }	
+			}
+		}
+			
 		return result;
 	}
 	
-	// 상세페이지 구현
-	@Override
+	// 상세페이지 구현(이미지)
+	/*@Override 
 	public ProductVO productDetail(ProductVO pvo) {
 		ProductVO detail = null;
+		List<ImageVO> list = new ArrayList<ImageVO>();
+		list.add(imageDAO.imageList(pvo.getP_no()));
+		pvo.setList(list);
+	
 		detail = productDAO.productDetail(pvo);
 		if(detail != null) {
 			detail.setP_info(detail.getP_info().toString().replace("\n", "<br />"));
 		}
 		
 		return detail;
-	}
+	} */
+	
+	// 상세페이지 구현
+		@Override
+		public ProductVO productDetail(ProductVO pvo) {
+			ProductVO detail = null;
+			detail = productDAO.productDetail(pvo);
+			if(detail != null) {
+				detail.setP_info(detail.getP_info().toString().replace("\n", "<br />"));
+			}
+
+			return detail;
+		}
 	
 	// 상품수정 폼 구현
 	@Override
@@ -114,4 +135,32 @@ public class ProductServiceImpl implements ProductService {
 		
 		return result;
 	}
+	
+	// 상품이미지 조회
+	@Override
+	public List<ImageVO> imageDetail(ProductVO pvo) {
+		List<ImageVO> list = imageDAO.imageDetail(pvo);
+		
+		return list;
+	}
+	
+	// 상품이미지 수정
+	public int imageUpdate(ImageVO ivo) throws Exception {
+		int result = 0;
+		
+		if(!ivo.getFile().isEmpty()) {
+			if(!ivo.getI_name().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+				FileUploadUtil.fileDelete(ivo.getI_thumb());
+			}
+			String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+			ivo.setI_name(fileName);
+			String thumbName = FileUploadUtil.makeThumbnail(fileName);
+			ivo.setI_thumb(thumbName);
+		}
+		result = imageDAO.imageUpdate(ivo);
+		
+		return result;
+	}
+	
 }

@@ -62,7 +62,6 @@
 						$("#keyword").val("");
 						$("#keyword").focus();
 					}
-				
 				});
 				
 				$("#type").change(function(){
@@ -75,6 +74,10 @@
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
+					if($("#search").val() == "p_type"){
+						$("#type").css("display", "inline");
+						$("#type").val($("#keyword").val());
+					}
 				});
 				
 				/* 상품등록 버튼 클릭 시 처리 이벤트 */
@@ -85,6 +88,7 @@
 				$("#searchDataAll").click(function(){
 					location.href="/product/productList"
 				});
+				
 				/* 상품명 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
 				$(".goDetail").click(function(){
 					let p_no = $(this).parents("tr").attr("data-num");
@@ -131,7 +135,7 @@
 					<div class="form-group">
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
-							<option value="p_name">상품이름</option>
+							<option value="p_name">상품명</option>
 							<option value="p_type">상품분류</option>
 							<option value="p_info">상품정보</option>
 							<option value="p_udate">등록일</option>
@@ -160,7 +164,7 @@
 					<thead>
 						<tr>
 							<th class="text-center">상품번호</th>
-							<th class="text-center">상품이미지</th>
+							<!-- <th class="text-center">상품이미지</th> -->
 							<th class="text-center">상품분류</th>
 							<th class="text-center">상품명</th>
 							<th class="text-center">상품가격</th>
@@ -175,11 +179,11 @@
 								<c:forEach var="product" items="${productList}" varStatus="status">
 									<tr data-num="${product.p_no}">
 										<td class="no text-center">${product.p_no}</td>
-										<%-- <td class="view_img text-center">
-											<c:if test="${not empty product.p_thumb}">
-												<img src="/uploadStorage/product/thumbnail/${product.p_thumb}">
+										 <%-- <td class="view_img text-center">
+											<c:if test="${not empty product.list[0].i_thumb}">
+												<img src="/uploadStorage/product/thumbnail/${product.list[0].i_thumb}">
 											</c:if>
-										</td> --%>
+										</td>  --%>
 										<td class="type text-center">${product.p_type}</td>
 										<td class="goDetail">${product.p_name}</td>
 										<td class="text-center">${product.p_price}</td>

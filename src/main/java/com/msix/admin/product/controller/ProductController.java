@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.msix.admin.image.vo.ImageVO;
 import com.msix.admin.product.service.ProductService;
 import com.msix.admin.product.vo.ProductVO;
 import com.msix.common.vo.PageDTO;
@@ -84,6 +85,19 @@ public class ProductController {
 		
 		return "product/productDetail";
 	}
+	
+	/* 상품이미지 폼 출력하기 */
+	@RequestMapping(value = "/imageDetail")
+	public String imageDetail(@ModelAttribute("data") ProductVO pvo, ImageVO ivo, Model model) {
+		log.info("imageDetail 호출 성공");
+		log.info("p_no = " + pvo.getP_no());
+		
+		List<ImageVO> imageDetail = productService.imageDetail(pvo);
+		model.addAttribute("imageDetail", imageDetail);
+		
+		return "product/imageDetail";
+	}
+	
 	
 	/* 상품수정 폼 출력하기 
 	 * @param : p_no
