@@ -2,12 +2,18 @@ package com.msix.admin.notice.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.msix.admin.notice.service.NoticeService;
@@ -85,24 +91,15 @@ public class NoticeController {
 		return "redirect:"+url;
 	}
 	
-	/* 공지 수정*/
-	@RequestMapping(value = "/noticeUpdate", method = RequestMethod.POST)
-	public String boardUpdate(@ModelAttribute NoticeVO nvo, RedirectAttributes ras) throws Exception  {
-		log.info("noticeUpdate 호출 성공");
-		
-		int result = 0;
-		String url= "";
-		
-		result = noticeService.boardUpdate(nvo);
-		ras.addFlashAttribute("data", nvo);				//------------
-		
-		if(result == 1) {
-			url = "/notice/noticeList";
-		}else {
-			url = "/notice/noticeDetail";
-		}
-		
-		return "redirect:"+url;
+	/* 공지 수정 */
+	@ResponseBody
+	@RequestMapping(value = "/{n_no}", method= {RequestMethod.PUT, RequestMethod.PATCH},
+			consumes="application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> boardUpdate(@PathVariable("n_no") Integer n_no, @RequestBody NoticeVO nvo) {
+		nvo.setN_no(n_no);
+		int result = noticeService.boardUpdate(nvo);
+		return result == 1 ? new ResponseEntity<String>("SUCCESS", HttpStatus.OK):
+			new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 }

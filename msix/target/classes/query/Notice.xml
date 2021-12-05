@@ -12,7 +12,7 @@
 		values(n_board_seq.nextval, #{n_title}, #{n_content}, sysdate, 0) 
 	</insert>
 	
-	<select id="boardDetail" parameterType="notice">
+	<select id="boardDetail" parameterType="notice" resultType="notice">
 		select n_no, n_title, n_content, to_char(n_date,'YYYY-MM-DD') as n_date, n_cnt 
 		from n_board
 		where n_no = #{n_no}

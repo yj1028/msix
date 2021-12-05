@@ -20,6 +20,16 @@
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		
+		<!-- 합쳐지고 최소화된 최신 CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		
+		<!-- 부가적인 테마 -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		
+		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
 		<script type="text/javascript">
 			$(function(){
 				// 목록
@@ -29,24 +39,15 @@
 				
 				// 공지 등록
 				$("#saveNoticeBtn").click(function(){
-					let n_date = ${NoticeVO.n_date};
-					
 					if(!chkData("#n_title", "공지 제목을")) return;
 					else if(!chkData("#n_content", "공지 내용을")) return;
 					else {
-						if(n_date=='reviseIndentity'){
+						$("#notice_write").attr({
 							"method":"post",
-							"enctype" :"multipart/form-data",
-							"action":"/notice/noticeUpdate"
-						}else {
-							$("#notice_write").attr({
-								"method":"post",
-								"enctype" :"multipart/form-data",
-								"action":"/notice/noticeInsert"
-							});
-							$("#notice_write").submit();
-						}
-						
+							//"enctype" :"multipart/form-data",
+							"action":"/notice/noticeInsert"
+						});
+						$("#notice_write").submit();
 					}
 				});
 				
@@ -65,11 +66,11 @@
 					<form id="notice_write">
 						<div class="mb-3">
 						  	<label for="n_title" class="form-label">공지 제목</label>
-						  	<input type="text" class="form-control" id="n_title" maxlength="49" value="${noticeVO.n_title }" />
+						  	<input type="text" class="form-control" id="n_title" name="n_title" maxlength="49" />
 						</div>
 						<div class="mb-3">
 						  	<label for="n_content" class="form-label">공지 내용</label>
-						 	<textarea class="form-control" id="n_content" rows="20">${NoticeVO.n_content }</textarea>
+						 	<textarea class="form-control" id="n_content" name="n_content" rows="20"></textarea>
 						</div>
 						<div class="mb-3">
 							<input class="btn btn-default" type="button" id="goList" value="목록" />

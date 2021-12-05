@@ -29,7 +29,7 @@ public class NoticeMapperTests {
 			log.info(out);
 		}
 	}
-	
+	@Test
 	public void testBoardInsert() {
 		NoticeVO nvo = new NoticeVO();
 		nvo.setN_title("제목");
@@ -41,12 +41,11 @@ public class NoticeMapperTests {
 	
 	public void testBoardDetail() {
 		NoticeVO nvo = new NoticeVO();
-		nvo.setN_no(1);
+		nvo.setN_no(2);
 		
 		noticeDAO.boardDetail(nvo);
 		
 	}
-	
 	
 	public void testBoardUpdate() {
 		NoticeVO nvo = new NoticeVO();
@@ -56,7 +55,7 @@ public class NoticeMapperTests {
 		
 		noticeDAO.boardUpdate(nvo);
 	}
-	@Test
+	
 	public void testBoardDelete() {
 		NoticeVO nvo = new NoticeVO();
 		nvo.setN_no(1);

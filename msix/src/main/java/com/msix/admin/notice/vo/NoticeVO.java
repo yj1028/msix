@@ -11,7 +11,7 @@ public class NoticeVO {
 	private int n_no;	//primary key
 	private String n_title;
 	private String n_content;
-	private String date;
+	private String n_date;
 	private int n_cnt =0;
 	
 }
