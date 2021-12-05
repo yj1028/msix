@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.TimeMapper">
+
+	<select id="getTime2" resultType="java.lang.String">
+		select sysdate from dual
+	</select>
+	
+	<select id="getSubjectName" parameterType="java.lang.String" resultType="java.lang.String">
+		select s_name from subject where s_num = #{s_num}
+	</select>
+	
+	<!-- resultType 이 List가 아님. -->
+	<select id="getSubjects" parameterType="int" resultType="com.spring.example.domain.SubjectVO">
+		select no, s_num, s_name from subject 
+		<![CDATA[where no > #{no}]]>
+	</select>
+	
+	<insert id="subjectInsert" parameterType="com.spring.example.domain.SubjectVO">
+		insert into subject(no, s_num, s_name) values(SEQ_SUB.NEXTVAL, #{s_num} , #{s_name})
+	</insert>
+	
+	<update id="subjectUpdate" parameterType="com.spring.example.domain.SubjectVO">
+		update subject set s_num = #{s_num}, s_name = #{s_name} where no = #{no}
+	</update>
+	
+	<delete id="subjectDelete" parameterType="com.spring.example.domain.SubjectVO">
+		delete from subject where no = #{no}
+	</delete>
+	
+</mapper>
