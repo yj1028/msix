@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		
-		<title>memberList</title>
+		<title>refundList</title>
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
@@ -16,9 +16,6 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
-		<style type="text/css">
-			.table-height{ min-height: 500px; }
-		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
@@ -29,31 +26,19 @@
 				if(word != ""){
 					$("#keyword").val("<c:out value='${data.keyword}' />");
 					$("#search").val("<c:out value='${data.search}' />");
-					
-					if($("#search").val()!='b_content'){
-						//:contains()는 특정 텍스트를 포함한 요소반환
-						if($("#search").val() == 'm_id') value= "#list tr td.goDetail";
-						else if($("#search").val() == 'm_name') value= "#list tr td.name";
-						console.log($(value + ":contains('" + word + "')").html());
-						
-						$(value + ":contains('" + word + "')").each(function(){
-							var regex = new RegExp(word,'gi');
-							$(this).html($(this).html().replace(regex,"<span class='required'>" + word + "</span>"));
-						});
-					}
 				}
 				
 				$("#search").change(function(){ // 검색 대상이 변경될 때마다 처리하는 이벤트
-					if($("#search").val()=="all"){
+					if($("#search").val()=="refundAll"){
 						$("#keyword").val("전체 데이터 조회합니다.");
-					} else if ($("#search").val() != "all"){
+					} else if ($("#search").val() != "refundAll"){
 						$("#keyword").val("");
 						$("#keyword").focus();
 					}
 				});
 				
-				$("#searchData").click(function(){
-					if($("#search").val() != "all"){
+				$("#rf_searchData").click(function(){
+					if($("#search").val() != "refundAll"){
 						if(!chkData("#keyword","검색어를")) return;
 					}
 					goPage();
@@ -61,83 +46,98 @@
 				
 				/* 제목 클릭시 상세 페이지로 이동 처리 이벤트 */
 				$(".goDetail").click(function(){
-					let m_no = $(this).parents("tr").attr("data-num"); <%-- "data-num"이 가리키는 값을 얻어온다. hidden 태그로 --%>
+					let p_no = $(this).parents("tr").attr("data-num"); <%-- "data-num"이 가리키는 값을 얻어온다. hidden 태그로 --%>
+					$("#p_no").val(p_no);
+					let m_no = $(this).parents("tr").attr("data-id");
 					$("#m_no").val(m_no);
-					console.log("회원번호 : " + m_no);
-					// 상세 페이지로 이동하기 위해 form추가 (id : m_detailForm)
-				 	$("#m_detailForm").attr({
+					let d_no = $(this).parents("tr").attr("data-dnum");
+					$("#d_no").val(d_no);
+					let rf_no = $(this).parents("tr").attr("data-rfnum");
+					$("#rf_no").val(rf_no);
+					console.log("주문상세번호 : " + d_no);
+					// 상세 페이지로 이동하기 위해 form추가 (id : rf_detailForm)
+				 	$("#rf_detailForm").attr({
 						"method":"get",
-						"action":"/member/memberDetail"
+						"action":"/refund/refundDetail"
 					});
-					$("#m_detailForm").submit(); 
+					$("#rf_detailForm").submit();
 				});
 				
 				/* 페이지 처리 */
 				$(".paginate_button a").click(function(e){
 					e.preventDefault();
-					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					$("#rf_search").find("input[name='pageNum']").val($(this).attr("href"));
 					goPage();
 				});
 			});
 			
 			function goPage(){
-				if($("#search").val() == "all"){
+				if($("#search").val() == "refundAll"){
 					$("#keyword").val("");
 				}
-				$("#f_search").attr({
+				$("#rf_search").attr({
 					"method":"get",
-					"action":"/member/memberList"
+					"action":"/refund/refundList"
 				});
-				$("#f_search").submit();
+				$("#rf_search").submit();
 			}
 		</script>
 	</head>
 	<body>
 		<div class="container">
-			<form id="m_detailForm">
+			<form id="rf_detailForm">
+				<input type="hidden" id="p_no" name="p_no" />
 				<input type="hidden" id="m_no" name="m_no" />
+				<input type="hidden" id="d_no" name="d_no" />
+				<input type="hidden" id="rf_no" name="rf_no" />
 			</form>
 			<div class="text-right">
-				<form id="f_search" name="f_search" class="form-inline">
+				<form id="rf_search" name="rf_search" class="form-inline">
 					<div class="form-group">
 						<label>검색조건</label>
 						<select name="search" id="search" class="form-control">
-							<option value="all">전체</option>
-							<option value="m_id">회원 아이디</option>
-							<option value="m_name">회원 이름</option>
+							<option value="refundAll">전체</option>
+							<option value="rf_date">환불 접수일</option>
+							<option value="m_no">회원 번호</option>
+							<option value="p_no">상품 번호</option>
 						</select>
 						<input type="text" name="keyword" class="form-control" id="keyword" value="검색어를 입력하세요" />
-						<button type="button" class="btn btn-default" id="searchData">검색</button>
+						<button type="button" class="btn btn-default" id="rf_searchData">검색</button>
 					</div>
 				</form>
 			</div>
 			
-			<div id="memberList" class="table-height">
-				<table summary="회원 리스트" class="table" style="margin-top:20px;">
+			<div id="refundList" class="table-height">
+				<table class="table table-bordered" style="margin-top:20px;">
 					<thead>
 						<tr>
-							<th class="order text-center col-md-1">회원번호</th>
-							<th class="text-center col-md-4">회원 아이디</th>
-							<th class="order col-md-1">가입일</th>
-							<th class="text-center col-md-2">회원 이름</th>
+							<th class="order text-center col-md-1">환불번호</th>
+							<th class="order text-center col-md-1">상품번호</th>
+							<th class="order col-md-1">회원번호</th>
+							<th class="text-center col-md-3">환불 글제목</th>
+							<th class="order col-md-2">환불 접수일</th>
+							<th class="text-center col-md-1">총 환불액</th>
 						</tr>
 					</thead>
-					<tbody id="list" class="table-striped">
+					<tbody id="rf_list" class="table-striped">
 						<!-- 데이터 출력 -->
 						<c:choose>
-							<c:when test="${not empty memberList}" >
-								<c:forEach var="member" items="${memberList}" varStatus="status">
-									<tr class="text-center" data-num="${member.m_no}">
-										<td>${member.m_no}</td>
-										<td class="goDetail text-left">${member.m_id}</td>
-										<td class="text-left">${member.m_date}</td>
-										<td class="name">${member.m_name}</td>
+							<c:when test="${not empty refundList}" >
+								<c:forEach var="refund" items="${refundList}" varStatus="status">
+									<tr class="text-center" data-num="${refund.p_no}" data-id="${refund.m_no}" 
+										data-dnum="${refund.d_no}" data-rfnum="${refund.rf_no}"> <%--data뒤에 임의로 값을 설정해 줄 수 있다. --%>
+										<td class="refundNum">${refund.rf_no}</td>
+										<td class="goDetail text-left">${refund.p_no}</td>
+										<td class="text-left">${refund.m_no}</td>
+										<td>${refund.rf_title}</td>
+										<td>${refund.rf_date}</td>
+										<td>${refund.rf_total}</td>
 									</tr>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="4" class="text-center">등록된 회원이 존재하지 않습니다.</td>
+									<td colspan="6" class="text-center">등록된 환불이 존재하지 않습니다.</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>

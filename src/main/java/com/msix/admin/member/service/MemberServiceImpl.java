@@ -34,9 +34,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public int memberDelete(MemberVO mvo) {
+	public int memberDormancy(MemberVO mvo) {
 		int result = 0;
-		result = memberDAO.memberDelete(mvo);
+		result = memberDAO.memberDormancy(mvo);
 		return result;
 	}
 

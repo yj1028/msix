@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msix.admin.member.dao.MemberDAO">
+	
+	<sql id = "memberSearch">
+		<if test="search == 'm_id'">
+			<![CDATA[ m_id like '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'm_name'">
+			<![CDATA[ m_name like '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
+	<select id="memberList" parameterType="member" resultType="member">
+		<![CDATA[
+			select
+			    rnum, m_no, m_name, m_id, to_char(m_date, 'YYYY/MM/DD') as m_date, m_isdelete
+			from(
+			    select /*+ index_desc(member member_pk) */
+			        rownum as rnum, m_no, m_name, m_id, m_date, m_isdelete
+			    from member
+			    where]]>
+			    <trim prefix="(" suffix=") and " prefixOverrides="and">
+			    	<include refid="memberSearch"></include>
+			    </trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount} 
+			) memberlist
+			where m_isdelete = 'N' and rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="memberListCnt" parameterType="member" resultType="int">
+		select count(*) from member
+		<trim prefix=" where (" suffix=")" >
+			<include refid="memberSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 회원 상세페이지 조회 -->
+	<select id="memberDetail" parameterType="member" resultType="member">
+		select m_no, m_id, m_name, m_tel, m_email,
+			to_char(m_date, 'YYYY-MM-DD') as m_date,
+			to_char(m_udate, 'YYYY-MM-DD') as m_udate,
+			m_isdelete
+		from member
+		where m_no = #{m_no}
+	</select>
+	
+	<!-- 회원 강제 탈퇴 -->
+	<update id="memberDormancy" parameterType="member">
+		update member
+		set m_isdelete = 'Y'
+		where m_no = #{m_no}
+	</update>
+	
+	<!-- <select id="memberList" parameterType="member" resultType="member">
+		select m_no, m_id, to_char(m_date, 'YYYY-MM-DD') as m_date, m_name
+		from member
+		order by m_no desc
+	</select> -->
+		
+</mapper>

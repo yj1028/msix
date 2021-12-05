@@ -52,18 +52,17 @@ public class MemberController {
 		return "member/memberDetail";
 	}
 	
-	@RequestMapping(value = "/memberDelete", method = RequestMethod.POST)
-	public String memberDelete(@ModelAttribute MemberVO mvo, Model model) throws Exception{
-		log.info("memberDelete 호출 성공");
+	@RequestMapping(value = "/memberDormancy", method = RequestMethod.POST)
+	public String memberDormancy(@ModelAttribute MemberVO mvo, Model model) {
+		log.info("memberDormancy 호출 성공");
 		
-		// 아래변수에는 입력 성공에 대한 상태값 담습니다.(1 or 0)
 		int result = 0;
 		
-		result = memberService.memberDelete(mvo);
+		result = memberService.memberDormancy(mvo);
 		if(result == 1) {
-			model.addAttribute("msg", "삭제되었습니다."); 
+			model.addAttribute("msg", "회원 탈퇴 되었습니다.");
 		}
 		
-		return "/member/memberList";
+		return "redirect:/member/memberList";
 	}
 }
