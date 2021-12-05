@@ -18,7 +18,7 @@
   </ul>
   
   <ul class="nav nav-sidebar">
-    <li><a href="">공지 게시판</a></li>
+    <li><a href="/notice/noticeList">공지 게시판</a></li>
     <li><a href="/review/reviewList">리뷰 게시판</a></li>
      <li><a href="/qna/qnaList">질의 게시판</a></li>
   </ul>

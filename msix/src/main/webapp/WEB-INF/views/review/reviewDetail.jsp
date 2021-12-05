@@ -90,7 +90,7 @@
 				
 			}); //최상위 끝.
 			
-			/* 댓글 목록을 보여주는 함수 */
+			/* 댓글 목록을 보여주는 함수 /------------ 댓글 목록을 못 불러옴 */
 			function listAll(rv_no){
 				$("#comment_list").html("");
 				let url = "/comments/all/"+rv_no;
@@ -139,50 +139,50 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" id ="rv_no" name="rv_no" value="${detail.rv_no}"/>
 			</form>
-			
-			<div>
-				<table summary="리뷰게시판 상세페이지" class="table table-bordered">
-					<tr>
-						<td>글번호</td>
-						<td colspan="3">${detail.rv_no}</td>
-					</tr>
-					<tr>
-						<td>회원번호</td>
-						<td colspan="3">${detail.m_no}</td>
-					</tr>
-					<tr>
-						<td>대분류</td>
-						<td colspan="3">${detail.rv_tag}</td>
-					</tr>
-					<tr>
-						<td>리뷰글 제목</td>
-						<td colspan="3">${detail.rv_title}</td>
-					</tr>
-					<tr class="table-height">
-						<td>리뷰글 내용</td>
-						<td colspan="3">${detail.rv_content}</td>
-					</tr>
-					<c:if test="${not empty detail.rv_image }">
-						<td>이미지</td>
-						<td><img src="/uploadStorage/${detail.rv_image }" class="rounded mx-auto d-block"></td>
-					</c:if> 
-					<tr>
-						<td>작성일</td>
-						<td colspan="3">${detail.rv_date}</td>
-					</tr>
-				</table>
+			<div class="d-grid gap-3">
+				<div class="p-2 bg-light border">
+					<table summary="리뷰게시판 상세페이지" class="table table-bordered">
+						<tr>
+							<td>글번호</td>
+							<td colspan="3">${detail.rv_no}</td>
+						</tr>
+						<tr>
+							<td>회원번호</td>
+							<td colspan="3">${detail.m_no}</td>
+						</tr>
+						<tr>
+							<td>대분류</td>
+							<td colspan="3">${detail.rv_tag}</td>
+						</tr>
+						<tr>
+							<td>리뷰글 제목</td>
+							<td colspan="3">${detail.rv_title}</td>
+						</tr>
+						<tr class="table-height">
+							<td>리뷰글 내용</td>
+							<td colspan="3">${detail.rv_content}</td>
+						</tr>
+						<c:if test="${not empty detail.rv_image }">
+							<td>이미지</td>
+							<td><img src="/uploadStorage/${detail.rv_image }" class="rounded mx-auto d-block"></td>
+						</c:if> 
+						<tr>
+							<td>작성일</td>
+							<td colspan="3">${detail.rv_date}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="p-2 bg-light border">
+					<input class="btn btn-default" type="button" id="goList" value="목록" />
+					<input class="btn btn-default" type="button" id="reviewDeleteBtn" value="게시글 삭제" />
+				</div>
+				<div class="p-2 bg-light border">
+					<ul class="list-group" id="comment_list">
+						<!-- 댓글 출력  -->
+						
+					</ul>
+				</div>
 			</div>
-			<div>
-				<input class="btn btn-default" type="button" id="goList" value="목록" />
-				<input class="btn btn-default" type="button" id="reviewDeleteBtn" value="게시글 삭제" />
-			</div>
-			<div>
-				<ul class="list-group" id="comment_list">
-					<!-- 댓글 출력  -->
-					
-				</ul>
-			</div>
-			
 		</div>
 	</body>
 </html>

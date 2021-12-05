@@ -30,7 +30,9 @@
 		
 		<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		
+		<style>
+			textarea{resize: none; }
+		</style>
 		<script>
 			let replyNum;
 			
@@ -81,25 +83,25 @@
 				/* 답글 수정 */
 				/* 수정하기 버튼 시 수정폼 동적으로 출력 */
 				$(document).on("click",".update_form",function(){
-					$(".reset_btn").click();
+					
 					let currLi = $(this).parents("li");
-					replyNum = currLi.attr("data-no");
+					updateForm(currLi);
 					
 				});
 				/* 수정화면에서 수정취소버튼(초기화) 클릭처리  */
 				$(document).on("click",".reset_btn",function(){
+					// 제목 가져오기	-- 제목 내용을 못 찾아옴.
+					let titletext = $(this).parents("li").find("input[type='text']").html();
 					
-					let titletext = $(this).parents("li").find("span").eq(1).html();
-					titletext = titletext.replace(/(\r\n|\r|\n)/g,"<br />");
-					
+					// 내용 가져오기
 					let context =$(this).parents("li").find("textarea").html();
 					context = context.replace(/(\r\n|\r|\n)/g,"<br />");
-					
+					// 버튼(수정, 삭제하기) 보여주기 
 					$(this).parents("li").find("input[type='button']").show();
 					
 					let titleArea = $(this).parents("li").children().eq(1);
 					let conArea = $(this).parents("li").children().eq(2);
-					
+					// 수정폼에 기존내용 보여주기
 					titleArea.html(titletext);
 					conArea.html(context);
 				});
@@ -107,7 +109,9 @@
 				$(document).on("click",".update_btn",function(){
 					let li = $(this).parents("li");
 					let r_no = li.attr("data-no");
+					let r_title = $("#title").val();
 					let r_content = $("#content").val();
+					
 					if(!chkData("#title","제목을")) return;
 					else if(!chkData("#content","답글 내용을")) return;
 					else {
@@ -119,7 +123,7 @@
 								"X-HTTP-Method-Override" :"PUT"
 							},
 							data: JSON.stringify({
-								r_title : r_title,
+								r_title:r_title,
 								r_content:r_content
 							}),
 							dataType :'text',
@@ -178,9 +182,12 @@
 			
 			/* 새 답글을 화면에 추가하기 위한 함수*/
 			function addNewReply(r_no, r_date, r_title, r_content) {
+				let new_ul = $("<ul>");
+				new_ul.addClass("list-group");
 				
 				let new_li = $("<li>");
 				new_li.attr("data-no", r_no);
+				new_li.addClass("list-group-item");
 				
 				let writer_p = $("<p>");
 				
@@ -206,44 +213,62 @@
 				//조립하기
 				writer_p.append(date_span).append(up_input).append(del_input)
 				new_li.append(writer_p).append(title_p).append(content_p);
-				$("#reply_list").append(new_li);
+				new_ul.append(new_li);
+				$("#reply_list").append(new_ul);
 			}
 			
 			/** 수정 폼 화면 구현 함수 */
 			function updateForm(currLi){
+				// 답글제목 가져오기
 				let titleArea = currLi.children().eq(1);
-				let titleText = titleArea.html();	// 답글제목 가져오기
-				
+				let titleText = titleArea.html();		
+				// 답글내용 가져오기
 				let conArea = currLi.children().eq(2);
-				let conText = conArea.html();			//답글내용 가져오기
+				let conText = conArea.html();			
 				
 				titleText = titleText.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 				conText = conText.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
-								
+				// 버튼(수정, 삭제하기) 숨기기 및 작성폼 초기화
 				currLi.find("input[type='button']").hide();
-				titleArea.html(""); 
+				titleArea.html("");
 				conArea.html("");
 							
 				let update_area = $("<span>");
 				update_area.addClass("update_area");
 				
-				let span_title = $("<span>");
-				span_title.attr({"name" : "title", "id" : "title"});
-				span_title.html(titleText);
-							
+				// 제목을 감싸는 <div>
+				let div_deco = $("<div>");
+				div_deco.addClass("input-group mb-3");
+													// ---- 라벨 태그 사이에 내용 못 넣음.
+				let label_deco = $("<label>");
+				label_deco.prop("제목");
+				div_deco.append(label_deco);
+				// 제목 삽입
+				let input_title = $("<input>");
+				input_title.attr({"type" : "text", "name" : "title", "id" : "title", "maxlength" : "49"});
+				input_title.addClass("form-control");
+				input_title.html(titleText);
+				
+				// 내용을 감싸는 <div>
+				let div_deco2 = $("<div>");
+				div_deco.addClass("input-group");
+				// <textarea>태그에 내용 삽입 
 				let textarea = $("<textarea>");
-				textarea.attr({"name" : "content", "id" : "content"});
+				textarea.attr({"name" : "content", "id" : "content", "rows": "10"});
+				textarea.addClass("form-control");
 				textarea.html(conText);
 							
 				let update_btn = $("<input>");
 				update_btn.attr({"type" : "button", "value" : "수정완료"});
 				update_btn.addClass("update_btn");
-							
+				update_btn.addClass("btn btn-primary");
+				
 				let reset_btn = $("<input>");
 				reset_btn.attr({"type" : "button", "value" : "수정취소"});
 				reset_btn.addClass("reset_btn");
+				reset_btn.addClass("btn btn-primary");
 							
-				update_area.append(span_title).append(textarea).append(update_btn).append(reset_btn);
+				update_area.append(div_deco).append(input_title).append(div_deco2).append(textarea).append(update_btn).append(reset_btn);
 				conArea.html(update_area);
 			}
 			
@@ -271,59 +296,61 @@
 	</head>
 	<body>
 		<div class="container">
-			<div >
-				<h3>질의게시판 상세내용</h3>
-				<table summary="질의게시판 상세페이지" class="table table-bordered">
-					<tr>
-						<td>글번호</td>
-						<td>${detail.q_no}</td>
-					</tr>
-					<tr>	
-						<td>회원번호</td>
-						<td>${detail.m_no}</td>
-					</tr>
-					<tr>
-						<td>태그</td>
-						<td>${detail.q_tag}</td>
-					</tr>
-					<tr>
-						<td>글제목</td>
-						<td>${detail.q_title}</td>
-					</tr>
-					<tr class="table-height">
-						<td>글내용</td>
-						<td>${detail.q_content}</td>
-					</tr>
-					<tr>
-						<td>등록일</td>
-						<td>${detail.q_date }</td>
-					</tr>
-				</table>
+			<div class="d-grid gap-3">
+				<div class="p-2 bg-light border">
+					<h3>질의게시판 상세내용</h3>
+					<table summary="질의게시판 상세페이지" class="table table-bordered">
+						<tr>
+							<td>글번호</td>
+							<td>${detail.q_no}</td>
+						</tr>
+						<tr>	
+							<td>회원번호</td>
+							<td>${detail.m_no}</td>
+						</tr>
+						<tr>
+							<td>태그</td>
+							<td>${detail.q_tag}</td>
+						</tr>
+						<tr>
+							<td>글제목</td>
+							<td>${detail.q_title}</td>
+						</tr>
+						<tr class="table-height">
+							<td>글내용</td>
+							<td>${detail.q_content}</td>
+						</tr>
+						<tr>
+							<td>등록일</td>
+							<td>${detail.q_date }</td>
+						</tr>
+					</table>
+				</div>
 				<div>
 					<input class="btn btn-default" type="button" id="goList" value="목록" />
 				</div>
-			</div>
-			<br /><br/>
-			<div >
-				<h3>관리자 답글 작성</h3>
-				<form id="reply_write">
-					<div class="mb-3">
-					  	<label for="r_title" class="form-label">답글 제목</label>
-					  	<input type="text" class="form-control" id="r_title" maxlength="49" />
+				<div class="p-2 bg-light border">
+					<h3>관리자 답글 작성</h3>
+					<form id="reply_write">
+						<div class="mb-3">
+						  	<label for="r_title" class="form-label">답글 제목</label>
+						  	<input type="text" class="form-control" id="r_title" maxlength="49" />
+						</div>
+						<div class="mb-3">
+						  	<label for="r_content" class="form-label">답글 내용</label>
+						 	<textarea class="form-control" id="r_content" rows="8"></textarea>
+						</div>
+						<div class="mb-3">
+							<input class="btn btn-default" type="button" id="replyBtn" value="답글 등록" />
+						</div>
+					</form>
+				</div>
+				<div class="p-2 bg-light border">
+					<h3>관리자가 작성한 답글</h3>
+					<div id="reply_list">
+						<!-- 동적 생성 요소 추가 -->
 					</div>
-					<div class="mb-3">
-					  	<label for="r_content" class="form-label">답글 내용</label>
-					 	<textarea class="form-control" id="r_content" rows="3"></textarea>
-					</div>
-					<div>
-						<input class="btn btn-default" type="button" id="replyBtn" value="답글 등록" />
-					</div>
-				</form>
-			</div>
-			<br /><br />
-			<h3>관리자가 작성한 답글</h3>
-			<div id="reply_list">
-				<!-- 동적 생성 요소 추가 -->
+				</div>
 			</div>
 		</div>
 	</body>
