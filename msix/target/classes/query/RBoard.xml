@@ -26,4 +26,5 @@
 	where r_no = #{r_no}
 </delete>
 
+
 </mapper>

@@ -25,13 +25,16 @@
 			let replyNum;
 			
 			$(function(){
-				/* 목록 */
+				let rv_no = ${detail.rv_no};
+				listAll(rv_no);
+				
+				/* 목록 이동 */
 				$("#goList").click(function(){
 					location.href="/review/reviewList";
 				});
 				
-				/* 글삭제버튼 클릭 시 댓글개수 확인 후 처리  
-				data : 값 확인 필요 */
+				
+				/* 글삭제버튼 클릭 시 댓글개수 확인 후 처리*/
 				$("#reviewDeleteBtn").click(function(){
 					$.ajax({
 						url : "/review/replyCnt",
@@ -45,7 +48,7 @@
 							var goUrl = "";   
 							if(resultData == 0){
 								// 게시글 삭제
-								if(confirm("정말 삭제하시겠습니까?")){
+								if(confirm("게시글을 삭제하시겠습니까?")){
 									goUrl = "/review/reviewDelete";
 									$("#f_data").attr("action",goUrl);
 									$("#f_data").submit();
@@ -62,13 +65,26 @@
 					});
 				});
 				
-				/* 댓글삭제하기(동적 폼) 버튼 클릭 처리*/
+				/* 댓글삭제하기 버튼 클릭 처리*/
 				$(document).on("click",".delete_btn",function(){
-					
-					let currLi = $(this).parents("li");
-					replyNum = currLi.attr("data-no");		// c_no
-					let rv_no = $("#rv_no").val();
-					deleteBtn(rv_no);
+					let replyNum = $(this).parents("li").attr("data-no");
+					if(confirm("선택하신 댓글을 삭제하시겠습니까?")){
+						$.ajax({
+							url : '/comments/'+replyNum,
+							type : "delete",
+							headers : {
+								"X-HTTP-Method-Override" : "DELETE"
+							},
+							dataType : "text",
+							success : function(result) {
+								console.log("result: "+result);
+								if(result =="SUCCESS"){
+									alert("삭제되었습니다.");
+									
+								}
+							}
+						});
+					}
 					
 				});
 				
@@ -80,8 +96,6 @@
 				let url = "/comments/all/"+rv_no;
 				
 				$.getJSON(url,function(data){
-					console.log("list count : " + data.length);
-					replyCnt = data.length;
 					$(data).each(function(){
 						var c_no = this.c_no;
 						var c_comment = this.c_comment;
@@ -95,15 +109,12 @@
 				});
 			}
 			
-			/* 새로운 글을 화면에 추가하기 위한 함수/ -----------회원번호 추가 필요 */
+			/* 새로운 글을 화면에 추가하기 위한 함수 */
 			function addNewItem(c_no, c_comment, c_date) {
 				let new_li = $("<li>");
 				new_li.attr("data-no", c_no);
 				
-				let writer_p = $("<p class="text-center">");
-				
-				let name_span = $("<span>");
-				name_span.html(r_name + "님");
+				let writer_p = $("<p>");
 				
 				let date_span = $("<span>");
 				date_span.html(" [ "+ c_date + " ] ");
@@ -117,29 +128,9 @@
 				content_p.html(c_comment);
 				
 				//조립하기
-				writer_p.append(name_span).append(date_span).append(del_input)
+				writer_p.append(date_span).append(del_input)
 				new_li.append(writer_p).append(content_p);
 				$("#comment_list").append(new_li);
-			}
-			/* 글 삭제를 위한 ajax 연동 처리 */
-			function deleteBtn(rv_no) {
-				if(confirm("선택하신 댓글을 삭제하시겠습니까?")){
-					$.ajax({
-						url : '/comments/'+replyNum,		//------check
-						type : "delete",
-						headers : {
-							"X-HTTP-Method-Override" : "DELETE"
-						},
-						dataType : "text",
-						success : function(result) {
-							console.log("result: "+result);
-							if(result =="SUCCESS"){
-								alert("삭제되었습니다.");
-								listAll(rv_no);
-							}
-						}
-					});
-				}
 			}
 		</script>
 	</head>
@@ -153,7 +144,7 @@
 				<table summary="리뷰게시판 상세페이지" class="table table-bordered">
 					<tr>
 						<td>글번호</td>
-						<td colspan="3" id="rv_no">${detail.rv_no}</td>
+						<td colspan="3">${detail.rv_no}</td>
 					</tr>
 					<tr>
 						<td>회원번호</td>
@@ -171,11 +162,10 @@
 						<td>리뷰글 내용</td>
 						<td colspan="3">${detail.rv_content}</td>
 					</tr>
-					<!-- 파일 업로드 작업이 되어있어야 가능함. -->
 					<c:if test="${not empty detail.rv_image }">
 						<td>이미지</td>
-						<td><img src="/uploadStorage/${detail.rv_image }" class="img-fluid"></td>
-					</c:if>
+						<td><img src="/uploadStorage/${detail.rv_image }" class="rounded mx-auto d-block"></td>
+					</c:if> 
 					<tr>
 						<td>작성일</td>
 						<td colspan="3">${detail.rv_date}</td>
@@ -187,10 +177,12 @@
 				<input class="btn btn-default" type="button" id="reviewDeleteBtn" value="게시글 삭제" />
 			</div>
 			<div>
-				<ul id="comment_list">
-					<!-- 댓글 보여주기 / 동적 생성 요소 추가 -->
+				<ul class="list-group" id="comment_list">
+					<!-- 댓글 출력  -->
+					
 				</ul>
 			</div>
+			
 		</div>
 	</body>
 </html>

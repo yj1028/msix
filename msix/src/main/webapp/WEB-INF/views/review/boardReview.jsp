@@ -68,13 +68,12 @@
 						<c:when test="${not empty boardList}" >
 							<c:forEach var="review" items="${boardList}" varStatus="status">
 								<tr class="text-center" data-no="${review.rv_no}">
-									<!-- <td>${count - status.index}</td>-->
-									<td class="text-left">${review.rv_no }</td>
-									<td class="text-left">${review.m_no }</td>
-									<td class="text-left">${review.rv_tag }</td>
-									<td class="goDetail text-left">${review.rv_title }</td>
-									<td class="text-left">${review.rv_date }</td>
-									<td class="text-left">${review.rv_cnt}</td>
+									<td class="text-center">${count - status.index}</td>
+									<td class="text-center">${review.m_no }</td>
+									<td class="text-center">${review.rv_tag }</td>
+									<td class="goDetail text-center">${review.rv_title }</td>
+									<td class="text-center">${review.rv_date }</td>
+									<td class="text-center">${review.rv_cnt}</td>
 								</tr>
 							</c:forEach>
 						</c:when>

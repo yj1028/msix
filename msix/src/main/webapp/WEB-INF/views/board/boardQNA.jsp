@@ -33,16 +33,29 @@
 						"action":"/qna/qnaDetail"
 					});
 					$("#detailForm").submit(); 
+					
+					
 				});
-				
-				// 조회수
 				
 				// 검색 
 				
 				// 페이지 처리
-				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
 				
 			});
+			
+			function goPage(){
+				
+				$("#f_search").attr({
+					"method":"get",
+					"action":"/qna/qnaList"
+				});
+				$("#f_search").submit();
+			}
 		</script>
 	</head>
 	<body>
@@ -51,6 +64,14 @@
 			<input type="hidden" id="q_no" name="q_no" />
 		</form>
 		
+		<form id="f_search" name="f_search">
+			<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+			<div>
+				
+			</div>
+		</form>
+				
 	 	<div class="table-height">
 			<table summary="질의게시판 리스트" class="table table-striped">
 				<thead>
@@ -70,14 +91,13 @@
 						<c:when test="${not empty qnaList}" >
 							<c:forEach var="board" items="${qnaList}" varStatus="status">
 								<tr class="text-center" data-no="${board.q_no}">
-									<!-- <td>${count - status.index}</td>-->
-									<td class="text-left">${board.q_no }</td>
-									<td class="text-left">${board.m_no }</td>
-									<td class="text-left">${board.q_tag }</td>
-									<td class="goDetail text-left">${board.q_title }</td>
-									<td class="text-left">${board.q_content }</td>
-									<td class="text-left">${board.q_date }</td>
-									<td class="text-left">${q_cnt }</td>
+									<td class="text-center">${count - status.index}</td>
+									<td class="text-center">${board.m_no }</td>
+									<td class="text-center">${board.q_tag }</td>
+									<td class="goDetail text-center">${board.q_title }</td>
+									<td class="text-center">${board.q_content }</td>
+									<td class="text-center">${board.q_date }</td>
+									<td class="text-center">${board.q_cnt }</td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -90,7 +110,26 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="text-center">
+			<ul class="pagination">
+				<c:if test="${pageMaker.prev}">
+					<li class="paginate_button previous">
+						<a href="${pageMaker.startPage - 1}">Previous</a>
+					</li>
+				</c:if>
+				<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+					<li class="paginate_button ${pageMaker.cvo.pageNum == num ? 'active':''}">
+						<a href="${num}">${num}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next}">
+					<li class="paginate_button next">
+						<a href="${pageMaker.endPage + 1}">Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		
  	</div> 
-    	
 	</body>
 </html>

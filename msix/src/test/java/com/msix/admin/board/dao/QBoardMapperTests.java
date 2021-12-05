@@ -21,20 +21,24 @@ public class QBoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private QBoardDAO qboardDAO;
 	
-	
+	@Test
 	public void testBoardList() {
-		List<QBoardVO> list = qboardDAO.boardList();
+		QBoardVO qvo = new QBoardVO();
+		
+		qvo.setPageNum(1);
+		qvo.setAmount(10);
+		
+		List<QBoardVO> list = qboardDAO.boardList(qvo);
 		for(QBoardVO out : list) {
 			log.info(out);
 		}
 	}
-	@Test
+	
 	public void testBoardDetail() {
 		QBoardVO qvo = new QBoardVO();
 		qvo.setQ_no(1);
 		
 		qboardDAO.boardDetail(qvo);
 	}
-	
 	
 }

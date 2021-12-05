@@ -22,11 +22,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class RepReviewController {
-		
+	
 	private RepReviewService repReviewService;
 	
+	
 	@GetMapping(value = "/all/{rv_no}", produces= {MediaType.APPLICATION_JSON_UTF8_VALUE} )
-	public List<RepReviewVO> replyList(@PathVariable("rv_no") int rv_no ){
+	public List<RepReviewVO> replyList(@PathVariable("rv_no") Integer rv_no ){
 		log.info("replyList 호출 성공");
 		List<RepReviewVO> list = null;
 		list = repReviewService.replyList(rv_no);

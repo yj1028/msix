@@ -5,7 +5,8 @@ import java.util.List;
 import com.msix.admin.board.vo.QBoardVO;
 
 public interface QBoardService {
-	public List<QBoardVO> boardList();
+	public int qboardListCnt(QBoardVO qvo);
+	public List<QBoardVO> boardList(QBoardVO qvo);
 	public QBoardVO boardDetail(QBoardVO qvo);
 	
 }

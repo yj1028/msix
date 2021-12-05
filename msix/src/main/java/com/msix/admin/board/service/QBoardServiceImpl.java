@@ -19,8 +19,8 @@ public class QBoardServiceImpl implements QBoardService {
 	
 	//질의게시판 리스트
 	@Override
-	public List<QBoardVO> boardList() {
-		List<QBoardVO> list = qboardDAO.boardList();
+	public List<QBoardVO> boardList(QBoardVO qvo) {
+		List<QBoardVO> list = qboardDAO.boardList(qvo);
 		return list;
 	}
 	
@@ -33,6 +33,11 @@ public class QBoardServiceImpl implements QBoardService {
 			detail.setQ_content(detail.getQ_content().toString().replaceAll("\n", "<br />"));
 		}
 		return detail;
+	}
+
+	@Override
+	public int qboardListCnt(QBoardVO qvo) {
+		return qboardDAO.qboardListCnt(qvo);
 	}
 	
 

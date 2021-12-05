@@ -2,20 +2,21 @@ package com.msix.admin.review.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msix.admin.review.vo.RepReviewVO;
 
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 
 @Service
-@AllArgsConstructor
 public class RepReviewServiceImpl implements RepReviewService {
-
+	
+	@Setter(onMethod_ = @Autowired)
 	private RepReviewService repReviewService;
 	
 	@Override
-	public List<RepReviewVO> replyList(int rv_no) {
+	public List<RepReviewVO> replyList(Integer rv_no) {
 		List<RepReviewVO> list = null;
 		list = repReviewService.replyList(rv_no);
 		return list;

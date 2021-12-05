@@ -20,9 +20,9 @@ public class RepReviewMapperTests {
 	@Setter(onMethod_ = @Autowired )
 	private RepReviewDAO repReviewDAO;
 	
-	
+	@Test
 	public void replyList() {
-		List<RepReviewVO> list = repReviewDAO.replyList(1);
+		List<RepReviewVO> list = repReviewDAO.replyList(7);
 		for(RepReviewVO out : list) {
 			log.info(out);
 		}
@@ -33,7 +33,7 @@ public class RepReviewMapperTests {
 		int count = repReviewDAO.replyEachDelete(2);
 		log.info("replyDelete 결과 : " + count);
 	}
-	@Test
+	
 	public void replyAllDelete() {
 		int count = repReviewDAO.replyAllDelete(2);
 		log.info("replyDelete 결과 : " + count);

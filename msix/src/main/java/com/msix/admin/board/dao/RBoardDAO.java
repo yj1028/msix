@@ -10,4 +10,6 @@ public interface RBoardDAO {
 	public int replyInsert(RBoardVO rvo);
 	public int replyupdate(RBoardVO rvo);
 	public int replyDelete(int r_no);
+
+	
 }
