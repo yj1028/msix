@@ -20,5 +20,9 @@ public interface ProductDAO {
 	public int productUpdate(ProductVO pvo); // 상품 수정
 	
 	public int productDelete(ProductVO pvo); // 상품 삭제
+	
+	public List<ProductVO> stockList(ProductVO pvo); // 재고 리스트 조회
+	
+	public int stockUpdate(ProductVO pvo); // 재고 수정
 
 }
