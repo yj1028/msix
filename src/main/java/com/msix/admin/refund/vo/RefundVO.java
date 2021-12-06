@@ -1,5 +1,7 @@
 package com.msix.admin.refund.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.msix.admin.orders.vo.OrderDetailVO;
 
 import lombok.Data;
@@ -15,4 +17,6 @@ public class RefundVO extends OrderDetailVO {
 	private String rf_image;
 	private String rf_date;
 	private int rf_total;
+	
+	private MultipartFile file;
 }

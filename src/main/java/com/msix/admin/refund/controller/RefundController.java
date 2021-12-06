@@ -87,4 +87,28 @@ public class RefundController {
 		
 		return "redirect:" + url;
 	}
+	
+	@RequestMapping("/refundInsertForm")
+	public String refundInsertForm() {
+		log.info("refundInsertForm 호출 성공");
+		
+		return "refund/refundInsertForm";
+	}
+	
+	@PostMapping
+	public String refundInsert(RefundVO rvo) throws Exception{
+		log.info("refundInsert 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = refundService.refundInsert(rvo);
+		if(result == 1) {
+			url = "";
+		} else {
+			url = "/refund/refundInsertForm";
+		}
+		
+		return "redirect:" + url;
+	}
 }

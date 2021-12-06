@@ -65,5 +65,11 @@
 		delete from refund
 		where rf_no = #{rf_no}
 	</delete>
+	
+	<!-- 환불 신청 처리 -->
+	<insert id="refundInsert" parameterType="refund">
+		insert into refund(rf_no, d_no, rf_title, rf_reason, rf_image, rf_total)
+		values(msix_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
+	</insert>
 
 </mapper>

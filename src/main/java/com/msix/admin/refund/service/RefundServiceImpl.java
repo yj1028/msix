@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.msix.admin.refund.dao.RefundDAO;
 import com.msix.admin.refund.vo.RefundVO;
+import com.msix.common.file.FileUploadUtil;
 
 import lombok.Setter;
 
@@ -38,6 +39,18 @@ public class RefundServiceImpl implements RefundService {
 	
 	public int refundDelete(RefundVO rvo) {
 		int result = refundDAO.refundDelete(rvo);
+		return result;
+	}
+	
+	public int refundInsert(RefundVO rvo) throws Exception {
+		int result = 0;
+		
+		if(rvo.getFile().getSize() > 0) {
+			String fileName = FileUploadUtil.fileUpload(rvo.getFile(), "refund");
+			rvo.setRf_image(fileName);
+		}
+		
+		result = refundDAO.refundInsert(rvo);
 		return result;
 	}
 }

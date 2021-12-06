@@ -10,4 +10,5 @@ public interface RefundService {
 	public RefundVO refundDetail(RefundVO rvo);
 	public int refundUpdate(RefundVO rvo);
 	public int refundDelete(RefundVO rvo);
+	public int refundInsert(RefundVO rvo) throws Exception;
 }
