@@ -21,4 +21,8 @@ public interface ProductService {
 	public int productDelete(ProductVO pvo) throws Exception; // 상품 삭제
 	
 	public List<ImageVO> imageDetail(ProductVO pvo); // 상품이미지 조회
+	
+	public int imageDelete(ImageVO ivo) throws Exception; // 상품이미지 삭제
+	
+	//public int imageUpdate(ImageVO ivo) throws Exception; // 상품이미지 수정
 }

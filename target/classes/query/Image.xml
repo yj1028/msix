@@ -24,7 +24,7 @@
 	</insert>
 	
 	<!-- 상품 이미지 수정 -->
-	<update id="imageUpdate" parameterType="int">
+	<update id="imageUpdate" parameterType="image">
 		update image set i_date = sysdate
 		<if test="i_name != ''">
 			, i_name = #{i_name}
@@ -36,7 +36,7 @@
 	</update>
 	
 	<!-- 상품 이미지 삭제 -->
-	<delete id="imageDelete" parameterType="int">
+	<delete id="imageDelete" parameterType="image">
 		delete from image where i_no = #{i_no} and p_no = #{p_no} 
 	</delete>
 </mapper>

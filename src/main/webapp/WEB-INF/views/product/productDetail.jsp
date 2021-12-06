@@ -20,7 +20,7 @@
 		<style type="text/css">
 			 #detailTable{width:80%;}
 			.table-height{height: 500px;}
-			.img img{width: 100px; height: 100px;}
+			img{width: 100px; height: 100px;}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -84,15 +84,15 @@
 					</form>
 				</div>
 			</div>
-			<%-- <div class="form-group">
-			    <label class="col-sm-2 control-label">상품이미지</label>
-			    <div class="select_img text-left">
-			    	<c:forEach var="image" items="${detail.list}">
-			    		<img src="/uploadStorage/product/${image.i_name}" />
-			    	</c:forEach>
-			    </div>    
-			</div> --%>
+		
+		    
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
+				<c:forEach var="image" items="${detail.list}">
+		    		<tr>
+		    			<td>상품이미지</td>
+		    			<td colspan="5"><img src="/uploadStorage/product/${image.i_name}" /></td>
+		    		</tr>
+		    	</c:forEach>
 				<tr>
 					<td>상품번호</td>
 					<td colspan="2">${detail.p_no}</td>
@@ -118,6 +118,11 @@
 					<td colspan="5" class="text-left">${detail.p_info}</td>
 				</tr>
 			</table>
+			<%-- <div class="select_img" >
+		    	<c:forEach var="image" items="${detail.list}">
+		    		<img src="/uploadStorage/product/${image.i_name}" />
+		    	</c:forEach>
+		    </div>   --%> 
 			<div class="text-center">
 				<input type="button" class="btn btn-default" value="상품이미지" id="productImgBtn" />	
 				<input type="button" class="btn btn-default" value="상품수정" id="updateFormBtn" />			

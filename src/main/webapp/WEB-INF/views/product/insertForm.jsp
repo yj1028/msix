@@ -20,7 +20,7 @@
 		<style type="text/css">
 			#p_name {width:400px;}
 			#p_type {width:110px;}
-			#p_content {resize:none;}
+			#p_info {resize:none;}
 			#p_price {width:100px;}
 			#p_cnt {width:80px;}
 			.select_img img {margin: 20px 120px;}
@@ -132,13 +132,13 @@
 			  </div>
 			  <br />
 			  <div class="form-group">
-			    <label class="col-sm-2 control-label">상품이미지</label>
+			    <label class="col-sm-2 control-label">상품이미지 등록</label>
 			    <div class="col-sm-10">
 			      <input type="file" name="list[0].file" id="list[0].file" />
 			      <input type="file" name="list[1].file" id="list[1].file" />
 			      <input type="file" name="list[2].file" id="list[2].file" />
 			    </div>
-			    <div class="select_img text-left"><img src=""></div>
+			    <!-- <div class="select_img text-left"><img src=""></div> 첨부이미지확인
 			    
 			    <script type="text/javascript">
 				    $("#file").change(function(){
@@ -150,7 +150,7 @@
 							reader.readAsDataURL(this.files[0]);
 						}
 					});
-			    </script>
+			    </script> -->
 			  </div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10 text-left">

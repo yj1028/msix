@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.msix.admin.image.vo.ImageVO;
@@ -153,4 +154,40 @@ public class ProductController {
 		
 		return "redirect:"+url;
 	}
+	
+	/* 상품이미지 삭제 구현하기 */
+	@ResponseBody
+	@PostMapping(value = "/imageDelete", produces = "text/plain; charset=utf-8")
+	public String imageDelete(ImageVO ivo) throws Exception {
+		log.info("imageDelete 호출 성공");
+		String value = "";
+		
+		int result = productService.imageDelete(ivo);
+		if(result == 1) {
+			value="success";
+		}else {
+			value="fail";
+		}
+		log.info("result = " + result);
+		
+		return value;
+	}
+	
+	/* 상품이미지 수정 구현하기 */
+//	@ResponseBody
+//	@PostMapping(value = "/imageUpdate", produces = "text/plain; charset=utf-8")
+//	public String imageUpdate(ImageVO ivo) throws Exception {
+//		log.info("imageUpdate 호출 성공");
+//		String value = "";
+//		
+//		int result = productService.imageUpdate(ivo);
+//		if(result == 1) {
+//			value="success";
+//		}else {
+//			value="fail";
+//		}
+//		log.info("result = " + result);
+//		
+//		return value;
+//	}
 }
