@@ -11,8 +11,8 @@
 		<if test="search == 'm_no'">
 			<![CDATA[ m_no like '%' || #{keyword} || '%' ]]>
 		</if>
-		<if test="search == 'd_no'">
-			<![CDATA[ d_no like '%' || #{keyword} || '%' ]]>
+		<if test="search == 'rf_date'">
+			<![CDATA[ rf_date like '%' || #{keyword} || '%' ]]>
 		</if>
 	</sql>
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
@@ -38,7 +38,9 @@
 	
 	<!-- 전체 레코드 수 조회 -->
 	<select id="refundListCnt" parameterType="refund" resultType="int">
-		select count(*) from refund
+		select count(*) from refund rf
+		inner join order_detail d on rf.d_no = d.d_no
+		inner join orders o on d.o_no = o.o_no  
 		<trim prefix=" where (" suffix=")" >
 			<include refid="refundSearch"></include>
 		</trim>
