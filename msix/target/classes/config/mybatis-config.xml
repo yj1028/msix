@@ -7,5 +7,6 @@
 		<typeAlias type="com.msix.admin.board.vo.RBoardVO" alias="qnaReply"/>
 		<typeAlias type="com.msix.admin.review.vo.ReviewVO" alias="review"/>
 		<typeAlias type="com.msix.admin.review.vo.RepReviewVO" alias="revReply"/>
+		<typeAlias type="com.msix.admin.notice.vo.NoticeVO" alias="notice"/>
 	</typeAliases>
 </configuration>
