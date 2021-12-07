@@ -1,5 +1,7 @@
 package com.msix.admin.product.dao;
 
+import java.util.List;
+
 //import java.util.List;
 
 import org.junit.Test;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.msix.admin.image.vo.ImageVO;
 import com.msix.admin.product.vo.ProductVO;
 
 
@@ -43,18 +46,18 @@ public class ProductMapperTests {
 //		log.info("전체 레코드 수 : " + result);
 //	}
 	
-	@Test
-	public void testProductInsert() {
-		ProductVO pvo = new ProductVO();
-		pvo.setP_name("가고일게코");
-		pvo.setP_type("Gecko");
-		pvo.setP_info("가고일게코 입니다.");
-		pvo.setP_price("120000");
-		pvo.setP_cnt(3);
-		
-		int result = productDAO.productInsert(pvo);
-		log.info("result : " + result);
-	}
+//	@Test
+//	public void testProductInsert() {
+//		ProductVO pvo = new ProductVO();
+//		pvo.setP_name("가고일게코");
+//		pvo.setP_type("Gecko");
+//		pvo.setP_info("가고일게코 입니다.");
+//		pvo.setP_price("120000");
+//		pvo.setP_cnt(3);
+//		
+//		int result = productDAO.productInsert(pvo);
+//		log.info("result : " + result);
+//	}
 	
 //	@Test
 //	public void testProductDetail() {
@@ -87,4 +90,5 @@ public class ProductMapperTests {
 //		int count = productDAO.productDelete(pvo);
 //		log.info("count : " + count);
 //	}
+	
 }

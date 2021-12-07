@@ -14,7 +14,7 @@
   </ul>
   <ul class="nav nav-sidebar">
     <li><a href="/product/productList">상품관리</a></li>
-    <li><a href="">재고관리</a></li>
+    <li><a href="/product/stockList">재고관리</a></li>
   </ul>
   <ul class="nav nav-sidebar">
     <li><a href="">공지 및 자유게시판</a></li>

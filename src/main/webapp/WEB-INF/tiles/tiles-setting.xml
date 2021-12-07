@@ -16,6 +16,11 @@
 		<put-attribute name="contents" value="/WEB-INF/views/product/{1}.jsp" />
 	</definition>
 	
+	<definition name="stock/*" extends="content"> 
+		<put-attribute name="title" value="재고관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/stock/{1}.jsp" />
+	</definition>
+	
 	<definition name="main/*" extends="content"> 
 		<put-attribute name="title" value="기본페이지" />
 		<put-attribute name="contents" value="/WEB-INF/views/main/{1}.jsp" />
