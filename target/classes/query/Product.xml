@@ -29,25 +29,26 @@
 		</if>
 	</sql>
 	
-	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리 + 이미지조회) 
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리 + 이미지조회) -->
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
 		select p.p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
 		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
-       		   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_update, i.i_thumb
-			   from product p, image i
-			   where p.p_no = i.p_no and rownum <= #{pageNum}*#{amount} and p_isdelete = 'N' and i.i_thumb is not null]]>
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+			   from product
+			   where ]]>
 				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
 					<include refid="productSearch" />
 				</trim>
 		<![CDATA[
+			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
 			)p, image i
 		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
 		]]>
-	</select> -->
+	</select> 
 	
-	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) 
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
 		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
@@ -63,7 +64,7 @@
 				rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
 			)productlist
 		WHERE rnum > (#{pageNum}-1)*#{amount} ]]>
-	</select> 
+	</select> -->
 	
 	<!-- 전체 레코드 수 조회  -->
 	<select id="productListCnt" parameterType="product" resultType="int">
@@ -112,7 +113,7 @@
 	</update>
 	
 	<!-- 재고 리스트 조회 -->
-	<select id="stockList" parameterType="product" resultType="product">
+	<!-- <select id="stockList" parameterType="product" resultType="product">
 		<![CDATA[
 		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update
@@ -127,10 +128,27 @@
 				rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
 			)stockList
 		WHERE rnum > (#{pageNum}-1)*#{amount} ]]>
-	</select>
+	</select> -->
+	<select id="stockList" parameterType="product" resultType="product">
+		<![CDATA[
+		select p.p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
+		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+			   from product
+			   where ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="productSearch" />
+				</trim>
+		<![CDATA[
+			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			)p, image i
+		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
+		]]>
+	</select> 
 	
 	<!-- 재고 수정 -->
 	<update id="stockUpdate" parameterType="product">
-		update product set p_cnt = #{p_cnt} where p_no = #{p_no}
+		update product set p_cnt = #{p_cnt}, p_update = sysdate where p_no = #{p_no}
 	</update>
 </mapper>

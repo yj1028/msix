@@ -19,7 +19,7 @@
 		
 		<style type="text/css">
 			.required{ color:red; }
-			.table-height{min-height: 500px;}
+			.table-height{min-height: 640px;}
 			.view_img img {width: 70px; height: 70px;}
 			#listTable th, td {text-align: center;}
 		</style>
@@ -88,25 +88,28 @@
 					$("#p_cnt").val($("#p_stock").val());
 					console.log($("#p_cnt").val());
 				})
-				
+			
 				/* 재고수정 버튼 클릭 시 처리 이벤트 */
 				$(".stockUpdateBtn").click(function(){
+					let p_stock = $(".p_stock").val();
+					$("#p_cnt").val(p_stock);
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
 					console.log("글번호 : " + p_no);
-					if($("#p_stock").val() <= 0 || $("#p_stock").val() >= 100){
+					console.log("재고 : " + p_stock);
+					if($(".p_stock").val() <= 0 || $(".p_stock").val() >= 100){
 						alert("수량은 1~99까지의 숫자만 입력 가능합니다.");
-						$("#p_stock").val("");
-						$("#p_stock").focus();	
+						location.href="/product/stockList";
+						/* 유효성 체크 다시 할 필요 있음*/
+						/* $(".p_stock").val(p_stock);
+						$(".p_stock").focus(); */
 					}else{
-						let p_cnt = $("#p_stock").val();
-						$("#p_cnt").val(p_cnt);
-						console.log(p_cnt);
 						$("#stockUpdateForm").attr({
 							method : "post",
 							action : "/product/stockUpdate"
 						});
-						//$("#stockUpdateForm").submit();
+						$("#stockUpdateForm").submit();
+						alert("수정이 완료되었습니다.");
 					}
 				});
 			}); // 최상위 $종료
@@ -185,14 +188,14 @@
 											<td class="no text-center">${stock.p_no}</td>
 											<td class="goDetail">${stock.p_name}</td>
 											 <td class="view_img text-center">
-												<c:if test="${not empty stock.list[0].i_thumb}">
-													<img src="/uploadStorage/product/thumbnail/${stock.list[0].i_thumb}">
+												<c:if test="${not empty stock.i_thumb}">
+													<img src="/uploadStorage/product/thumbnail/${stock.i_thumb}">
 												</c:if>
 											</td>  
 											<td class="type text-center">${stock.p_type}</td>
 											<td class="text-center">${stock.p_price}</td>
 											<td class="text-center">
-												<input type="number" id="p_stock" min="1" max="99" value="${stock.p_cnt}">
+												<input type="number" class="p_stock" min="1" max="99" value="${stock.p_cnt}">
 											</td>
 											<td class="udate text-center">${stock.p_update}</td>
 											<td>

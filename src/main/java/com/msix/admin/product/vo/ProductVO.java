@@ -28,6 +28,7 @@ public class ProductVO extends CommonVO{
 	private String p_update; // 수정일
 	private String p_isdelete; // 삭제여부
 	
+	private String i_thumb;
 	private List<ImageVO> list;
 	
 	public ProductVO() {

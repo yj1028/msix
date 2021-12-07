@@ -19,7 +19,7 @@
 		
 		<style type="text/css">
 			.required{ color:red; }
-			.table-height{min-height: 500px;}
+			.table-height{min-height: 640px;}
 			.view_img img {width: 70px; height: 70px;}
 			#listTable th, td {text-align: center;}
 		</style>
@@ -179,10 +179,10 @@
 									<tr data-num="${product.p_no}">
 										<td class="no text-center">${product.p_no}</td>
 										<td class="goDetail">${product.p_name}</td>
-										 <td class="view_img text-center">
-											<c:if test="${not empty product.list[0].i_thumb}">
-												<img src="/uploadStorage/product/thumbnail/${product.list[0].i_thumb}">
-											</c:if>
+										 <td class="view_img text-center goDetail">
+											 <c:if test="${not empty product.i_thumb}">
+												<img src="/uploadStorage/product/thumbnail/${product.i_thumb}">
+											 </c:if>
 										</td>  
 										<td class="type text-center">${product.p_type}</td>
 										<td class="text-center">${product.p_price}</td>

@@ -26,9 +26,6 @@ public class ProductServiceImpl implements ProductService {
 	// 상품목록 구현
 	@Override
 	public List<ProductVO> productList(ProductVO pvo) {
-		List<ImageVO> imgList = imageDAO.imageDetail(pvo);
-		pvo.setList(imgList);
-		
 		List<ProductVO> list = productDAO.productList(pvo);
 		
 		return list;
@@ -44,7 +41,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productInsert(ProductVO pvo) throws Exception {
 		int result = 0;
-		//System.out.println(pvo.getList().size());
 		int p_no = productDAO.productNumber();
 		pvo.setP_no(p_no);
 		result = productDAO.productInsert(pvo);
@@ -127,6 +123,32 @@ public class ProductServiceImpl implements ProductService {
 //			String thumbName = FileUploadUtil.makeThumbnail(fileName);
 //			pvo.setP_thumb(thumbName);
 //		}
+//		for(ImageVO ivo : pvo.getList()) {
+//			if(!ivo.getFile().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_name());
+//				FileUploadUtil.fileDelete(ivo.getI_thumb());
+//			}
+//		}
+//		System.out.println("이미지개수" + pvo.getList().size());
+//		
+//		for(int i = 0; i < pvo.getList().size(); i++) {
+//			if(!pvo.getList().get(i).getFile().isEmpty()) {
+//				if(!pvo.getList().get(i).getI_name().isEmpty()) {
+//					FileUploadUtil.fileDelete(pvo.getList().get(i).getI_name());
+//				}else if(!pvo.getList().get(i).getI_thumb().isEmpty()) {
+//					FileUploadUtil.fileDelete(pvo.getList().get(i).getI_thumb());
+//				}
+//				if(i == 0) {
+//					String fileName = FileUploadUtil.fileUpload(pvo.getList().get(i).getFile(), "product");
+//					pvo.getList().get(i).setI_name(fileName);
+//					String thumbName = FileUploadUtil.makeThumbnail(fileName);
+//					pvo.getList().get(i).setI_thumb(thumbName);
+//				}else {
+//					String fileName = FileUploadUtil.fileUpload(pvo.getList().get(i).getFile(), "product");
+//					pvo.getList().get(i).setI_name(fileName);
+//				}
+//			}
+//		}
 		result = productDAO.productUpdate(pvo);
 		
 		return result;
@@ -136,11 +158,26 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productDelete(ProductVO pvo) throws Exception{
 		int result = 0;
-		
+
 //		if(!pvo.getP_file().isEmpty()) {
 //			FileUploadUtil.fileDelete(pvo.getP_file());
 //			FileUploadUtil.fileDelete(pvo.getP_thumb());
 //		}
+//		for(ImageVO ivo : pvo.getList()) {
+//			if(ivo.getI_name().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_name());
+//				FileUploadUtil.fileDelete(ivo.getI_thumb());
+//			}
+//		}
+		pvo.setList(imageDAO.imageDetail(pvo));
+		for(ImageVO ivo : pvo.getList()) {
+			if(!ivo.getI_name().isEmpty() && !ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+				FileUploadUtil.fileDelete(ivo.getI_thumb());
+			}else if(!ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+			}
+		}
 		result = productDAO.productDelete(pvo);
 		
 		return result;
@@ -155,10 +192,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	// 상품이미지 수정
-//	@Override
-//	public int imageUpdate(ProductVO pvo) throws Exception {
-//		int result = 0;
-//		
+	@Override
+	public int imageUpdate(ImageVO ivo) throws Exception {
+		int result = 0;
+		
 //		for(ImageVO ivo : pvo.getList()) {
 //			if(!ivo.getFile().isEmpty()) {
 //				FileUploadUtil.fileDelete(ivo.getI_name());
@@ -172,10 +209,41 @@ public class ProductServiceImpl implements ProductService {
 //				ivo.setI_thumb(thumbName);
 //			}
 //		}
-//		result = imageDAO.imageUpdate(pvo);
-//		
-//		return result;
-//	}
+		
+		if(!ivo.getFile().isEmpty()) {
+			
+			if(!ivo.getI_name().isEmpty() && !ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+				FileUploadUtil.fileDelete(ivo.getI_thumb());
+				
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+				ivo.setI_name(fileName);
+				
+				String thumbName = FileUploadUtil.makeThumbnail(fileName);
+				ivo.setI_thumb(thumbName);
+				result = imageDAO.imageUpdate(ivo);
+			}
+			
+			if(!ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+				
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+				ivo.setI_name(fileName);
+				ivo.setI_thumb("");
+				result = imageDAO.imageUpdate(ivo);
+			} 
+			
+			if(ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+				ivo.setI_name(fileName);
+				ivo.setI_thumb("");
+				result = imageDAO.imageInsert(ivo);
+			}
+		}
+
+		
+		return result;
+	}
 	
 	// 상품이미지 삭제
 	@Override

@@ -87,34 +87,34 @@
 		
 		    
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
-				<c:forEach var="image" items="${detail.list}">
+				 <c:forEach var="image" items="${detail.list}">
 		    		<tr>
-		    			<td>상품이미지</td>
+		    			<td><strong>상품이미지</strong></td>
 		    			<td colspan="5"><img src="/uploadStorage/product/${image.i_name}" /></td>
 		    		</tr>
 		    	</c:forEach>
 				<tr>
-					<td>상품번호</td>
+					<td><strong>상품번호</strong></td>
 					<td colspan="2">${detail.p_no}</td>
-					<td>상품명</td>
+					<td><strong>상품명</strong></td>
 					<td colspan="2">${detail.p_name}</td> 
 				</tr> 
 				<tr>
-					<td>등록일</td>
+					<td><strong>등록일</strong></td>
 					<td colspan="2">${detail.p_date}</td>
-					<td>수정일</td>
+					<td><strong>수정일</strong></td>
 					<td colspan="2">${detail.p_update}</td>
 				</tr>
 				<tr>
-					<td>상품분류</td>
+					<td><strong>카테고리</strong></td>
 					<td>${detail.p_type}</td>
-					<td>상품가격</td>
+					<td><strong>판매가</strong></td>
 					<td>${detail.p_price}</td>
-					<td>재고</td>
+					<td><strong>재고</strong></td>
 					<td>${detail.p_cnt}</td>
 				</tr>
 				<tr class="table-height">
-					<td>상품정보</td>
+					<td><strong>상품정보</strong></td>
 					<td colspan="5" class="text-left">${detail.p_info}</td>
 				</tr>
 			</table>

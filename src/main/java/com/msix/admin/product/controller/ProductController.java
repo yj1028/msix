@@ -174,23 +174,23 @@ public class ProductController {
 	}
 	
 	/* 상품이미지 수정 구현하기 */
-//	@ResponseBody
-//	@PostMapping(value = "/imageUpdate", produces = "text/plain; charset=utf-8")
-//	public String imageUpdate(ImageVO ivo) throws Exception {
-//		log.info("imageUpdate 호출 성공");
-//		String value = "";
-//		
-//		int result = productService.imageUpdate(ivo);
-//		if(result == 1) {
-//			value="success";
-//		}else {
-//			value="fail";
-//		}
-//		log.info("result = " + result);
-//		
-//		return value;
-//	}
-	
+	@PostMapping(value = "/imageUpdate", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String imageUpdate(ImageVO ivo) throws Exception {
+		log.info("imageUpdate 호출 성공");
+		String value = "";
+		
+		int result = productService.imageUpdate(ivo);
+		if(result == 1) {
+			value="success";
+		}else {
+			value="fail";
+		}
+		log.info("result = " + result);
+		
+		return value;
+	}
+
 	/* 재고 리스트 조회 구현하기 */
 	@RequestMapping(value = "/stockList", method = RequestMethod.GET)
 	public String stockList(@ModelAttribute("data") ProductVO pvo, Model model) {
