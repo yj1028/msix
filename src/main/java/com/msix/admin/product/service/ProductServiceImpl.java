@@ -43,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
 		int result = 0;
 		int p_no = productDAO.productNumber();
 		pvo.setP_no(p_no);
+		
 		result = productDAO.productInsert(pvo);
 		
 		for(ImageVO ivo : pvo.getList()) {
@@ -60,6 +61,7 @@ public class ProductServiceImpl implements ProductService {
 				 }	
 			}
 		}
+		
 			
 		return result;
 	}

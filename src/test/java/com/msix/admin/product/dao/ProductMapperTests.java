@@ -25,18 +25,14 @@ public class ProductMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private ProductDAO productDAO;
 	
-//	@Test
-//	public void testProductList() {
-//		ProductVO pvo = new ProductVO();
-//		pvo.setPageNum(1);
-//		pvo.setAmount(10);
-//		pvo.setSearch("p_no");
-//		pvo.setKeyword("1");
-//		List<ProductVO> list = productDAO.productList(pvo);
-//		for(ProductVO vo : list) {
-//			log.info(vo);
-//		}
-//	}
+	@Test
+	public void testProductList() {
+		ProductVO pvo = new ProductVO();
+		List<ProductVO> list = productDAO.productList(pvo);
+		for(ProductVO vo : list) {
+			log.info(vo);
+		}
+	}
 	
 //	@Test
 //	public void testBoardListCnt() {
@@ -49,7 +45,9 @@ public class ProductMapperTests {
 //	@Test
 //	public void testProductInsert() {
 //		ProductVO pvo = new ProductVO();
+//		pvo.setP_no(productDAO.productNumber());
 //		pvo.setP_name("가고일게코");
+//		pvo.setP_code(10);
 //		pvo.setP_type("Gecko");
 //		pvo.setP_info("가고일게코 입니다.");
 //		pvo.setP_price("120000");
