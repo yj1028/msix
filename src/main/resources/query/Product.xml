@@ -75,7 +75,7 @@
 	</select>
 	
 	<!--  상품 번호 추출  -->
-	<select id="productNumber" resultType="int">
+	<select id="productNumber" resultType="String">
 		select PRODUCT_SEQ.nextval from dual
 	</select>
 	

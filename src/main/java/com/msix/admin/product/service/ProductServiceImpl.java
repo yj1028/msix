@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productInsert(ProductVO pvo) throws Exception {
 		int result = 0;
-		int p_no = productDAO.productNumber();
+		String p_no = productDAO.productNumber();
 		pvo.setP_no(p_no);
 		
 		result = productDAO.productInsert(pvo);

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msixpet.client.cart.dao.CartDAO">
+
+	<select id="cartList" resultType="cart">
+		select cart_no, m_no, p_no, cart_cnt, cart_delivery, cart_pay, to_char(cart_date, 'YYYY-MM-DD')as cart_date
+		from cart where cart_no = #{cart_no}
+		order by cart_no desc
+	</select>
+	
+</mapper>
