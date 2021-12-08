@@ -60,6 +60,12 @@
 		where d_no = #{d_no}
 	</update>
 	
+	<!-- 주문 상세 삭제 처리 -->
+	<delete id="orderDetailCancel" parameterType="orderDetail">
+		delete from order_detail
+		where d_no = #{d_no}
+	</delete>
+	
 	<!-- 주문 삭제 처리 -->
 	<delete id="orderCancel" parameterType="orders">
 		delete from orders

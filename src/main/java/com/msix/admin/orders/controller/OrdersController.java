@@ -74,6 +74,24 @@ public class OrdersController {
 		return "redirect:"+url;
 	}
 	
+	@PostMapping("/orderCancelq")
+	public String orderDetailCancel(@ModelAttribute OrderDetailVO odvo, RedirectAttributes ras) {
+		log.info("orderDetailCancel 호출 성공");
+		
+		String url = "";
+		
+		int result = ordersService.orderDetailCancel(odvo);
+		ras.addFlashAttribute("data", odvo);
+		
+		if(result == 1) {
+			url = "/orders/orderList";
+		} else {
+			url = "/orders/orderDetail";
+		}
+		
+		return "redirect:"+url;
+	}
+	
 	@PostMapping("/orderCancel")
 	public String orderCancel(@ModelAttribute OrdersVO ovo, RedirectAttributes ras) {
 		log.info("orderCancel 호출 성공");

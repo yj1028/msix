@@ -46,4 +46,10 @@ public class OrdersServiceImpl implements OrdersService {
 		int result = ordersDAO.orderCancel(ovo);
 		return result;
 	}
+	
+	@Override
+	public int orderDetailCancel(OrderDetailVO odvo) {
+		int result = ordersDAO.orderDetailCancel(odvo);
+		return result;
+	}
 }
