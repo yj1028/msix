@@ -12,7 +12,6 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 	
-		
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
@@ -33,7 +32,25 @@
 				
 				/* 등록 버튼 클릭 시 처리 이벤트 */
 				$("#productInsertBtn").click(function(){
-					console.log($("#p_type option:selected").val());
+					console.log($("#p_type").val());
+					let p_type = $("#p_type").val();
+					let p_code = 0;
+					if(p_type == "Gecko"){
+						p_code = 10;
+					}else if(p_type == "Lizard"){
+						p_code = 20;
+					}else if(p_type == "Turtle"){
+						p_code = 30;
+					}else if(p_type == "Amphibian"){
+						p_code = 40;
+					}else if(p_type == "Food"){
+						p_code = 50;
+					}else if(p_type == "Supplies"){
+						p_code = 60;
+					}
+					$("#p_code").val(p_code);
+					console.log(p_code);
+					
 					// 입력값 체크
 					if(!chkData("#p_name", "상품명을")) return;
 					else if($("#p_type option").index($("#p_type option:selected"))==0){
@@ -87,7 +104,7 @@
 	<body>
 		<div class="container">
 			<form class="form-horizontal" id="f_writeForm">
-				<input type="hidden" name="p_code" id="p_code /">
+				 <input type="hidden" name="p_code" id="p_code" />
 			  <div class="form-group">
 			    <label for="p_name" class="col-sm-2 control-label">상품명</label>
 			    <div class="col-sm-10">

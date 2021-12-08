@@ -26,7 +26,6 @@
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		
 		<script type="text/javascript">
 			$(function(){
 				//$("#type").css("visibility", "hidden");
@@ -192,7 +191,7 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="6">등록된 게시물이 존재하지 않습니다.</td>
+									<td colspan="6">등록된 상품이 존재하지 않습니다.</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>

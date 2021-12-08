@@ -8,16 +8,17 @@
 <div class="col-sm-3 col-md-2 sidebar">
   <ul class="nav nav-sidebar">
     <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-    <li><a href="#">회원관리</a></li>
-    <li><a href="#">주문관리</a></li>
-    <li><a href="#">환불관리</a></li>
+    <li><a href="/member/memberList">회원관리</a></li>
+    <li><a href="/orders/orderList">주문관리</a></li>
+    <li><a href="/refund/refundList">환불관리</a></li>
   </ul>
   <ul class="nav nav-sidebar">
     <li><a href="/product/productList">상품관리</a></li>
     <li><a href="/product/stockList">재고관리</a></li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li><a href="">공지 및 자유게시판</a></li>
+    <li><a href="">공지게시판</a></li>
     <li><a href="">질의게시판</a></li>
+    <li><a href="">리뷰게시판</a></li>
   </ul>
 </div>

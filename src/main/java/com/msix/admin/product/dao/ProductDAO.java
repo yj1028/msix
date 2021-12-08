@@ -9,7 +9,7 @@ public interface ProductDAO {
 	
 	public int productListCnt(ProductVO pvo); // 전체 레코드 수
 	
-	public int productNumber(); // 상품번호 추출
+	public String productNumber(); // 상품번호 추출
 	
 	public int productInsert(ProductVO pvo); // 상품 등록
 	
