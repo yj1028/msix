@@ -84,21 +84,25 @@
 					location.href="/product/stockList"
 				});
 				
-				$("#p_stock").change(function(){
-					$("#p_cnt").val($("#p_stock").val());
-					console.log($("#p_cnt").val());
-				})
+				/* $(".p_stock").click(function(){
+					var p_stock = 0;
+					p_stock = $(".p_stock").val();
+					$(this).parents("tr").attr("data-stock", p_stock);
+				}); */
 			
 				/* 재고수정 버튼 클릭 시 처리 이벤트 */
 				$(".stockUpdateBtn").click(function(){
-					let p_stock = $(".p_stock").val();
-					$("#p_cnt").val(p_stock);
+					let stock = $(this).prev().prev().find("input[type='number']").val();
+					/* 재고수정 로직 다시 짜야함
+					let index = $(this).parents("tr").attr("data-index");*/
+					//$("#p_cnt").val(stock);
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
 					console.log("글번호 : " + p_no);
-					console.log("재고 : " + p_stock);
-					if($(".p_stock").val() <= 0 || $(".p_stock").val() >= 100){
-						alert("수량은 1~99까지의 숫자만 입력 가능합니다.");
+					console.log("재고 : " + stock);
+					//console.log("인덱스 : " + index);
+					if($(".p_stock").val() < 0 || $(".p_stock").val() >= 1000){
+						alert("수량은 1~999까지의 숫자만 입력 가능합니다.");
 						location.href="/product/stockList";
 						/* 유효성 체크 다시 할 필요 있음*/
 						/* $(".p_stock").val(p_stock);
@@ -108,8 +112,8 @@
 							method : "post",
 							action : "/product/stockUpdate"
 						});
-						$("#stockUpdateForm").submit();
-						alert("수정이 완료되었습니다.");
+						//$("#stockUpdateForm").submit();
+						//alert("수정이 완료되었습니다.");
 					}
 				});
 			}); // 최상위 $종료
@@ -184,7 +188,7 @@
 							<c:choose>
 								<c:when test="${not empty stockList}">
 									<c:forEach var="stock" items="${stockList}" varStatus="status">
-										<tr data-num="${stock.p_no}">
+										<tr data-num="${stock.p_no}" data-stock="${stock.p_cnt}" data-index="${status.index}">
 											<td class="no text-center">${stock.p_no}</td>
 											<td class="goDetail">${stock.p_name}</td>
 											 <td class="view_img text-center">
@@ -195,7 +199,7 @@
 											<td class="type text-center">${stock.p_type}</td>
 											<td class="text-center">${stock.p_price}</td>
 											<td class="text-center">
-												<input type="number" class="p_stock" min="1" max="99" value="${stock.p_cnt}">
+												<input type="number" class="p_stock" min="0" max="999" value="${stock.p_cnt}">
 											</td>
 											<td class="udate text-center">${stock.p_update}</td>
 											<td>

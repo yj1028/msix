@@ -74,15 +74,20 @@
 		</trim>	
 	</select>
 	
-	<!--  상품 번호 추출  -->
+	<!-- 상품 번호 추출  -->
 	<select id="productNumber" resultType="String">
 		select PRODUCT_SEQ.nextval from dual
 	</select>
 	
+	<!-- 카테고리 코드 추출 
+	<select id="productCateCode" parameterType="product" resultType="String">
+		select p_code
+	</select> -->
+	
 	<!-- 상품 등록 --> 
 	<insert id="productInsert" parameterType="product">
 		insert into product(p_no, p_name, p_type, p_info, p_price, p_cnt, p_code)
-		values(#{p_no}, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt}, #{p_code})
+		values(#{p_code}||#{p_no}, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt}, #{p_code})
 	</insert>
 	
 	<!-- 상세 페이지를 위한 상품 조회 -->

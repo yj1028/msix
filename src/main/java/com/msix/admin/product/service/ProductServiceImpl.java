@@ -45,9 +45,10 @@ public class ProductServiceImpl implements ProductService {
 		pvo.setP_no(p_no);
 		
 		result = productDAO.productInsert(pvo);
+		String no = pvo.getP_code() + pvo.getP_no();
 		
 		for(ImageVO ivo : pvo.getList()) {
-			ivo.setP_no(p_no);
+			ivo.setP_no(no);
 			if(ivo.getFile().getSize() > 0) {
 				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product"); 
 				 ivo.setI_name(fileName);

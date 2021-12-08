@@ -25,14 +25,14 @@ public class ProductMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private ProductDAO productDAO;
 	
-	@Test
-	public void testProductList() {
-		ProductVO pvo = new ProductVO();
-		List<ProductVO> list = productDAO.productList(pvo);
-		for(ProductVO vo : list) {
-			log.info(vo);
-		}
-	}
+//	@Test
+//	public void testProductList() {
+//		ProductVO pvo = new ProductVO();
+//		List<ProductVO> list = productDAO.productList(pvo);
+//		for(ProductVO vo : list) {
+//			log.info(vo);
+//		}
+//	}
 	
 //	@Test
 //	public void testBoardListCnt() {
@@ -42,20 +42,20 @@ public class ProductMapperTests {
 //		log.info("전체 레코드 수 : " + result);
 //	}
 	
-//	@Test
-//	public void testProductInsert() {
-//		ProductVO pvo = new ProductVO();
-//		pvo.setP_no(productDAO.productNumber());
-//		pvo.setP_name("가고일게코");
-//		pvo.setP_code(10);
-//		pvo.setP_type("Gecko");
-//		pvo.setP_info("가고일게코 입니다.");
-//		pvo.setP_price("120000");
-//		pvo.setP_cnt(3);
-//		
-//		int result = productDAO.productInsert(pvo);
-//		log.info("result : " + result);
-//	}
+	@Test
+	public void testProductInsert() {
+		ProductVO pvo = new ProductVO();
+		pvo.setP_no("1");
+		pvo.setP_name("가고일게코");
+		pvo.setP_code(10);
+		pvo.setP_type("Gecko");
+		pvo.setP_info("가고일게코 입니다.");
+		pvo.setP_price("120000");
+		pvo.setP_cnt(3);
+		
+		int result = productDAO.productInsert(pvo);
+		log.info("result : " + result);
+	}
 	
 //	@Test
 //	public void testProductDetail() {
