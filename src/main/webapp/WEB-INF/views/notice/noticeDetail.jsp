@@ -42,7 +42,9 @@
 					/* 수정하기 버튼 시 수정폼 동적으로 출력 - 한 번만 출력되도록 설정*/
 					let currTr = $(this).parents("tr");
 					updateForm(currTr);
+					
 					$(this).hide();
+					
 				});
 				
 				/* 수정화면에서 수정취소버튼(초기화) 클릭처리  */
@@ -58,9 +60,8 @@
 					// 버튼(수정, 삭제하기) 보여주기 
 					$(this).find("input[type='button']").show();
 					
-					// 수정폼에 기존내용 보여주고, 공지수정버튼 되살리기.
 					$("#input_reply").hide();
-					$("#reviseNoticeBtn").show();
+					
 					
 				});
 				
@@ -144,7 +145,7 @@
 				div_deco2.addClass("input-group");
 				// <textarea>태그에 내용 삽입 
 				let textarea = $("<textarea>");
-				textarea.attr({"name" : "content", "name" :"content", "id" : "content", "rows": "10"});
+				textarea.attr({"name" : "content", "name" :"content", "id" : "content", "rows": "10", "maxlength" : "1300"});
 				textarea.addClass("form-control");
 				textarea.html(conText);
 							

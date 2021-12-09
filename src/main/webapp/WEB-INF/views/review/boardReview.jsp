@@ -106,7 +106,7 @@
 					<label>검색조건</label>
 					<select name="search" id="search">
 						<option value="all">전체</option>
-						<option value="rv_tag">대분류</option>
+						<option value="rv_tag">태그</option>
 						<option value="rv_title">제목</option>
 						<option value="rv_content">내용</option>
 					</select>
@@ -122,7 +122,7 @@
 						<tr>
 							<th class="text-center">글번호</th>
 							<th class="text-center">회원번호</th>
-							<th class="text-center">대분류</th>
+							<th class="text-center">태그</th>
 							<th class="text-center">리뷰글 제목</th>
 							<th class="text-center">작성일</th>
 							<th class="text-center">조회수</th>

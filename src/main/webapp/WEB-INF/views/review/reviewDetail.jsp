@@ -156,7 +156,7 @@
 							<td colspan="3">${detail.m_no}</td>
 						</tr>
 						<tr>
-							<td>대분류</td>
+							<td>태그</td>
 							<td colspan="3">${detail.rv_tag}</td>
 						</tr>
 						<tr>
