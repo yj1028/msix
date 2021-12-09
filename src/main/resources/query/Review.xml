@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.admin.review.dao.ReviewDAO">
+	<!--  기본조회
+	<select id="boardList" parameterType="review" resultType="review">
+		select rv_no, m_no, rv_tag, rv_title, rv_content, rv_image, 
+		to_char(rv_date,'YYYY-MM-DD') as rv_date, rv_cnt
+		from rv_board
+		order by rv_no desc
+	</select>-->
+	
+	<sql id = "boardSearch">
+		<if test="search == 'rv_tag'">
+				<![CDATA[ rv_tag like '%' || #{keyword} || '%' ]]>
+			</if>
+			<if test="search == 'rv_title'">
+				<![CDATA[ rv_title like '%' || #{keyword} || '%' ]]>
+			</if>
+			<if test="search == 'rv_content'">
+				<![CDATA[ rv_content like '%' || #{keyword} || '%' ]]>
+			</if>
+	</sql>
+	
+	<!-- 게시판 리스트 조회(페이징 처리 / ) -->
+	<select id="boardList" parameterType="review" resultType="review">
+		<![CDATA[
+				select
+				    rv_no, m_no, rv_tag, rv_title, rv_content, rv_image, 
+					to_char(rv_date,'YYYY-MM-DD') as rv_date, rv_cnt
+				from(
+				    select /*+ index_desc(rv_board rv_board_pk) */
+				        rownum as rnum, rv_no, m_no, rv_tag, rv_title, 
+				        rv_content, rv_image, rv_date, rv_cnt
+				    from rv_board
+				    where ]]>
+			    <trim prefix="(" suffix=") and " prefixOverrides="and">
+			    	<include refid="boardSearch"></include>
+			    </trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount} 
+			) boardlist
+			where rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select> 
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="rvboardListCnt" parameterType="review" resultType="int">
+		select count(*) from rv_board
+		<!--<trim prefix=" where (" suffix=")" >
+				<include refid="boardSearch"></include>
+			</trim> -->
+	</select>
+	
+	<select id="boardDetail" parameterType="review" resultType="review">
+		select rv_no, m_no, rv_tag, rv_title, rv_content, rv_image, 
+		to_char(rv_date,'YYYY-MM-DD') as rv_date, rv_cnt
+		from rv_board
+		where rv_no = #{rv_no}
+	</select>
+	
+	<delete id="boardDelete" parameterType="review">
+		delete from rv_board
+		where rv_no = #{rv_no}
+	</delete>
+	
+	
+</mapper>
