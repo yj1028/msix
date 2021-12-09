@@ -39,12 +39,16 @@
 				/* 주문 취소 버튼 클릭시 제어 */
 				$("#orderDeleteBtn").click(function(){
 					if(confirm("정말 주문을 취소 하시겠습니까?")){
-						$("#o_data").attr({
-							"method":"post",
-							"action":"/orders/orderCancel"
-						});
-						$("#o_data").submit();
-						alert("주문이 취소 되었습니다.")
+						if($(".ref").attr("data-ref") != 'N'){
+							$("#o_data").attr({
+								"method":"post",
+								"action":"/orders/orderCancel"
+							});
+							$("#o_data").submit();
+							alert("주문이 취소 되었습니다.");
+						} else {
+							alert("주문 취소를 실패하였습니다. 환불 처리 중입니다.");
+						}
 					}
 				});
 				
@@ -61,7 +65,6 @@
 		<%-- 수정 및 삭제 시 가져가는 폼--%>
 		<form name="o_data" id="o_data" method="post">
 			<input type="hidden" name="o_no" value="${detail.o_no}"/>
-			<input type="hidden" name="m_no" value="${detail.m_no}"/>
 		</form>
 		
 		<div id="orderStatement" class="text-right">
@@ -128,7 +131,7 @@
 					<td>결제수단</td>
 					<td>${detail.d_payment}</td>
 					<td>환불가능여부</td>
-					<td>${detail.d_refund}</td>
+					<td class ="ref" data-ref="${detail.d_refund}">${detail.d_refund}</td>
 				</tr>
 				
 			</table>

@@ -75,13 +75,13 @@ public class OrdersController {
 	}
 	
 	@PostMapping("/orderCancel")
-	public String orderCancel(@ModelAttribute OrdersVO ovo, RedirectAttributes ras) {
+	public String orderCancel(@ModelAttribute OrderDetailVO odvo, RedirectAttributes ras) {
 		log.info("orderCancel 호출 성공");
 		
 		String url = "";
 		
-		int result = ordersService.orderCancel(ovo);
-		ras.addFlashAttribute("data", ovo);
+		int result = ordersService.orderCancel(odvo);
+		ras.addFlashAttribute("data", odvo);
 		
 		if(result == 1) {
 			url = "/orders/orderList";
