@@ -240,7 +240,7 @@
 				
 				// <textarea>태그에 내용 삽입 
 				let textarea = $("<textarea>");
-				textarea.attr({"name" : "content", "id" : "content", "rows": "10"});
+				textarea.attr({"name" : "content", "id" : "content", "rows": "10" , "maxlength" : "50"});
 				textarea.addClass("form-control");
 				textarea.html(conText);
 					
@@ -325,7 +325,7 @@
 						</div>
 						<div class="mb-3">
 						  	<label for="r_content" class="form-label">답글 내용</label>
-						 	<textarea class="form-control" id="r_content" rows="8"></textarea>
+						 	<textarea class="form-control" id="r_content" rows="8" maxlength="1300"></textarea>
 						</div>
 						<div class="mb-3">
 							<input class="btn btn-default" type="button" id="replyBtn" value="답글 등록" />

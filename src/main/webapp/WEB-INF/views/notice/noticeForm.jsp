@@ -70,7 +70,7 @@
 						</div>
 						<div class="mb-3">
 						  	<label for="n_content" class="form-label">공지 내용</label>
-						 	<textarea class="form-control" id="n_content" name="n_content" rows="20"></textarea>
+						 	<textarea class="form-control" id="n_content" name="n_content" rows="20" maxlength="1300"></textarea>
 						</div>
 						<div class="mb-3">
 							<input class="btn btn-default" type="button" id="goList" value="목록" />
