@@ -40,7 +40,7 @@
         
                 <div class="row data">
                     <div class="subdiv">
-                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+                        <div class="check"><input type="checkbox" name="buy" value="260" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
                         <div class="img"><img src="./img/basket1.jpg" width="60"></div>
                         <div class="pname">
                             <span>찜마마(XJ-92214/3)</span>

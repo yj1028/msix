@@ -19,7 +19,6 @@ public class PageDTO {
 		
 		/* 페이징의 끝번호(endPage) 구하기
 		   this.endPage = (int)(Math.ceil(페이지번호 / 10.0)) * 10; */
-
 		this.endPage = (int)(Math.ceil(cvo.getPageNum() / 10.0)) * 10;
 		
 		/* 페이징의 시작번호(startPage) 구하기 */

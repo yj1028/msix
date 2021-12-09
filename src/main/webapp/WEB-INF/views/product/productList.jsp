@@ -28,8 +28,8 @@
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				//$("#type").css("visibility", "hidden");
 				$("#type").css("display", "none");
+				
 				/* 검색 후 검색 대상과 검색 단어 출력 */
 				let word="<c:out value='${data.keyword}' />";
 				let value="";
@@ -41,7 +41,7 @@
 						//:contain()는 특정 텍스트를 포함한 요소반환
 						if($("#search").val()=='p_name') value="#list tr td.goDetail";
 						else if($("#search").val()=='p_type') value="#list tr td.type";
-						else if($("#search").val()=='p_udate') value="#list tr td.udate";
+						else if($("#search").val()=='p_update') value="#list tr td.update";
 						else if($("#search").val()=='p_no') value="#list tr td.no";
 						console.log($(value+":contains('"+word+"')").html());
 						
@@ -51,10 +51,10 @@
 						});
 					}
 				}
+				
 				/* 검색 대상이 변경될 때마다 처리 이벤트 */
 				$("#search").change(function(){
 					if($("#search").val() == "p_type"){
-						//$("#type").css("visibility", "visible");
 						$("#type").css("display", "inline");
 					}else if($("#search").val() != "p_type"){
 						$("#type").css("display", "none");
@@ -63,6 +63,7 @@
 					}
 				});
 				
+				/* 카테고리가 변경될 때마다 처리 이벤트 */
 				$("#type").change(function(){
 					$("#keyword").val($("#type").val());
 				});
@@ -73,10 +74,10 @@
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
-					if($("#search").val() == "p_type"){
+					/* if($("#search").val() == "p_type"){
 						$("#type").css("display", "inline");
-						$("#type").val($("#keyword").val());
-					}
+						$("#type").val($("#keyword").val()); 
+					}*/
 				});
 				
 				/* 상품등록 버튼 클릭 시 처리 이벤트 */
@@ -134,10 +135,11 @@
 					<div class="form-group">
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
+							<option>--검색조건--</option>
 							<option value="p_name">상품명</option>
 							<option value="p_type">상품분류</option>
 							<option value="p_info">상품정보</option>
-							<option value="p_udate">등록일</option>
+							<option value="p_update">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
 						<select class="form-control" name="type" id="type">
@@ -185,7 +187,7 @@
 										</td>  
 										<td class="type text-center">${product.p_type}</td>
 										<td class="text-center">${product.p_price}</td>
-										<td class="udate text-center">${product.p_update}</td>
+										<td class="update text-center">${product.p_update}</td>
 									</tr>
 								</c:forEach>
 							</c:when>

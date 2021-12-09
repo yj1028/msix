@@ -95,8 +95,6 @@
 					console.log("재고 : " + stock);
 					if($(".p_stock").val() < 0 || $(".p_stock").val() >= 1000){
 						alert("수량은 1~999까지의 숫자만 입력 가능합니다.");
-						//location.href="/product/stockList";
-						
 						$(this).parents("tr").find(".p_stock").val(o_stock);
 						$(this).parents("tr").find(".p_stock").focus;
 					}else{

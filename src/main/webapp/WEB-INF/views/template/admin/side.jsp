@@ -17,8 +17,8 @@
     <li><a href="/product/stockList">재고관리</a></li>
   </ul>
   <ul class="nav nav-sidebar">
-    <li><a href="">공지게시판</a></li>
-    <li><a href="">질의게시판</a></li>
-    <li><a href="">리뷰게시판</a></li>
+    <li><a href="/notice/noticeList">공지 게시판</a></li>
+    <li><a href="/review/reviewList">리뷰 게시판</a></li>
+    <li><a href="/qna/qnaList">질의 게시판</a></li>
   </ul>
 </div>
