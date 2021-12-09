@@ -31,9 +31,10 @@
 	                <!-- Collect the nav links, forms, and other content for toggling -->
 	                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	                  <ul class="nav navbar-nav navbar-right">
-	                  	<li><a href="/">메인화면</a></li>
-	                    <li><a href="/">로그인</a></li>
-	                    <li><a href="/">회원가입</a></li>
+	                  	<li<c:if test="${fn:containsIgnoreCase(clientUri, '/main')}">class="active"</c:if>>
+	                  	<a href="/main/mainPage">메인화면</a></li>
+	                    <li><a href="/login/loginForm">로그인</a></li>
+	                    <li><a href="/member/memberJoin">회원가입</a></li>
 	                    <li><a href="/">마이페이지</a></li>
 	                    <li><a href="/">공지사항</a></li> 
 	                    <li <c:if test="${fn:containsIgnoreCase(clientUri, '/cart')}">class="active"</c:if>>

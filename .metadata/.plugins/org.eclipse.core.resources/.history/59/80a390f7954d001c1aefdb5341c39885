@@ -1,5 +1,0 @@
-package com.spring.common.log;
-
-public class LoggerAdvice {
-
-}

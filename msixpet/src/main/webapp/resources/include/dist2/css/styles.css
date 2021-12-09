@@ -1,9 +1,9 @@
-body {
+/* body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 80%;
 	font-weight: bold;
 	background: #FFF;
-	}
+	} */
 
 hr {
 	border:none;
@@ -23,6 +23,7 @@ img {
 	}
 	
 #menu {
+	float: left;
 	width: 200px;
 	margin: 10px;
 	border-style: solid solid none solid;

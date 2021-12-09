@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msixpet.client.product.dao.ProductDAO">
+
+	<!-- 리스트 조회(페이징 처리와 검색 처리) -->
+
+	<select id="productList" resultType="product" parameterType="product">
+	
+		<![CDATA[
+				select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, to_char(p_update, 'YYYY-MM-DD') AS p_update
+				from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+		       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+					   from product
+					   where ]]>
+			<trim prefixOverrides="AND" suffix=") AND" prefix="(">
+			</trim>
+	<![CDATA[
+					rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+				)productList
+				WHERE rnum > (#{pageNum}-1)*#{amount}
+			]]>
+	</select>
+
+	<!-- 상세 페이지를 위한 상품 조회 -->
+	<select id="productDetail" parameterType="product" resultType="product">
+		select p_no, p_name, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') AS p_date,
+		to_char(p_update, 'YYYY-MM-DD HH24:MI:SS') AS p_update, p_type, p_info, p_cnt, 
+		to_char(p_price, 'L999,999,999') AS p_price
+		from product
+		where p_no = #{p_no}
+	</select>
+	
+</mapper>

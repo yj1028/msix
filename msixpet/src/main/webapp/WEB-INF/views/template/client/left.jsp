@@ -5,8 +5,8 @@
 	
 	<div id="menu">
 	  <ul class="nav nav-pills nav-stacked">
-	    <li><a href="http://www.free-css.com/">CSS Templates</a></li>
-	    <li><a href="http://www.free-css.com/">CSS Layouts</a></li>
+	    <li><a href="/product/productList">상품목록</a></li>
+	    <li><a href="/product/productDetail">상품상세페이지</a></li>
 	    <li><a href="http://www.free-css.com/">CSS Books</a></li>
 	    <li><a href="http://www.free-css.com/">CSS Menus</a></li>
 	    <li><a href="http://www.free-css.com/">CSS Tutorials</a></li>

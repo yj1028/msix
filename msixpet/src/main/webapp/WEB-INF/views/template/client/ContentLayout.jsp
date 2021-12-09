@@ -64,6 +64,12 @@
 				text-align: center;
 				color: black;
 			}
+			#left {
+				float: left;
+				margin-right: 15px;
+				width: 170px;
+				height: 170px;
+			}
 		</style>
 	
 </head>
@@ -85,7 +91,7 @@
 	      <tiles:insertAttribute name="body"/>
 	    </div>
    
-	  <div id="menu">
+	  <div class="container" id="left">
 			<tiles:insertAttribute name="left"/>
 		</div>
 

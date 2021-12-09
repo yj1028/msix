@@ -2,10 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.msixpet.client.cart.dao.CartDAO">
 
-	<select id="cartList" resultType="cart">
-		select cart_no, m_no, p_no, cart_cnt, cart_delivery, cart_pay, to_char(cart_date, 'YYYY-MM-DD')as cart_date
-		from cart where cart_no = #{cart_no}
-		order by cart_no desc
+	<select id="cartList" resultType="cart" parameterType="cart">
+		select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay  
+			from cart c
+			inner join product p
+			on c.p_no = p.p_no
+			where p.p_no = #{p_no}
 	</select>
 	
+	<sql id="joinselect">
+		select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay  
+			from cart c
+			inner join product p
+			on c.p_no = p.p_no
+			where p.p_no = #{p_no}
+	</sql>
+	
+	
+	<insert id="addCart" parameterType="cart">
+	insert into cart(cart_no, m_no, p_no, cart_price, cart_cnt, cart_delivery, cart_pay)
+	values(cart_seq.nextval, #{m_no}, #{p_no}, #{cart_price}, #{cart_cnt}, #{cart_delivery}, #{cart_pay})
+	</insert>
+	
+	<delete id="deleteCart" parameterType="cart">
+		delete cart where p_no = #{p_no}
+	</delete>
+		
 </mapper>

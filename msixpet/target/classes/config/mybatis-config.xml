@@ -5,6 +5,8 @@
 <!-- resultType과 parameterType에 사용되는 별명 설정 -->
 	<typeAliases>
 		 <typeAlias type="com.msixpet.client.cart.vo.CartVO" alias="cart"/>
+		 <typeAlias alias="member" type="com.msixpet.client.member.vo.MemberVO"/>
+		 <typeAlias alias="product" type="com.msixpet.client.product.vo.ProductVO"/>
 	</typeAliases>
-	
+		
 </configuration>

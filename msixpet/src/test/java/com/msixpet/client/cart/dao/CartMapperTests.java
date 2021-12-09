@@ -21,15 +21,40 @@ public class CartMapperTests {
 	@Setter(onMethod_=@Autowired)
 	private CartDAO cartDAO;
 	
-	@Test 
+ /*	@Test 
 	 public void TestCartList() {
 		CartVO cvo = new CartVO();
-		cvo.setCart_no(3);
+		cvo.setP_no("2");
 	 
 		List<CartVO> list = cartDAO.cartList(cvo);
 	  for(CartVO vo : list) {
 	  log.info(vo);
 	  } 
-	 }
+	 } */
 	
-}
+@Test
+	public void TestaddCart() {
+		CartVO cvo = new CartVO();
+		cvo.setCart_cnt(3);
+		cvo.setP_no("2");
+		cvo.setCart_delivery("일반배송");
+		cvo.setCart_pay(10000);
+		cvo.setCart_price("50000");
+		cvo.setM_no(1);
+		
+		int count = cartDAO.addCart(cvo);
+		log.info("add Count: "+count);
+	} 
+ 
+	 @Test 
+	 public void TestdeleteCart() {
+		CartVO cvo = new CartVO();
+		cvo.setP_no("2");
+	 
+		int count = cartDAO.deleteCart(cvo);
+	  log.info("delete Count : "+count);
+	  } 
+	 
+	} 
+	
+
