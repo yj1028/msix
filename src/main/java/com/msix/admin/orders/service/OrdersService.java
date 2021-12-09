@@ -11,5 +11,4 @@ public interface OrdersService {
 	public OrderDetailVO orderDetail(OrderDetailVO odvo);
 	public int orderChange(OrderDetailVO odvo);
 	public int orderCancel(OrdersVO ovo);
-	public int orderDetailCancel(OrderDetailVO odvo);
 }
