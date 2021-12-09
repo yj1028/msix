@@ -27,7 +27,7 @@
 			    </trim>
 		<![CDATA[ rownum <= #{pageNum} * #{amount} 
 			) memberlist
-			where m_isdelete = 'Y' and rnum > (#{pageNum} - 1) * #{amount}
+			where m_isdelete = 'N' and rnum > (#{pageNum} - 1) * #{amount}
 		]]>
 	</select>
 	
