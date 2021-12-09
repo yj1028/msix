@@ -43,7 +43,7 @@
 	<select id="memberDetail" parameterType="member" resultType="member">
 		select m_no, m_id, m_name, m_tel, m_email,
 			to_char(m_date, 'YYYY-MM-DD') as m_date,
-			to_char(m_udate, 'YYYY-MM-DD') as m_udate,
+			to_char(m_update, 'YYYY-MM-DD') as m_update,
 			m_isdelete
 		from member
 		where m_no = #{m_no}

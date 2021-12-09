@@ -20,7 +20,7 @@
 		<style type="text/css">
 			 #detailTable{width:80%;}
 			.table-height{height: 500px;}
-			.img img{width: 100px; height: 100px;}
+			img{width: 100px; height: 100px;}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -84,40 +84,45 @@
 					</form>
 				</div>
 			</div>
-			<%-- <div class="form-group">
-			    <label class="col-sm-2 control-label">상품이미지</label>
-			    <div class="select_img text-left">
-			    	<c:forEach var="image" items="${detail.list}">
-			    		<img src="/uploadStorage/product/${image.i_name}" />
-			    	</c:forEach>
-			    </div>    
-			</div> --%>
+		
+		    
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
+				 <c:forEach var="image" items="${detail.list}">
+		    		<tr>
+		    			<td><strong>상품이미지</strong></td>
+		    			<td colspan="5"><img src="/uploadStorage/product/${image.i_name}" /></td>
+		    		</tr>
+		    	</c:forEach>
 				<tr>
-					<td>상품번호</td>
+					<td><strong>상품번호</strong></td>
 					<td colspan="2">${detail.p_no}</td>
-					<td>상품명</td>
+					<td><strong>상품명</strong></td>
 					<td colspan="2">${detail.p_name}</td> 
 				</tr> 
 				<tr>
-					<td>등록일</td>
+					<td><strong>등록일</strong></td>
 					<td colspan="2">${detail.p_date}</td>
-					<td>수정일</td>
+					<td><strong>수정일</strong></td>
 					<td colspan="2">${detail.p_update}</td>
 				</tr>
 				<tr>
-					<td>상품분류</td>
+					<td><strong>카테고리</strong></td>
 					<td>${detail.p_type}</td>
-					<td>상품가격</td>
+					<td><strong>판매가</strong></td>
 					<td>${detail.p_price}</td>
-					<td>재고</td>
+					<td><strong>재고</strong></td>
 					<td>${detail.p_cnt}</td>
 				</tr>
 				<tr class="table-height">
-					<td>상품정보</td>
+					<td><strong>상품정보</strong></td>
 					<td colspan="5" class="text-left">${detail.p_info}</td>
 				</tr>
 			</table>
+			<%-- <div class="select_img" >
+		    	<c:forEach var="image" items="${detail.list}">
+		    		<img src="/uploadStorage/product/${image.i_name}" />
+		    	</c:forEach>
+		    </div>   --%> 
 			<div class="text-center">
 				<input type="button" class="btn btn-default" value="상품이미지" id="productImgBtn" />	
 				<input type="button" class="btn btn-default" value="상품수정" id="updateFormBtn" />			

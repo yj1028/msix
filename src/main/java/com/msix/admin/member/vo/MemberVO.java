@@ -15,6 +15,6 @@ public class MemberVO extends CommonVO {
 	private String m_tel;
 	private String m_email;
 	private String m_date;
-	private String m_udate;
+	private String m_update;
 	private String m_isdelete;
 }

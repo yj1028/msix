@@ -61,7 +61,7 @@
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputEmail2">수정일</label>
-			    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="${detail.m_udate}" readonly>
+			    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="${detail.m_update}" readonly>
 			  </div>
 			  <br />
 			  <div class="form-group">

@@ -41,13 +41,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productInsert(ProductVO pvo) throws Exception {
 		int result = 0;
-		//System.out.println(pvo.getList().size());
-		int p_no = productDAO.productNumber();
+		String p_no = productDAO.productNumber();
 		pvo.setP_no(p_no);
+		
 		result = productDAO.productInsert(pvo);
+		String no = pvo.getP_code() + pvo.getP_no();
 		
 		for(ImageVO ivo : pvo.getList()) {
-			ivo.setP_no(p_no);
+			ivo.setP_no(no);
 			if(ivo.getFile().getSize() > 0) {
 				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product"); 
 				 ivo.setI_name(fileName);
@@ -56,10 +57,12 @@ public class ProductServiceImpl implements ProductService {
 					 ivo.setI_thumb(thumbName);
 					 imageDAO.imageInsert(ivo);
 				 }else {
+					 ivo.setI_thumb("");
 					 imageDAO.imageInsert(ivo); 
 				 }	
 			}
 		}
+		
 			
 		return result;
 	}
@@ -84,7 +87,10 @@ public class ProductServiceImpl implements ProductService {
 		@Override
 		public ProductVO productDetail(ProductVO pvo) {
 			ProductVO detail = null;
+			List<ImageVO> list = imageDAO.imageDetail(pvo);
+			
 			detail = productDAO.productDetail(pvo);
+			detail.setList(list);
 			if(detail != null) {
 				detail.setP_info(detail.getP_info().toString().replace("\n", "<br />"));
 			}
@@ -96,7 +102,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductVO updateForm(ProductVO pvo) {
 		ProductVO update = null;
+		List<ImageVO> list = imageDAO.imageDetail(pvo);
+		
 		update = productDAO.productUpdateForm(pvo);
+		update.setList(list);
 		
 		return update;
 	}
@@ -117,6 +126,32 @@ public class ProductServiceImpl implements ProductService {
 //			String thumbName = FileUploadUtil.makeThumbnail(fileName);
 //			pvo.setP_thumb(thumbName);
 //		}
+//		for(ImageVO ivo : pvo.getList()) {
+//			if(!ivo.getFile().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_name());
+//				FileUploadUtil.fileDelete(ivo.getI_thumb());
+//			}
+//		}
+//		System.out.println("이미지개수" + pvo.getList().size());
+//		
+//		for(int i = 0; i < pvo.getList().size(); i++) {
+//			if(!pvo.getList().get(i).getFile().isEmpty()) {
+//				if(!pvo.getList().get(i).getI_name().isEmpty()) {
+//					FileUploadUtil.fileDelete(pvo.getList().get(i).getI_name());
+//				}else if(!pvo.getList().get(i).getI_thumb().isEmpty()) {
+//					FileUploadUtil.fileDelete(pvo.getList().get(i).getI_thumb());
+//				}
+//				if(i == 0) {
+//					String fileName = FileUploadUtil.fileUpload(pvo.getList().get(i).getFile(), "product");
+//					pvo.getList().get(i).setI_name(fileName);
+//					String thumbName = FileUploadUtil.makeThumbnail(fileName);
+//					pvo.getList().get(i).setI_thumb(thumbName);
+//				}else {
+//					String fileName = FileUploadUtil.fileUpload(pvo.getList().get(i).getFile(), "product");
+//					pvo.getList().get(i).setI_name(fileName);
+//				}
+//			}
+//		}
 		result = productDAO.productUpdate(pvo);
 		
 		return result;
@@ -126,11 +161,26 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int productDelete(ProductVO pvo) throws Exception{
 		int result = 0;
-		
+
 //		if(!pvo.getP_file().isEmpty()) {
 //			FileUploadUtil.fileDelete(pvo.getP_file());
 //			FileUploadUtil.fileDelete(pvo.getP_thumb());
 //		}
+//		for(ImageVO ivo : pvo.getList()) {
+//			if(ivo.getI_name().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_name());
+//				FileUploadUtil.fileDelete(ivo.getI_thumb());
+//			}
+//		}
+		pvo.setList(imageDAO.imageDetail(pvo));
+		for(ImageVO ivo : pvo.getList()) {
+			if(!ivo.getI_name().isEmpty() && !ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+				FileUploadUtil.fileDelete(ivo.getI_thumb());
+			}else if(!ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+			}
+		}
 		result = productDAO.productDelete(pvo);
 		
 		return result;
@@ -145,22 +195,97 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	// 상품이미지 수정
+	@Override
 	public int imageUpdate(ImageVO ivo) throws Exception {
 		int result = 0;
 		
+//		for(ImageVO ivo : pvo.getList()) {
+//			if(!ivo.getFile().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_name());
+//			}else if(!ivo.getI_thumb().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_thumb());
+//			}
+//			String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+//			ivo.setI_name(fileName);
+//			if(ivo.getFile() == pvo.getList().get(0)) {
+//				String thumbName = FileUploadUtil.makeThumbnail(fileName);
+//				ivo.setI_thumb(thumbName);
+//			}
+//		}
+		
 		if(!ivo.getFile().isEmpty()) {
-			if(!ivo.getI_name().isEmpty()) {
+			
+			if(!ivo.getI_name().isEmpty() && !ivo.getI_thumb().isEmpty()) {
 				FileUploadUtil.fileDelete(ivo.getI_name());
 				FileUploadUtil.fileDelete(ivo.getI_thumb());
+				
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+				ivo.setI_name(fileName);
+				
+				String thumbName = FileUploadUtil.makeThumbnail(fileName);
+				ivo.setI_thumb(thumbName);
+				result = imageDAO.imageUpdate(ivo);
 			}
-			String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
-			ivo.setI_name(fileName);
-			String thumbName = FileUploadUtil.makeThumbnail(fileName);
-			ivo.setI_thumb(thumbName);
+			
+			if(!ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+				FileUploadUtil.fileDelete(ivo.getI_name());
+				
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+				ivo.setI_name(fileName);
+				ivo.setI_thumb("");
+				result = imageDAO.imageUpdate(ivo);
+			} 
+			
+			if(ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
+				ivo.setI_name(fileName);
+				ivo.setI_thumb("");
+				result = imageDAO.imageInsert(ivo);
+			}
 		}
-		result = imageDAO.imageUpdate(ivo);
+
 		
 		return result;
 	}
 	
+	// 상품이미지 삭제
+	@Override
+	public int imageDelete(ImageVO ivo) throws Exception{
+		int result = 0;
+		
+		if(!ivo.getI_name().isEmpty()) {
+			FileUploadUtil.fileDelete(ivo.getI_name());
+		} else if(!ivo.getI_thumb().isEmpty()) {
+			FileUploadUtil.fileDelete(ivo.getI_thumb());
+		}
+		
+//		for(ImageVO ivo : pvo.getList()) {
+//			if(!ivo.getFile().isEmpty()) {
+//				FileUploadUtil.fileDelete(ivo.getI_name());
+//				if(!ivo.getI_thumb().isEmpty()) {
+//					FileUploadUtil.fileDelete(ivo.getI_thumb());
+//				}
+//			}
+//		}
+		result = imageDAO.imageDelete(ivo);
+		
+		return result;
+	}
+	
+	// 재고리스트 조회 구현
+	@Override
+	public List<ProductVO> stockList(ProductVO pvo) {
+		List<ProductVO> list = productDAO.stockList(pvo);
+		
+		return list;
+	}
+	
+	// 재고수정 구현
+	@Override
+	public int stockUpdate(ProductVO pvo) {
+		int result = 0;
+		result = productDAO.stockUpdate(pvo);
+		
+		return result;
+	}
 }

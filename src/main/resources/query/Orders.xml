@@ -63,11 +63,11 @@
 	<!-- 주문 상세 삭제 처리 -->
 	<delete id="orderDetailCancel" parameterType="orderDetail">
 		delete from order_detail
-		where d_no = #{d_no}
+		where o_no = #{o_no}
 	</delete>
 	
 	<!-- 주문 삭제 처리 -->
-	<delete id="orderCancel" parameterType="orders">
+	<delete id="orderCancel" parameterType="orderDetail">
 		delete from orders
 		where o_no = #{o_no}
 	</delete>

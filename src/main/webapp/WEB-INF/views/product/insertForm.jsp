@@ -12,7 +12,6 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 	
-		
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
@@ -20,7 +19,7 @@
 		<style type="text/css">
 			#p_name {width:400px;}
 			#p_type {width:110px;}
-			#p_content {resize:none;}
+			#p_info {resize:none;}
 			#p_price {width:100px;}
 			#p_cnt {width:80px;}
 			.select_img img {margin: 20px 120px;}
@@ -33,7 +32,25 @@
 				
 				/* 등록 버튼 클릭 시 처리 이벤트 */
 				$("#productInsertBtn").click(function(){
-					console.log($("#p_type option:selected").val());
+					console.log($("#p_type").val());
+					let p_type = $("#p_type").val();
+					let p_code = "";
+					if(p_type == "Gecko"){
+						p_code = "GK10";
+					}else if(p_type == "Lizard"){
+						p_code = "LZ20";
+					}else if(p_type == "Turtle"){
+						p_code = "TR30";
+					}else if(p_type == "Amphibian"){
+						p_code = "AB40";
+					}else if(p_type == "Food"){
+						p_code = "FD50";
+					}else if(p_type == "Supplies"){
+						p_code = "SP60";
+					}
+					$("#p_code").val(p_code);
+					console.log(p_code);
+					
 					// 입력값 체크
 					if(!chkData("#p_name", "상품명을")) return;
 					else if($("#p_type option").index($("#p_type option:selected"))==0){
@@ -87,7 +104,7 @@
 	<body>
 		<div class="container">
 			<form class="form-horizontal" id="f_writeForm">
-				<input type="hidden" name="p_code" id="p_code /">
+				 <input type="hidden" name="p_code" id="p_code" />
 			  <div class="form-group">
 			    <label for="p_name" class="col-sm-2 control-label">상품명</label>
 			    <div class="col-sm-10">
@@ -132,13 +149,13 @@
 			  </div>
 			  <br />
 			  <div class="form-group">
-			    <label class="col-sm-2 control-label">상품이미지</label>
+			    <label class="col-sm-2 control-label">상품이미지 등록</label>
 			    <div class="col-sm-10">
 			      <input type="file" name="list[0].file" id="list[0].file" />
 			      <input type="file" name="list[1].file" id="list[1].file" />
 			      <input type="file" name="list[2].file" id="list[2].file" />
 			    </div>
-			    <div class="select_img text-left"><img src=""></div>
+			    <!-- <div class="select_img text-left"><img src=""></div> 첨부이미지확인
 			    
 			    <script type="text/javascript">
 				    $("#file").change(function(){
@@ -150,7 +167,7 @@
 							reader.readAsDataURL(this.files[0]);
 						}
 					});
-			    </script>
+			    </script> -->
 			  </div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10 text-left">

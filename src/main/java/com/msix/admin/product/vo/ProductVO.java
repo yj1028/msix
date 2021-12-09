@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 import com.msix.admin.image.vo.ImageVO;
 import com.msix.common.vo.CommonVO;
 
@@ -13,12 +12,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class ProductVO extends CommonVO{
-	private int p_no = 0; // 상품번호
+	private String p_no = ""; // 상품번호
+	private String p_code = ""; // 상품코드
 	private String p_type = ""; // 상품분류
 	private String p_name = ""; // 상품명
 	private String p_price = ""; // 상품가격
@@ -28,6 +27,7 @@ public class ProductVO extends CommonVO{
 	private String p_update; // 수정일
 	private String p_isdelete; // 삭제여부
 	
+	private String i_thumb;
 	private List<ImageVO> list;
 	
 	public ProductVO() {

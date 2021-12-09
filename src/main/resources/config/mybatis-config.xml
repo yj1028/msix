@@ -7,7 +7,7 @@
 		<typeAlias type="com.msix.admin.orders.vo.OrdersVO" alias="orders" />
 		<typeAlias type="com.msix.admin.orders.vo.OrderDetailVO" alias="orderDetail" />
 		<typeAlias type="com.msix.admin.refund.vo.RefundVO" alias="refund" />
-		<typeAlias type="com.msixpet.client.cart.vo.CartVO" alias="cart" />
+		<!-- <typeAlias type="com.msixpet.client.cart.vo.CartVO" alias="cart" /> -->
 		<typeAlias type="com.msix.admin.image.vo.ImageVO" alias="image" />
 	</typeAliases>
 </configuration>

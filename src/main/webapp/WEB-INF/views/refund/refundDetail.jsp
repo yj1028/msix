@@ -37,12 +37,16 @@
 				/* 환불 취소 버튼 클릭시 제어 */
 				$("#refundDeleteBtn").click(function(){
 					if(confirm("정말 환불을 취소 하시겠습니까?")){
-						$("#rf_data").attr({
-							"method":"post",
-							"action":"/refund/refundDelete"
-						});
-						$("#rf_data").submit();
-						alert("환불이 취소 되었습니다.")
+						if($("#d_refund").val() != 'N'){
+							$("#rf_data").attr({
+								"method":"post",
+								"action":"/refund/refundDelete"
+							});
+							$("#rf_data").submit();
+							alert("환불이 취소 되었습니다.");
+						} else {
+							alert("환불 취소를 실패하였습니다. 이미 환불 처리가 되었습니다.");	
+						}
 					}
 				});
 				

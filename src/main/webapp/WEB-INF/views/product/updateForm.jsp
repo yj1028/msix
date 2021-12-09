@@ -21,17 +21,80 @@
 			#p_name {width:300px;}
 			#p_price {width:100px;}
 			#p_type {width:120px;}
-			#detailTable{width:80%;}
+			#p_cnt {width:80px;}
+			#p_info {resize:none;}
+			#detailTable{width:100%;}
 			.table-height{min-height: 500px;}
-			.img img{width: 100px; height: 100px;}
+			img{width: 100px; height: 100px;}
 		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
 			
 			$(function(){
 				
 				$("#p_type").val("${updateData.p_type}").prop("selected", true);
+				$(".listFile").css("display", "none");
+				$(".confirmUpdateBtn").css("display", "none");
+				
+				/* 이미지수정 버튼 클릭 시 처리 이벤트 */
+				$(".imageUpdateBtn").click(function(){
+					let i_no1 = $(this).parents("tr").attr("data-num");
+					
+					$("#i_no1").val(i_no1==""?0:i_no1);
+					$("#i_name1").val($(this).parents("tr").attr("data-name"))
+					$("#i_thumb1").val($(this).parents("tr").attr("data-thumb"))
+					console.log($("#i_no1").val());
+					console.log($("#i_name1").val());
+					console.log($("#i_thumb1").val());
+				
+					$("#f_updateForm").ajaxForm({
+						url : "/product/imageUpdate", 
+						type : "post",               
+						enctype : "multipart/form-data",
+						dataType : "text",
+						error : function(){     
+							alert('시스템 오류 입니다. 관리자에게 문의해 주세요.');
+						},                        
+						success : function(value){ 
+							console.log(value);
+							if(value == "success"){
+								location.href="/product/updateForm?p_no="+$("#p_no").val();
+								alert("이미지가 수정되었습니다.")
+							}
+						}
+					});
+					$("#f_updateForm").submit(); 
+				});
+				
+				/* 이미지삭제 버튼 클릭 시 처리 이벤트 */
+				$(".imageDeleteBtn").click(function(){
+					if(confirm("등록된 이미지를 삭제 하시겠습니까?")){
+						let i_no = $(this).parents("tr").attr("data-num");
+						$("#i_no").val(i_no);
+						$("#i_name").val($(this).parents("tr").attr("data-name"))
+						$("#i_thumb").val($(this).parents("tr").attr("data-thumb"))
+						console.log($("#i_no").val());
+						console.log($("#i_name").val());
+						console.log($("#i_thumb").val());
+						 $.ajax({
+							url : "/product/imageDelete",
+							type : "post",
+							data : $("#f_update").serialize(),
+							dataType : "text",
+							error : function(){
+								alert("시스템 오류 입니다. 관리자에게 문의 하세요.");
+							},
+							success : function(value){
+								if(value == "success"){
+									location.href="/product/updateForm?p_no="+$("#p_no").val();
+									alert("이미지가 삭제되었습니다.")
+								}
+							}
+						}); 
+					}
+				});
 				
 				/* 수정 버튼 클릭 시 처리 이벤트 */
 				$("#productUpdateBtn").click(function(){
@@ -49,10 +112,14 @@
 						$("#p_price").focus();
 						return;
 					}
+					/* else if(!chkData("#p_cnt", "수량을")) return;
+					else if($("#p_cnt").val() <= 0 || $("#p_cnt").val() >= 100){
+						alert("수량은 1~99까지의 숫자만 입력 가능합니다.");
+						$("#p_cnt").val("");
+						$("#p_cnt").focus();	
+					} */
 					else{
-						if($("#file").val() != ""){
-							if(!chkFile($("#file"))) return;
-						}
+						
 						$("#f_updateForm").attr({
 							method : "post",
 							enctype : "multipart/form-data",
@@ -67,6 +134,7 @@
 					$("#f_updateForm").each(function(){
 						this.reset();
 					});
+					$("#p_type").val("${updateData.p_type}").prop("selected", true);
 				});
 				
 				/* 목록 버튼 클릭 시 처리 이벤트 */
@@ -78,22 +146,81 @@
 	</head>
 	<body>
 		<div class="container">
-			<form id="f_updateForm" name="updateForm">
+			<form id="f_update">
 				<input type="hidden" name="p_no" id="p_no" value="${updateData.p_no}">
-				<input type="hidden" name="p_file" id="p_file" value="${ updateData.p_file }" />
-				<input type="hidden" name="p_thumb" id="p_thumb" value="${ updateData.p_thumb }" />
-				<div class="form-group">
+				<input type="hidden" name="i_no" id="i_no" value="">
+				<input type="hidden" name="i_name" id="i_name" value="">
+				<input type="hidden" name="i_thumb" id="i_thumb" value="">
+			</form>
+			<form id="f_updateForm">
+			<%-- 	<input type="hidden" name="p_file" id="p_file" value="${ updateData.p_file }" />
+				<input type="hidden" name="p_thumb" id="p_thumb" value="${ updateData.p_thumb }" /> --%>
+				<%-- <div class="form-group">
 				    <label class="col-sm-2 control-label">상품이미지</label>
 				    <div class="select_img text-left">
 				    	<img src="/uploadStorage/product/${updateData.p_file}" />
 				    </div>    
-				</div>
+				</div> --%>
+				<input type="hidden" name="p_no" id="p_no1" value="${updateData.p_no}">
+				<input type="hidden" name="i_no" id="i_no1" value="">
+				<input type="hidden" name="i_name" id="i_name1" value="">
+				<input type="hidden" name="i_thumb" id="i_thumb1" value="">
+				
 				<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
+					 <tr data-num="${updateData.list[0].i_no}" data-name="${updateData.list[0].i_name}" data-thumb="${updateData.list[0].i_thumb}">
+						<td>
+							상품이미지1
+							 <input type="file" name="file" id="file1" />
+						</td>
+						<td colspan="4">
+							<img src="/uploadStorage/product/${updateData.list[0].i_name}" />
+						</td>
+						<td>
+		    				<input type="button" class="btn btn-default imageUpdateBtn" value="수정" />
+							<input type="button" class="btn btn-default imageDeleteBtn" value="삭제" />
+			    		</td>
+					</tr>
+					<tr data-num="${updateData.list[1].i_no}" data-name="${updateData.list[1].i_name}" data-thumb="${updateData.list[1].i_thumb}">
+						<td>
+							상품이미지2
+							 <input type="file" name="file" id="file2" />
+						</td>
+						<td colspan="4">
+							<img src="/uploadStorage/product/${updateData.list[1].i_name}" />
+						</td>
+						<td>
+		    				<input type="button" class="btn btn-default imageUpdateBtn" value="수정" />
+							<input type="button" class="btn btn-default imageDeleteBtn" value="삭제" />
+			    		</td>
+					</tr>
+					<tr data-num="${updateData.list[2].i_no}" data-name="${updateData.list[2].i_name}" data-thumb="${updateData.list[2].i_thumb}">
+						<td>
+							상품이미지3
+							 <input type="file" name="file" id="file3" />
+						</td>
+						<td colspan="4">
+							<img src="/uploadStorage/product/${updateData.list[2].i_name}" />
+						</td>
+						<td>
+		    				<input type="button" class="btn btn-default imageUpdateBtn" value="수정" />
+							<input type="button" class="btn btn-default imageDeleteBtn" value="삭제" />
+			    		</td>
+					</tr> 
+					<%-- <c:forEach var="image" items="${updateData.list}" varStatus="status">
+			    		<tr data-num="${image.i_no}" data-name="${image.i_name}" data-thumb="${image.i_thumb}">
+			    			<td>상품이미지${status.index+1}</td>
+			    			<td colspan="4"><img src="/uploadStorage/product/${image.i_name}" /></td>
+			    			<td>
+			    				<input type="button" class="btn btn-default imageUpdateBtn" value="수정" />
+								<input type="button" class="btn btn-default imageDeleteBtn" value="이미지삭제" />
+			    			</td> 
+			    		</tr>
+		    		</c:forEach> --%>
 					<tr>
 						<td>상품번호</td>
-						<td>${updateData.p_no}</td>
+						<td colspan="2">${updateData.p_no}</td>
 						<td>상품명</td>
-						<td><input type="text" name="p_name" id="p_name" value="${updateData.p_name}" class="form-control" /></td>
+						<td colspan="2"><input type="text" name="p_name" id="p_name" value="${updateData.p_name}" class="form-control" /></td>
 					</tr> 
 					<tr>
 						<td>상품분류</td>
@@ -107,7 +234,7 @@
 								<option value="Supplies">Supplies</option>                  	
 							</select>
 						</td>
-						<td>상품가격</td>
+						<td>판매가</td>
 						<td><input type="text" name="p_price" id="p_price" value="${updateData.p_price}" class="form-control text-left"
 							maxlength="9" /></td>
 						<td>재고</td>
@@ -120,7 +247,8 @@
 						</td>
 					</tr>
 				</table>
-				<div class="form-group">
+				
+				<!-- <div class="form-group">
 				    <label class="col-sm-2 control-label">상품이미지 수정</label>
 				    <div class="col-sm-10">
 				      <input type="file" name="file" id="file" />
@@ -138,7 +266,7 @@
 							}
 						});
 				    </script>
-			 	 </div>
+			 	 </div> -->
 			</form>
 			<div class="text-center">
 				<input type="button" class="btn btn-default" value="수정" id="productUpdateBtn" />			

@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		
-		<title>productList.jsp</title>
+		<title>stockList.jsp</title>
 		
 		<link rel="shortcut icon" href="/resources/images/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/icon.png" />
@@ -26,6 +26,7 @@
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		
 		<script type="text/javascript">
 			$(function(){
 				//$("#type").css("visibility", "hidden");
@@ -79,32 +80,33 @@
 					}
 				});
 				
-				/* 상품등록 버튼 클릭 시 처리 이벤트 */
-				$("#insertFormBtn").click(function(){
-					location.href="/product/insertForm"
-				});
-				
 				$("#searchDataAll").click(function(){
-					location.href="/product/productList"
+					location.href="/product/stockList"
 				});
 				
-				/* 상품명 클릭시 상세 페이지 이동을 위한 처리 이벤트 */
-				$(".goDetail").click(function(){
+				/* 재고수정 버튼 클릭 시 처리 이벤트 */
+				$(".stockUpdateBtn").click(function(){
+					let stock = $(this).parents("tr").find(".p_stock").val();
+					$("#p_cnt").val(stock);
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
+					let o_stock = $(this).parents("tr").attr("data-stock");
 					console.log("글번호 : " + p_no);
-					// 상세 페이지로 이동하기 위해 form 추가(id : detailForm)
-					$("#detailForm").attr({
-						"method":"get",
-						"action":"/product/productDetail"
-					});
-					$("#detailForm").submit();
-				}); 
-				
-				$(".paginate_button a").click(function(e){
-					e.preventDefault();
-					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
-					goPage();
+					console.log("재고 : " + stock);
+					if($(".p_stock").val() < 0 || $(".p_stock").val() >= 1000){
+						alert("수량은 1~999까지의 숫자만 입력 가능합니다.");
+						//location.href="/product/stockList";
+						
+						$(this).parents("tr").find(".p_stock").val(o_stock);
+						$(this).parents("tr").find(".p_stock").focus;
+					}else{
+						$("#stockUpdateForm").attr({
+							method : "post",
+							action : "/product/stockUpdate"
+						});
+						$("#stockUpdateForm").submit();
+						alert("수정이 완료되었습니다.");
+					}
 				});
 			}); // 최상위 $종료
 			
@@ -115,7 +117,7 @@
 				}
 				$("#f_search").attr({
 					"method":"get",
-					"action":"/product/productList"
+					"action":"/product/stockList"
 				});
 				$("#f_search").submit();
 			}
@@ -123,8 +125,9 @@
 	</head>
 	<body>
 		<div class="container">
-			<form id="detailForm">
+			<form id="stockUpdateForm">
 				<input type="hidden" id="p_no" name="p_no">
+				<input type="hidden" id="p_cnt" name="p_cnt">
 			</form>
 			<%-- =================== 검색기능 시작 =================== --%>
 			<div id="productSearch" class="text-right">
@@ -135,8 +138,7 @@
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
 							<option value="p_name">상품명</option>
-							<option value="p_type">상품분류</option>
-							<option value="p_info">상품정보</option>
+							<option value="p_type">카테고리</option>
 							<option value="p_udate">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
@@ -158,46 +160,56 @@
 			</div>
 			<%-- =================== 검색기능 종료 =================== --%>
 			<%-- =================== 리스트 시작 =================== --%>
-			<div class="table-height">
-				<table class="table table-hover" style="margin-top:20px;" id="listTable">
-					<thead>
-						<tr>
-							<th class="text-center">상품번호</th>
-							<th class="text-center">상품명</th>
-							<th class="text-center">상품이미지</th>
-							<th class="text-center">카테고리</th>
-							<th class="text-center">판매가</th>
-							<th class="text-center">등록일</th> 
-						</tr>
-					</thead>
-					<tbody id="list">
-						<!-- 데이터 출력 -->
-						<c:choose>
-							<c:when test="${not empty productList}">
-								<c:forEach var="product" items="${productList}" varStatus="status">
-									<tr data-num="${product.p_no}">
-										<td class="no text-center">${product.p_no}</td>
-										<td class="goDetail">${product.p_name}</td>
-										 <td class="view_img text-center goDetail">
-											 <c:if test="${not empty product.i_thumb}">
-												<img src="/uploadStorage/product/thumbnail/${product.i_thumb}">
-											 </c:if>
-										</td>  
-										<td class="type text-center">${product.p_type}</td>
-										<td class="text-center">${product.p_price}</td>
-										<td class="udate text-center">${product.p_update}</td>
+			<form>
+				<div class="table-height">
+					<table class="table table-hover" style="margin-top:20px;" id="listTable">
+						<thead>
+							<tr>
+								<th class="text-center">상품번호</th>
+								<th class="text-center">상품명</th>
+								<th class="text-center">상품이미지</th>
+								<th class="text-center">카테고리</th>
+								<th class="text-center">판매가</th>
+								<th class="text-center">재고</th>
+								<th class="text-center">등록일</th>
+								<th class="text-center">관리</th> 
+							</tr>
+						</thead>
+						<tbody id="list">
+							<!-- 데이터 출력 -->
+							<c:choose>
+								<c:when test="${not empty stockList}">
+									<c:forEach var="stock" items="${stockList}" varStatus="status">
+										<tr data-num="${stock.p_no}" data-stock="${stock.p_cnt}" data-index="${status.index}">
+											<td class="no text-center">${stock.p_no}</td>
+											<td class="goDetail">${stock.p_name}</td>
+											 <td class="view_img text-center">
+												<c:if test="${not empty stock.i_thumb}">
+													<img src="/uploadStorage/product/thumbnail/${stock.i_thumb}">
+												</c:if>
+											</td>  
+											<td class="type text-center">${stock.p_type}</td>
+											<td class="text-center">${stock.p_price}</td>
+											<td class="text-center sto">
+												<input type="number" class="p_stock" min="0" max="999" value="${stock.p_cnt}">
+											</td>
+											<td class="udate text-center">${stock.p_update}</td>
+											<td>
+												<input class="btn btn-default stockUpdateBtn" type="button" value="재고수정" />
+											</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td colspan="8">등록된 상품이 존재하지 않습니다.</td>
 									</tr>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<tr>
-									<td colspan="6">등록된 상품이 존재하지 않습니다.</td>
-								</tr>
-							</c:otherwise>
-						</c:choose>
-					</tbody>
-				</table>
-			</div>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+			</form>
 			<%-- =================== 리스트 종료 =================== --%>
 			<%-- ========== 페이징 출력 시작 ========== --%>
 			<div class="text-center">
@@ -220,11 +232,6 @@
 				</ul>
 			</div>
 			<%-- ========== 페이징 출력 종료 ========== --%>	
-			<%-- ========== 글쓰기 버튼 출력 시작 ========== --%>
-			<div class="text-left">
-				<input class="btn btn-default" type="button" value="상품등록" id="insertFormBtn" />
-			</div>
-			<%-- ========== 글쓰기 버튼 출력 종료 ========== --%>
 		</div>
 	</body>
 </html>
