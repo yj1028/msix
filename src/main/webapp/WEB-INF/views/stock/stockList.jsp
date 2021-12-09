@@ -84,36 +84,28 @@
 					location.href="/product/stockList"
 				});
 				
-				/* $(".p_stock").click(function(){
-					var p_stock = 0;
-					p_stock = $(".p_stock").val();
-					$(this).parents("tr").attr("data-stock", p_stock);
-				}); */
-			
 				/* 재고수정 버튼 클릭 시 처리 이벤트 */
 				$(".stockUpdateBtn").click(function(){
-					let stock = $(this).prev().prev().find("input[type='number']").val();
-					/* 재고수정 로직 다시 짜야함
-					let index = $(this).parents("tr").attr("data-index");*/
-					//$("#p_cnt").val(stock);
+					let stock = $(this).parents("tr").find(".p_stock").val();
+					$("#p_cnt").val(stock);
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
+					let o_stock = $(this).parents("tr").attr("data-stock");
 					console.log("글번호 : " + p_no);
 					console.log("재고 : " + stock);
-					//console.log("인덱스 : " + index);
 					if($(".p_stock").val() < 0 || $(".p_stock").val() >= 1000){
 						alert("수량은 1~999까지의 숫자만 입력 가능합니다.");
-						location.href="/product/stockList";
-						/* 유효성 체크 다시 할 필요 있음*/
-						/* $(".p_stock").val(p_stock);
-						$(".p_stock").focus(); */
+						//location.href="/product/stockList";
+						
+						$(this).parents("tr").find(".p_stock").val(o_stock);
+						$(this).parents("tr").find(".p_stock").focus;
 					}else{
 						$("#stockUpdateForm").attr({
 							method : "post",
 							action : "/product/stockUpdate"
 						});
-						//$("#stockUpdateForm").submit();
-						//alert("수정이 완료되었습니다.");
+						$("#stockUpdateForm").submit();
+						alert("수정이 완료되었습니다.");
 					}
 				});
 			}); // 최상위 $종료
@@ -198,7 +190,7 @@
 											</td>  
 											<td class="type text-center">${stock.p_type}</td>
 											<td class="text-center">${stock.p_price}</td>
-											<td class="text-center">
+											<td class="text-center sto">
 												<input type="number" class="p_stock" min="0" max="999" value="${stock.p_cnt}">
 											</td>
 											<td class="udate text-center">${stock.p_update}</td>

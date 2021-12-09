@@ -34,19 +34,19 @@
 				$("#productInsertBtn").click(function(){
 					console.log($("#p_type").val());
 					let p_type = $("#p_type").val();
-					let p_code = 0;
+					let p_code = "";
 					if(p_type == "Gecko"){
-						p_code = 10;
+						p_code = "GK10";
 					}else if(p_type == "Lizard"){
-						p_code = 20;
+						p_code = "LZ20";
 					}else if(p_type == "Turtle"){
-						p_code = 30;
+						p_code = "TR30";
 					}else if(p_type == "Amphibian"){
-						p_code = 40;
+						p_code = "AB40";
 					}else if(p_type == "Food"){
-						p_code = 50;
+						p_code = "FD50";
 					}else if(p_type == "Supplies"){
-						p_code = 60;
+						p_code = "SP60";
 					}
 					$("#p_code").val(p_code);
 					console.log(p_code);

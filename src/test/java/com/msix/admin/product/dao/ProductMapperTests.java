@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.msix.admin.image.vo.ImageVO;
 import com.msix.admin.product.vo.ProductVO;
 
 
@@ -47,7 +46,7 @@ public class ProductMapperTests {
 		ProductVO pvo = new ProductVO();
 		pvo.setP_no("1");
 		pvo.setP_name("가고일게코");
-		pvo.setP_code(10);
+		pvo.setP_code("10");
 		pvo.setP_type("Gecko");
 		pvo.setP_info("가고일게코 입니다.");
 		pvo.setP_price("120000");

@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class ProductVO extends CommonVO{
 	private String p_no = ""; // 상품번호
-	private int p_code = 0; // 상품코드
+	private String p_code = ""; // 상품코드
 	private String p_type = ""; // 상품분류
 	private String p_name = ""; // 상품명
 	private String p_price = ""; // 상품가격
