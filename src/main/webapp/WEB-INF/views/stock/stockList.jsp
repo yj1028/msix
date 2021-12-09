@@ -29,8 +29,8 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				//$("#type").css("visibility", "hidden");
 				$("#type").css("display", "none");
+				
 				/* 검색 후 검색 대상과 검색 단어 출력 */
 				let word="<c:out value='${data.keyword}' />";
 				let value="";
@@ -42,7 +42,7 @@
 						//:contain()는 특정 텍스트를 포함한 요소반환
 						if($("#search").val()=='p_name') value="#list tr td.goDetail";
 						else if($("#search").val()=='p_type') value="#list tr td.type";
-						else if($("#search").val()=='p_udate') value="#list tr td.udate";
+						else if($("#search").val()=='p_update') value="#list tr td.update";
 						else if($("#search").val()=='p_no') value="#list tr td.no";
 						console.log($(value+":contains('"+word+"')").html());
 						
@@ -52,10 +52,10 @@
 						});
 					}
 				}
+				
 				/* 검색 대상이 변경될 때마다 처리 이벤트 */
 				$("#search").change(function(){
 					if($("#search").val() == "p_type"){
-						//$("#type").css("visibility", "visible");
 						$("#type").css("display", "inline");
 					}else if($("#search").val() != "p_type"){
 						$("#type").css("display", "none");
@@ -64,22 +64,29 @@
 					}
 				});
 				
+				/* 카테고리가 변경될 때마다 처리 이벤트 */
 				$("#type").change(function(){
 					$("#keyword").val($("#type").val());
 				});
 				
 				/* 검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchData").click(function(){
-					if($("#search").val() != "p_type"){
+					if($("#search option").index($("#search option:selected"))==0){
+						alert("검색조건을 선택해 주세요.");
+						$("#search").focus();
+						return;
+					}
+					else if($("#search").val() != "p_type"){
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
 					if($("#search").val() == "p_type"){
 						$("#type").css("display", "inline");
-						$("#type").val($("#keyword").val());
+						$("#keyword").val($("#type").val()); 
 					}
 				});
 				
+				/* 전체검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchDataAll").click(function(){
 					location.href="/product/stockList"
 				});
@@ -91,10 +98,8 @@
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
 					let o_stock = $(this).parents("tr").attr("data-stock");
-					console.log("글번호 : " + p_no);
-					console.log("재고 : " + stock);
 					if($(".p_stock").val() < 0 || $(".p_stock").val() >= 1000){
-						alert("수량은 1~999까지의 숫자만 입력 가능합니다.");
+						alert("수량은 0~999까지의 숫자만 입력 가능합니다.");
 						$(this).parents("tr").find(".p_stock").val(o_stock);
 						$(this).parents("tr").find(".p_stock").focus;
 					}else{
@@ -123,6 +128,7 @@
 	</head>
 	<body>
 		<div class="container">
+			<%-- 재고 수정을 위한 폼 --%>
 			<form id="stockUpdateForm">
 				<input type="hidden" id="p_no" name="p_no">
 				<input type="hidden" id="p_cnt" name="p_cnt">
@@ -135,9 +141,11 @@
 					<div class="form-group">
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
+							<option>--검색조건--</option>
 							<option value="p_name">상품명</option>
 							<option value="p_type">카테고리</option>
-							<option value="p_udate">등록일</option>
+							<option value="p_info">상품정보</option>
+							<option value="p_update">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
 						<select class="form-control" name="type" id="type">
@@ -151,8 +159,8 @@
 						</select>
 						<!-- 키워드 != null : 검색함.  키워드 == null : 검색안함 -->
 						<input class="form-control" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" />
-						<button class="btn btn-default" type="button" id="searchData">검색</button>
-						<button class="btn btn-default" type="button" id="searchDataAll">전체검색</button>
+						<button class="btn btn-info" type="button" id="searchData">검색</button>
+						<button class="btn btn-success" type="button" id="searchDataAll">전체검색</button>
 					</div>
 				</form>
 			</div>
@@ -191,9 +199,9 @@
 											<td class="text-center sto">
 												<input type="number" class="p_stock" min="0" max="999" value="${stock.p_cnt}">
 											</td>
-											<td class="udate text-center">${stock.p_update}</td>
+											<td class="update text-center">${stock.p_update}</td>
 											<td>
-												<input class="btn btn-default stockUpdateBtn" type="button" value="재고수정" />
+												<input class="btn btn-warning stockUpdateBtn" type="button" value="재고수정" />
 											</td>
 										</tr>
 									</c:forEach>

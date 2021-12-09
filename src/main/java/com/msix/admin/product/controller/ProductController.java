@@ -190,6 +190,24 @@ public class ProductController {
 		
 		return value;
 	}
+	
+	/* 상품이미지 등록 구현하기 */
+	@PostMapping(value = "/imageInsert", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String imageInsert(ImageVO ivo) throws Exception {
+		log.info("imageInsert 호출 성공");
+		String value = "";
+		
+		int result = productService.imageInsert(ivo);
+		if(result == 1) {
+			value="success";
+		}else {
+			value="fail";
+		}
+		log.info("result = " + result);
+		
+		return value;
+	}
 
 	/* 재고 리스트 조회 구현하기 */
 	@RequestMapping(value = "/stockList", method = RequestMethod.GET)

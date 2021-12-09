@@ -32,7 +32,7 @@
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리 + 이미지조회) -->
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p.p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
 		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
        		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
@@ -89,7 +89,7 @@
 	<select id="productDetail" parameterType="product" resultType="product">
 		select p_no, p_name, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') AS p_date,
 		to_char(p_update, 'YYYY-MM-DD HH24:MI:SS') AS p_update, p_type, p_info, p_cnt, 
-		to_char(p_price, 'L999,999,999') AS p_price
+		to_char(p_price, '999,999,999') AS p_price
 		from product
 		where p_no = #{p_no}
 	</select>
@@ -131,7 +131,7 @@
 	</select> -->
 	<select id="stockList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p.p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
 		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
        		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update

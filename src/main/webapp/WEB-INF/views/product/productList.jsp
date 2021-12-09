@@ -70,7 +70,12 @@
 				
 				/* 검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchData").click(function(){
-					if($("#search").val() != "p_type"){
+					if($("#search option").index($("#search option:selected"))==0){
+						alert("검색조건을 선택해 주세요.");
+						$("#search").focus();
+						return;
+					}
+					else if($("#search").val() != "p_type"){
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
@@ -85,6 +90,7 @@
 					location.href="/product/insertForm"
 				});
 				
+				/* 전체검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchDataAll").click(function(){
 					location.href="/product/productList"
 				});
@@ -127,6 +133,11 @@
 			<form id="detailForm">
 				<input type="hidden" id="p_no" name="p_no">
 			</form>
+			<%-- ========== 상품등록 버튼 출력 시작 ========== --%>
+				<div class="text-left">
+					<input class="btn btn-primary" type="button" value="상품등록" id="insertFormBtn" />
+				</div>
+				<%-- ========== 상품등록 버튼 출력 종료 ========== --%>
 			<%-- =================== 검색기능 시작 =================== --%>
 			<div id="productSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
@@ -137,7 +148,7 @@
 						<select class="form-control" name="search" id="search">
 							<option>--검색조건--</option>
 							<option value="p_name">상품명</option>
-							<option value="p_type">상품분류</option>
+							<option value="p_type">카테고리</option>
 							<option value="p_info">상품정보</option>
 							<option value="p_update">등록일</option>
 							<option value="p_no">상품번호</option>		
@@ -153,8 +164,8 @@
 						</select>
 						<!-- 키워드 != null : 검색함.  키워드 == null : 검색안함 -->
 						<input class="form-control" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" />
-						<button class="btn btn-default" type="button" id="searchData">검색</button>
-						<button class="btn btn-default" type="button" id="searchDataAll">전체검색</button>
+						<button class="btn btn-info" type="button" id="searchData">검색</button>
+						<button class="btn btn-success" type="button" id="searchDataAll">전체검색</button>
 					</div>
 				</form>
 			</div>
@@ -222,11 +233,6 @@
 				</ul>
 			</div>
 			<%-- ========== 페이징 출력 종료 ========== --%>	
-			<%-- ========== 글쓰기 버튼 출력 시작 ========== --%>
-			<div class="text-left">
-				<input class="btn btn-default" type="button" value="상품등록" id="insertFormBtn" />
-			</div>
-			<%-- ========== 글쓰기 버튼 출력 종료 ========== --%>
 		</div>
 	</body>
 </html>
