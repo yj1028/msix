@@ -56,7 +56,7 @@ public class NoticeController {
 		NoticeVO detail = noticeService.boardDetail(nvo);
 		model.addAttribute("detail", detail);
 		
-		return "/notice/noticeDetail";
+		return "notice/noticeDetail";
 	}
 	
 	/* 공지등록 폼 이동 */
@@ -64,7 +64,7 @@ public class NoticeController {
 	public String noticeForm() {
 		log.info("noticeForm 호출 성공");
 		
-		return "/notice/noticeForm";
+		return "notice/noticeForm";
 	}
 	/* 공지 입력 */
 	@RequestMapping(value ="/noticeInsert", method =RequestMethod.POST)

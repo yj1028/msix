@@ -57,5 +57,11 @@
 				<include refid="boardSearch"></include>
 			</trim> -->
 	</select>
-
+	
+	<!-- 글 삭제 -->
+	<delete id="boardDelete" parameterType="qna">
+		delete from q_board 
+		where q_no = #{q_no}
+	</delete>
+	
 </mapper>
