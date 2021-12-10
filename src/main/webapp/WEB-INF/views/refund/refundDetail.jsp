@@ -108,6 +108,12 @@
 				<tr>
 					<td colspan="4">${detail.rf_image}</td>
 				</tr>
+				<tr>
+					<td colspan="4">환불처리여부</td>
+				</tr>
+				<tr>
+					<td colspan="4">${detail.rf_isrefund}</td>
+				</tr>
 			</table>
 			
 		</div>

@@ -29,7 +29,7 @@
 			    <trim prefix="(" suffix=") and " prefixOverrides="and">
 			    	<include refid="ordersSearch"></include>
 			    </trim>
-		<![CDATA[ rownum <= #{pageNum} * #{amount} 
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
 			) orderslist
 			where rnum > (#{pageNum} - 1) * #{amount}
 		]]>
