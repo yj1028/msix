@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.admin.product.dao.ProductDAO">
+	
+	<!-- 상품 리스트 기본 조회 
+	<select id="productList" parameterType="product" resultType="product">
+		select product.p_no, i_thumb, p_type, p_name, to_char(p_price, 'L9,999,999') as p_price, p_cnt, p_update
+		from product inner join p_image
+		on product.p_no = p_image.p_no
+        order by p_no desc 
+	</select> -->
+	
+	<!-- 검색 조건 -->
+	<sql id="productSearch">
+		<if test="search=='p_info'">
+			<![CDATA[p_info LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_type'">
+			<![CDATA[p_type LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_name'">
+			<![CDATA[p_name LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_update'">
+			<![CDATA[p_update LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+		<if test="search=='p_no'">
+			<![CDATA[p_no LIKE '%'||#{keyword}||'%' ]]>
+		</if>
+	</sql>
+	
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리 + 이미지조회) -->
+	<select id="productList" parameterType="product" resultType="product">
+		<![CDATA[
+		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
+		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+			   from product
+			   where ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="productSearch" />
+				</trim>
+		<![CDATA[
+			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			)p, image i
+		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
+		]]>
+	</select> 
+	
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) 
+	<select id="productList" parameterType="product" resultType="product">
+		<![CDATA[
+		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update
+		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+			   from product
+			   where ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="productSearch" />
+				</trim>
+		<![CDATA[
+				rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			)productlist
+		WHERE rnum > (#{pageNum}-1)*#{amount} ]]>
+	</select> -->
+	
+	<!-- 전체 레코드 수 조회  -->
+	<select id="productListCnt" parameterType="product" resultType="int">
+		select count(*) from product
+		<trim prefix=" where (" suffix=")">
+			<include refid="productSearch" />
+		</trim>	
+	</select>
+	
+	<!-- 상품 번호 추출  -->
+	<select id="productNumber" resultType="String">
+		select PRODUCT_SEQ.nextval from dual
+	</select>
+	
+	<!-- 상품 등록 --> 
+	<insert id="productInsert" parameterType="product">
+		insert into product(p_no, p_name, p_type, p_info, p_price, p_cnt, p_code)
+		values(#{p_code}||#{p_no}, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt}, #{p_code})
+	</insert>
+	
+	<!-- 상세 페이지를 위한 상품 조회 -->
+	<select id="productDetail" parameterType="product" resultType="product">
+		select p_no, p_name, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') AS p_date,
+		to_char(p_update, 'YYYY-MM-DD HH24:MI:SS') AS p_update, p_type, p_info, p_cnt, 
+		to_char(p_price, '999,999,999') AS p_price
+		from product
+		where p_no = #{p_no}
+	</select>
+	
+	<!-- 상품 수정폼을 위한 조회 -->
+	<select id="productUpdateForm" parameterType="product" resultType="product">
+		select p_no, p_name, p_type, p_price, p_cnt, p_info
+		from product
+		where p_no = #{p_no}
+	</select>
+		
+	<!-- 상품 수정 -->
+	<update id="productUpdate" parameterType="product">
+		update product set p_name = #{p_name}, p_type = #{p_type}, p_price = #{p_price}, p_info = #{p_info}, p_update = sysdate
+		where p_no = #{p_no}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<update id="productDelete" parameterType="product">
+		update product set p_isdelete = 'Y' where p_no = #{p_no}
+	</update>
+	
+	<!-- 재고 리스트 조회 -->
+	<!-- <select id="stockList" parameterType="product" resultType="product">
+		<![CDATA[
+		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update
+		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+			   from product
+			   where ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="productSearch" />
+				</trim>
+		<![CDATA[
+				rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			)stockList
+		WHERE rnum > (#{pageNum}-1)*#{amount} ]]>
+	</select> -->
+	<select id="stockList" parameterType="product" resultType="product">
+		<![CDATA[
+		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
+		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
+			   from product
+			   where ]]>
+				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+					<include refid="productSearch" />
+				</trim>
+		<![CDATA[
+			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			)p, image i
+		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
+		]]>
+	</select> 
+	
+	<!-- 재고 수정 -->
+	<update id="stockUpdate" parameterType="product">
+		update product set p_cnt = #{p_cnt}, p_update = sysdate where p_no = #{p_no}
+	</update>
+</mapper>

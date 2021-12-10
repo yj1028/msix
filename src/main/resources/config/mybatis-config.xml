@@ -2,6 +2,13 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.msix.admin.product.vo.ProductVO" alias="product"/>
+		<typeAlias type="com.msix.admin.member.vo.MemberVO" alias="member" />
+		<typeAlias type="com.msix.admin.orders.vo.OrdersVO" alias="orders" />
+		<typeAlias type="com.msix.admin.orders.vo.OrderDetailVO" alias="orderDetail" />
+		<typeAlias type="com.msix.admin.refund.vo.RefundVO" alias="refund" />
+	<!-- 	<typeAlias type="com.msixpet.client.cart.vo.CartVO" alias="cart" />  -->
+		<typeAlias type="com.msix.admin.image.vo.ImageVO" alias="image" />
 		<typeAlias type="com.msix.admin.board.vo.QBoardVO" alias="qna"/>
 		<typeAlias type="com.msix.admin.board.vo.RBoardVO" alias="qnaReply"/>
 		<typeAlias type="com.msix.admin.review.vo.ReviewVO" alias="review"/>
@@ -9,3 +16,4 @@
 		<typeAlias type="com.msix.admin.notice.vo.NoticeVO" alias="notice"/>
 	</typeAliases>
 </configuration>
+

@@ -32,6 +32,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<style>
 			textarea{resize: none; }
+			#replyBtn{margin-top: 15px;}
+			.delete_btn{margin-left: 10px;}
 		</style>
 		<script>
 			let replyNum;
@@ -206,10 +208,12 @@
 				let up_input = $("<input>");
 				up_input.attr({"type" : "button", "value" : "수정하기"});
 				up_input.addClass("update_form"); // 버튼 식별자로 사용할 클래스명
+				up_input.addClass("btn btn-default");
 				
 				let del_input = $("<input>");
 				del_input.attr({"type": "button", "value" : "삭제하기"});
 				del_input.addClass("delete_btn");
+				del_input.addClass("btn btn-default");
 				
 				//내용
 				var title_p = $("<p>");
@@ -305,26 +309,23 @@
 						<tr data-no="${detail.q_no}">
 							<td>글번호</td>
 							<td>${detail.q_no}</td>
-						</tr>
-						<tr>	
 							<td>회원번호</td>
 							<td>${detail.m_no}</td>
+							
 						</tr>
 						<tr>
 							<td>태그</td>
 							<td>${detail.q_tag}</td>
+							<td>등록일</td>
+							<td>${detail.q_date }</td>
 						</tr>
 						<tr>
 							<td>글제목</td>
-							<td>${detail.q_title}</td>
+							<td colspan="3">${detail.q_title}</td>
 						</tr>
 						<tr class="table-height">
 							<td>글내용</td>
-							<td>${detail.q_content}</td>
-						</tr>
-						<tr>
-							<td>등록일</td>
-							<td>${detail.q_date }</td>
+							<td colspan="3">${detail.q_content}</td>
 						</tr>
 					</table>
 				</div>

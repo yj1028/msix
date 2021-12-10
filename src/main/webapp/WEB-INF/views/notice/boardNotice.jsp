@@ -76,7 +76,7 @@
 					<tr>
 						<th class="text-center">글번호</th>
 						<th class="text-center">제목</th>
-						<th class="text-center">내용</th>
+<!-- 						<th class="text-center">내용</th> -->
 						<th class="text-center">작성일</th>
 						<th class="text-center">조회수</th>
 					</tr>
@@ -89,7 +89,7 @@
 								<tr class="text-center" data-no="${notice.n_no}">
 									<td class="text-center">${count - status.index}</td>
 									<td class="goDetail text-center">${notice.n_title }</td>
-									<td class="text-center">${notice.n_content }</td>
+									<%-- <td class="text-center">${notice.n_content }</td> --%>
 									<td class="text-center">${notice.n_date}</td>
 									<td class="text-center">${notice.n_cnt}</td>
 								</tr>
