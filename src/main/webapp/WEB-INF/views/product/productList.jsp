@@ -52,6 +52,11 @@
 					}
 				}
 				
+				if($("#search").val() == "p_type"){
+					$("#type").css("display", "inline");
+					$("#type").val($("#keyword").val()); 
+				 }
+				
 				/* 검색 대상이 변경될 때마다 처리 이벤트 */
 				$("#search").change(function(){
 					if($("#search").val() == "p_type"){
@@ -79,10 +84,6 @@
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
-					/* if($("#search").val() == "p_type"){
-						$("#type").css("display", "inline");
-						$("#type").val($("#keyword").val()); 
-					}*/
 				});
 				
 				/* 상품등록 버튼 클릭 시 처리 이벤트 */

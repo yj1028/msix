@@ -84,16 +84,14 @@
 						$("#p_cnt").focus();
 						return;
 					}
-					/* 이미지파일 유효성 체크 안되고있음. replace, split 속성 못읽음 
-					else if(!chkData("#list[0].file", "썸네일을 생성할 이미지 파일을")) return;
-					else if(!chkFile($("#list[0].file"))) return; */
+					else if(!chkData("#file0", "썸네일을 생성할 이미지 파일을")) return;
+					else if(!chkFile($("#file0"))) return; 
 					else{
-						/*
-						if($("#list[1].file").val() != ""){
-							if(!chkFile($("#list[1].file"))) return;
-						}else if($("#list[2].file").val() != ""){
-							if(!chkFile($("#list[2].file"))) return;
-						} */
+						if($("#file1").val() != ""){
+							if(!chkFile($("#file1"))) return;
+						}else if($("#file2").val() != ""){
+							if(!chkFile($("#file2"))) return;
+						} 
 						$("#f_writeForm").attr({
 							method:"post",
 							enctype:"multipart/form-data",
@@ -167,15 +165,15 @@
 			  <div class="form-group" id="i_img">
 			    <div class="col-sm-10 m_img">
 			      <label class="col-sm-2 control-label">메인이미지</label>
-			      <input type="file" name="list[0].file" id="list[0].file" />
+			      <input type="file" name="list[0].file" id="file0" />
 			    </div>
 			    <div class="col-sm-10 m_img">
 			      <label class="col-sm-2 control-label">상세이미지1</label>
-			      <input type="file" name="list[1].file" id="list[1].file" />
+			      <input type="file" name="list[1].file" id="file1" />
 			    </div>
 			    <div class="col-sm-10 m_img">
 			      <label class="col-sm-2 control-label">상세이미지2</label>
-			      <input type="file" name="list[2].file" id="list[2].file" />
+			      <input type="file" name="list[2].file" id="file2" />
 			    </div>
 			  </div>
 			  <div class="form-group">

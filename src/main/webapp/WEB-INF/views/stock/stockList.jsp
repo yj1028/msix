@@ -53,6 +53,11 @@
 					}
 				}
 				
+				if($("#search").val() == "p_type"){
+					$("#type").css("display", "inline");
+					$("#type").val($("#keyword").val()); 
+				 }
+				
 				/* 검색 대상이 변경될 때마다 처리 이벤트 */
 				$("#search").change(function(){
 					if($("#search").val() == "p_type"){
@@ -68,7 +73,7 @@
 				$("#type").change(function(){
 					$("#keyword").val($("#type").val());
 				});
-				
+			
 				/* 검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchData").click(function(){
 					if($("#search option").index($("#search option:selected"))==0){
@@ -80,15 +85,11 @@
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
-					if($("#search").val() == "p_type"){
-						$("#type").css("display", "inline");
-						$("#keyword").val($("#type").val()); 
-					}
 				});
 				
 				/* 전체검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchDataAll").click(function(){
-					location.href="/product/stockList"
+					location.href="/stock/stockList"
 				});
 				
 				/* 재고수정 버튼 클릭 시 처리 이벤트 */
@@ -105,7 +106,7 @@
 					}else{
 						$("#stockUpdateForm").attr({
 							method : "post",
-							action : "/product/stockUpdate"
+							action : "/stock/stockUpdate"
 						});
 						$("#stockUpdateForm").submit();
 						alert("수정이 완료되었습니다.");
@@ -120,7 +121,7 @@
 				}
 				$("#f_search").attr({
 					"method":"get",
-					"action":"/product/stockList"
+					"action":"/stock/stockList"
 				});
 				$("#f_search").submit();
 			}
