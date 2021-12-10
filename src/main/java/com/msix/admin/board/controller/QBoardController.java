@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.msix.admin.board.service.QBoardService;
 import com.msix.admin.board.vo.QBoardVO;
@@ -52,5 +54,22 @@ public class QBoardController {
 		return "/board/qnaDetail";
 	}
 	
-	
+	// 질의글 삭제 
+	@RequestMapping(value = "/qnaDelete", method = RequestMethod.POST)
+	public String boardDelete(@ModelAttribute QBoardVO qvo, RedirectAttributes ras) throws Exception {
+		log.info("boardDelete 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = qboardService.boardDelete(qvo);
+		ras.addFlashAttribute("QBoardVO", qvo);
+		
+		if(result == 1) {
+			url = "/qna/qnaList";
+		} else {
+			url = "/qna/qnaDetail";
+		}
+		return "redirect:"+url;
+	}
 }

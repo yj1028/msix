@@ -46,6 +46,18 @@
 					location.href = "/qna/qnaList";
 				});
 				
+				// 질의글 삭제
+				$("#deleteQNABtn").click(function(){
+					if(confirm("질의 글을 삭제하시겠습니까?")){
+						$("#sendQNO").attr({
+							"method" : "post",
+							"action" : "/qna/qnaDelete"
+						});
+						$("#sendQNO").submit();
+					}
+					
+				});
+				
 				/* 답글 입력을 위한 ajax 연동 처리*/
 				$("#replyBtn").click(function(){
 					let insertUrl = "/qnaReply/replyInsert";
@@ -289,6 +301,9 @@
 		<div class="container">
 			<div class="d-grid gap-3">
 				<div class="p-2 bg-light border">
+				<form id="sendQNO" name="sendQNO">
+					<input type="hidden" name="q_no" value="${detail.q_no}">
+				</form>
 					<h3>질의게시판 상세내용</h3>
 					<table summary="질의게시판 상세페이지" class="table table-bordered">
 						<tr data-no="${detail.q_no}">
@@ -316,6 +331,7 @@
 				</div>
 				<div>
 					<input class="btn btn-default" type="button" id="goList" value="목록" />
+					<input class="btn btn-default" type="button" id="deleteQNABtn" value="삭제" />
 				</div>
 				<div class="p-2 bg-light border">
 					<h3>관리자 답글 작성</h3>
