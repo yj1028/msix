@@ -4,7 +4,7 @@
 	
 	<!-- 상품 리스트 기본 조회 
 	<select id="productList" parameterType="product" resultType="product">
-		select product.p_no, i_thumb, p_type, p_name, to_char(p_price, 'L9,999,999') as p_price, p_cnt, p_udate
+		select product.p_no, i_thumb, p_type, p_name, to_char(p_price, 'L9,999,999') as p_price, p_cnt, p_update
 		from product inner join p_image
 		on product.p_no = p_image.p_no
         order by p_no desc 
@@ -21,8 +21,8 @@
 		<if test="search=='p_name'">
 			<![CDATA[p_name LIKE '%'||#{keyword}||'%' ]]>
 		</if>
-		<if test="search=='p_udate'">
-			<![CDATA[p_udate LIKE '%'||#{keyword}||'%' ]]>
+		<if test="search=='p_update'">
+			<![CDATA[p_update LIKE '%'||#{keyword}||'%' ]]>
 		</if>
 		<if test="search=='p_no'">
 			<![CDATA[p_no LIKE '%'||#{keyword}||'%' ]]>
@@ -32,7 +32,7 @@
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리 + 이미지조회) -->
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p.p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
 		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
        		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
@@ -79,22 +79,17 @@
 		select PRODUCT_SEQ.nextval from dual
 	</select>
 	
-	<!-- 카테고리 코드 추출 
-	<select id="productCateCode" parameterType="product" resultType="String">
-		select p_code
-	</select> -->
-	
 	<!-- 상품 등록 --> 
 	<insert id="productInsert" parameterType="product">
 		insert into product(p_no, p_name, p_type, p_info, p_price, p_cnt, p_code)
-		values(#{p_code}||#{p_no}||to_char(sysdate, ''), #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt}, #{p_code})
+		values(#{p_code}||#{p_no}, #{p_name}, #{p_type}, #{p_info}, #{p_price}, #{p_cnt}, #{p_code})
 	</insert>
 	
 	<!-- 상세 페이지를 위한 상품 조회 -->
 	<select id="productDetail" parameterType="product" resultType="product">
 		select p_no, p_name, to_char(p_date, 'YYYY-MM-DD HH24:MI:SS') AS p_date,
 		to_char(p_update, 'YYYY-MM-DD HH24:MI:SS') AS p_update, p_type, p_info, p_cnt, 
-		to_char(p_price, 'L999,999,999') AS p_price
+		to_char(p_price, '999,999,999') AS p_price
 		from product
 		where p_no = #{p_no}
 	</select>
@@ -136,7 +131,7 @@
 	</select> -->
 	<select id="stockList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p.p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
+		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
 		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
        		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update

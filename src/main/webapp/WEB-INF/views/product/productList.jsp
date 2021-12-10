@@ -28,8 +28,8 @@
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				//$("#type").css("visibility", "hidden");
 				$("#type").css("display", "none");
+				
 				/* 검색 후 검색 대상과 검색 단어 출력 */
 				let word="<c:out value='${data.keyword}' />";
 				let value="";
@@ -41,7 +41,7 @@
 						//:contain()는 특정 텍스트를 포함한 요소반환
 						if($("#search").val()=='p_name') value="#list tr td.goDetail";
 						else if($("#search").val()=='p_type') value="#list tr td.type";
-						else if($("#search").val()=='p_udate') value="#list tr td.udate";
+						else if($("#search").val()=='p_update') value="#list tr td.update";
 						else if($("#search").val()=='p_no') value="#list tr td.no";
 						console.log($(value+":contains('"+word+"')").html());
 						
@@ -51,10 +51,15 @@
 						});
 					}
 				}
+				
+				if($("#search").val() == "p_type"){
+					$("#type").css("display", "inline");
+					$("#type").val($("#keyword").val()); 
+				 }
+				
 				/* 검색 대상이 변경될 때마다 처리 이벤트 */
 				$("#search").change(function(){
 					if($("#search").val() == "p_type"){
-						//$("#type").css("visibility", "visible");
 						$("#type").css("display", "inline");
 					}else if($("#search").val() != "p_type"){
 						$("#type").css("display", "none");
@@ -63,20 +68,22 @@
 					}
 				});
 				
+				/* 카테고리가 변경될 때마다 처리 이벤트 */
 				$("#type").change(function(){
 					$("#keyword").val($("#type").val());
 				});
 				
 				/* 검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchData").click(function(){
-					if($("#search").val() != "p_type"){
+					if($("#search option").index($("#search option:selected"))==0){
+						alert("검색조건을 선택해 주세요.");
+						$("#search").focus();
+						return;
+					}
+					else if($("#search").val() != "p_type"){
 						if(!chkData("#keyword", "검색어를")) return;
 					}
 					goPage();
-					if($("#search").val() == "p_type"){
-						$("#type").css("display", "inline");
-						$("#type").val($("#keyword").val());
-					}
 				});
 				
 				/* 상품등록 버튼 클릭 시 처리 이벤트 */
@@ -84,6 +91,7 @@
 					location.href="/product/insertForm"
 				});
 				
+				/* 전체검색 버튼 클릭 시 처리 이벤트 */
 				$("#searchDataAll").click(function(){
 					location.href="/product/productList"
 				});
@@ -126,6 +134,11 @@
 			<form id="detailForm">
 				<input type="hidden" id="p_no" name="p_no">
 			</form>
+			<%-- ========== 상품등록 버튼 출력 시작 ========== --%>
+				<div class="text-left">
+					<input class="btn btn-primary" type="button" value="상품등록" id="insertFormBtn" />
+				</div>
+				<%-- ========== 상품등록 버튼 출력 종료 ========== --%>
 			<%-- =================== 검색기능 시작 =================== --%>
 			<div id="productSearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
@@ -134,10 +147,11 @@
 					<div class="form-group">
 						<strong>검색조건</strong>
 						<select class="form-control" name="search" id="search">
+							<option>--검색조건--</option>
 							<option value="p_name">상품명</option>
-							<option value="p_type">상품분류</option>
+							<option value="p_type">카테고리</option>
 							<option value="p_info">상품정보</option>
-							<option value="p_udate">등록일</option>
+							<option value="p_update">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
 						<select class="form-control" name="type" id="type">
@@ -151,8 +165,8 @@
 						</select>
 						<!-- 키워드 != null : 검색함.  키워드 == null : 검색안함 -->
 						<input class="form-control" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" />
-						<button class="btn btn-default" type="button" id="searchData">검색</button>
-						<button class="btn btn-default" type="button" id="searchDataAll">전체검색</button>
+						<button class="btn btn-info" type="button" id="searchData">검색</button>
+						<button class="btn btn-success" type="button" id="searchDataAll">전체검색</button>
 					</div>
 				</form>
 			</div>
@@ -185,7 +199,7 @@
 										</td>  
 										<td class="type text-center">${product.p_type}</td>
 										<td class="text-center">${product.p_price}</td>
-										<td class="udate text-center">${product.p_update}</td>
+										<td class="update text-center">${product.p_update}</td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -220,11 +234,6 @@
 				</ul>
 			</div>
 			<%-- ========== 페이징 출력 종료 ========== --%>	
-			<%-- ========== 글쓰기 버튼 출력 시작 ========== --%>
-			<div class="text-left">
-				<input class="btn btn-default" type="button" value="상품등록" id="insertFormBtn" />
-			</div>
-			<%-- ========== 글쓰기 버튼 출력 종료 ========== --%>
 		</div>
 	</body>
 </html>

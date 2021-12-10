@@ -18,7 +18,7 @@
 		<![endif]-->
 		
 		<style type="text/css">
-			 #detailTable{width:80%;}
+			 #detailTable{width: 80%; margin-top: 20px;}
 			.table-height{height: 500px;}
 			img{width: 100px; height: 100px;}
 		</style>
@@ -28,15 +28,6 @@
 		<script type="text/javascript">
 			$(function(){
 				$("#pwdChk").css("visibility", "hidden");
-				
-				/*상품이미지 버튼 클릭 시 처리 이벤트 */
-				$("#productImgBtn").click(function(){
-					$("#f_data").attr({
-						"method":"get",
-						"action":"/product/imageDetail"
-					});
-					$("#f_data").submit();
-				});
 				
 				/* 수정 버튼 클릭 시 처리 이벤트 */
 				$("#updateFormBtn").click(function(){
@@ -72,20 +63,24 @@
 	</head>
 	<body>
 		<div class="container">
-			<div>
-				<div id="pwdChk">
-					<%-- 수정 및 삭제 시 글번호, 원본파일명, 썸네일파일명을 전달하는 폼--%>
-					<form name="f_data" id="f_data" method="post"> 
-						<input type="hidden" name="p_no" value="${detail.p_no}" />
-						<%-- <input type="hidden" name="list[0].file" value="${detail.list[0].file}" />
-						<input type="hidden" name="list[1].file" value="${detail.list[1].file}" />
-						<input type="hidden" name="list[2].file" value="${detail.list[2].file}" />
-						<input type="hidden" name="list[0].i_thumb" value="${detail.list[0].i_thumb}" />  --%>
-					</form>
-				</div>
+			<%-- 수정 및 삭제 시 상품번호를 전달하는 폼--%>
+			<form name="f_data" id="f_data" method="post"> 
+				<input type="hidden" name="p_no" value="${detail.p_no}" />
+			</form>
+			<div class="text-left">	
+				<input type="button" class="btn btn-warning" value="상품수정" id="updateFormBtn" />			
+				<input type="button" class="btn btn-danger" value="상품삭제" id="productDeleteBtn" />
+				<input type="button" class="btn btn-primary" value="상품등록" id="insertFormBtn" />
+				<input type="button" class="btn btn-info" value="목록" id="productListBtn" />
 			</div>
-		
-		    
+			<%-- <c:forEach var="image" items="${detail.list}">
+				<div class="row">
+			    	<div class="col-xs-6 col-md-3">
+	    				<strong>상품이미지</strong>
+	    				<img src="/uploadStorage/product/${image.i_name}">
+					</div>
+				</div>
+			</c:forEach> --%>
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
 				 <c:forEach var="image" items="${detail.list}">
 		    		<tr>
@@ -109,27 +104,15 @@
 					<td><strong>카테고리</strong></td>
 					<td>${detail.p_type}</td>
 					<td><strong>판매가</strong></td>
-					<td>${detail.p_price}</td>
-					<td><strong>재고</strong></td>
+					<td>${detail.p_price}원</td>
+					<td><strong>수량</strong></td>
 					<td>${detail.p_cnt}</td>
 				</tr>
 				<tr class="table-height">
 					<td><strong>상품정보</strong></td>
 					<td colspan="5" class="text-left">${detail.p_info}</td>
 				</tr>
-			</table>
-			<%-- <div class="select_img" >
-		    	<c:forEach var="image" items="${detail.list}">
-		    		<img src="/uploadStorage/product/${image.i_name}" />
-		    	</c:forEach>
-		    </div>   --%> 
-			<div class="text-center">
-				<input type="button" class="btn btn-default" value="상품이미지" id="productImgBtn" />	
-				<input type="button" class="btn btn-default" value="상품수정" id="updateFormBtn" />			
-				<input type="button" class="btn btn-default" value="상품삭제" id="productDeleteBtn" />
-				<input type="button" class="btn btn-default" value="상품등록" id="insertFormBtn" />
-				<input type="button" class="btn btn-default" value="목록" id="productListBtn" />
-			</div>
+			</table>   
 		</div>
 	</body>
 </html>

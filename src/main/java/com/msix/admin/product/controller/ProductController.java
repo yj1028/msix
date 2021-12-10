@@ -190,45 +190,22 @@ public class ProductController {
 		
 		return value;
 	}
-
-	/* 재고 리스트 조회 구현하기 */
-	@RequestMapping(value = "/stockList", method = RequestMethod.GET)
-	public String stockList(@ModelAttribute("data") ProductVO pvo, Model model) {
-		log.info("stockList 호출 성공");
-		
-		// 전체 레코드 조회
-		List<ProductVO> stockList = productService.stockList(pvo);
-		model.addAttribute("stockList", stockList);
-		
-		// 전체 레코드 수 구현
-		int total = productService.productListCnt(pvo);
-		
-		// 페이징 처리
-		model.addAttribute("pageMaker", new PageDTO(pvo, total));
-		
-		// 출력되는 글번호 제어
-		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
-		model.addAttribute("count", count);
-		
-		return "stock/stockList";
-	}
 	
-	/* 재고수정 구현하기 */
-	@PostMapping(value = "/stockUpdate")
-	public String stockUpdate(@ModelAttribute ProductVO pvo) throws Exception {
-		log.info("productUpdate 호출 성공");
+	/* 상품이미지 등록 구현하기 */
+	@PostMapping(value = "/imageInsert", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String imageInsert(ImageVO ivo) throws Exception {
+		log.info("imageInsert 호출 성공");
+		String value = "";
 		
-		int result = 0;
-		String url = "";
-		
-		result = productService.stockUpdate(pvo);
-		
+		int result = productService.imageInsert(ivo);
 		if(result == 1) {
-			url = "/product/stockList";
+			value="success";
 		}else {
-			url = "/product/productList";
+			value="fail";
 		}
+		log.info("result = " + result);
 		
-		return "redirect:"+url;
+		return value;
 	}
 }

@@ -1,4 +1,13 @@
 /.metadata/
+<<<<<<< HEAD
 /target/
 /src/main/webapp/META-INF/
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> branch 'msix_sh' of https://github.com/yj1028/msix.git
+=======
+/src/main/webapp/META-INF/
+>>>>>>> branch 'msix_rm' of https://github.com/yj1028/msix.git
