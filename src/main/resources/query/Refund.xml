@@ -14,15 +14,18 @@
 		<if test="search == 'rf_date'">
 			<![CDATA[ rf_date like '%' || #{keyword} || '%' ]]>
 		</if>
+		<if test="search == 'rf_isrefund'">
+			<![CDATA[ rf_isrefund like '%' || #{keyword} || '%' ]]>
+		</if>
 	</sql>
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
 	<select id="refundList" parameterType="refund" resultType="refund">
 		<![CDATA[
 			select
-			    rnum, rf_no, p_no, m_no, d_no, rf_title, to_char(rf_date, 'YYYY/MM/DD') as rf_date, rf_total
+			    rnum, rf_no, p_no, m_no, d_no, rf_title, to_char(rf_date, 'YYYY/MM/DD') as rf_date, rf_total, rf_isrefund
 			from(
 			    select /*+ index_desc(refund refund_pk) */
-			        rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total
+			        rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total, rf_isrefund
 					from refund rf 
 					inner join order_detail d on rf.d_no = d.d_no
 					inner join orders o on d.o_no = o.o_no
@@ -30,9 +33,10 @@
 			    <trim prefix="(" suffix=") and " prefixOverrides="and">
 			    	<include refid="refundSearch"></include>
 			    </trim>
-		<![CDATA[ rownum <= #{pageNum} * #{amount} 
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
 			) refundlist 
 			where rnum > (#{pageNum} - 1) * #{amount}
+			order by rf_no desc
 		]]>
 	</select>
 	
@@ -48,7 +52,7 @@
 	
 	<!-- 환불 상세페이지 조회 -->
 	<select id="refundDetail" parameterType="refund" resultType="refund">
-		select rf_no, d.d_no, d.p_no, o.m_no, rf_title, rf_reason, rf_image, rf_date, rf_total, d.d_refund
+		select rf_no, d.d_no, d.p_no, o.m_no, rf_title, rf_reason, rf_image, rf_date, rf_total, d.d_refund, rf_isrefund
 		from refund rf
 		inner join order_detail d on rf.d_no = d.d_no
 		inner join orders o on d.o_no = o.o_no
@@ -59,6 +63,13 @@
 	<update id="refundUpdate" parameterType="refund">
 		update order_detail
 		set d_refund = 'N'
+		where d_no = #{d_no}
+	</update>
+	
+	<!-- 환불 처리 여부 처리 -->
+	<update id="refundUpdateCheck" parameterType="refund">
+		update refund
+		set rf_isrefund = 'O'
 		where d_no = #{d_no}
 	</update>
 	

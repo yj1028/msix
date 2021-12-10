@@ -16,7 +16,7 @@
 	<select id="memberList" parameterType="member" resultType="member">
 		<![CDATA[
 			select
-			    rnum, m_no, m_name, m_id, to_char(m_date, 'YYYY/MM/DD') as m_date, m_isdelete
+			    rnum, m_no, REGEXP_REPLACE(m_name, '.', '*', 2, 1) AS m_name, m_id, to_char(m_date, 'YYYY/MM/DD') as m_date, m_isdelete
 			from(
 			    select /*+ index_desc(member member_pk) */
 			        rownum as rnum, m_no, m_name, m_id, m_date, m_isdelete
@@ -25,7 +25,8 @@
 			    <trim prefix="(" suffix=") and " prefixOverrides="and">
 			    	<include refid="memberSearch"></include>
 			    </trim>
-		<![CDATA[ rownum <= #{pageNum} * #{amount} 
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
+				order by m_no desc
 			) memberlist
 			where m_isdelete = 'N' and rnum > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -41,7 +42,9 @@
 	
 	<!-- 회원 상세페이지 조회 -->
 	<select id="memberDetail" parameterType="member" resultType="member">
-		select m_no, m_id, m_name, m_tel, m_email,
+		select m_no, m_id, REGEXP_REPLACE(m_name, '.', '*', 2, 1) AS m_name, 
+			REGEXP_REPLACE(m_tel, '(\\d{3})\\-(\\d{3,4})\\-(\\d{4})', '\\1-****-\\3') AS m_tel, 
+			CONCAT('***', SUBSTR(m_email, 4, LENGTH(m_email))) AS m_email,
 			to_char(m_date, 'YYYY-MM-DD') as m_date,
 			to_char(m_update, 'YYYY-MM-DD') as m_update,
 			m_isdelete

@@ -33,6 +33,9 @@ public class RefundServiceImpl implements RefundService {
 	}
 	
 	public int refundUpdate(RefundVO rvo) {
+		
+		refundDAO.refundUpdateCheck(rvo);
+		
 		int count = refundDAO.refundUpdate(rvo);
 		return count;
 	}

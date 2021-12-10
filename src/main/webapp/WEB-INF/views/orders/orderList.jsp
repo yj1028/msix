@@ -103,6 +103,8 @@
 			</form>
 			<div class="text-right">
 				<form id="o_search" name="o_search" class="form-inline">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 					<div class="form-group">
 						<label>검색조건</label>
 						<select name="search" id="search" class="form-control">
@@ -138,10 +140,10 @@
 								<c:forEach var="orders" items="${orderList}" varStatus="status">
 									<tr class="text-center" data-num="${orders.o_no}" data-id="${orders.m_no}"> <%--data뒤에 임의로 값을 설정해 줄 수 있다. --%>
 										<td class="orderNum">${orders.o_no}</td>
-										<td class="goDetail text-left">${orders.m_no}</td>
+										<td>${orders.m_no}</td>
 										<td class="oDate text-left">${orders.o_date}</td>
 										<td class="pcode">${orders.o_pcode}</td>
-										<td class="addr">${orders.o_addr}</td>
+										<td class="goDetail">${orders.o_addr}</td>
 										<td class="daddr">${orders.o_daddr}</td>
 										<td class="rep">${orders.o_recipient}</td>
 										<td class="reptel">${orders.o_rectel}</td>

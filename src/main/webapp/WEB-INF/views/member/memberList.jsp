@@ -78,6 +78,9 @@
 					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 					goPage();
 				});
+				
+				/* let masking = $(".goDetail").parents("tr").attr("data-name").replace(/(?<=.{1})./,"*");
+				$(".name").val(masking); */
 			});
 			
 			function goPage(){
@@ -99,6 +102,8 @@
 			</form>
 			<div class="text-right">
 				<form id="f_search" name="f_search" class="form-inline">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 					<div class="form-group">
 						<label>검색조건</label>
 						<select name="search" id="search" class="form-control">
@@ -127,9 +132,9 @@
 						<c:choose>
 							<c:when test="${not empty memberList}" >
 								<c:forEach var="member" items="${memberList}" varStatus="status">
-									<tr class="text-center" data-num="${member.m_no}">
+									<tr class="text-center" data-num="${member.m_no}" data-name="${member.m_name}">
 										<td>${member.m_no}</td>
-										<td class="goDetail text-left">${member.m_id}</td>
+										<td class="goDetail text-center">${member.m_id}</td>
 										<td class="text-left">${member.m_date}</td>
 										<td class="name">${member.m_name}</td>
 									</tr>

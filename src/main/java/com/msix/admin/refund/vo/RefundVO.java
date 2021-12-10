@@ -21,6 +21,7 @@ public class RefundVO extends OrderDetailVO {
 	private String rf_image;
 	private String rf_date;
 	private int rf_total;
+	private String rf_isrefund;
 	
 	private MultipartFile file;
 }

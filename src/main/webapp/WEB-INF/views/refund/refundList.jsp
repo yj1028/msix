@@ -93,6 +93,8 @@
 			</form>
 			<div class="text-right">
 				<form id="rf_search" name="rf_search" class="form-inline">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 					<div class="form-group">
 						<label>검색조건</label>
 						<select name="search" id="search" class="form-control">
@@ -100,6 +102,7 @@
 							<option value="rf_date">환불 접수일</option>
 							<option value="m_no">회원 번호</option>
 							<option value="p_no">상품 번호</option>
+							<option value="rf_isrefund">환불처리여부</option>
 						</select>
 						<input type="text" name="keyword" class="form-control" id="keyword" value="검색어를 입력하세요" />
 						<button type="button" class="btn btn-default" id="rf_searchData">검색</button>
@@ -117,6 +120,7 @@
 							<th class="text-center col-md-3">환불 글제목</th>
 							<th class="order col-md-2">환불 접수일</th>
 							<th class="text-center col-md-1">총 환불액</th>
+							<th class="text-center col-md-1">환불처리여부</th>
 						</tr>
 					</thead>
 					<tbody id="rf_list" class="table-striped">
@@ -127,11 +131,12 @@
 									<tr class="text-center" data-num="${refund.p_no}" data-id="${refund.m_no}" 
 										data-dnum="${refund.d_no}" data-rfnum="${refund.rf_no}"> <%--data뒤에 임의로 값을 설정해 줄 수 있다. --%>
 										<td class="refundNum">${refund.rf_no}</td>
-										<td class="goDetail text-left">${refund.p_no}</td>
-										<td class="text-left">${refund.m_no}</td>
-										<td>${refund.rf_title}</td>
+										<td>${refund.p_no}</td>
+										<td>${refund.m_no}</td>
+										<td class="goDetail">${refund.rf_title}</td>
 										<td>${refund.rf_date}</td>
 										<td>${refund.rf_total}</td>
+										<td>${refund.rf_isrefund}</td>
 									</tr>
 								</c:forEach>
 							</c:when>
