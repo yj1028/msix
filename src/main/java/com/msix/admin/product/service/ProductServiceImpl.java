@@ -174,7 +174,6 @@ public class ProductServiceImpl implements ProductService {
 				result = imageDAO.imageInsert(ivo);
 			}
 		}
-
 		return result;
 	}
 	

@@ -37,11 +37,6 @@
 				$("#i_file").css("display", "none");
 				$("#confirmInsertBtn").css("display", "none");
 				
-				/* 썸네일이 생성되는 메인이미지는 삭제할 수 없게 제어 */
-				if($(".tr").length == 1){
-					$(".imageDeleteBtn").css("display", "none");
-				}
-				
 				/* 이미지등록 버튼 클릭 시 처리 이벤트 */
 				$("#imageInsertBtn").click(function(){
 					if($(".tr").length == 3){
@@ -51,6 +46,7 @@
 					$("#i_file").css("display", "inline");
 					$("#confirmInsertBtn").css("display", "inline");
 				});
+				
 				
 				/* 이미지등록 확인 버튼 클릭 시 처리 이벤트 */
 				$("#confirmInsertBtn").click(function(){
@@ -249,7 +245,9 @@
 			    			<td colspan="4"><img src="/uploadStorage/product/${image.i_name}" /></td>
 			    			<td>
 			    				<input type="button" class="btn btn-default imageUpdateBtn" value="이미지수정" />
+			    			<c:if test="${status.index!=0}">
 								<input type="button" class="btn btn-default imageDeleteBtn" value="이미지삭제" />
+							</c:if>
 			    			</td> 
 			    		</tr>
 		    		</c:forEach>
