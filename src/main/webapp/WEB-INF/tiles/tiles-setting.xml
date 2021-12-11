@@ -11,31 +11,37 @@
 		<put-attribute name="side" value="/WEB-INF/views/template/admin/side.jsp" />
 	</definition>
 	
-	<definition name="product/*" extends="content"> 
-		<put-attribute name="title" value="상품관리" />
-		<put-attribute name="contents" value="/WEB-INF/views/product/{1}.jsp" />
-	</definition>
-	
-	<definition name="stock/*" extends="content"> 
-		<put-attribute name="title" value="재고관리" />
-		<put-attribute name="contents" value="/WEB-INF/views/stock/{1}.jsp" />
-	</definition>
-	
+	<!-- 메인페이지 -->
 	<definition name="main/*" extends="content"> 
 		<put-attribute name="title" value="기본페이지" />
 		<put-attribute name="contents" value="/WEB-INF/views/main/{1}.jsp" />
 	</definition>
 	
+	<!-- 상품관리 -->
+	<definition name="product/*" extends="content"> 
+		<put-attribute name="title" value="상품관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/product/{1}.jsp" />
+	</definition>
+	
+	<!-- 재고관리 -->
+	<definition name="stock/*" extends="content"> 
+		<put-attribute name="title" value="재고관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/stock/{1}.jsp" />
+	</definition>
+	
+	<!-- 회원관리 -->
 	<definition name="member/*" extends="content"> 
 		<put-attribute name="title" value="회원관리" />
 		<put-attribute name="contents" value="/WEB-INF/views/member/{1}.jsp" />
 	</definition>
 	
+	<!-- 주문관리 -->
 	<definition name="orders/*" extends="content"> 
 		<put-attribute name="title" value="주문관리" />
 		<put-attribute name="contents" value="/WEB-INF/views/orders/{1}.jsp" />
 	</definition>
 	
+	<!-- 환불관리 -->
 	<definition name="refund/*" extends="content"> 
 		<put-attribute name="title" value="환불관리" />
 		<put-attribute name="contents" value="/WEB-INF/views/refund/{1}.jsp" />

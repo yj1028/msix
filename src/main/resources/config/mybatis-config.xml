@@ -14,6 +14,7 @@
 		<typeAlias type="com.msix.admin.review.vo.ReviewVO" alias="review"/>
 		<typeAlias type="com.msix.admin.review.vo.RepReviewVO" alias="revReply"/>
 		<typeAlias type="com.msix.admin.notice.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.msix.admin.signin.vo.SigninVO" alias="signin" />
 	</typeAliases>
 </configuration>
 
