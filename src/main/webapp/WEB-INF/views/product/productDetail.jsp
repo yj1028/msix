@@ -18,9 +18,31 @@
 		<![endif]-->
 		
 		<style type="text/css">
-			 #detailTable{width: 80%; margin-top: 20px;}
+			 #detailTable{width: 81%; margin-top: 20px;}
 			.table-height{height: 500px;}
-			img{width: 100px; height: 100px;}
+			
+			div.gallery{
+				margin: 20px 5px;
+				
+				border: 1px solid #ccc;
+				float: left;
+				width: 300px;
+				box-sizing: border-box;
+				
+				position: relative;
+				left: 104px;
+			}
+			div.gallery img{
+				width: 100%;
+				height: 200px;
+			}
+			div.desc	{
+				padding: 15px;
+				text-align: center;
+			}
+			div.gallery img:hover{
+				opacity: 0.3;
+			}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -73,21 +95,26 @@
 				<input type="button" class="btn btn-primary" value="상품등록" id="insertFormBtn" />
 				<input type="button" class="btn btn-info" value="목록" id="productListBtn" />
 			</div>
-			<%-- <c:forEach var="image" items="${detail.list}">
-				<div class="row">
-			    	<div class="col-xs-6 col-md-3">
-	    				<strong>상품이미지</strong>
-	    				<img src="/uploadStorage/product/${image.i_name}">
-					</div>
+			<c:forEach var="image" items="${detail.list}" varStatus="status">
+				<div class="gallery">
+					<a target="_blank" href="/uploadStorage/product/${image.i_name}">
+						<img src="/uploadStorage/product/${image.i_name}"/>
+					</a>
+					<c:if test="${status.index==0}">
+						<div class="desc">메인이미지</div>
+					</c:if>
+					<c:if test="${status.index!=0}">
+						<div class="desc">상세이미지</div>
+					</c:if>
 				</div>
-			</c:forEach> --%>
+			</c:forEach>
 			<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
-				 <c:forEach var="image" items="${detail.list}">
+				 <%-- <c:forEach var="image" items="${detail.list}">
 		    		<tr>
 		    			<td><strong>상품이미지</strong></td>
 		    			<td colspan="5"><img src="/uploadStorage/product/${image.i_name}" /></td>
 		    		</tr>
-		    	</c:forEach>
+		    	</c:forEach> --%>
 				<tr>
 					<td><strong>상품번호</strong></td>
 					<td colspan="2">${detail.p_no}</td>

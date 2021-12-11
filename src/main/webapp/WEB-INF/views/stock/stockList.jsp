@@ -53,6 +53,7 @@
 					}
 				}
 				
+				/* 카테고리 검색 후 처리 */
 				if($("#search").val() == "p_type"){
 					$("#type").css("display", "inline");
 					$("#type").val($("#keyword").val()); 
@@ -99,7 +100,7 @@
 					let p_no = $(this).parents("tr").attr("data-num");
 					$("#p_no").val(p_no);
 					let o_stock = $(this).parents("tr").attr("data-stock");
-					if($(".p_stock").val() < 0 || $(".p_stock").val() >= 1000){
+					if(stock < 0 || stock >= 1000){
 						alert("수량은 0~999까지의 숫자만 입력 가능합니다.");
 						$(this).parents("tr").find(".p_stock").val(o_stock);
 						$(this).parents("tr").find(".p_stock").focus;

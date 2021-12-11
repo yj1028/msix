@@ -52,6 +52,7 @@
 					}
 				}
 				
+				/* 카테고리 검색 후 처리 */
 				if($("#search").val() == "p_type"){
 					$("#type").css("display", "inline");
 					$("#type").val($("#keyword").val()); 
