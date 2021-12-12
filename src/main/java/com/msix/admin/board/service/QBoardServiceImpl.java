@@ -40,5 +40,12 @@ public class QBoardServiceImpl implements QBoardService {
 		return qboardDAO.qboardListCnt(qvo);
 	}
 
+	@Override
+	public int boardDelete(QBoardVO qvo) {
+		int result =0;
+		result = qboardDAO.boardDelete(qvo);
+		return result;
+	}
+
 
 }

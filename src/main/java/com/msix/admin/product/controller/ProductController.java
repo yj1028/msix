@@ -86,20 +86,7 @@ public class ProductController {
 		
 		return "product/productDetail";
 	}
-	
-	/* 상품이미지 폼 출력하기 */
-	@RequestMapping(value = "/imageDetail")
-	public String imageDetail(@ModelAttribute("data") ProductVO pvo, ImageVO ivo, Model model) {
-		log.info("imageDetail 호출 성공");
-		log.info("p_no = " + pvo.getP_no());
 		
-		List<ImageVO> imageDetail = productService.imageDetail(pvo);
-		model.addAttribute("imageDetail", imageDetail);
-		
-		return "product/imageDetail";
-	}
-	
-	
 	/* 상품수정 폼 출력하기 
 	 * @param : p_no
 	 * @return : PorductVO */
