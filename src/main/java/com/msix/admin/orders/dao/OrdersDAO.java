@@ -8,7 +8,7 @@ import com.msix.admin.orders.vo.OrdersVO;
 public interface OrdersDAO {
 	public List<OrdersVO> orderList(OrdersVO ovo);
 	public int orderListCnt(OrdersVO ovo);
-	public OrderDetailVO orderDetail(OrderDetailVO odvo);
+	public List<OrderDetailVO> orderDetail(OrderDetailVO odvo);
 	public int orderChange(OrderDetailVO odvo);
 	public int orderCancel(int o_no);
 	public int orderDetailCancel(int o_no);

@@ -30,8 +30,8 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 	
 	@Override
-	public OrderDetailVO orderDetail(OrderDetailVO odvo) {
-		OrderDetailVO detail = ordersDAO.orderDetail(odvo);
+	public List<OrderDetailVO> orderDetail(OrderDetailVO odvo) {
+		List<OrderDetailVO> detail = ordersDAO.orderDetail(odvo);
 		return detail;
 	}
 	

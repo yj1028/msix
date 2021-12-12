@@ -53,11 +53,13 @@
 		where d.o_no = #{o_no}
 	</select>
 	
+	<!-- 주문 상세페이지 리스트 조회 -->
+	
 	<!-- 주문 처리상태 변경 -->
 	<update id="orderChange" parameterType="orderDetail">
 		update order_detail
 		set d_delivery = #{d_delivery}
-		where d_no = #{d_no}
+		where o_no = #{o_no}
 	</update>
 	
 	<!-- 주문 상세 삭제 처리 -->

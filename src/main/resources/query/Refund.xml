@@ -24,11 +24,14 @@
 			select
 			    rnum, rf_no, p_no, m_no, d_no, rf_title, to_char(rf_date, 'YYYY/MM/DD') as rf_date, rf_total, rf_isrefund
 			from(
-			    select /*+ index_desc(refund refund_pk) */
-			        rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total, rf_isrefund
+			    select 
+			        rownum as rnum, rf_no, p_no, m_no, d_no, rf_title, rf_date, rf_total, rf_isrefund
+					from (
+						select rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total, rf_isrefund
 					from refund rf 
 					inner join order_detail d on rf.d_no = d.d_no
 					inner join orders o on d.o_no = o.o_no
+					order by rf_no desc )
 			    where]]>
 			    <trim prefix="(" suffix=") and " prefixOverrides="and">
 			    	<include refid="refundSearch"></include>
@@ -36,7 +39,6 @@
 		<![CDATA[ rownum <= #{pageNum} * #{amount}
 			) refundlist 
 			where rnum > (#{pageNum} - 1) * #{amount}
-			order by rf_no desc
 		]]>
 	</select>
 	

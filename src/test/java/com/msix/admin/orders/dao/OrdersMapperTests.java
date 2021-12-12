@@ -22,33 +22,45 @@ public class OrdersMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private OrdersDAO ordersDAO;
 	
-	@Test
-	public void testOrderList() {
-		OrdersVO ovo = new OrdersVO();
-		
-		List<OrdersVO> list = ordersDAO.orderList(ovo);
-		for(OrdersVO vo : list) {
-			log.info(vo);
-		}
-	}
+//	@Test
+//	public void testOrderList() {
+//		OrdersVO ovo = new OrdersVO();
+//		
+//		List<OrdersVO> list = ordersDAO.orderList(ovo);
+//		for(OrdersVO vo : list) {
+//			log.info(vo);
+//		}
+//	}
+	
+//	@Test
+//	public void testOrderDetail() {
+//		OrderDetailVO odvo = new OrderDetailVO();
+//		odvo.setO_no(43);
+//		
+//		List<OrderDetailVO> list = ordersDAO.orderDetail(odvo);
+//		for(OrderDetailVO vo : list) {
+//			log.info(vo);
+//		}
+//	}
 	
 	@Test
-	public void testOrderDetail() {
+	public void testOrderChange() {
 		OrderDetailVO odvo = new OrderDetailVO();
-		odvo.setO_no(11);
+		odvo.setO_no(43);
+		odvo.setD_delivery("배송중");
 		
-		OrderDetailVO vo = ordersDAO.orderDetail(odvo);
-		
-		log.info(vo.toString());
+		int count = ordersDAO.orderChange(odvo);
+		log.info("count : " + count);
 	}
 	
 //	@Test
-//	public void testOrderChange() {
-//		OrderDetailVO odvo = new OrderDetailVO();
-//		odvo.setD_no(14);
-//		odvo.setD_delivery("배송중");
+//	public void testOrderCancel() {
 //		
-//		int count = ordersDAO.orderChange(odvo);
-//		log.info("count : " + count);
 //	}
+//	
+//	@Test
+//	public void testOrderDetailCancel() {
+//		
+//	}
+	
 }
