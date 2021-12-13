@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.msix.admin.board.service.RBoardService;
-import com.msix.admin.board.vo.RBoardVO;
+import com.msix.admin.board.vo.ARBoardVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,15 +29,15 @@ public class RBoardController {
 	private RBoardService rboardService;
 	
 	@GetMapping(value = "/all/{q_no}", produces= {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public List<RBoardVO> replyList(@PathVariable("q_no") int q_no){
+	public List<ARBoardVO> replyList(@PathVariable("q_no") int q_no){
 		log.info("replyList 호출");
-		List<RBoardVO> list = null;
+		List<ARBoardVO> list = null;
 		list = rboardService.replyList(q_no);
 		return list;
 	}
 	//답글 입력
 	@PostMapping(value = "/replyInsert", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public String replyInsert(@RequestBody RBoardVO rvo) {
+	public String replyInsert(@RequestBody ARBoardVO rvo) {
 		int result =0;
 		result = rboardService.replyInsert(rvo);
 		return (result==1) ? "SUCCESS" : "FAILURE";
@@ -45,7 +45,7 @@ public class RBoardController {
 	//답글 수정
 	@RequestMapping(value = "/{r_no}", method= {RequestMethod.PUT, RequestMethod.PATCH},
 			consumes="application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> replyUpdate(@PathVariable("r_no") int r_no, @RequestBody RBoardVO rvo){
+	public ResponseEntity<String> replyUpdate(@PathVariable("r_no") int r_no, @RequestBody ARBoardVO rvo){
 		rvo.setR_no(r_no);
 		int result = rboardService.replyupdate(rvo);
 		return result == 1 ? new ResponseEntity<String>("SUCCESS", HttpStatus.OK):

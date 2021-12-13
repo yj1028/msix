@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RBoardVO {
+public class ARBoardVO {
 	private int r_no;	//primary key
 	private int q_no;	//foreign key q_board(q_no)
 	private String r_title;

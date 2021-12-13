@@ -113,6 +113,13 @@
 						alert("수정이 완료되었습니다.");
 					}
 				});
+				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
+				
 			}); // 최상위 $종료
 			
 			/* 검색을 위한 실질적인 처리 함수 */

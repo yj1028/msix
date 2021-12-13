@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
-public class QBoardVO extends CommonVO{
+public class AQBoardVO extends CommonVO{
 	private int q_no;	// primary key
 	private int m_no;	// foreign key member(m_no)
 	private String q_tag;

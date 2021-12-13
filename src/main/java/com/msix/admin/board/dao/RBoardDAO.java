@@ -2,13 +2,12 @@ package com.msix.admin.board.dao;
 
 import java.util.List;
 
-import com.msix.admin.board.vo.RBoardVO;
-
+import com.msix.admin.board.vo.ARBoardVO;
 
 public interface RBoardDAO {
-	public List<RBoardVO> replyList(int q_no);
-	public int replyInsert(RBoardVO rvo);
-	public int replyupdate(RBoardVO rvo);
+	public List<ARBoardVO> replyList(int q_no);
+	public int replyInsert(ARBoardVO rvo);
+	public int replyupdate(ARBoardVO rvo);
 	public int replyDelete(int r_no);
 	
 }

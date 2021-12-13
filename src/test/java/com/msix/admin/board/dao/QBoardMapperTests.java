@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.msix.admin.board.vo.QBoardVO;
+import com.msix.admin.board.vo.AQBoardVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -23,19 +23,19 @@ public class QBoardMapperTests {
 	
 	@Test
 	public void testBoardList() {
-		QBoardVO qvo = new QBoardVO();
+		AQBoardVO qvo = new AQBoardVO();
 		
 		qvo.setPageNum(1);
 		qvo.setAmount(10);
 		
-		List<QBoardVO> list = qboardDAO.boardList(qvo);
-		for(QBoardVO out : list) {
+		List<AQBoardVO> list = qboardDAO.boardList(qvo);
+		for(AQBoardVO out : list) {
 			log.info(out);
 		}
 	}
 	
 	public void testBoardDetail() {
-		QBoardVO qvo = new QBoardVO();
+		AQBoardVO qvo = new AQBoardVO();
 		qvo.setQ_no(1);
 		
 		qboardDAO.boardDetail(qvo);

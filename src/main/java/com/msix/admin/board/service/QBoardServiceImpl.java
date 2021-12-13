@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msix.admin.board.dao.QBoardDAO;
-import com.msix.admin.board.vo.QBoardVO;
-
+import com.msix.admin.board.vo.AQBoardVO;
 
 import lombok.Setter;
 
@@ -19,15 +18,15 @@ public class QBoardServiceImpl implements QBoardService {
 	
 	//질의게시판 리스트
 	@Override
-	public List<QBoardVO> boardList(QBoardVO qvo) {
-		List<QBoardVO> list = qboardDAO.boardList(qvo);
+	public List<AQBoardVO> boardList(AQBoardVO qvo) {
+		List<AQBoardVO> list = qboardDAO.boardList(qvo);
 		return list;
 	}
 	
 	//질의게시판 상세리스트
 	@Override
-	public QBoardVO boardDetail(QBoardVO qvo) {
-		QBoardVO detail = null;
+	public AQBoardVO boardDetail(AQBoardVO qvo) {
+		AQBoardVO detail = null;
 		detail = qboardDAO.boardDetail(qvo);
 		if(detail!=null) {
 			detail.setQ_content(detail.getQ_content().toString().replaceAll("\n", "<br />"));
@@ -36,12 +35,12 @@ public class QBoardServiceImpl implements QBoardService {
 	}
 
 	@Override
-	public int qboardListCnt(QBoardVO qvo) {
+	public int qboardListCnt(AQBoardVO qvo) {
 		return qboardDAO.qboardListCnt(qvo);
 	}
 
 	@Override
-	public int boardDelete(QBoardVO qvo) {
+	public int boardDelete(AQBoardVO qvo) {
 		int result =0;
 		result = qboardDAO.boardDelete(qvo);
 		return result;

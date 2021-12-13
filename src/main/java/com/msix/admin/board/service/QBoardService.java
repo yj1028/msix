@@ -2,12 +2,12 @@ package com.msix.admin.board.service;
 
 import java.util.List;
 
-import com.msix.admin.board.vo.QBoardVO;
+import com.msix.admin.board.vo.AQBoardVO;
 
 public interface QBoardService {
-	public int qboardListCnt(QBoardVO qvo);
-	public List<QBoardVO> boardList(QBoardVO qvo);
-	public QBoardVO boardDetail(QBoardVO qvo);
-	public int boardDelete(QBoardVO qvo);
+	public int qboardListCnt(AQBoardVO qvo);
+	public List<AQBoardVO> boardList(AQBoardVO qvo);
+	public AQBoardVO boardDetail(AQBoardVO qvo);
+	public int boardDelete(AQBoardVO qvo);
 	
 }

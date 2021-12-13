@@ -18,7 +18,7 @@
 		
 		<style type="text/css">
 			#p_name {width: 400px;}
-			#p_type {width: 110px;}
+			#p_type {width: 120px;}
 			#p_info {resize: none;}
 			#p_price {width: 100px;}
 			#p_cnt {width: 80px;}

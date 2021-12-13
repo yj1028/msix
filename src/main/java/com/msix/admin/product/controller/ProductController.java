@@ -42,9 +42,9 @@ public class ProductController {
 		// 페이징 처리
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
 		
-		// 출력되는 글번호 제어
-		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
-		model.addAttribute("count", count);
+		// 출력되는 상품번호 제어
+//		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
+//		model.addAttribute("count", count);
 		
 		return "product/productList";
 	}

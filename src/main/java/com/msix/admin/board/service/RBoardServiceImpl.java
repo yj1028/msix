@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.msix.admin.board.dao.RBoardDAO;
-import com.msix.admin.board.vo.RBoardVO;
-
+import com.msix.admin.board.vo.ARBoardVO;
 import lombok.Setter;
 
 @Service
@@ -17,21 +16,21 @@ public class RBoardServiceImpl implements RBoardService {
 	private RBoardDAO rboardDAO;
 
 	@Override
-	public List<RBoardVO> replyList(int q_no) {
-		List<RBoardVO> list = null;
+	public List<ARBoardVO> replyList(int q_no) {
+		List<ARBoardVO> list = null;
 		list = rboardDAO.replyList(q_no);
 		return list;
 	}
 
 	@Override
-	public int replyInsert(RBoardVO rvo) {
+	public int replyInsert(ARBoardVO rvo) {
 		int result =0;
 		result = rboardDAO.replyInsert(rvo);
 		return result;
 	}
 
 	@Override
-	public int replyupdate(RBoardVO rvo) {
+	public int replyupdate(ARBoardVO rvo) {
 		int result =0;
 		result = rboardDAO.replyupdate(rvo);
 		return result;

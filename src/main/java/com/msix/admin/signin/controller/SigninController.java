@@ -30,7 +30,7 @@ public class SigninController {
 		if(result == 1) {
 			url = "/admin/mainPage";
 		}else {
-			url = "adminLogin";
+			url = "msixAdmin";
 		}
 		
 		return url;
