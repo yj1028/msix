@@ -64,14 +64,14 @@
 	<!-- 환불 처리 -->
 	<update id="refundUpdate" parameterType="refund">
 		update order_detail
-		set d_refund = 'N'
+		set d_refund = '환불불가'
 		where d_no = #{d_no}
 	</update>
 	
 	<!-- 환불 처리 여부 처리 -->
 	<update id="refundUpdateCheck" parameterType="refund">
 		update refund
-		set rf_isrefund = 'O'
+		set rf_isrefund = '처리완료'
 		where d_no = #{d_no}
 	</update>
 	
@@ -84,7 +84,7 @@
 	<!-- 환불 신청 처리 -->
 	<insert id="refundInsert" parameterType="refund">
 		insert into refund(rf_no, d_no, rf_title, rf_reason, rf_image, rf_total)
-		values(msix_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
+		values(msix_refund_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
 	</insert>
 
 </mapper>

@@ -133,9 +133,9 @@
 							<c:when test="${not empty detail}" >
 							
 								<c:forEach var="orders" items="${detail}" varStatus="status">
-									<c:set var="sum" value="${sum + orders.d_sum}" />
+									<c:set var="sum" value="${sum + orders.d_price}" />
 									<tr class="text-center" data-num="${orders.o_no}" data-id="${orders.m_no}" 
-										data-dnum="${orders.d_no}" data-ref="${orders.d_refund}" data-price="${orders.d_sum}"> <%--data뒤에 임의로 값을 설정해 줄 수 있다. --%>
+										data-dnum="${orders.d_no}" data-ref="${orders.d_refund}" data-price="${orders.d_price}"> <%--data뒤에 임의로 값을 설정해 줄 수 있다. --%>
 										<td class="orderNum">${orders.o_no}</td>
 										<td>${orders.d_no}</td>
 										<td>${orders.m_no}</td>
