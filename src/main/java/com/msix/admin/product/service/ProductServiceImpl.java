@@ -151,29 +151,25 @@ public class ProductServiceImpl implements ProductService {
 			if(!ivo.getI_name().isEmpty() && !ivo.getI_thumb().isEmpty()) {
 				FileUploadUtil.fileDelete(ivo.getI_name());
 				FileUploadUtil.fileDelete(ivo.getI_thumb());
-				
 				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
 				ivo.setI_name(fileName);
-				
 				String thumbName = FileUploadUtil.makeThumbnail(fileName);
 				ivo.setI_thumb(thumbName);
 				result = imageDAO.imageUpdate(ivo);
-			}
-			if(!ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+			}else if(!ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
 				FileUploadUtil.fileDelete(ivo.getI_name());
-				
 				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
 				ivo.setI_name(fileName);
 				ivo.setI_thumb("");
 				result = imageDAO.imageUpdate(ivo);
-			} 
-			if(ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
+			} else if(ivo.getI_name().isEmpty() && ivo.getI_thumb().isEmpty()) {
 				String fileName = FileUploadUtil.fileUpload(ivo.getFile(), "product");
 				ivo.setI_name(fileName);
 				ivo.setI_thumb("");
 				result = imageDAO.imageInsert(ivo);
 			}
 		}
+		
 		return result;
 	}
 	

@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		
-		<title>Insert title here</title>
+		<title>updateForm.jsp</title>
 		
 		<link rel="shortcut icon" href="/resources/images/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/images/icon.png" />
@@ -145,11 +145,8 @@
 					if(confirm("등록된 이미지를 삭제 하시겠습니까?")){
 						let i_no = $(this).parents("tr").attr("data-num");
 						$("#i_no").val(i_no);
-						$("#i_name").val($(this).parents("tr").attr("data-name"))
-						$("#i_thumb").val($(this).parents("tr").attr("data-thumb"))
-						console.log($("#i_no").val());
-						console.log($("#i_name").val());
-						console.log($("#i_thumb").val());
+						$("#i_name").val($(this).parents("tr").attr("data-name"));
+						$("#i_thumb").val($(this).parents("tr").attr("data-thumb"));
 						 $.ajax({
 							url : "/product/imageDelete",
 							type : "post",
@@ -258,15 +255,14 @@
 				</c:forEach> --%>
 				
 				<table class="table table-bordered" id="detailTable" style="margin-left: auto; margin-right: auto;">
-					
 					<c:forEach var="image" items="${updateData.list}" varStatus="status">
 			    		<tr data-num="${image.i_no}" data-name="${image.i_name}" data-thumb="${image.i_thumb}" data-index="${status.index}" class="tr">
 			    			<td>
 			    				<c:if test="${status.index==0}">
-				    				메인이미지
+				    				<strong>메인이미지</strong>
 			   					</c:if>
 			    				<c:if test="${status.index!=0}">
-				    				상세이미지
+				    				<strong>상품이미지</strong>
 			   					</c:if>
 			   					<input type="file" name="file" class="file" />
 			    			</td>

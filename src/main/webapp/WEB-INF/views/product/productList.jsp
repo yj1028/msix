@@ -19,7 +19,7 @@
 		
 		<style type="text/css">
 			.required{ color:red; }
-			.table-height{min-height: 640px;}
+			.table-height{min-height: 800px;}
 			.view_img img {width: 70px; height: 70px;}
 			#listTable th, td {text-align: center;}
 		</style>
