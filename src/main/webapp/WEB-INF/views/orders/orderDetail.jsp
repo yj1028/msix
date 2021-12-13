@@ -142,14 +142,14 @@
 										<td>${orders.d_delivery}</td>
 										<td>${orders.p_no}</td>
 										<td>${orders.d_cnt}</td>
-										<td>${orders.d_sum}</td>
+										<td>${orders.d_price}</td>
 										<td>${orders.o_date}</td>
 										<td>${orders.o_pcode}</td>
 										<td>${orders.o_addr}</td>
 										<td>${orders.o_daddr}</td>
 										<td>${orders.o_recipient}</td>
 										<td>${orders.o_rectel}</td>
-										<td>${orders.d_payment}</td>
+										<td>${orders.o_payment}</td>
 										<td>${orders.d_refund}</td>
 									</tr>
 								</c:forEach>

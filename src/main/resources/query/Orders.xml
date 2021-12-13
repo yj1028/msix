@@ -45,8 +45,8 @@
 	
 	<!-- 주문 상세페이지 조회 -->
 	<select id="orderDetail" parameterType="orderDetail" resultType="orderDetail">
-		select d.o_no, o.m_no, d.d_delivery, d.p_no, d.d_cnt, d.d_sum, to_char(o.o_date, 'YYYY/MM/DD') as o_date,
-		 o.o_pcode, o.o_addr, o.o_daddr, o.o_recipient, o.o_rectel, d.d_payment, d.d_refund, d.d_no
+		select d.o_no, o.m_no, d.d_delivery, d.p_no, d.d_cnt, d.d_price, to_char(o.o_date, 'YYYY/MM/DD') as o_date,
+		 o.o_pcode, o.o_addr, o.o_daddr, o.o_recipient, o.o_rectel, o.o_payment, d.d_refund, d.d_no
 		from order_detail d
 		join orders o
 		on o.o_no = d.o_no
