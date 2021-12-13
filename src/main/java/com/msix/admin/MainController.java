@@ -14,9 +14,9 @@ public class MainController {
 		return "main/mainPage";
 	}
 	
-	@GetMapping(value="/adminLogin")
+	@GetMapping(value="/msixAdmin")
 	public String adminLogin() {
 		
-		return "adminLogin";
+		return "msixAdmin";
 	}
 }

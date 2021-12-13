@@ -34,7 +34,7 @@
 		<![CDATA[
 		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
-		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+		from ( select 
        		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
 			   from product
 			   where ]]>
@@ -42,7 +42,8 @@
 					<include refid="productSearch" />
 				</trim>
 		<![CDATA[
-			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N' 
+			   order by p_date desc
 			)p, image i
 		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
 		]]>
@@ -133,7 +134,7 @@
 		<![CDATA[
 		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
 		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
-		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
+		from ( select 
        		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
 			   from product
 			   where ]]>
@@ -142,6 +143,7 @@
 				</trim>
 		<![CDATA[
 			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
+			   order by p_date desc
 			)p, image i
 		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
 		]]>
