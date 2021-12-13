@@ -48,7 +48,9 @@ public class OrdersController {
 	public String orderDetail(@ModelAttribute("detail") OrderDetailVO odvo, Model model) {
 		log.info("orderDetail 호출 성공");
 		
-		OrderDetailVO detail = ordersService.orderDetail(odvo);
+		odvo.setO_no(odvo.getO_no());
+		
+		List<OrderDetailVO> detail = ordersService.orderDetail(odvo);
 		model.addAttribute("detail", detail);
 		
 		return "orders/orderDetail";
@@ -63,7 +65,7 @@ public class OrdersController {
 		int result = ordersService.orderChange(odvo);
 
 		log.info("no=" + odvo.getO_no());
-		if(result == 1) {
+		if(result != 0) {
 			url = "/orders/orderDetail?o_no="+odvo.getO_no()+"&m_no="+odvo.getM_no();
 			//url = "/orders/orderDetail";
 		} else {
@@ -83,7 +85,7 @@ public class OrdersController {
 		int result = ordersService.orderCancel(odvo);
 		ras.addFlashAttribute("data", odvo);
 		
-		if(result == 1) {
+		if(result != 0) {
 			url = "/orders/orderList";
 		} else {
 			url = "/orders/orderDetail";

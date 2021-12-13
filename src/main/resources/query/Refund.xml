@@ -24,11 +24,14 @@
 			select
 			    rnum, rf_no, p_no, m_no, d_no, rf_title, to_char(rf_date, 'YYYY/MM/DD') as rf_date, rf_total, rf_isrefund
 			from(
-			    select /*+ index_desc(refund refund_pk) */
-			        rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total, rf_isrefund
+			    select 
+			        rownum as rnum, rf_no, p_no, m_no, d_no, rf_title, rf_date, rf_total, rf_isrefund
+					from (
+						select rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total, rf_isrefund
 					from refund rf 
 					inner join order_detail d on rf.d_no = d.d_no
 					inner join orders o on d.o_no = o.o_no
+					order by rf_no desc )
 			    where]]>
 			    <trim prefix="(" suffix=") and " prefixOverrides="and">
 			    	<include refid="refundSearch"></include>
@@ -36,7 +39,6 @@
 		<![CDATA[ rownum <= #{pageNum} * #{amount}
 			) refundlist 
 			where rnum > (#{pageNum} - 1) * #{amount}
-			order by rf_no desc
 		]]>
 	</select>
 	
@@ -62,14 +64,14 @@
 	<!-- 환불 처리 -->
 	<update id="refundUpdate" parameterType="refund">
 		update order_detail
-		set d_refund = 'N'
+		set d_refund = '환불불가'
 		where d_no = #{d_no}
 	</update>
 	
 	<!-- 환불 처리 여부 처리 -->
 	<update id="refundUpdateCheck" parameterType="refund">
 		update refund
-		set rf_isrefund = 'O'
+		set rf_isrefund = '처리완료'
 		where d_no = #{d_no}
 	</update>
 	
@@ -82,7 +84,7 @@
 	<!-- 환불 신청 처리 -->
 	<insert id="refundInsert" parameterType="refund">
 		insert into refund(rf_no, d_no, rf_title, rf_reason, rf_image, rf_total)
-		values(msix_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
+		values(msix_refund_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
 	</insert>
 
 </mapper>

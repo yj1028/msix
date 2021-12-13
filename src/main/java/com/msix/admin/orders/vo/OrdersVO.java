@@ -20,6 +20,7 @@ public class OrdersVO extends CommonVO {
 	private String o_daddr;
 	private String o_recipient;
 	private String o_rectel;
+	private String o_payment;
 	
 	public OrdersVO(int o_no) {
 		this.o_no = o_no;
