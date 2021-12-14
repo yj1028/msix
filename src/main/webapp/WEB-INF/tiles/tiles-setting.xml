@@ -43,9 +43,9 @@
 	</definition>
 	
 	<!-- 환불관리 -->
-	<definition name="refund/*" extends="content"> 
+	<definition name="arefund/*" extends="contents"> 
 		<put-attribute name="title" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/refund/{1}.jsp" />
+		<put-attribute name="contents" value="/WEB-INF/views/arefund/{1}.jsp" />
 	</definition>
 	
 	<!-- 질의 게시판 -->
@@ -124,5 +124,10 @@
 	<definition name="product/*" extends="content">
 		<put-attribute name="title"  value="" /> 
 		<put-attribute name="body" value="/WEB-INF/views/product/{1}.jsp" />
+	</definition>
+	
+	<definition name="refund/*" extends="content"> 
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/refund/{1}.jsp" />
 	</definition>
 </tiles-definitions>

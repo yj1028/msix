@@ -15,7 +15,7 @@
 			<![CDATA[ o_date like '%' || #{keyword} || '%' ]]>
 		</if>
 	</sql>
-	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
+	<!-- 주문 리스트 조회(페이징 처리와 검색 처리) -->
 	<select id="orderList" parameterType="aorders" resultType="aorders">
 		<![CDATA[
 			select
@@ -48,12 +48,11 @@
 	<select id="orderDetail" parameterType="aorderDetail" resultType="aorderDetail">
 		select d.o_no, o.m_no, d.d_delivery, d.p_no, d.d_cnt, d.d_price, to_char(o.o_date, 'YYYY/MM/DD') as o_date,
 		 o.o_pcode, o.o_addr, o.o_daddr, REGEXP_REPLACE(o.o_recipient, '.', '*', 2, 1) AS o_recipient,
-		 REGEXP_REPLACE(o_rectel, '(\\d{3})\\-(\\d{3,4})\\-(\\d{4})', '\\1-****-\\3') AS o_rectel, o.o_payment, d.d_refund, d.d_no, c.cart_delivery
+		 REGEXP_REPLACE(o_rectel, '(\\d{3})\\-(\\d{3,4})\\-(\\d{4})', '\\1-****-\\3') AS o_rectel,
+		 o.o_payment, d.d_refund, d.d_no, d.d_shipment, d.d_pay
 		from order_detail d
 		join orders o
 		on o.o_no = d.o_no
-		join cart c
-		on c.cart_no = o.cart_no
 		where d.o_no = #{o_no}
 	</select>
 	

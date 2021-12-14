@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 public class ARefundVO extends AOrderDetailVO {
 	private int rf_no;
-	private int d_no;
+	private String d_no;
 	private String rf_title;
 	private String rf_reason;
 	private String rf_image;

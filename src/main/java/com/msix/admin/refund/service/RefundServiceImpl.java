@@ -53,6 +53,8 @@ public class RefundServiceImpl implements RefundService {
 			rvo.setRf_image(fileName);
 		}
 		
+		refundDAO.refundCheck(rvo);
+		
 		result = refundDAO.refundInsert(rvo);
 		return result;
 	}

@@ -58,7 +58,7 @@
 					// 상세 페이지로 이동하기 위해 form추가 (id : rf_detailForm)
 				 	$("#rf_detailForm").attr({
 						"method":"get",
-						"action":"/refund/refundDetail"
+						"action":"/arefund/refundDetail"
 					});
 					$("#rf_detailForm").submit();
 				});
@@ -77,7 +77,7 @@
 				}
 				$("#rf_search").attr({
 					"method":"get",
-					"action":"/refund/refundList"
+					"action":"/arefund/refundList"
 				});
 				$("#rf_search").submit();
 			}

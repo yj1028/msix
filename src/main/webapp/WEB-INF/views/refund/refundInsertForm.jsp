@@ -36,7 +36,7 @@
 				});
 				
 				$("#returnBtn").click(function(){
-					location.href="";
+					location.href="/orders/orderDetailList";
 				});
 			});
 		</script>
@@ -45,7 +45,7 @@
 		
 		<div>
 		<form id="rf_writeForm">
-			<input type="hidden" name="d_no" id="d_no" />
+			<input type="hidden" name="d_no" id="d_no" value="${detail.d_no}"/>
 			<h3>게시판 입력화면</h3>
 				<div>
 					<label>환불 글 제목</label>

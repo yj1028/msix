@@ -15,6 +15,9 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
+		<style type="text/css">
+			.refundCheck{ background-color: green; color: blue; }
+		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
@@ -24,7 +27,7 @@
 						if($("#d_refund").val() != 'N'){
 							$("#rf_data").attr({
 								"method":"post",
-								"action":"/refund/refundUpdate"
+								"action":"/arefund/refundUpdate"
 							});
 							$("#rf_data").submit();
 							alert("환불 처리 되었습니다.")
@@ -37,10 +40,10 @@
 				/* 환불 취소 버튼 클릭시 제어 */
 				$("#refundDeleteBtn").click(function(){
 					if(confirm("정말 환불을 취소 하시겠습니까?")){
-						if($("#d_refund").val() != 'N'){
+						if($("#d_refund").val() != '환불완료'){
 							$("#rf_data").attr({
 								"method":"post",
-								"action":"/refund/refundDelete"
+								"action":"/arefund/refundDelete"
 							});
 							$("#rf_data").submit();
 							alert("환불이 취소 되었습니다.");
@@ -52,7 +55,7 @@
 				
 				/* 목록 버튼 클릭시 제어 */
 				$("#refundListBtn").click(function(){
-					location.href="/refund/refundList";
+					location.href="/arefund/refundList";
 				});
 			});
 		</script>
@@ -106,13 +109,13 @@
 					<td colspan="4">환불사유사진</td>
 				</tr>
 				<tr>
-					<td colspan="4">${detail.rf_image}</td>
+					<td colspan="4"><img src="/uploadStorage/refund/${detail.rf_image}"/></td>
 				</tr>
 				<tr>
-					<td colspan="4">환불처리여부</td>
+					<td colspan="4" class="refundCheck">환불처리여부</td>
 				</tr>
 				<tr>
-					<td colspan="4">${detail.rf_isrefund}</td>
+					<td colspan="4" class="refundCheck">${detail.rf_isrefund}</td>
 				</tr>
 			</table>
 			

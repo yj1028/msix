@@ -17,7 +17,14 @@
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
 		<style type="text/css">
-			.table{ min-height: 500px; }
+			/* .table{ min-height: 500px; } */
+			table {
+					  table-layout: fixed;
+					  width: 100%;
+					  border-collapse: collapse;
+					  border: 3px solid purple;
+					}
+			.deli{ background-color: green; color: blue; }
 		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript">
@@ -111,10 +118,11 @@
 					<thead>
 						<tr>
 							<th class="order text-center col-md-1">주문번호</th>
-							<th class="order text-center col-md-1">주문상세번호</th>
+							<th class="order col-md-1">주문상세번호</th>
 							<th class="order col-md-1">회원번호</th>
 							<th class="order col-md-1">배송구분</th>
-							<th class="order col-md-1">주문처리상태</th>
+							<th class="order col-md-1">배송비</th>
+							<th class="deli col-md-1">주문처리상태</th>
 							<th class="order col-md-1">상품번호</th>
 							<th class="order col-md-1">수량</th>
 							<th class="order col-md-1">가격</th>
@@ -141,8 +149,9 @@
 										<td class="orderNum">${orders.o_no}</td>
 										<td>${orders.d_no}</td>
 										<td>${orders.m_no}</td>
-										<td>${orders.cart_delivery}</td>
-										<td>${orders.d_delivery}</td>
+										<td>${orders.d_shipment}</td>
+										<td>${orders.d_pay}</td>
+										<td class="deli">${orders.d_delivery}</td>
 										<td>${orders.p_no}</td>
 										<td>${orders.d_cnt}</td>
 										<td>${orders.d_price}</td>

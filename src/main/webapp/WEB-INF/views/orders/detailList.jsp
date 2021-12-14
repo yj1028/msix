@@ -20,15 +20,20 @@
 		<title>주문내역조회</title>
 	<script type="text/javascript">
 
-	$(function(){
-		$("#refundBtn").click(function(){
+		$(function(){
+			$("#refundBtn").click(function(){
 				let d_no = $(this).parents("tr").attr("data-num");
 				$("#d_no").val(d_no);
-				$("#refundForm").attr({
-					method : "post",
-					action : "/refund/refundInsertForm"
-				});
-				$("#refundForm").submit();
+				if($(this).parents("tr").attr("data-refund") == '환불가능'){
+					$("#refundForm").attr({
+						method : "post",
+						action : "/refund/refundInsertForm"
+					});
+					$("#refundForm").submit();
+				} else {
+					alert("환불 처리중이거나 환불이 완료된 상품입니다")
+				}
+				
 			});
 
 		});
@@ -36,6 +41,7 @@
 	</head>
 	<body>
 		<form id="refundForm">
+		<input type="hidden" name="d_no" id="d_no" value="${orderdetail.d_no}"/>
 		<span>${login.m_id}님의 주문내역</span>
 		<table class="table table-striped">
 			<tr>
@@ -54,14 +60,14 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${orderDetailList}" var="orderdetail">
-						<tr class="orderDetailList" data-num="${orderdetail.d_no}">
+						<tr class="orderDetailList" data-num="${orderdetail.d_no}" data-refund="${orderdetail.d_refund}">
 							<td>${orderdetail.d_no}</td>
 							<td>${orderdetail.p_name}</td>
 							<td>${orderdetail.o_date}</td>
 							<td>${orderdetail.d_cnt}</td>
 							<td>${orderdetail.d_price}</td>
 							<td>${orderdetail.d_delivery}</td>
-							<td>${orderdetail.d_refund }</td>
+							<td>${orderdetail.d_refund}</td>
 							<td><button class="btn btn-default disable" id="refundBtn">환불신청</button></td>
 						</tr>
 					</c:forEach>

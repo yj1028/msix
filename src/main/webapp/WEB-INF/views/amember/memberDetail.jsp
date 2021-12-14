@@ -15,6 +15,10 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
+		<style type="text/css">
+			.aMemberDetail{ color : blue; padding :20px; 
+							font-size: 20px; text-align: center;}
+		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
@@ -56,82 +60,54 @@
 			<form class="form-inline">
 			  <div class="form-group">
 			    <label for="exampleInputName2">회원번호</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_no}" readonly>
+			    <p class="aMemberDetail">${detail.m_no}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_no}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputEmail2">수정일</label>
-			    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="${detail.m_update}" readonly>
+			    <p class="aMemberDetail">${detail.m_update}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputEmail2" placeholder="${detail.m_update}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputName2">가입일</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_date}" readonly>
+			    <p class="aMemberDetail">${detail.m_date}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_date}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputName2">회원 아이디</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_id}" readonly>
+			    <p class="aMemberDetail">${detail.m_id}</p>
+			   <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_id}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputName2">회원 이름</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_name}" readonly>
+			    <p class="aMemberDetail">${detail.m_name}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_name}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputName2">회원 연락처</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_tel}" readonly>
+			    <p class="aMemberDetail">${detail.m_tel}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_tel}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputName2">회원 이메일</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_email}" readonly>
+			    <p class="aMemberDetail">${detail.m_email}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_email}" readonly> --%>
 			  </div>
 			  <br />
 			  <div class="form-group">
 			    <label for="exampleInputName2">탈퇴여부</label>
-			    <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_isdelete}" readonly>
+			    <p class="aMemberDetail">${detail.m_isdelete}</p>
+			    <%-- <input type="text" class="form-control" id="exampleInputName2" placeholder="${detail.m_isdelete}" readonly> --%>
 			  </div>
 			</form>
 		</div>
 		
-			<%-- <div>
-				<table class="table">
-					<tr>
-						<td>회원번호</td>
-						<td>${detail.m_no}</td>
-					</tr>
-					<tr>
-						<td>수정일</td>
-						<td>${detail.m_udate}</td>
-					</tr>
-					<tr>
-						<td>가입일</td>
-						<td>${detail.m_date}</td>
-					</tr>
-					<tr>
-						<td>회원 아이디</td>
-						<td>${detail.m_id}</td>
-					</tr>
-					<tr>
-						<td>회원 이름</td>
-						<td>${detail.m_name}</td>
-					</tr>
-					<tr>
-						<td>회원 연락처</td>
-						<td>${detail.m_tel}</td>
-					</tr>
-					<tr>
-						<td>회원 이메일</td>
-						<td>${detail.m_email}</td>
-					</tr>
-					<tr>
-						<td>탈퇴 여부</td>
-						<td>${detail.m_isdelete}</td>
-					</tr>
-				</table>
-			</div> --%>
 		</div>
 	</body>
 </html>
