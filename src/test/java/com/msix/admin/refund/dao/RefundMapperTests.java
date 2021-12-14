@@ -7,8 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.msix.admin.refund.vo.RefundVO;
+import com.msix.admin.refund.vo.ARefundVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -19,25 +18,25 @@ import lombok.extern.log4j.Log4j;
 public class RefundMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private RefundDAO refundDAO;
+	private ARefundDAO refundDAO;
 	
 	@Test
 	public void testRefundList() {
-		RefundVO rvo = new RefundVO();
+		ARefundVO rvo = new ARefundVO();
 		
-		List<RefundVO> list = refundDAO.refundList(rvo);
-		for(RefundVO vo : list) {
+		List<ARefundVO> list = refundDAO.refundList(rvo);
+		for(ARefundVO vo : list) {
 			log.info(vo);
 		}
 	}
 	
 	@Test
 	public void testRefundDetail() {
-		RefundVO rvo = new RefundVO();
+		ARefundVO rvo = new ARefundVO();
 		rvo.setRf_no(29);
 		
-		RefundVO detail = refundDAO.refundDetail(rvo);
-		
+		ARefundVO detail = refundDAO.refundDetail(rvo);
+
 		log.info(detail.toString());
 	}
 	

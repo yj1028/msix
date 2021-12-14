@@ -23,8 +23,8 @@
 					if(!chkData("#rf_title","글 제목을")) return;
 					else if(!chkData("#rf_reason","환불 사유를")) return;
 					else {
-						if($("#rf_image").val() != ""){
-							if (!chkFile($("#rf_image"))) return;
+						if($("#file").val() != ""){
+							if (!chkFile($("#file"))) return;
 						}
 						$("#rf_writeForm").attr({
 							"method":"post",
@@ -45,6 +45,7 @@
 		
 		<div>
 		<form id="rf_writeForm">
+			<input type="hidden" name="d_no" id="d_no" />
 			<h3>게시판 입력화면</h3>
 				<div>
 					<label>환불 글 제목</label>
@@ -60,7 +61,7 @@
 				</div>
 				<div>
 					<label>환불 이미지 파일첨부</label>
-					<div><input type="file" name="rf_image" id="rf_image" /></div>
+					<div><input type="file" name="file" id="file" /></div>
 				</div>
 				<div>
 					<div><input type="button" value="저장" id="refundInsertBtn"/></div>

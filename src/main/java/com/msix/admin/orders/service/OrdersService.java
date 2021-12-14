@@ -1,14 +1,13 @@
 package com.msix.admin.orders.service;
 
 import java.util.List;
-
-import com.msix.admin.orders.vo.OrderDetailVO;
-import com.msix.admin.orders.vo.OrdersVO;
+import com.msix.admin.orders.vo.AOrderDetailVO;
+import com.msix.admin.orders.vo.AOrdersVO;
 
 public interface OrdersService {
-	public List<OrdersVO> orderList(OrdersVO ovo);
-	public int orderListCnt(OrdersVO ovo);
-	public List<OrderDetailVO> orderDetail(OrderDetailVO odvo);
-	public int orderChange(OrderDetailVO odvo);
-	public int orderCancel(OrderDetailVO odvo);
+	public List<AOrdersVO> orderList(AOrdersVO ovo);
+	public int orderListCnt(AOrdersVO ovo);
+	public List<AOrderDetailVO> orderDetail(AOrderDetailVO odvo);
+	public int orderChange(AOrderDetailVO odvo);
+	public int orderCancel(AOrderDetailVO odvo);
 }

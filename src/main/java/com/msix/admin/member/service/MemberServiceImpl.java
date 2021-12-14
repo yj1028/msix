@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.msix.admin.member.dao.MemberDAO;
-import com.msix.admin.member.vo.MemberVO;
+import com.msix.admin.member.dao.AMemberDAO;
+import com.msix.admin.member.vo.AMemberVO;
 
 import lombok.Setter;
 
@@ -14,27 +13,27 @@ import lombok.Setter;
 public class MemberServiceImpl implements MemberService {
 
 	@Setter(onMethod_ = @Autowired)
-	private MemberDAO memberDAO;
+	private AMemberDAO memberDAO;
 	
 	@Override
-	public List<MemberVO> memberList(MemberVO mvo) {
-		List<MemberVO> list = memberDAO.memberList(mvo);
+	public List<AMemberVO> memberList(AMemberVO mvo) {
+		List<AMemberVO> list = memberDAO.memberList(mvo);
 		return list;
 	}
 	
 	@Override
-	public int memberListCnt(MemberVO mvo) {
+	public int memberListCnt(AMemberVO mvo) {
 		return memberDAO.memberListCnt(mvo);
 	}
 	
 	@Override
-	public MemberVO memberDetail(MemberVO mvo) {
-		MemberVO detail = memberDAO.memberDetail(mvo);
+	public AMemberVO memberDetail(AMemberVO mvo) {
+		AMemberVO detail = memberDAO.memberDetail(mvo);
 		return detail;
 	}
 	
 	@Override
-	public int memberDormancy(MemberVO mvo) {
+	public int memberDormancy(AMemberVO mvo) {
 		int result = 0;
 		result = memberDAO.memberDormancy(mvo);
 		return result;

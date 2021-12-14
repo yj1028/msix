@@ -11,10 +11,10 @@
    		<a href="/admin/mainPage">메인페이지 <span class="sr-only">(current)</span></a>
     </li>
     <li <c:if test="${fn:containsIgnoreCase(clientUri, '/member')}">class="active"</c:if>>
-    	<a href="/member/memberList">회원관리</a>
+    	<a href="/amember/memberList">회원관리</a>
     </li>
     <li <c:if test="${fn:containsIgnoreCase(clientUri, '/orders')}">class="active"</c:if>>
-    	<a href="/orders/orderList">주문관리</a>
+    	<a href="/aorders/orderList">주문관리</a>
     </li>
     <li <c:if test="${fn:containsIgnoreCase(clientUri, '/refund')}">class="active"</c:if>>
     	<a href="/refund/refundList">환불관리</a>

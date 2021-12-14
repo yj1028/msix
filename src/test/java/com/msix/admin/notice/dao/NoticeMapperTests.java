@@ -7,9 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.msix.admin.notice.vo.NoticeVO;
-
+import com.msix.admin.notice.vo.ANoticeVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -19,22 +17,22 @@ import lombok.extern.log4j.Log4j;
 public class NoticeMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private NoticeDAO noticeDAO;
+	private ANoticeDAO noticeDAO;
 	
 	 
 	public void testBoardList() {
-		NoticeVO nvo = new NoticeVO();
+		ANoticeVO nvo = new ANoticeVO();
 		nvo.setPageNum(1);
 		nvo.setAmount(10);
 		
-		List<NoticeVO> list = noticeDAO.boardList(nvo);
-		for(NoticeVO out : list) {
+		List<ANoticeVO> list = noticeDAO.boardList(nvo);
+		for(ANoticeVO out : list) {
 			log.info(out);
 		}
 	}
 	@Test
 	public void testBoardInsert() {
-		NoticeVO nvo = new NoticeVO();
+		ANoticeVO nvo = new ANoticeVO();
 		nvo.setN_title("제목");
 		nvo.setN_content("내용");
 		
@@ -43,7 +41,7 @@ public class NoticeMapperTests {
 	}
 	
 	public void testBoardDetail() {
-		NoticeVO nvo = new NoticeVO();
+		ANoticeVO nvo = new ANoticeVO();
 		nvo.setN_no(2);
 		
 		noticeDAO.boardDetail(nvo);
@@ -51,7 +49,7 @@ public class NoticeMapperTests {
 	}
 	
 	public void testBoardUpdate() {
-		NoticeVO nvo = new NoticeVO();
+		ANoticeVO nvo = new ANoticeVO();
 		nvo.setN_no(1);
 		nvo.setN_title("제목 수정");
 		nvo.setN_content("내용 수정");
@@ -60,7 +58,7 @@ public class NoticeMapperTests {
 	}
 	
 	public void testBoardDelete() {
-		NoticeVO nvo = new NoticeVO();
+		ANoticeVO nvo = new ANoticeVO();
 		nvo.setN_no(1);
 		
 		noticeDAO.boardDelete(nvo);

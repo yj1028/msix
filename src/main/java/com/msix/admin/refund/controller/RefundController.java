@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.msix.admin.refund.service.RefundService;
-import com.msix.admin.refund.vo.RefundVO;
+
+import com.msix.admin.refund.vo.ARefundVO;
 import com.msix.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
@@ -26,10 +27,10 @@ public class RefundController {
 	private RefundService refundService;
 	
 	@GetMapping("/refundList")
-	public String refundList(@ModelAttribute("data") RefundVO rvo, Model model) {
+	public String refundList(@ModelAttribute("data") ARefundVO rvo, Model model) {
 		log.info("refundList 호출 성공");
 		
-		List<RefundVO> refundList = refundService.refundList(rvo);
+		List<ARefundVO> refundList = refundService.refundList(rvo);
 		model.addAttribute("refundList", refundList);
 		
 		// 전체 레코드 수 구현
@@ -44,17 +45,17 @@ public class RefundController {
 	}
 	
 	@GetMapping("/refundDetail")
-	public String refundDetail(@ModelAttribute RefundVO rvo, Model model) {
+	public String refundDetail(@ModelAttribute ARefundVO rvo, Model model) {
 		log.info("refundDetail 호출 성공");
 		
-		RefundVO detail = refundService.refundDetail(rvo);
+		ARefundVO detail = refundService.refundDetail(rvo);
 		model.addAttribute("detail", detail);
 		
 		return "refund/refundDetail";
 	}
 	
 	@PostMapping("/refundUpdate")
-	public String refundUpdate(@ModelAttribute RefundVO rvo) {
+	public String refundUpdate(@ModelAttribute ARefundVO rvo) {
 		log.info("refundUpdate 호출 성공");
 		
 		String url = "";
@@ -71,7 +72,7 @@ public class RefundController {
 	}
 	
 	@PostMapping("/refundDelete")
-	public String refundDelete(@ModelAttribute RefundVO rvo, RedirectAttributes ras) {
+	public String refundDelete(@ModelAttribute ARefundVO rvo, RedirectAttributes ras) {
 		log.info("refundDelete 호출 성공");
 		
 		String url = "";
@@ -89,14 +90,16 @@ public class RefundController {
 	}
 	
 	@RequestMapping("/refundInsertForm")
-	public String refundInsertForm() {
+	public String refundInsertForm(@ModelAttribute ARefundVO rvo) {
 		log.info("refundInsertForm 호출 성공");
+		
+		
 		
 		return "refund/refundInsertForm";
 	}
 	
-	@PostMapping
-	public String refundInsert(RefundVO rvo) throws Exception{
+	@PostMapping("/refundInsert")
+	public String refundInsert(ARefundVO rvo) throws Exception{
 		log.info("refundInsert 호출 성공");
 		
 		int result = 0;
@@ -104,7 +107,7 @@ public class RefundController {
 		
 		result = refundService.refundInsert(rvo);
 		if(result == 1) {
-			url = "";
+			url = "/orders/orderDetailList";
 		} else {
 			url = "/refund/refundInsertForm";
 		}

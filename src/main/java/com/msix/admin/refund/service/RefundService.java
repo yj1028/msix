@@ -2,13 +2,13 @@ package com.msix.admin.refund.service;
 
 import java.util.List;
 
-import com.msix.admin.refund.vo.RefundVO;
+import com.msix.admin.refund.vo.ARefundVO;
 
 public interface RefundService {
-	public List<RefundVO> refundList(RefundVO rvo);
-	public int refundListCnt(RefundVO rvo);
-	public RefundVO refundDetail(RefundVO rvo);
-	public int refundUpdate(RefundVO rvo);
-	public int refundDelete(RefundVO rvo);
-	public int refundInsert(RefundVO rvo) throws Exception;
+	public List<ARefundVO> refundList(ARefundVO rvo);
+	public int refundListCnt(ARefundVO rvo);
+	public ARefundVO refundDetail(ARefundVO rvo);
+	public int refundUpdate(ARefundVO rvo);
+	public int refundDelete(ARefundVO rvo);
+	public int refundInsert(ARefundVO rvo) throws Exception;
 }

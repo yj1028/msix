@@ -18,8 +18,8 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class RBoardMapperTests {
 	@Setter(onMethod_ = @Autowired )
-	private RBoardDAO rboardDAO;
-	
+	private ARBoardDAO rboardDAO;
+
 	@Test
 	public void replyList(){
 		List<ARBoardVO> list = rboardDAO.replyList(1);

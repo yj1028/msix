@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.ccmnt.dao.CcmntDAO">
+	<!-- 댓글 리스트 보여주기 -->
+	<select id="ccmntList" parameterType="ccmnt" resultType="ccmnt">
+	 	SELECT c.c_no, r.rv_no 
+       		,c.c_comment ,m.m_no, m.m_name
+        	,to_char(c_date,'YYYY-MM-DD HH24:MI:SS') as c_date
+        FROM c_cmnt c,rv_board r,member m
+        where  c.rv_no=r.rv_no 
+            and r.m_no=m.m_no and c.rv_no=#{rv_no}
+        order by c.c_no desc
+	</select>
+	 <!-- 댓글입력하기 --> 
+	<insert id="ccmntInsert" parameterType="ccmnt">
+		<selectKey keyProperty="c_no" resultType="int" order="BEFORE">
+			select c_cmnt_seq.nextval from dual
+		</selectKey>
+			insert into c_cmnt(c_no,rv_no,c_comment)
+			values(#{c_no},#{rv_no},#{c_comment})
+	</insert>
+	
+	<!-- 댓글 수정하기 -->
+	<update id="ccmntUpdate" parameterType="ccmnt">
+		update c_cmnt 
+			set c_comment=#{c_comment},c_date=sysdate
+		where c_no=#{c_no}
+	</update>
+	<!-- 댓글 삭제하기 -->
+	<delete id="ccmntDelete" parameterType="ccmnt">
+		delete from c_cmnt where c_no=#{c_no}
+	</delete>
+	<delete id="rvccmntDelete" parameterType="int">
+		delete from c_cmnt where  rv_no=#{rv_no}
+	</delete>
+	<!--댓글갯수 보야주기 -->
+	<select id="ccmntCnt" parameterType="int" resultType="int">
+		select count(c_no) from c_cmnt where rv_no=#{rv_no}
+	</select>
+</mapper> 
