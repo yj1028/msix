@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.qboard.dao.QboardDAO">
+	<!--조회하기 
+	<select id="qboardList" parameterType="qboard" resultType="qboard">
+		SELECT q_no,m_no ,q_tag, q_title, to_char(q_date,'YYYY-MM-DD') as q_date, q_cnt
+		FROM q_board
+		<where>
+			<if test="search=='q_title'">
+				<![CDATA[ q_title LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+			<if test="search=='q_content'">
+				<![CDATA[ q_content LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+			<if test="search=='m_no'">
+				<![CDATA[ m_no LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>		
+		</where>
+		ORDER BY q_no desc
+	</select> -->
+	
+	<!-- 게시판 조회 검색,페이징 처리 -->
+		<sql id="qboardSearch">
+			<if test="search=='q_title'">
+				<![CDATA[ q_title LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+			<if test="search=='q_content'">
+				<![CDATA[ q_content LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+			<if test="search=='m_name'">
+				<![CDATA[ m_name LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>	
+		</sql>
+		<select id="qboardList" parameterType="qboard" resultType="qboard">
+		<![CDATA[
+		SELECT q_no, m_no ,q_tag, q_title, to_char(q_date,'YYYY-MM-DD') as q_date,q_cnt,m_name
+		FROM (
+			SELECT /*+ INDEX_DESC(q_board q_board_pk) */
+			rownum as rnum,q.q_no,m.m_no ,q.q_tag, q.q_title, q_date, q.q_cnt,m.m_name
+   			FROM q_board q inner join member m on q.m_no=m.m_no 
+   			
+			WHERE]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<include refid="qboardSearch"></include>
+			</trim>
+	<![CDATA[	rownum <= #{pageNum} * #{amount} 
+			) qboardlist
+		WHERE rnum > (#{pageNum}-1) * #{amount}
+	]]>
+		</select>
+		
+		<!-- 전체 레코드 수 조회 -->
+		<select id="qboardListCnt" parameterType="qboard" resultType="int">
+			select count(*) From q_board
+		<trim prefix="where">  </trim>
+		</select>
+		
+			
+		
+	<!-- 입력하기 -->
+	<insert id="qboardInsert" parameterType="qboard">
+	INSERT INTO q_board(q_no, m_no ,q_tag, q_title, q_content) 
+		VALUES (q_board_seq.nextval, #{m_no}, #{q_tag}, #{q_title}, #{q_content})
+	</insert>
+	<!-- 상세화면보기 -->
+	<select id="qboardDetail" parameterType="qboard" resultType="qboard">
+		SELECT q.q_no,m.m_no ,q.q_tag, q.q_title, to_char(q_date,'YYYY-MM-DD') as q_date,
+		 q.q_cnt,m.m_name,q.q_content
+        FROM q_board q inner join member m on q.m_no=m.m_no
+		WHERE q_no = #{q_no}
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="qboardUpdate" parameterType="qboard" >
+		update q_board
+			set q_title=#{q_title}, q_content= #{q_content},q_date=sysdate
+			where q_no=#{q_no}
+	</update>
+	
+	<!-- 조회수 올리기 -->
+	<update id="QcntUpdate" parameterType="qboard">
+		update q_board set q_cnt =q_cnt +1
+		where q_no=#{q_no}
+	</update>
+	
+	<!--게시물 삭제-->
+	<delete id="qboardDelete" parameterType="qboard">
+		delete from q_board where q_no=#{q_no}
+	</delete>
+</mapper>

@@ -1,5 +1,7 @@
 package com.msix.common.vo;
 
+import com.msix.admin.orders.vo.AOrdersVO;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -36,5 +38,9 @@ public class PageDTO {
 		
 		/* 다음(next) 구하기 */
 		this.next = this.endPage < realEnd;
+	}
+
+	public PageDTO(AOrdersVO ovo, int total2) {
+		// TODO Auto-generated constructor stub
 	}
 }

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.msix.admin.refund.dao.RefundDAO;
-import com.msix.admin.refund.vo.RefundVO;
+import com.msix.admin.refund.dao.ARefundDAO;
+import com.msix.admin.refund.vo.ARefundVO;
 import com.msix.common.file.FileUploadUtil;
 
 import lombok.Setter;
@@ -15,24 +15,24 @@ import lombok.Setter;
 public class RefundServiceImpl implements RefundService {
 	
 	@Setter(onMethod_ = @Autowired)
-	private RefundDAO refundDAO;
+	private ARefundDAO refundDAO;
 	
-	public List<RefundVO> refundList(RefundVO rvo){
-		List<RefundVO> list = refundDAO.refundList(rvo);
+	public List<ARefundVO> refundList(ARefundVO rvo){
+		List<ARefundVO> list = refundDAO.refundList(rvo);
 		return list;
 	}
 	
-	public int refundListCnt(RefundVO rvo) {
+	public int refundListCnt(ARefundVO rvo) {
 		int count = refundDAO.refundListCnt(rvo);
 		return count;
 	}
 	
-	public RefundVO refundDetail(RefundVO rvo) {
-		RefundVO detail = refundDAO.refundDetail(rvo);
+	public ARefundVO refundDetail(ARefundVO rvo) {
+		ARefundVO detail = refundDAO.refundDetail(rvo);
 		return detail;
 	}
 	
-	public int refundUpdate(RefundVO rvo) {
+	public int refundUpdate(ARefundVO rvo) {
 		
 		refundDAO.refundUpdateCheck(rvo);
 		
@@ -40,12 +40,12 @@ public class RefundServiceImpl implements RefundService {
 		return count;
 	}
 	
-	public int refundDelete(RefundVO rvo) {
+	public int refundDelete(ARefundVO rvo) {
 		int result = refundDAO.refundDelete(rvo);
 		return result;
 	}
 	
-	public int refundInsert(RefundVO rvo) throws Exception {
+	public int refundInsert(ARefundVO rvo) throws Exception {
 		int result = 0;
 		
 		if(rvo.getFile().getSize() > 0) {

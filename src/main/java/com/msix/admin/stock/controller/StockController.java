@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.msix.admin.product.service.ProductService;
-import com.msix.admin.product.vo.ProductVO;
+import com.msix.admin.product.service.AProductService;
+import com.msix.admin.product.vo.AProductVO;
 import com.msix.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
@@ -22,15 +22,15 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class StockController {
 	
-	private ProductService productService;
+	private AProductService productService;
 	
 	/* 재고 리스트 조회 구현하기 */
 	@RequestMapping(value = "/stockList", method = RequestMethod.GET)
-	public String stockList(@ModelAttribute("data") ProductVO pvo, Model model) {
+	public String stockList(@ModelAttribute("data") AProductVO pvo, Model model) {
 		log.info("stockList 호출 성공");
 		
 		// 전체 레코드 조회
-		List<ProductVO> stockList = productService.stockList(pvo);
+		List<AProductVO> stockList = productService.stockList(pvo);
 		model.addAttribute("stockList", stockList);
 		
 		// 전체 레코드 수 구현
@@ -48,7 +48,7 @@ public class StockController {
 	
 	/* 재고수정 구현하기 */
 	@PostMapping(value = "/stockUpdate")
-	public String stockUpdate(@ModelAttribute ProductVO pvo) throws Exception {
+	public String stockUpdate(@ModelAttribute AProductVO pvo) throws Exception {
 		log.info("stockUpdate 호출 성공");
 		
 		int result = 0;
@@ -59,7 +59,7 @@ public class StockController {
 		if(result == 1) {
 			url = "/stock/stockList";
 		}else {
-			url = "/product/productList";
+			url = "/aproduct/productList";
 		}
 		
 		return "redirect:"+url;

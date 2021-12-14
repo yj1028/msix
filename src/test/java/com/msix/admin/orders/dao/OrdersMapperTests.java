@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.msix.admin.orders.vo.OrderDetailVO;
-import com.msix.admin.orders.vo.OrdersVO;
+import com.msix.admin.orders.vo.AOrderDetailVO;
+import com.msix.admin.orders.vo.AOrdersVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 public class OrdersMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private OrdersDAO ordersDAO;
+	private AOrdersDAO ordersDAO;
 	
 //	@Test
 //	public void testOrderList() {
@@ -45,7 +45,7 @@ public class OrdersMapperTests {
 	
 	@Test
 	public void testOrderChange() {
-		OrderDetailVO odvo = new OrderDetailVO();
+		AOrderDetailVO odvo = new AOrderDetailVO();
 		odvo.setO_no(43);
 		odvo.setD_delivery("배송중");
 		

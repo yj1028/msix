@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.product.dao.ProductDAO">
+	
+	<!-- p_type 6가지 :  Gecko Lizard Turtle Amphibian Food Supplies 
+	p_code 6가지 :  GK10 LZ20 TR30 AB40 FD50 SP60-->
+	<sql id = "productType">
+		<if test="p_type == 'Gecko'">
+			p_type = #{p_type}
+		</if>
+		<if test="p_type == 'Lizard'">
+			p_type = #{p_type}
+		</if>
+		<if test="p_type == 'Turtle'">
+			p_type = #{p_type}
+		</if>
+		<if test="p_type == 'Amphibian'">
+			p_type = #{p_type}
+		</if>
+		<if test="p_type == 'Food'">
+			p_type = #{p_type}
+		</if>
+		<if test="p_type == 'Supplies'">
+			p_type = #{p_type}
+		</if>	
+	</sql>
+	
+	<sql id = "productSearch">
+		<if test="search == 'p_name'">
+			<![CDATA[ p_name like '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'p_price'">
+			<![CDATA[ p_price <= #{keyword} ]]>
+		</if>
+	</sql>
+	
+	<!-- 상품 리스트 기본 조회
+	<select id="productList" parameterType="goods" resultType="goods">
+		select pd.p_no, img.i_thumb, p_name, p_price, p_code, p_type, p_cnt, p_info, 
+				to_char(p_date, 'YYYY-MM-DD') as p_date,
+				to_char(p_update, 'YYYY-MM-DD') as p_update, p_isdelete
+		from product pd, image img 
+		where pd.p_no = img.p_no
+		<trim prefix=" and (" suffix=") " prefixOverrides="and">
+	    	<include refid="productSearch"></include>
+	    </trim>
+        order by p_no desc 
+	</select> -->
+	
+	<select id="productList" parameterType="goods" resultType="goods">
+		<![CDATA[
+			select
+			    rnum,  pd.p_no, img.i_thumb, p_name, p_price, p_code, p_type,
+			    p_cnt, p_info, to_char(p_date, 'YYYY-MM-DD') as p_date,
+				to_char(p_update, 'YYYY-MM-DD') as p_update, p_isdelete
+			from(
+			    select /*+ index_desc(product product_pk) */
+			        rownum as rnum, p_no, p_name, p_price, p_code, p_type,
+			    p_cnt, p_info, p_date, p_update, p_isdelete
+			    from product
+			    where rownum <= #{pageNum} * #{amount} 
+			) pd, image img 
+			where pd.p_no = img.p_no and i_thumb is not null
+				and rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+			<trim prefix=" and (" suffix=") " prefixOverrides="and">
+		    	<include refid="productType"></include>
+		    </trim>
+		    <trim prefix=" and (" suffix=") " prefixOverrides="and">
+		    	<include refid="productSearch"></include>
+		    </trim>
+	</select>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="productListCnt" parameterType="goods" resultType="int">
+		select count(*) from product
+		<trim prefix=" where (" suffix=")" >
+			<include refid="productType"></include>
+		</trim>
+	</select>
+	
+	<select id="productDetail" parameterType="goods" resultType="goods">
+		select p.p_no, p_name, p_price, p_type, p_code, p_cnt, p_info
+     	from product p 
+    	where<!--  p.p_no = img.p_no and --> p.p_no = #{p_no}
+   </select>
+
+</mapper>

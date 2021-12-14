@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.orderdetail.dao.OrderdetailDAO">
+	
+	<!-- 주문 상세 정보 인서트 --> 
+   <insert id="orderDetailInsert" parameterType="orderdetail">
+    insert into order_detail(d_no, p_no, o_no, d_cnt, d_price, d_delivery)
+       values(#{p_no}||msix_order_detail_seq.nextval||to_char(sysdate, 'YYMMDD'), #{p_no}, #{o_no}, #{d_cnt}, #{d_price}, #{d_delivery})
+   </insert> 
+   
+   <!-- 주문내역 리스트 조회해오기 -->
+   <!-- <select id="orderDetailList" resultType="orderdetail">
+   select d.d_no, d.p_no, d.o_no, d.d_cnt, d.d_price, d.d_delivery, p.p_name
+   from order_detail d inner join product
+   on d.p_no = p.p_no
+   </select> -->
+   <select id="orderDetailList" resultType="orderdetail">
+	   select d.d_no, d.p_no, d.o_no, o.o_date, d.d_cnt, d.d_price, d.d_delivery, p.p_name, d.d_refund
+	   from order_detail d
+	   inner join product p
+	   on d.p_no = p.p_no
+	   inner join orders o
+	   on o.o_no = d.o_no
+   </select>
+   
+</mapper>

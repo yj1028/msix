@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.msix.admin.product.vo.ProductVO;
+import com.msix.admin.product.vo.AProductVO;
 
 
 import lombok.Setter;
@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 public class ProductMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private ProductDAO productDAO;
+	private AProductDAO productDAO;
 	
 //	@Test
 //	public void testProductList() {
@@ -39,7 +39,7 @@ public class ProductMapperTests {
 	
 	@Test
 	public void testProductInsert() {
-		ProductVO pvo = new ProductVO();
+		AProductVO pvo = new AProductVO();
 		pvo.setP_no("1");
 		pvo.setP_name("가고일게코");
 		pvo.setP_code("10");

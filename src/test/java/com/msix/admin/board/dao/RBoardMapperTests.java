@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.msix.admin.board.vo.RBoardVO;
+import com.msix.admin.board.vo.ARBoardVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -18,18 +18,18 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class RBoardMapperTests {
 	@Setter(onMethod_ = @Autowired )
-	private RBoardDAO rboardDAO;
+	private ARBoardDAO rboardDAO;
 	
 	@Test
 	public void replyList(){
-		List<RBoardVO> list = rboardDAO.replyList(1);
-		for(RBoardVO out : list) {
+		List<ARBoardVO> list = rboardDAO.replyList(1);
+		for(ARBoardVO out : list) {
 			log.info(out);
 		}
 	}
 	
 	public void replyInsert() {
-		RBoardVO rvo = new RBoardVO();
+		ARBoardVO rvo = new ARBoardVO();
 		rvo.setQ_no(1);
 		rvo.setR_title("title");
 		rvo.setR_content("content");
@@ -38,7 +38,7 @@ public class RBoardMapperTests {
 	}
 	
 	public void replyupdate() {
-		RBoardVO rvo = new RBoardVO();
+		ARBoardVO rvo = new ARBoardVO();
 		rvo.setR_no(3);
 		rvo.setR_title("제목 수정");
 		rvo.setR_content("내용 수정");
