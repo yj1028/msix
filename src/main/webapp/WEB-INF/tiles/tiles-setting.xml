@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- tiles 설정파일 -->
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+  
+<tiles-definitions>
+	
+	<definition name="contents" template="/WEB-INF/views/template/admin/contents.jsp">
+		<put-attribute name="title" value="관리자 페이지" />
+		<put-attribute name="head" value="/WEB-INF/views/template/admin/head.jsp" />
+		<put-attribute name="contents" value="" />
+		<put-attribute name="side" value="/WEB-INF/views/template/admin/side.jsp" />
+	</definition>
+	
+	<!-- 메인페이지 -->
+	<definition name="amain/*" extends="contents"> 
+		<put-attribute name="title" value="기본페이지" />
+		<put-attribute name="contents" value="/WEB-INF/views/amain/{1}.jsp" />
+	</definition>
+	
+	<!-- 상품관리 -->
+	<definition name="aproduct/*" extends="contents"> 
+		<put-attribute name="title" value="상품관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/aproduct/{1}.jsp" />
+	</definition>
+	
+	<!-- 재고관리 -->
+	<definition name="stock/*" extends="contents"> 
+		<put-attribute name="title" value="재고관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/stock/{1}.jsp" />
+	</definition>
+	
+	<!-- 회원관리 -->
+	<definition name="amember/*" extends="contents"> 
+		<put-attribute name="title" value="회원관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/amember/{1}.jsp" />
+	</definition>
+	
+	<!-- 주문관리 -->
+	<definition name="aorders/*" extends="contents"> 
+		<put-attribute name="title" value="주문관리" />
+		<put-attribute name="contents" value="/WEB-INF/views/aorders/{1}.jsp" />
+	</definition>
+	
+	<!-- 환불관리 -->
+	<definition name="refund/*" extends="content"> 
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/WEB-INF/views/refund/{1}.jsp" />
+	</definition>
+	
+	<!-- 질의 게시판 -->
+	<definition name="board/*" extends="contents"> 
+		<put-attribute name="title" value="질의게시판" />
+		<put-attribute name="contents" value="/WEB-INF/views/board/{1}.jsp" />
+	</definition>
+	
+	<!-- 리뷰 게시판 -->
+	<definition name="review/*" extends="contents"> 
+		<put-attribute name="title" value="리뷰게시판" />
+		<put-attribute name="contents" value="/WEB-INF/views/review/{1}.jsp" />
+	</definition>
+	
+	<!-- 공지 게시판 -->
+	<definition name="notice/*" extends="contents"> 
+		<put-attribute name="title" value="공지게시판" />
+		<put-attribute name="contents" value="/WEB-INF/views/notice/{1}.jsp" />
+	</definition>
+	
+	<!-- 사용자 -->
+	
+	<definition name="content" template="/WEB-INF/views/template/client/ContentLayout.jsp">
+		<put-attribute name="title"  value="msixpet" /> 
+		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/template/client/left.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
+	</definition>
+	
+	<definition name="cart/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/cart/{1}.jsp" />
+	</definition>
+	
+	<definition name="login/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/login/{1}.jsp" />
+	</definition> 
+	
+	<definition name="member/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+	</definition>
+	
+	<definition name="main/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp" />
+	</definition>
+	
+	<definition name="address/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/address/{1}.jsp" />
+	</definition> 
+	
+	<definition name="nboard/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/nboard/{1}.jsp" />
+	</definition> 
+	
+	<definition name="qboard/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/qboard/{1}.jsp" />
+	</definition> 
+	
+	<definition name="rvboard/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/rvboard/{1}.jsp" />
+	</definition> 
+	
+	<definition name="orders/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/orders/{1}.jsp" />
+	</definition> 
+	
+	<definition name="product/*" extends="content">
+		<put-attribute name="title"  value="" /> 
+		<put-attribute name="body" value="/WEB-INF/views/product/{1}.jsp" />
+	</definition>
+</tiles-definitions>

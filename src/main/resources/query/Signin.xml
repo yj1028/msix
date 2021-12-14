@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.admin.signin.dao.SigninDAO">
+	
+	<!-- 관리자 페이지 로그인 -->
+	<select id="signin" parameterType="signin" resultType="int">
+		select count(m_id) from member where m_id = #{m_id} and m_pwd = #{m_pwd}
+	</select>
+</mapper>

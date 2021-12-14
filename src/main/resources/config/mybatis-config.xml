@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.msix.admin.product.vo.AProductVO" alias="product"/>
+		<typeAlias type="com.msix.admin.member.vo.AMemberVO" alias="amember" />
+		<typeAlias type="com.msix.admin.orders.vo.AOrdersVO" alias="aorders" />
+		<typeAlias type="com.msix.admin.orders.vo.AOrderDetailVO" alias="aorderDetail" />
+		<typeAlias type="com.msix.admin.refund.vo.ARefundVO" alias="refund" />
+	<!-- 	<typeAlias type="com.msixpet.client.cart.vo.CartVO" alias="cart" />  -->
+		<typeAlias type="com.msix.admin.image.vo.AImageVO" alias="image" />
+		<typeAlias type="com.msix.admin.board.vo.AQBoardVO" alias="qna"/>
+		<typeAlias type="com.msix.admin.board.vo.ARBoardVO" alias="qnaReply"/>
+		<typeAlias type="com.msix.admin.review.vo.AReviewVO" alias="review"/>
+		<typeAlias type="com.msix.admin.review.vo.ARepReviewVO" alias="revReply"/>
+		<typeAlias type="com.msix.admin.notice.vo.ANoticeVO" alias="notice"/>
+		<typeAlias type="com.msix.admin.signin.vo.SigninVO" alias="signin" />
+		
+		<!-- 사용자 -->
+		<typeAlias type="com.msix.client.product.vo.ProductVO" alias="goods"/>
+		<typeAlias type="com.msix.client.member.vo.MemberVO" alias="member"/>
+		<typeAlias type="com.msix.client.address.vo.AddressVO" alias="address"/>
+		<typeAlias type="com.msix.client.nbaord.vo.NboardVO" alias="nboard"/>
+	    <typeAlias type="com.msix.client.qboard.vo.QboardVO" alias="qboard"/>
+	    <typeAlias type="com.msix.client.rvboard.vo.RvboardVO" alias="rvboard"/>
+	  	<typeAlias type="com.msix.client.rboard.vo.RboardVO" alias="rboard"/>
+	  	<typeAlias type="com.msix.client.ccmnt.vo.CcmntVO" alias="ccmnt"/>
+	  	<typeAlias type="com.msix.client.cart.vo.CartVO" alias="cart"/>
+	  	<typeAlias type="com.msix.client.product.vo.CImageVO" alias="clientImage"/>
+	  	<typeAlias type="com.msix.client.orders.vo.OrdersVO" alias="orders"/>
+	  	<typeAlias type="com.msix.client.orderdetail.vo.OrderdetailVO" alias="orderDetail"/>
+	</typeAliases>
+</configuration>
+

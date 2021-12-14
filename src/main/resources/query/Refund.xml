@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.msix.admin.refund.dao.ARefundDAO">
+
+	<sql id = "refundSearch">
+		<if test="search == 'p_no'">
+			<![CDATA[ p_no like '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'm_no'">
+			<![CDATA[ m_no like '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'rf_date'">
+			<![CDATA[ rf_date like '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'rf_isrefund'">
+			<![CDATA[ rf_isrefund like '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
+	<select id="refundList" parameterType="refund" resultType="refund">
+		<![CDATA[
+			select
+			    rnum, rf_no, p_no, m_no, d_no, rf_title, to_char(rf_date, 'YYYY/MM/DD') as rf_date, rf_total, rf_isrefund
+			from(
+			    select 
+			        rownum as rnum, rf_no, p_no, m_no, d_no, rf_title, rf_date, rf_total, rf_isrefund
+					from (
+						select rownum as rnum, rf_no, d.p_no, o.m_no, rf.d_no, rf_title, rf_date, rf_total, rf_isrefund
+					from refund rf 
+					inner join order_detail d on rf.d_no = d.d_no
+					inner join orders o on d.o_no = o.o_no
+					order by rf_no desc )
+			    where]]>
+			    <trim prefix="(" suffix=") and " prefixOverrides="and">
+			    	<include refid="refundSearch"></include>
+			    </trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount}
+			) refundlist 
+			where rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="refundListCnt" parameterType="refund" resultType="int">
+		select count(*) from refund rf
+		inner join order_detail d on rf.d_no = d.d_no
+		inner join orders o on d.o_no = o.o_no  
+		<trim prefix=" where (" suffix=")" >
+			<include refid="refundSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 환불 상세페이지 조회 -->
+	<select id="refundDetail" parameterType="refund" resultType="refund">
+		select rf_no, d.d_no, d.p_no, o.m_no, rf_title, rf_reason, rf_image, rf_date, rf_total, d.d_refund, rf_isrefund
+		from refund rf
+		inner join order_detail d on rf.d_no = d.d_no
+		inner join orders o on d.o_no = o.o_no
+		where rf_no = #{rf_no}
+	</select>
+	
+	<!-- 환불 처리 -->
+	<update id="refundUpdate" parameterType="refund">
+		update order_detail
+		set d_refund = '환불불가'
+		where d_no = #{d_no}
+	</update>
+	
+	<!-- 환불 처리 여부 처리 -->
+	<update id="refundUpdateCheck" parameterType="refund">
+		update refund
+		set rf_isrefund = '처리완료'
+		where d_no = #{d_no}
+	</update>
+	
+	<!-- 환불 취소 처리 -->
+	<delete id="refundDelete" parameterType="refund">
+		delete from refund
+		where rf_no = #{rf_no}
+	</delete>
+	
+	<!-- 환불 신청 처리 -->
+	<insert id="refundInsert" parameterType="refund">
+		insert into refund(rf_no, d_no, rf_title, rf_reason, rf_image, rf_total)
+		values(msix_refund_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
+	</insert>
+
+</mapper>

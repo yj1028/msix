@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.member.dao.MemberDAO">
+	
+	<!-- 해당 아이디 중복 확인 -->
+	<select id="idCheck" parameterType="member" resultType="int">
+		select nvl((select 1 from member where m_id = #{m_id}), 0) as state from dual
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="memberInsert" parameterType="member">
+		INSERT INTO member(m_no, m_id, m_pwd, m_name, m_tel, m_email)
+		VALUES (msix_member_seq.nextval,#{m_id},#{m_pwd},#{m_name},#{m_tel},#{m_email})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="member" resultType="member">
+		SELECT m_no, m_id, m_name, m_pwd, m_email, m_tel, m_isdelete FROM member WHERE m_id = #{m_id} AND m_pwd = #{m_pwd} AND m_isdelete = 'N'
+	</select>
+	
+	<!-- 아이디 찾기  -->
+	<select id="selectId" parameterType="member" resultType="member">
+		SELECT m_id FROM member WHERE  m_name= #{m_name} AND m_email = #{m_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectPwd" parameterType="member" resultType="int">
+		SELECT NVL((select 1 from member where m_id = #{m_id} AND m_name = #{m_name} AND m_email = #{m_email}), 0)
+		as state from dual
+	</select>
+
+	<!-- 비밀번호 수정 -->
+	<update id="rePasswd" parameterType="member" >
+		UPDATE member SET m_pwd = #{m_pwd} WHERE m_id = #{m_id}
+	</update>
+	
+	<!-- 회원정보 수정 -->
+	<update id="memberUpdate" parameterType="member">
+		UPDATE member SET m_tel = #{m_tel}, m_email = #{m_email} WHERE m_no = #{m_no}
+	</update>
+	
+	<!-- 회원정보에서 비밀번호 수정 -->
+	<update id="memberUpPasswd" parameterType="member">
+		UPDATE member SET m_pwd = #{m_pwd} WHERE m_no = #{m_no}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<update id="memberDelete" parameterType="member">
+		UPDATE member SET m_isdelete = 'Y' WHERE m_no = #{m_no}
+	</update>
+</mapper>

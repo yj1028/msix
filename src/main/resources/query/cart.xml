@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.cart.dao.CartDAO">
+
+	<select id="cartList" resultType="cart" parameterType="cart">
+		select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay,  p.p_no
+		from cart c inner join product p on c.p_no = p.p_no
+			        inner join member m on c.m_no = m.m_no
+		where c.m_no = #{m_no}
+	</select>
+	
+	<!-- <sql id="joinselect">
+		select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay  
+			from cart c
+			inner join product p
+			on c.p_no = p.p_no
+			where p.p_no = #{p_no}
+	</sql>  -->
+	
+	
+	<insert id="addCart" parameterType="cart">
+		insert into cart(cart_no, m_no, p_no, cart_price, cart_cnt, cart_delivery, cart_pay)
+		values(msix_cart_seq.nextval, #{m_no}, #{p_no}, #{cart_price}, #{cart_cnt}, #{cart_delivery}, #{cart_pay})
+	</insert>
+	
+	
+	<delete id="deleteCart" parameterType="cart">
+		delete cart where cart_no = #{cart_no}
+	</delete>
+	
+	<!-- 수량 수정하기(상품 변경 X, 수량만 변경함.) -->
+	<update id="updateCart" parameterType="cart">
+		update cart
+			set cart_cnt=#{cart_cnt} , cart_date = sysdate, cart_price=#{cart_price}
+		where cart_no=#{cart_no}
+	</update>
+	
+	<update id="updateCartcnt" parameterType="cart">
+		update cart
+			set cart_cnt=cart_cnt+#{cart_cnt} , cart_date = sysdate, cart_price=cart_price + #{cart_price}
+		where cart_no=#{cart_no}
+	</update>
+		
+</mapper>
