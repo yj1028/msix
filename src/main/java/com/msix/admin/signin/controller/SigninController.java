@@ -34,10 +34,10 @@ public class SigninController {
 		
 		if(result == 1) {
 			session.setAttribute("adminLogin", svo);
-			url = "/admin/mainPage";
+			url = "amain/mainPage";
 		}else {
 			model.addAttribute("errorMsg", "아이디 혹은 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.");
-			url = "/admin/msixAdmin";
+			url = "msixAdmin";
 		}
 		
 		return "redirect:"+url;
@@ -50,6 +50,6 @@ public class SigninController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		return "redirect:/admin/msixAdmin";
+		return "msixAdmin";
 	}
 }
