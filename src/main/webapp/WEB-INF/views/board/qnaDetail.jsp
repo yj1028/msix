@@ -18,10 +18,9 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
-		
+
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		
 		<style>
 			textarea{resize: none; }
 			#replyBtn{margin-top: 15px;}

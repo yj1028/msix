@@ -117,7 +117,7 @@
 			
 				$("#f_search").attr({
 					"method":"get",
-					"action":"/goods/p"
+					"action":"/goods/clientProductList"
 				});
 				$("#f_search").submit();
 			}

@@ -18,11 +18,12 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
+		
+		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<style type="text/css">
 			.required{ color: blue; }
 		</style>
-		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
-		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script>
 			$(function(){
 				/* 검색 후 검색 대상과 검색 단어 출력 */
