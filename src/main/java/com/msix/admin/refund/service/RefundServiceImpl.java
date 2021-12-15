@@ -18,6 +18,7 @@ public class RefundServiceImpl implements RefundService {
 	private ARefundDAO refundDAO;
 	
 	public List<ARefundVO> refundList(ARefundVO rvo){
+		rvo.setAmount(10);
 		List<ARefundVO> list = refundDAO.refundList(rvo);
 		return list;
 	}

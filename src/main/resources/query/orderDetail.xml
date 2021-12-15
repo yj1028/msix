@@ -27,6 +27,7 @@
 	   on d.p_no = p.p_no
 	   inner join orders o
 	   on o.o_no = d.o_no
+	   where o.m_no = #{m_no}
    </select>
    
 </mapper>

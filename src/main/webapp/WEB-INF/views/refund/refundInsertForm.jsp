@@ -47,7 +47,7 @@
 			<form id="rf_writeForm">
 				<input type="hidden" name="d_no" id="d_no" value="${detail.d_no}"/>
 				<input type="hidden" name="rf_total" id="rf_total" value="${detail.d_price}"/>
-				<h3>게시판 입력화면</h3>
+				<h3>환불 신청</h3>
 					<div>
 						<label>환불 글 제목</label>
 						<div>

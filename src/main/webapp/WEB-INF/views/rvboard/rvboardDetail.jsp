@@ -65,7 +65,7 @@
 				<!--  <input type="hidden" name="rv_image" value="${detail.rv_image}"/>	-->		
 			</form>
 				<div class="text-right">
-					<c:if test="${not empty login}">
+					<c:if test="${login.m_no == detail.m_no }">
 						<button type="button" class="btn btn-primary" id="updateFormBtn" name="updateFormBtn">수정</button>
 						<button type="button" class="btn btn-primary" id="boardDeleteBtn" name="boardDeleteBtn">삭제</button>
 					</c:if>

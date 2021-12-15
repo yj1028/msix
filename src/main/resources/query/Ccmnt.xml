@@ -14,7 +14,7 @@
 	 <!-- 댓글입력하기 --> 
 	<insert id="ccmntInsert" parameterType="ccmnt">
 		<selectKey keyProperty="c_no" resultType="int" order="BEFORE">
-			select c_cmnt_seq.nextval from dual
+			select msix_c_cmnt_seq.nextval from dual
 		</selectKey>
 			insert into c_cmnt(c_no,rv_no,c_comment)
 			values(#{c_no},#{rv_no},#{c_comment})

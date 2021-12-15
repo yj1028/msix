@@ -23,9 +23,12 @@
 			    REGEXP_REPLACE(o_recipient, '.', '*', 2, 1) AS o_recipient,
 			    REGEXP_REPLACE(o_rectel, '(\\d{3})\\-(\\d{3,4})\\-(\\d{4})', '\\1-****-\\3') AS o_rectel
 			from(
-			    select /*+ index_desc(orders orders_pk) */
+			    select
 			        rownum as rnum, o_no, m_no, o_date, o_pcode, o_addr, o_daddr, o_recipient, o_rectel
-			    from orders
+			    from (
+			    	select rownum as rnum, to_number(o_no) as o_no, m_no, o_date, o_pcode, o_addr, o_daddr, o_recipient, o_rectel
+			    	from orders
+			    	order by o_no desc )
 			    where]]>
 			    <trim prefix="(" suffix=") and " prefixOverrides="and">
 			    	<include refid="ordersSearch"></include>
