@@ -262,7 +262,7 @@
 				    				<strong>메인이미지</strong>
 			   					</c:if>
 			    				<c:if test="${status.index!=0}">
-				    				<strong>상품이미지</strong>
+				    				<strong>상세이미지</strong>
 			   					</c:if>
 			   					<input type="file" name="file" class="file" />
 			    			</td>

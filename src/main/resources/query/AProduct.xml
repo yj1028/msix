@@ -33,12 +33,12 @@
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
 		select p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
-		to_char(p_update, 'YYYY-MM-DD') AS p_update, i_thumb
+		to_char(p_date, 'YYYY-MM-DD') AS p_date, i_thumb
 		from ( 
-        	select rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update, i_thumb
+        	select rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_date, i_thumb
         	from       
             ( select 
-                   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_update, i.i_thumb
+                   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_date, i.i_thumb
               from product p inner join image i
               on p.p_no = i.p_no
               where ]]> 
@@ -47,7 +47,7 @@
 			  </trim>          
 			  <![CDATA[
 			   p_isdelete = 'N' and i.i_thumb is not null 
-              order by p_update desc)
+              order by p_date desc)
 	      where rownum <= #{pageNum}*#{amount})
 	    WHERE rnum > (#{pageNum}-1)*#{amount}]]>
 	</select> 
@@ -117,31 +117,15 @@
 	</update>
 	
 	<!-- 재고 리스트 조회 -->
-	<!-- <select id="stockList" parameterType="product" resultType="product">
-		<![CDATA[
-		select p_no, p_type, p_name, to_char(p_price, 'L999,999,999') AS p_price, p_cnt, 
-		to_char(p_update, 'YYYY-MM-DD') AS p_update
-		from ( select /*+ INDEX_DESC(product product_p_no_pk) */
-       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
-			   from product
-			   where ]]>
-				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
-					<include refid="productSearch" />
-				</trim>
-		<![CDATA[
-				rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
-			)stockList
-		WHERE rnum > (#{pageNum}-1)*#{amount} ]]>
-	</select> -->
 	<select id="stockList" parameterType="product" resultType="product">
 		<![CDATA[
 		select p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
-		to_char(p_update, 'YYYY-MM-DD') AS p_update, i_thumb
+		to_char(p_date, 'YYYY-MM-DD') AS p_date, i_thumb
 		from ( 
-        	select rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update, i_thumb
+        	select rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_date, i_thumb
         	from       
             ( select 
-                   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_update, i.i_thumb
+                   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_date, i.i_thumb
               from product p inner join image i
               on p.p_no = i.p_no
               where ]]> 
@@ -150,7 +134,7 @@
 			  </trim>          
 			  <![CDATA[
 			   p_isdelete = 'N' and i.i_thumb is not null 
-              order by p_update desc)
+              order by p_date desc)
 	      where rownum <= #{pageNum}*#{amount})
 	    WHERE rnum > (#{pageNum}-1)*#{amount}]]>
 	</select> 
