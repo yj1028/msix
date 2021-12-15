@@ -124,7 +124,6 @@
 								<th class="text-center">회원번호</th>
 								<th class="text-center">대분류</th>
 								<th class="text-center">질의글 제목</th>
-								<th class="text-center">질의글 내용</th>
 								<th class="text-center">작성일</th>
 								<th class="text-center">조회수</th>
 							</tr>
@@ -138,8 +137,7 @@
 											<td class="text-center">${count - status.index}</td>
 											<td class="text-center">${board.m_no }</td>
 											<td class="tag text-center">${board.q_tag }</td>
-											<td class="goDetail text-center">${board.q_title }</td>
-											<td class="text-center">${board.q_content }</td>
+											<td class="goDetail text-left">${board.q_title }</td>
 											<td class="text-center">${board.q_date }</td>
 											<td class="text-center">${board.q_cnt }</td>
 										</tr>

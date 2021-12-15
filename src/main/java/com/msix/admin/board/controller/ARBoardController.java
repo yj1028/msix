@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +35,7 @@ public class ARBoardController {
 		return list;
 	}
 	//답글 입력
-	@PostMapping(value = "/replyInsert", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
+	@RequestMapping(value = "/replyInsert", method= {RequestMethod.POST}, consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public String replyInsert(@RequestBody ARBoardVO rvo) {
 		int result =0;
 		result = rboardService.replyInsert(rvo);

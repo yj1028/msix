@@ -137,7 +137,7 @@
 										<td class="text-center">${count - status.index}</td>
 										<td class="text-center">${review.m_no }</td>
 										<td class="tag text-center">${review.rv_tag }</td>
-										<td class="goDetail text-center">${review.rv_title }</td>
+										<td class="goDetail text-left">${review.rv_title }</td>
 										<td class="text-center">${review.rv_date }</td>
 										<td class="text-center">${review.rv_cnt}</td>
 									</tr>

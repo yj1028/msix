@@ -243,13 +243,13 @@
 				// 제목 삽입
 				let input_title = $("<input>");
 				input_title.attr({"type" : "text", "name" : "title", "id" : "title", "maxlength" : "49"});
-				input_title.addClass("form-control");
+				input_title.addClass("form-control text-left");
 				input_title.val(titleText);
 				
 				// <textarea>태그에 내용 삽입 
 				let textarea = $("<textarea>");
 				textarea.attr({"name" : "content", "id" : "content", "rows": "10" , "maxlength" : "50"});
-				textarea.addClass("form-control");
+				textarea.addClass("form-control text-left");
 				textarea.html(conText);
 					
 				let update_btn = $("<input>");
@@ -313,11 +313,11 @@
 						</tr>
 						<tr>
 							<td>글제목</td>
-							<td colspan="3">${detail.q_title}</td>
+							<td colspan="3" class="text-left">${detail.q_title}</td>
 						</tr>
 						<tr class="table-height">
 							<td>글내용</td>
-							<td colspan="3">${detail.q_content}</td>
+							<td colspan="3" class="text-left">${detail.q_content}</td>
 						</tr>
 					</table>
 				</div>

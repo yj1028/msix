@@ -146,7 +146,7 @@
 			</form>
 			<div class="d-grid gap-3">
 				<div class="p-2 bg-light border">
-					<table summary="리뷰게시판 상세페이지" class="table table-bordered">
+					<table summary="리뷰게시판 상세페이지" class="table table-bordered text-left">
 						<tr>
 							<td>글번호</td>
 							<td colspan="3">${detail.rv_no}</td>
