@@ -54,31 +54,7 @@
 						});
 						$("#form-signin").submit();
 					}
-				}); 
-				
-				/* 로그인 버튼 클릭 시 처리 이벤트(임시) 
-				$("#signinBtn").click(function(){
-					// 입력값 체크
-					if(!chkData("#m_id", "ID를")) return;
-					else if($("#m_id").val() != "admin"){
-						alert("등록되지 않은 ID 입니다. ID를 다시 입력해 주세요.")
-						$("#m_id").val("");
-						$("#m_id").focus();
-						return;
-					}
-					else if(!chkData("#m_pwd", "비밀번호를")) return;
-					else if($("#m_pwd").val() != "admin1234"){
-						alert("비밀번호가 틀렸습니다. 비밀번호를 다시 입력해 주세요.")
-						$("#m_pwd").val("");
-						$("#m_pwd").focus();
-						return;
-					}
-					else{
-						if($("#m_id").val() == "admin" && $("#m_pwd").val() == "admin1234"){
-							location.href = "/admin/mainPage"
-						}
-					} 
-				}); */
+				});
 			}); // 최상위$ 종료
 		</script>
 	</head>

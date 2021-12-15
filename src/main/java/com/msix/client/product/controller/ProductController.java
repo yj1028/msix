@@ -40,6 +40,7 @@ public class ProductController {
 		// 페이징 처리
 		int total = productService.productListCnt(pvo);
 		model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		
 		// 출력되는 사진개수 제어
 		int count = total - (pvo.getPageNum()-1) * pvo.getAmount();
 		model.addAttribute("count", count);

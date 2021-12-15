@@ -16,7 +16,7 @@
 			, i_thumb
 		</if>
 		) 
-		values(image_seq.nextval, #{p_no}, #{i_name}
+		values(msix_image_seq.nextval, #{p_no}, #{i_name}
 		<if test="i_thumb != ''">
 			, #{i_thumb}
 		</if>

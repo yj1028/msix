@@ -40,7 +40,7 @@ public class SigninController {
 			url = "msixAdmin";
 		}
 		
-		return "redirect:"+url;
+		return url;
 	}
 	
 	@GetMapping(value = "/signout")
