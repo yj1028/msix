@@ -32,21 +32,24 @@
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리 + 이미지조회) -->
 	<select id="productList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
-		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
-		from ( select 
-       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
-			   from product
-			   where ]]>
-				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
-					<include refid="productSearch" />
-				</trim>
-		<![CDATA[
-			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N' 
-			   order by p_date desc
-			)p, image i
-		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
-		]]>
+		select p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update, i_thumb
+		from ( 
+        	select rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update, i_thumb
+        	from       
+            ( select 
+                   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_update, i.i_thumb
+              from product p inner join image i
+              on p.p_no = i.p_no
+              where ]]> 
+              <trim prefix="(" suffix=") AND" prefixOverrides="AND">
+				   		<include refid="productSearch" />
+			  </trim>          
+			  <![CDATA[
+			   p_isdelete = 'N' and i.i_thumb is not null 
+              order by p_update desc)
+	      where rownum <= #{pageNum}*#{amount})
+	    WHERE rnum > (#{pageNum}-1)*#{amount}]]>
 	</select> 
 	
 	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) 
@@ -77,7 +80,7 @@
 	
 	<!-- 상품 번호 추출  -->
 	<select id="productNumber" resultType="String">
-		select PRODUCT_SEQ.nextval from dual
+		select MSIX_PRODUCT_SEQ.nextval from dual
 	</select>
 	
 	<!-- 상품 등록 --> 
@@ -97,14 +100,14 @@
 	
 	<!-- 상품 수정폼을 위한 조회 -->
 	<select id="productUpdateForm" parameterType="product" resultType="product">
-		select p_no, p_name, p_type, p_price, p_cnt, p_info
+		select p_no, p_name, p_type, to_char(p_price, '999,999,999')as p_price, p_cnt, p_info
 		from product
 		where p_no = #{p_no}
 	</select>
 		
 	<!-- 상품 수정 -->
 	<update id="productUpdate" parameterType="product">
-		update product set p_name = #{p_name}, p_type = #{p_type}, p_price = #{p_price}, p_info = #{p_info}, p_update = sysdate
+		update product set p_name = #{p_name}, p_type = #{p_type}, p_info = #{p_info}, p_update = sysdate
 		where p_no = #{p_no}
 	</update>
 	
@@ -132,21 +135,24 @@
 	</select> -->
 	<select id="stockList" parameterType="product" resultType="product">
 		<![CDATA[
-		select p.p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
-		to_char(p_update, 'YYYY-MM-DD') AS p_update, i.i_thumb
-		from ( select 
-       		   rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update
-			   from product
-			   where ]]>
-				<trim prefix="(" suffix=") AND" prefixOverrides="AND">
-					<include refid="productSearch" />
-				</trim>
-		<![CDATA[
-			   rownum <= #{pageNum}*#{amount} and p_isdelete = 'N'
-			   order by p_date desc
-			)p, image i
-		WHERE p.p_no = i.p_no and i.i_thumb is not null and rnum > (#{pageNum}-1)*#{amount}
-		]]>
+		select p_no, p_type, p_name, to_char(p_price, '999,999,999') AS p_price, p_cnt, 
+		to_char(p_update, 'YYYY-MM-DD') AS p_update, i_thumb
+		from ( 
+        	select rownum AS rnum, p_no, p_type, p_name, p_price, p_cnt, p_update, i_thumb
+        	from       
+            ( select 
+                   rownum AS rnum, p.p_no, p_type, p_name, p_price, p_cnt, p_update, i.i_thumb
+              from product p inner join image i
+              on p.p_no = i.p_no
+              where ]]> 
+              <trim prefix="(" suffix=") AND" prefixOverrides="AND">
+				   		<include refid="productSearch" />
+			  </trim>          
+			  <![CDATA[
+			   p_isdelete = 'N' and i.i_thumb is not null 
+              order by p_update desc)
+	      where rownum <= #{pageNum}*#{amount})
+	    WHERE rnum > (#{pageNum}-1)*#{amount}]]>
 	</select> 
 	
 	<!-- 재고 수정 -->
