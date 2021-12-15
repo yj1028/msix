@@ -21,10 +21,14 @@
 	<script type="text/javascript">
 
 		$(function(){
-			$("#refundBtn").click(function(){
+			$(".refundBtn").click(function(){
 				let d_no = $(this).parents("tr").attr("data-num");
 				$("#d_no").val(d_no);
-				if($(this).parents("tr").attr("data-refund") == '환불가능'){
+				let d_price = $(this).parents("tr").attr("data-price");
+				$("#d_price").val(d_price);
+				console.log(d_no);
+				console.log(d_price);
+				if($(this).parents("tr").attr("data-refund") == "환불가능"){
 					$("#refundForm").attr({
 						method : "post",
 						action : "/refund/refundInsertForm"
@@ -41,7 +45,8 @@
 	</head>
 	<body>
 		<form id="refundForm">
-		<input type="hidden" name="d_no" id="d_no" value="${orderdetail.d_no}"/>
+		<input type="hidden" name="d_no" id="d_no"/>
+		<input type="hidden" name="d_price" id="d_price"/>
 		<span>${login.m_id}님의 주문내역</span>
 		<table class="table table-striped">
 			<tr>
@@ -60,7 +65,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${orderDetailList}" var="orderdetail">
-						<tr class="orderDetailList" data-num="${orderdetail.d_no}" data-refund="${orderdetail.d_refund}">
+						<tr class="orderDetailList" data-num="${orderdetail.d_no}" data-refund="${orderdetail.d_refund}" data-price="${orderdetail.d_price}">
 							<td>${orderdetail.d_no}</td>
 							<td>${orderdetail.p_name}</td>
 							<td>${orderdetail.o_date}</td>
@@ -68,7 +73,7 @@
 							<td>${orderdetail.d_price}</td>
 							<td>${orderdetail.d_delivery}</td>
 							<td>${orderdetail.d_refund}</td>
-							<td><button class="btn btn-default disable" id="refundBtn">환불신청</button></td>
+							<td><button type="button" class="refundBtn btn btn-default disable">환불신청</button></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

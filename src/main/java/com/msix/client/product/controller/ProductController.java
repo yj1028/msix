@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.msix.client.common.vo.PageDTO;
+import com.msix.common.vo.PageDTO;
 import com.msix.client.product.service.ImageService;
 import com.msix.client.product.service.ProductService;
 import com.msix.client.product.vo.CImageVO;

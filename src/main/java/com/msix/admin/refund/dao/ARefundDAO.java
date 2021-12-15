@@ -13,4 +13,5 @@ public interface ARefundDAO {
 	public int refundInsert(ARefundVO rvo);
 	public int refundUpdateCheck(ARefundVO rvo);
 	public int refundCheck(ARefundVO rvo);
+	public int refundAttrCheck(ARefundVO rvo);
 }

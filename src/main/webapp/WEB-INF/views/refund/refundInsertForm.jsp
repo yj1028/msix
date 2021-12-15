@@ -44,30 +44,31 @@
 	<body>
 		
 		<div>
-		<form id="rf_writeForm">
-			<input type="hidden" name="d_no" id="d_no" value="${detail.d_no}"/>
-			<h3>게시판 입력화면</h3>
-				<div>
-					<label>환불 글 제목</label>
+			<form id="rf_writeForm">
+				<input type="hidden" name="d_no" id="d_no" value="${detail.d_no}"/>
+				<input type="hidden" name="rf_total" id="rf_total" value="${detail.d_price}"/>
+				<h3>게시판 입력화면</h3>
 					<div>
-					<input type="text" class="form-control" name="rf_title" id="rf_title" placeholder="환불 글 제목을 입력해주세요." maxlength="150"/>
+						<label>환불 글 제목</label>
+						<div>
+						<input type="text" class="form-control" name="rf_title" id="rf_title" placeholder="환불 글 제목을 입력해주세요." maxlength="150"/>
+						</div>
 					</div>
-				</div>
-				<div>
-					<label>환불 사유</label>
 					<div>
-					<textarea class="form-control" name="rf_reason" id="rf_reason" placeholder="환불 사유를 입력해주세요." maxlength="5000" rows="8"></textarea>
+						<label>환불 사유</label>
+						<div>
+						<textarea class="form-control" name="rf_reason" id="rf_reason" placeholder="환불 사유를 입력해주세요." maxlength="5000" rows="8"></textarea>
+						</div>
 					</div>
-				</div>
-				<div>
-					<label>환불 이미지 파일첨부</label>
-					<div><input type="file" name="file" id="file" /></div>
-				</div>
-				<div>
-					<div><input type="button" value="저장" id="refundInsertBtn"/></div>
-					<div><input type="button" value="목록" id="returnBtn"/></div>
-				</div>
-		</form>
+					<div>
+						<label>환불 이미지 파일첨부</label>
+						<div><input type="file" name="file" id="file" /></div>
+					</div>
+					<div>
+						<div><input type="button" value="저장" id="refundInsertBtn"/></div>
+						<div><input type="button" value="목록" id="returnBtn"/></div>
+					</div>
+			</form>
 		</div>
 		
 	</body>

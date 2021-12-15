@@ -54,6 +54,7 @@ public class RefundServiceImpl implements RefundService {
 		}
 		
 		refundDAO.refundCheck(rvo);
+		refundDAO.refundAttrCheck(rvo);
 		
 		result = refundDAO.refundInsert(rvo);
 		return result;

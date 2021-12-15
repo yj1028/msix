@@ -93,5 +93,12 @@
 		set rf_isrefund = '환불처리중'
 		where d_no = #{d_no}
 	</update>
+	
+	<!-- 환불 처리중 처리2 -->
+	<update id="refundAttrCheck" parameterType="aorderDetail">
+		update order_detail
+		set d_refund = '환불처리중'
+		where d_no = #{d_no}
+	</update>
 
 </mapper>
