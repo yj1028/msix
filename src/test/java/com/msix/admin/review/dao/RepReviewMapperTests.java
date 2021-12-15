@@ -7,8 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.msix.admin.review.vo.RepReviewVO;
+import com.msix.admin.review.vo.ARepReviewVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -18,16 +17,15 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class RepReviewMapperTests {
 	@Setter(onMethod_ = @Autowired )
-	private RepReviewDAO repReviewDAO;
+	private ARepReviewDAO repReviewDAO;
 	
 	@Test
 	public void replyList() {
-		List<RepReviewVO> list = repReviewDAO.replyList(4);
-		for(RepReviewVO out : list) {
+		List<ARepReviewVO> list = repReviewDAO.replyList(4);
+		for(ARepReviewVO out : list) {
 			log.info(out);
 		}
 	}
-	
 	
 	public void replyEachDelete() {
 		int count = repReviewDAO.replyEachDelete(2);

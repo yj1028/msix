@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msix.client.rvboard.dao.RvboardDAO">
+	<!--게시물 조회0 
+	<select id="rvboardList" parameterType="rvboard" resultType="rvboard">
+		SELECT rv_no,m_no ,rv_tag, rv_title, to_char(rv_date,'YYYY-MM-DD') as rv_date, rv_cnt
+		FROM rv_board
+	</select>--> 
+	<!--게시물 조회 검색 페이징 처리 --> 
+	<sql id="rvboardSearch">
+			<if test="search=='rv_title'">
+				<![CDATA[ rv_title LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+			<if test="search=='rv_content'">
+				<![CDATA[ rv_content LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+			<if test="search=='m_name'">
+				<![CDATA[ m_name LIKE '%'|| #{keyword} ||'%' ]]>
+			</if>
+	</sql>
+	<select id="rvboardList" parameterType="rvboard" resultType="rvboard">
+		<![CDATA[
+		SELECT rv_no, m_no ,rv_tag, rv_title, to_char(rv_date,'YYYY-MM-DD') as rv_date,rv_cnt,m_name,
+		(select count(c_no) from c_cmnt where rv_no = rvboardlist.rv_no) as c_cnt
+		FROM (
+			SELECT /*+ INDEX_DESC(rv_board rv_board_pk) */
+					rownum as rnum, r.rv_no, m.m_no ,r.rv_tag ,r.rv_title, rv_date,r.rv_cnt,m.m_name
+					
+			FROM rv_board r inner join member m on r.m_no=m.m_no
+			WHERE]]>
+			<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				<include refid="rvboardSearch"></include>
+			</trim>
+	<![CDATA[	rownum <= #{pageNum} * #{amount}
+			) rvboardlist
+		WHERE rnum > (#{pageNum}-1) * #{amount}
+	]]>
+	</select>
+	
+	<!--전체 레코드 수 조회  -->
+		<select id="rvboardListCnt" parameterType="rvboard" resultType="int">
+			select count(*) From rv_board
+			<trim prefix="where"></trim>
+		</select>
+		
+	<!--상세페이지  -->
+	<select id="rvboardDetail" parameterType="rvboard" resultType="rvboard">
+		 select r.rv_no, m.m_no ,r.rv_tag ,r.rv_title, TO_CHAR(rv_date,'YYYY-MM-DD HH24:MI:SS') as rv_date
+		 ,r.rv_cnt,m.m_name,rv_content,rv_image
+        FROM rv_board r inner join member m on r.m_no=m.m_no
+		WHERE rv_no = #{rv_no}
+	</select>
+	
+	
+	<!-- 입력하기 -->
+	<insert id="rvboardInsert" parameterType="rvboard">
+	
+	INSERT INTO rv_board(rv_no,m_no ,rv_tag, rv_title, rv_content,rv_image) 
+		VALUES (rv_board_seq.nextval, #{m_no},#{rv_tag},#{rv_title},#{rv_content},#{rv_image})
+	
+	
+	</insert>
+	<!-- 게시물 수정하기 -->
+	<update id="rvboardUpdate" parameterType="rvboard">
+		update rv_board
+			set rv_title=#{rv_title}, rv_content=#{rv_content},rv_date=sysdate
+			<if test="rv_image">
+				,rv_image=#{rv_image}
+			</if>
+		where rv_no=#{rv_no}
+	</update>
+	
+	<!-- 조회수 올리기 -->
+	<update id="RvcntUpdate" parameterType="rvboard">
+		update rv_board set rv_cnt =rv_cnt +1
+		where rv_no=#{rv_no}
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="rvboardDelete" parameterType="rvboard">
+	  	delete from rv_board where rv_no=#{rv_no}
+	</delete>
+</mapper>

@@ -7,8 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.msix.admin.member.vo.MemberVO;
+import com.msix.admin.member.vo.AMemberVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -19,14 +18,14 @@ import lombok.extern.log4j.Log4j;
 public class MemberMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private MemberDAO memberDAO;
+	private AMemberDAO memberDAO;
 	
 	@Test
 	public void testMemberList() {
-		MemberVO mvo = new MemberVO();
+		AMemberVO mvo = new AMemberVO();
 		
-		List<MemberVO> list = memberDAO.memberList(mvo);
-		for(MemberVO vo : list) {
+		List<AMemberVO> list = memberDAO.memberList(mvo);
+		for(AMemberVO vo : list) {
 			log.info(vo);
 		}
 	}

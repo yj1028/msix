@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 public class QBoardMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
-	private QBoardDAO qboardDAO;
+	private AQBoardDAO qboardDAO;
 	
 	@Test
 	public void testBoardList() {

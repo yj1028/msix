@@ -2,11 +2,11 @@ package com.msix.admin.member.service;
 
 import java.util.List;
 
-import com.msix.admin.member.vo.MemberVO;
+import com.msix.admin.member.vo.AMemberVO;
 
 public interface MemberService {
-	public List<MemberVO> memberList(MemberVO mvo);
-	public int memberListCnt(MemberVO mvo);
-	public MemberVO memberDetail(MemberVO mvo);
-	public int memberDormancy(MemberVO mvo);
+	public List<AMemberVO> memberList(AMemberVO mvo);
+	public int memberListCnt(AMemberVO mvo);
+	public AMemberVO memberDetail(AMemberVO mvo);
+	public int memberDormancy(AMemberVO mvo);
 }

@@ -35,7 +35,14 @@
 		<script src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				/* 로그인 버튼 클릭 시 처리 이벤트(db) 
+				
+				/* 아이디나 비밀번호가 틀릴 경우 */
+				let msg = "${errorMsg}";
+				if(msg != ""){
+					alert(msg);
+				}
+				
+				/* 로그인 버튼 클릭 시 처리 이벤트(db) */
 				$("#signinBtn").click(function(){
 					// 입력값 체크
 					if(!chkData("#m_id", "ID를")) return;
@@ -47,9 +54,9 @@
 						});
 						$("#form-signin").submit();
 					}
-				}); */
+				}); 
 				
-				/* 로그인 버튼 클릭 시 처리 이벤트(임시) */
+				/* 로그인 버튼 클릭 시 처리 이벤트(임시) 
 				$("#signinBtn").click(function(){
 					// 입력값 체크
 					if(!chkData("#m_id", "ID를")) return;
@@ -70,8 +77,8 @@
 						if($("#m_id").val() == "admin" && $("#m_pwd").val() == "admin1234"){
 							location.href = "/admin/mainPage"
 						}
-					}
-				});
+					} 
+				}); */
 			}); // 최상위$ 종료
 		</script>
 	</head>
@@ -81,14 +88,9 @@
 	      <form class="form-signin" id="form-signin">
 	        <h3 class="form-signin-heading">MSIXPet Admin sign in</h3>
 	        <label for="inputEmail" class="sr-only">ID</label>
-	        <input type="text" name="m_id" id="m_id" class="form-control" placeholder="ID" required autofocus value="admin">
+	        <input type="text" name="m_id" id="m_id" class="form-control" placeholder="ID" required autofocus />
 	        <label for="inputPassword" class="sr-only">Password</label>
-	        <input type="password" name="m_pwd" id="m_pwd" class="form-control" placeholder="Password" required value="admin1234">
-	        <div class="checkbox">
-	          <label>
-	            <input type="checkbox" value="remember-me"> Remember me
-	          </label>
-	        </div>
+	        <input type="password" name="m_pwd" id="m_pwd" class="form-control" placeholder="Password" required />
 	        <button class="btn btn-lg btn-primary btn-block" type="button" name="signinBtn" id="signinBtn">Sign in</button>
 	      </form>
    		</div> <!-- /container -->

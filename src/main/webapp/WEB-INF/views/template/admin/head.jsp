@@ -15,15 +15,10 @@
     </button>
     <a class="navbar-brand" href="/admin/mainPage">MSIXPet 관리자 페이지</a>
   </div>
-  <div id="navbar" class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Settings</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Help</a></li>
-    </ul>
-    <form class="navbar-form navbar-right">
-      <input type="text" class="form-control" placeholder="Search...">
-    </form>
-  </div>
+  	<div id="navbar" class="navbar-collapse collapse">
+	  <ul class="nav navbar-nav navbar-right">
+	  	<li><a href="#">${adminLogin.m_id}님 환영합니다!!</a></li>
+        <li><a href="/signin/signout">sign out</a></li>
+      </ul>
+  	</div>
 </div>
