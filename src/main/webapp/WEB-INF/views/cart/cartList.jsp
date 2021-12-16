@@ -206,13 +206,12 @@
                                            class="chkbox" value="${cart.p_price * cart.cart_cnt + cart.cart_pay}"
                                             data-Num="${cart.cart_no}" /> 
                                     </td> 
-                                            
+                                            <%-- <img src="/uploadStorage/refund/${detail.rf_image}"/> --%>
                                             <td class="product-col">${cart.p_name}
                                             
-                                   <%--  <td class="product-col">
-                                        <img src="${cart.gdsThumbImg}" alt="${cart.gdsThumbImg}" />
-                                    </td> --%>
-                                    
+                                    <%--  <td class="product-col">
+                                         <img src="/uploadStorage/goods/${cart.i_thumb}" />
+                                    </td>  --%>                               
                                     <td class="price-col">
                                         <fmt:formatNumber pattern="###,###,###" value="${cart.p_price}" />
                                         원

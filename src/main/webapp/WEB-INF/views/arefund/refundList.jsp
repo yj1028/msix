@@ -58,6 +58,28 @@
 					// 상세 페이지로 이동하기 위해 form추가 (id : rf_detailForm)
 				 	$("#rf_detailForm").attr({
 						"method":"get",
+<<<<<<< HEAD
+						"action":"/arefund/refundDetail"
+					});
+					$("#rf_detailForm").submit();
+				});
+				
+				/* 페이지 처리 */
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#rf_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
+			});
+			
+			function goPage(){
+				if($("#search").val() == "refundAll"){
+					$("#keyword").val("");
+				}
+				$("#rf_search").attr({
+					"method":"get",
+					"action":"/arefund/refundList"
+=======
 						"action":"/refund/refundDetail"
 					});
 					$("#rf_detailForm").submit();
@@ -78,6 +100,7 @@
 				$("#rf_search").attr({
 					"method":"get",
 					"action":"/refund/refundList"
+>>>>>>> branch 'msix_total' of https://github.com/yj1028/msix.git
 				});
 				$("#rf_search").submit();
 			}

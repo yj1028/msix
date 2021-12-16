@@ -33,29 +33,31 @@ public class OrdersServiceImpl implements OrdersService {
    }
    
    public int ordersInsert(OrdersVO ovo) {
-	   int result = 0;
-	   int orderNumber = ordersDAO.orderNumber();
-		ovo.setO_no(orderNumber);
-		result = ordersDAO.ordersInsert(ovo);
-	      
-	      OrderdetailVO dvo = new OrderdetailVO();
-	      CartVO cvo = new CartVO();
-	      cvo.setM_no(ovo.getM_no());
-	      List<CartVO> cartList = cartDAO.cartList(cvo);
-	      
-	      for(CartVO cart  : cartList) {
-		   dvo = new OrderdetailVO();
-		   dvo.setO_no(orderNumber);
-		   dvo.setP_no(cart.getP_no());
-		   dvo.setD_cnt(cart.getCart_cnt());
-		   dvo.setD_price(cart.getCart_price());
-		   dvo.setD_delivery("결제완료");
-		     orderdetailDAO.orderDetailInsert(dvo);
-		     System.out.println(dvo);
-		  }
-	      return result;
-	   }
 
+	      int result = 0;
+	      int orderNumber = ordersDAO.orderNumber();
+	      ovo.setO_no(orderNumber);
+	      result = ordersDAO.ordersInsert(ovo);
+	         
+	         OrderdetailVO dvo = new OrderdetailVO();
+	         CartVO cvo = new CartVO();
+	         cvo.setM_no(ovo.getM_no());
+	         List<CartVO> cartList = cartDAO.cartList(cvo);
+	         
+	         for(CartVO cart  : cartList) {
+	         dvo = new OrderdetailVO();
+	         dvo.setO_no(orderNumber);
+	         dvo.setP_no(cart.getP_no());
+	         dvo.setD_cnt(cart.getCart_cnt());
+	         dvo.setD_price(cart.getCart_price());
+	         dvo.setD_delivery("결제완료");
+	         dvo.setD_shipment(cart.getCart_delivery());
+	         dvo.setD_pay(cart.getCart_pay());
+	           orderdetailDAO.orderDetailInsert(dvo);
+	           System.out.println(dvo);
+	        }
+	         return result;
+	      }
 
    @Override
 	public List<OrderdetailVO> ordersDetailList(OrderdetailVO odvo) {

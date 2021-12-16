@@ -169,7 +169,7 @@
 				$("#productUpdateBtn").click(function(){
 					//입력값 체크
 					if(!chkData("#p_name", "상품명을")) return;
-					else if(!chkData("#p_price", "상품가격을")) return;
+					/* else if(!chkData("#p_price", "상품가격을")) return;
 					else if($.isNumeric($("#p_price").val())==false){
 						alert("가격은 숫자만 입력해 주세요.");
 						$("#p_price").focus();
@@ -179,7 +179,7 @@
 						alert("음수는 입력할 수 없습니다.");
 						$("#p_price").focus();
 						return;
-					}
+					} */
 					else if(!chkData("#p_info", "상품정보를")) return;
 					else{
 						$("#f_updateForm").attr({
@@ -262,7 +262,7 @@
 				    				<strong>메인이미지</strong>
 			   					</c:if>
 			    				<c:if test="${status.index!=0}">
-				    				<strong>상품이미지</strong>
+				    				<strong>상세이미지</strong>
 			   					</c:if>
 			   					<input type="file" name="file" class="file" />
 			    			</td>
@@ -296,8 +296,7 @@
 							</select>
 						</td>
 						<td><strong>판매가</strong></td>
-						<td><input type="text" name="p_price" id="p_price" value="${updateData.p_price}" class="form-control text-left"
-							maxlength="9" /></td>
+						<td>${updateData.p_price}원</td>
 						<td><strong>수량</strong></td>
 						<td>${updateData.p_cnt}</td>
 					</tr>

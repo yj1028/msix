@@ -18,10 +18,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/refund/*")
+@RequestMapping("/arefund/*")
 @Log4j
 @AllArgsConstructor
-public class RefundController {
+public class ARefundController {
 	
 	private RefundService refundService;
 	
@@ -40,7 +40,7 @@ public class RefundController {
 		int count = total - (rvo.getPageNum() - 1) * rvo.getAmount();
 		model.addAttribute("count", count);
 				
-		return "refund/refundList";
+		return "arefund/refundList";
 	}
 	
 	@GetMapping("/refundDetail")
@@ -50,7 +50,7 @@ public class RefundController {
 		ARefundVO detail = refundService.refundDetail(rvo);
 		model.addAttribute("detail", detail);
 		
-		return "refund/refundDetail";
+		return "arefund/refundDetail";
 	}
 	
 	@PostMapping("/refundUpdate")
@@ -62,9 +62,9 @@ public class RefundController {
 		int result = refundService.refundUpdate(rvo);
 		
 		if(result == 1) {
-			url = "/refund/refundList";
+			url = "/arefund/refundList";
 		} else {
-			url = "/refund/refundDetail";
+			url = "/arefund/refundDetail";
 		}
 		
 		return "redirect:" + url;
@@ -80,37 +80,12 @@ public class RefundController {
 		ras.addFlashAttribute("data", rvo);
 		
 		if(result == 1) {
-			url = "/refund/refundList";
+			url = "/arefund/refundList";
 		} else {
-			url = "/refund/refundDetail";
+			url = "/arefund/refundDetail";
 		}
 		
 		return "redirect:" + url;
 	}
 	
-	@RequestMapping("/refundInsertForm")
-	public String refundInsertForm(@ModelAttribute ARefundVO rvo) {
-		log.info("refundInsertForm 호출 성공");
-		
-		
-		
-		return "refund/refundInsertForm";
-	}
-	
-	@PostMapping("/refundInsert")
-	public String refundInsert(ARefundVO rvo) throws Exception{
-		log.info("refundInsert 호출 성공");
-		
-		int result = 0;
-		String url = "";
-		
-		result = refundService.refundInsert(rvo);
-		if(result == 1) {
-			url = "/orders/orderDetailList";
-		} else {
-			url = "/refund/refundInsertForm";
-		}
-		
-		return "redirect:" + url;
-	}
 }

@@ -17,7 +17,7 @@
     	<a href="/aorders/orderList">주문관리</a>
     </li>
     <li <c:if test="${fn:containsIgnoreCase(clientUri, '/refund')}">class="active"</c:if>>
-    	<a href="/refund/refundList">환불관리</a>
+    	<a href="/arefund/refundList">환불관리</a>
     </li>
   </ul>
   <ul class="nav nav-sidebar">

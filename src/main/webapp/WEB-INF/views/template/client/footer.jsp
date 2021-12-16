@@ -16,10 +16,13 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div ><!-- class="copyright_text  wow fadeInUp animated" -->
-                       	 <p class="text-muted">COMPANY : 주식회사 msixpetOWNER : 장영진과 아이들 BUSINESS LICENSE : 873-88-01730 MALL-ORDER LICENSE : 제 2014-서울양천-0758호
-							ADDRESS : 137841 서울특별시 성동구 134 B1TEL : 02-6071-9253
-							CPO : 장영진과 아이들 (msixpet_@naver.com)CONTACT US : msixpet@naver.com
-							COPYRIGHT © msixpet ALL RIGHTS RESERVED. HOSTING MSIXself | DESIGNED By MSIX</p>
+                       	 <p class="text-muted">회사명 : (주)MSIXPET | 대표 : msix| 사업자등록번호 : 286-86-38546 ㅣ 판매업신고번호 : 2021-의정부송산-0094호 | 개인정보보호 책임자 : msix
+                  
+							<br/>주소 : 경기도 의정부시 산단로45번길 94, 3층(용현동)
+						
+							CONTACT US : msixpet@naver.com
+							Copyright ⓒ MSIXPET.CO.KR All rights reserved.
+							HOSTING MSIXself | DESIGNED By MSIX</p>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 package com.msix.client.product.vo;
 
-import com.msix.client.common.vo.CommonVO;
-
+import com.msix.common.vo.CommonVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

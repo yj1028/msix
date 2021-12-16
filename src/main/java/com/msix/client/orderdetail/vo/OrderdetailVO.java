@@ -18,5 +18,7 @@ public class OrderdetailVO extends OrdersVO {
 	private int d_cnt;
 	private int d_price;
 	private String d_delivery;
+	private String d_shipment;
+	private int d_pay;
 	private String d_refund;
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
 <mapper namespace="com.msix.admin.refund.dao.ARefundDAO">
 
 	<sql id = "refundSearch">
@@ -18,7 +17,7 @@
 			<![CDATA[ rf_isrefund like '%' || #{keyword} || '%' ]]>
 		</if>
 	</sql>
-	<!-- 게시판 리스트 조회(페이징 처리와 검색 처리) -->
+	<!-- 환불 리스트 조회(페이징 처리와 검색 처리) -->
 	<select id="refundList" parameterType="refund" resultType="refund">
 		<![CDATA[
 			select
@@ -64,7 +63,7 @@
 	<!-- 환불 처리 -->
 	<update id="refundUpdate" parameterType="refund">
 		update order_detail
-		set d_refund = '환불불가'
+		set d_refund = '환불완료'
 		where d_no = #{d_no}
 	</update>
 	
@@ -86,5 +85,19 @@
 		insert into refund(rf_no, d_no, rf_title, rf_reason, rf_image, rf_total)
 		values(msix_refund_seq.nextval, #{d_no}, #{rf_title}, #{rf_reason}, #{rf_image}, #{rf_total})
 	</insert>
+	
+	<!-- 환불 처리중 처리 -->
+	<update id="refundCheck" parameterType="refund">
+		update refund
+		set rf_isrefund = '환불처리중'
+		where d_no = #{d_no}
+	</update>
+	
+	<!-- 환불 처리중 처리2 -->
+	<update id="refundAttrCheck" parameterType="aorderDetail">
+		update order_detail
+		set d_refund = '환불처리중'
+		where d_no = #{d_no}
+	</update>
 
 </mapper>

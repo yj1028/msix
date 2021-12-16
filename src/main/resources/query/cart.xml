@@ -3,11 +3,12 @@
 <mapper namespace="com.msix.client.cart.dao.CartDAO">
 
 	<select id="cartList" resultType="cart" parameterType="cart">
-		select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay,  p.p_no
-		from cart c inner join product p on c.p_no = p.p_no
-			        inner join member m on c.m_no = m.m_no
-		where c.m_no = #{m_no}
-	</select>
+      select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay, p.p_no, i.i_thumb
+      from cart c inner join product p on c.p_no = p.p_no
+                 inner join member m on c.m_no = m.m_no
+                 inner join image i on c.p_no = i.p_no
+      where c.m_no = #{m_no}
+   </select>
 	
 	<!-- <sql id="joinselect">
 		select p.p_name, p.p_price, c.cart_no, c.cart_price, c.cart_cnt, c.cart_delivery, c.cart_pay  
