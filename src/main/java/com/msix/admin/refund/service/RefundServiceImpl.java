@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.msix.admin.refund.dao.ARefundDAO;
 import com.msix.admin.refund.vo.ARefundVO;
 import com.msix.common.file.FileUploadUtil;
@@ -19,6 +18,7 @@ public class RefundServiceImpl implements RefundService {
 	
 	public List<ARefundVO> refundList(ARefundVO rvo){
 		rvo.setAmount(10);
+
 		List<ARefundVO> list = refundDAO.refundList(rvo);
 		return list;
 	}
@@ -47,6 +47,7 @@ public class RefundServiceImpl implements RefundService {
 	}
 	
 	public int refundInsert(ARefundVO rvo) throws Exception {
+		
 		int result = 0;
 		
 		if(rvo.getFile().getSize() > 0) {

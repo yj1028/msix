@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.msix.admin.product.service.AProductService;
 import com.msix.admin.product.vo.AProductVO;
 import com.msix.common.vo.PageDTO;

@@ -36,6 +36,7 @@ public class AOrdersController {
 		// 전체 레코드 수 구현
 		int total = ordersService.orderListCnt(ovo);
 		log.info("count : " + total);
+
 		// 페이징 처리
 		model.addAttribute("pageMaker", new PageDTO(ovo, total));
 		// 출력되는 글번호 제어

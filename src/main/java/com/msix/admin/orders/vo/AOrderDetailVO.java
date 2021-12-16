@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class AOrderDetailVO extends AOrdersVO{
+
 	private String d_no;
 	private String p_no;
 	private int d_cnt;

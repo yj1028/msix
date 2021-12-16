@@ -12,6 +12,7 @@
 			<![CDATA[ m_name like '%' || #{keyword} || '%' ]]>
 		</if>
 	</sql>
+
 	<!-- 회원 리스트 조회(페이징 처리와 검색 처리) -->
 	<select id="memberList" parameterType="amember" resultType="amember">
 		<![CDATA[

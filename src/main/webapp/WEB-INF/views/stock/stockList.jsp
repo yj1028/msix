@@ -42,7 +42,7 @@
 						//:contain()는 특정 텍스트를 포함한 요소반환
 						if($("#search").val()=='p_name') value="#list tr td.goDetail";
 						else if($("#search").val()=='p_type') value="#list tr td.type";
-						else if($("#search").val()=='p_update') value="#list tr td.update";
+						else if($("#search").val()=='p_date') value="#list tr td.date";
 						else if($("#search").val()=='p_no') value="#list tr td.no";
 						console.log($(value+":contains('"+word+"')").html());
 						
@@ -110,8 +110,14 @@
 							action : "/stock/stockUpdate"
 						});
 						$("#stockUpdateForm").submit();
-						alert("수정이 완료되었습니다.");
+						alert("재고수정이 완료되었습니다.");
 					}
+				});
+				
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
 				});
 			}); // 최상위 $종료
 			
@@ -201,7 +207,7 @@
 											<td class="text-center sto">
 												<input type="number" class="p_stock" min="0" max="999" value="${stock.p_cnt}">
 											</td>
-											<td class="update text-center">${stock.p_update}</td>
+											<td class="date text-center">${stock.p_date}</td>
 											<td>
 												<input class="btn btn-warning stockUpdateBtn" type="button" value="재고수정" />
 											</td>

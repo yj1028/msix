@@ -33,6 +33,7 @@ public class OrdersServiceImpl implements OrdersService {
    }
    
    public int ordersInsert(OrdersVO ovo) {
+
 	      int result = 0;
 	      int orderNumber = ordersDAO.orderNumber();
 	      ovo.setO_no(orderNumber);
@@ -57,7 +58,6 @@ public class OrdersServiceImpl implements OrdersService {
 	        }
 	         return result;
 	      }
-
 
    @Override
 	public List<OrderdetailVO> ordersDetailList(OrderdetailVO odvo) {

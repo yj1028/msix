@@ -68,9 +68,9 @@ public class AProductController {
 		
 		result = productService.productInsert(pvo);
 		if(result == 1) {
-			url = "/aproduct/productList";
+			url = "/product/productList";
 		} else {
-			url = "/aproduct/insertForm";
+			url = "/product/insertForm";
 		}
 		
 		return "redirect:" + url;
@@ -114,9 +114,9 @@ public class AProductController {
 		ras.addFlashAttribute("data", pvo);
 		
 		if(result == 1) {
-			url = "/aproduct/productDetail";
+			url = "/product/productDetail";
 		} else {
-			url = "/aproduct/updateForm";
+			url = "/product/updateForm";
 		}
 		
 		return "redirect:"+url;
@@ -134,9 +134,9 @@ public class AProductController {
 		ras.addFlashAttribute("data", pvo);
 		
 		if(result == 1) {
-			url = "/aproduct/productList";
+			url = "/product/productList";
 		} else {
-			url = "/aproduct/productDetail";
+			url = "/product/productDetail";
 		}
 		
 		return "redirect:"+url;
