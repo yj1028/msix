@@ -69,15 +69,12 @@
 	<script type="text/javascript" src="/resources/include/js/common.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			
+			/* 아이디 찾기 */
 			$("#selectBtn").click(function(){
 				if(!chkData("#m_name", "이름을")) return;
 				else if(!chkData("#m_email", "이메일을")) return;
 				else{
-					/* $("#idForm").attr({
-						"method":"post",
-						"action":"/login/selectId"
-					});
-					$("#idForm").submit(); */
 					$.ajax({
 						url : "/login/selectId",
 						type : "post",
