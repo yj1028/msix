@@ -44,7 +44,7 @@
 	
 	<!-- 환불관리 -->
 	<definition name="arefund/*" extends="contents"> 
-		<put-attribute name="title" value="" />
+		<put-attribute name="title" value="환불관리" />
 		<put-attribute name="contents" value="/WEB-INF/views/arefund/{1}.jsp" />
 	</definition>
 	
