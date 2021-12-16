@@ -60,7 +60,7 @@
 					// 입력값 체크
 					if(!chkData("#p_name", "상품명을")) return;
 					else if($("#p_type option").index($("#p_type option:selected"))==0){
-						alert("상품분류를 선택해 주세요.");
+						alert("카테고리를 선택해 주세요.");
 						$("#p_type").focus();
 						return;
 					}else if(!chkData("#p_info", "상품정보를")) return;
