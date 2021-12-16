@@ -41,7 +41,7 @@
 						//:contain()는 특정 텍스트를 포함한 요소반환
 						if($("#search").val()=='p_name') value="#list tr td.goDetail";
 						else if($("#search").val()=='p_type') value="#list tr td.type";
-						else if($("#search").val()=='p_update') value="#list tr td.update";
+						else if($("#search").val()=='p_date') value="#list tr td.date";
 						else if($("#search").val()=='p_no') value="#list tr td.no";
 						console.log($(value+":contains('"+word+"')").html());
 						
@@ -110,6 +110,7 @@
 					$("#detailForm").submit();
 				}); 
 				
+				/* 페이징 처리 */
 				$(".paginate_button a").click(function(e){
 					e.preventDefault();
 					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
@@ -152,7 +153,7 @@
 							<option value="p_name">상품명</option>
 							<option value="p_type">카테고리</option>
 							<option value="p_info">상품정보</option>
-							<option value="p_update">등록일</option>
+							<option value="p_date">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
 						<select class="form-control" name="type" id="type">
@@ -200,7 +201,7 @@
 										</td>  
 										<td class="type text-center">${product.p_type}</td>
 										<td class="text-center">${product.p_price}</td>
-										<td class="update text-center">${product.p_update}</td>
+										<td class="date text-center">${product.p_date}</td>
 									</tr>
 								</c:forEach>
 							</c:when>

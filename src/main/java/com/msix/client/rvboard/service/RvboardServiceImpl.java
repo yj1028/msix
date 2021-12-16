@@ -94,6 +94,7 @@ public class RvboardServiceImpl implements RvboardService {
 		result=rvboardDAO.rvboardDelete(rvvo);
 		return result;
 	}
+	
 	@Override
 	public int ccmntCnt(int rv_no) {
 		int result=0;

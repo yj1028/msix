@@ -19,10 +19,11 @@ public class AOrdersServiceImpl implements OrdersService {
 	
 	@Override
 	public List<AOrdersVO> orderList(AOrdersVO ovo){
+
 		ovo.setAmount(10);
 		System.out.println("count : " + ovo.getPageNum());
 		System.out.println("count : " + ovo.getAmount());
-		
+
 		List<AOrdersVO> list = ordersDAO.orderList(ovo);
 		return list;
 	}

@@ -11,7 +11,7 @@ public class AMainController {
 	@GetMapping(value = "/mainPage")
 	public String mainPage() {
 		
-		return "main/mainPage";
+		return "amain/mainPage";
 	}
 	
 	@GetMapping(value="/msixAdmin")

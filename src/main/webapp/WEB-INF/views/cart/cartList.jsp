@@ -211,8 +211,7 @@
                                             
                                     <%--  <td class="product-col">
                                          <img src="/uploadStorage/goods/${cart.i_thumb}" />
-                                    </td>  --%>
-                                    
+                                    </td>  --%>                               
                                     <td class="price-col">
                                         <fmt:formatNumber pattern="###,###,###" value="${cart.p_price}" />
                                         원

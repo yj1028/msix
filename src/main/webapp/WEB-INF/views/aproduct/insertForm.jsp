@@ -60,7 +60,7 @@
 					// 입력값 체크
 					if(!chkData("#p_name", "상품명을")) return;
 					else if($("#p_type option").index($("#p_type option:selected"))==0){
-						alert("상품분류를 선택해 주세요.");
+						alert("카테고리를 선택해 주세요.");
 						$("#p_type").focus();
 						return;
 					}else if(!chkData("#p_info", "상품정보를")) return;
@@ -127,7 +127,7 @@
 			  </div>
 			  <br />
 			  <div class="form-group">
-			   	<label for="p_type" class="col-sm-2 control-label text-left">상품분류</label>
+			   	<label for="p_type" class="col-sm-2 control-label text-left">카테고리</label>
 			    <div class="col-sm-10">
 			      	<select class="form-control" name="p_type" id="p_type">
 			      		<option>---선택---</option>
@@ -149,9 +149,9 @@
 			  </div>
 			  <br />
 			  <div class="form-group">
-			    <label for="file" class="col-sm-2 control-label">상품가격</label>
+			    <label for="file" class="col-sm-2 control-label">판매가</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="p_price" id="p_price" placeholder="상품가격" maxlength="9" />
+			      <input type="text" class="form-control" name="p_price" id="p_price" placeholder="판매가" maxlength="9" />
 			    </div>
 			  </div>
 			  <br />

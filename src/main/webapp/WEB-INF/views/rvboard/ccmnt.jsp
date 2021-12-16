@@ -197,6 +197,7 @@
 		}
 		/**새로운 글을 화면에 추가하기(보여주기) 위한 함수*/		
 		function addNewItem(c_no,m_name,c_comment,c_date) {
+
 			let lno ="${login.m_no}";
 			
 			//새로운 글이 추가될 li 갹채
