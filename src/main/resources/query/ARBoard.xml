@@ -12,7 +12,7 @@
 	
 	<insert id="replyInsert" parameterType="qnaReply">
 		insert into r_board(r_no, q_no, r_title, r_content, r_cnt)
-		values(r_no_seq.nextval, #{q_no}, #{r_title}, #{r_content}, 0)
+		values(msix_r_board_seq.nextval, #{q_no}, #{r_title}, #{r_content}, 0)
 	</insert>
 	
 	<update id="replyupdate" parameterType="qnaReply">

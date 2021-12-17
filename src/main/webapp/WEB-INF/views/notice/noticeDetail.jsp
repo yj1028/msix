@@ -33,8 +33,6 @@
 					let currTr = $(this).parents("tr");
 					updateForm(currTr);
 					
-					$(this).hide();
-					
 				});
 				
 				/* 수정화면에서 수정취소버튼(초기화) 클릭처리  */
@@ -50,8 +48,7 @@
 					// 버튼(수정, 삭제하기) 보여주기 
 					$(this).find("input[type='button']").show();
 					
-					$("#input_reply").hide();
-					
+					$(".update_area").remove();
 					
 				});
 				
@@ -145,7 +142,7 @@
 				update_btn.addClass("btn btn-primary");
 				
 				let reset_btn = $("<input>");
-				reset_btn.attr({"type" : "button", "value" : "수정취소"});
+				reset_btn.attr({"type" : "button", "id" : "cancleUpdateBtn", "value" : "수정취소"});
 				reset_btn.addClass("reset_btn");
 				reset_btn.addClass("btn btn-primary");
 							

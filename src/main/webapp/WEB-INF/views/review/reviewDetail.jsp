@@ -146,7 +146,7 @@
 			</form>
 			<div class="d-grid gap-3">
 				<div class="p-2 bg-light border">
-					<table summary="리뷰게시판 상세페이지" class="table table-bordered">
+					<table summary="리뷰게시판 상세페이지" class="table table-bordered text-left">
 						<tr>
 							<td>글번호</td>
 							<td colspan="3">${detail.rv_no}</td>
@@ -169,7 +169,7 @@
 						</tr>
 						<c:if test="${not empty detail.rv_image }">
 							<td>이미지</td>
-							<td><img src="/uploadStorage/${detail.rv_image }" class="rounded mx-auto d-block"></td>
+							<td><img src="/uploadStorage/product/${detail.rv_image }" class="rounded mx-auto d-block"></td>
 						</c:if> 
 						<tr>
 							<td>작성일</td>

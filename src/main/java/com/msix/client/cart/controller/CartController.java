@@ -141,8 +141,6 @@ public class CartController {
 		
 		MemberVO member = (MemberVO)session.getAttribute("login");
 		
-		int result = 0;
-		
 		CartVO cvo = new CartVO();
 		int cart_no = 0;
 		
@@ -152,7 +150,7 @@ public class CartController {
 			for(String i : checkArr) {
 				cart_no = Integer.parseInt(i);
 				cvo.setCart_no(cart_no);
-				result = cartService.deleteCart(cvo);
+				cartService.deleteCart(cvo);
 			}
 		
 		}

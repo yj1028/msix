@@ -47,9 +47,49 @@
 						$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 						goPage();
 					});
+					
+					// 검색 처리
+					/* 검색 후 검색 대상과 검색 단어 출력 */
+					let word = "<c:out value='${data.keyword}' />";
+					let value = "";
+					if(word != ""){
+						$("#keyword").val("<c:out value='${data.keyword}' />");
+						$("#search").val("<c:out value='${data.search}' />");
+						
+						if($("#search").val()!='n_content'){
+							//:contains()는 특정 텍스트를 포함한 요소반환
+							if($("#search").val() == 'n_title') value= "#list tr td.goDetail";
+							console.log($(value + ":contains('" + word + "')").html());
+							
+							$(value + ":contains('" + word + "')").each(function(){
+								var regex = new RegExp(word,'gi');
+								$(this).html($(this).html().replace(regex,"<span class='required'>" + word + "</span>"));
+							});
+						}
+					}
+					
+					$("#search").change(function(){ // 검색 대상이 변경될 때마다 처리하는 이벤트
+						if($("#search").val()=="all"){
+							$("#keyword").val("전체 데이터 조회합니다.");
+						} else if ($("#search").val() != "all"){
+							$("#keyword").val("");
+							$("#keyword").focus();
+						}
+					});
+						
+					$("#searchData").click(function(){
+						if($("#search").val() != "all"){
+							if(!chkData("#keyword","검색어를")) return;
+						}
+						goPage();
+					});
+					
 				});
 				
 				function goPage(){
+					if($("#search").val() == "all"){
+						$("#keyword").val("");
+					}
 					$("#f_search").attr({
 						"method":"get",
 						"action":"/notice/noticeList"
@@ -57,6 +97,9 @@
 					$("#f_search").submit();
 				}
 		</script>
+		<style type="text/css">
+			.required{ color: blue; }
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -66,8 +109,15 @@
 			<form id="f_search" name="f_search">
 				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-				<div>
-					
+				<div class="text-right">
+					<label>검색조건</label>
+					<select name="search" id="search">
+						<option value="all">전체</option>
+						<option value="n_title">제목</option>
+						<option value="n_content">내용</option>
+					</select>
+					<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" />
+					<button type="button" id="searchData">검색</button>
 				</div>
 			</form>
 			<div class="table-height">
@@ -76,7 +126,6 @@
 					<tr>
 						<th class="text-center">글번호</th>
 						<th class="text-center">제목</th>
-<!-- 						<th class="text-center">내용</th> -->
 						<th class="text-center">작성일</th>
 						<th class="text-center">조회수</th>
 					</tr>
@@ -88,8 +137,7 @@
 							<c:forEach var="notice" items="${boardList}" varStatus="status">
 								<tr class="text-center" data-no="${notice.n_no}">
 									<td class="text-center">${count - status.index}</td>
-									<td class="goDetail text-center">${notice.n_title }</td>
-									<%-- <td class="text-center">${notice.n_content }</td> --%>
+									<td class="goDetail text-left">${notice.n_title }</td>
 									<td class="text-center">${notice.n_date}</td>
 									<td class="text-center">${notice.n_cnt}</td>
 								</tr>

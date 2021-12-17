@@ -14,13 +14,17 @@
 			</if>
 	</sql>
 
-	<!--  기본 조회 
-	<select id="boardList" resultType="qna">
-		select q_no, m_no, q_tag, q_title, q_content, 
-		to_char(q_date,'YYYY-MM-DD') as q_date, q_cnt
+	<!--  통계용 조회 -->
+	<resultMap type="qna" id="statsBoard">
+		<id column="q_no" property="q_no" />
+		<result column="q_title" property="q_title"/>
+	</resultMap>	
+	
+	<select id="selectStatsBoard" resultMap="statsBoard">
+		select q_no, q_title 
 		from q_board
-		order by q_no desc
-	</select> 	-->
+	</select>
+	
 	
 	<select id="boardDetail" parameterType="qna" resultType="qna">
 		select q_no, m_no, q_tag, q_title, q_content, 
