@@ -32,14 +32,14 @@
 	<!-- 수량 수정하기(상품 변경 X, 수량만 변경함.) -->
 	<update id="updateCart" parameterType="cart">
 		update cart
-			set cart_cnt=#{cart_cnt} , cart_date = sysdate, cart_price=#{cart_price}
-		where cart_no=#{cart_no}
+			set cart_cnt = #{cart_cnt} , cart_date = sysdate, cart_price=#{cart_price}
+		where cart_no = #{cart_no}
 	</update>
 	
 	<update id="updateCartcnt" parameterType="cart">
 		update cart
-			set cart_cnt=cart_cnt+#{cart_cnt} , cart_date = sysdate, cart_price=cart_price + #{cart_price}
-		where cart_no=#{cart_no}
+			set cart_cnt = cart_cnt + #{cart_cnt} , cart_date = sysdate, cart_price = cart_price + #{cart_price}
+		where cart_no= #{cart_no}
 	</update>
 		
 </mapper>

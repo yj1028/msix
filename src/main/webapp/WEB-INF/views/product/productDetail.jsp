@@ -246,6 +246,8 @@
 				number_input.attr({"type" : "number", "id" : "num2", "name" : "cart_cnt", "min" : "1", "max" : "100", "value" : ""});
 				number_input.addClass("number_form");
 				
+				//컨트롤러로 보내는 수량 카운트
+				console.log("수량 : "+ $("#num2").val());
 				
 				let sum_span = $("<span>");
 				sum_span.attr({"id" : "sum2"});
