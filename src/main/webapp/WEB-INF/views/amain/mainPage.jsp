@@ -102,22 +102,22 @@
 	    </style>
 	</head>
 	<body>
-		<div id="piechart" style="width: 550px; height: 500px;"></div>
+		<div id="piechart" style="width: 550px; height: 420px;"></div>
 		<div id="columnchart_values" style="width: 550px; height: 300px;"></div>
-		<br /><br /><br /><br /><br /><br />
+		<br /><br /><br />
 		<div id="table_div"></div>
-		<br /><br /><br /><br /><br /><br />
+		<br /><br /><br />
 		
 		<table class="table table-condensed">
-			<caption>공지게시판</caption>
+			<caption class="text-center">공지게시판</caption>
 			<tr>
-				<td>공지글 제목</td>
+				<td>배송지연 공지사항</td>
 			</tr>
 			<tr>
-				<td>공지글 제목</td>
+				<td>CITES 양수 신청 방법</td>
 			</tr>
 			<tr>
-				<td>공지글 제목</td>
+				<td>7월 8일 생물 수입 안내입니다.</td>
 			</tr>
 		</table>
 		<table class="table table-condensed">
