@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.msix.client.cart.service.CartService;
 import com.msix.client.cart.vo.CartVO;
@@ -38,7 +37,7 @@ public class OrdersController {
 		log.info("ordersForm 호출 성공 ★");
 
 		MemberVO mvo = (MemberVO) session.getAttribute("login");
-		CartVO cart = (CartVO) session.getAttribute("cart");
+		//CartVO cart = (CartVO) session.getAttribute("cart");
 
 		cvo.setM_no(mvo.getM_no());
 
