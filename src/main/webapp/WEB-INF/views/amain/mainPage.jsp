@@ -121,27 +121,27 @@
 			</tr>
 		</table>
 		<table class="table table-condensed">
-			<caption>리뷰게시판</caption>
+			<caption class="text-center">리뷰게시판</caption>
 			<tr>
-				<td>글 제목</td>
+				<td>방문수령했습니다</td>
 			</tr>
 			<tr>
-				<td>글 제목</td>
+				<td>전부폐사했습니다</td>
 			</tr>
 			<tr>
-				<td>글 제목</td>
+				<td>팬시모프 레오파드</td>
 			</tr>
 		</table>
 		<table class="table table-condensed">
-			<caption>질의게시판</caption>
+			<caption class="text-center">질의게시판</caption>
 			<tr>
-				<td>글 제목</td>
+				<td>거북이 사이즈 및 수량 문의 드립니다</td>
 			</tr>
 			<tr>
-				<td>글 제목</td>
+				<td>레오파드 게코 입니다</td>
 			</tr>
 			<tr>
-				<td>글 제목</td>
+				<td>일반택배배송</td>
 			</tr>
 		</table>
 	</body>

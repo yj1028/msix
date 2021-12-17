@@ -138,21 +138,21 @@
                 <div class="col-md-3 text-center">
                     <div class="single_service wow fadeInUp" data-wow-delay="1s">
                         <img src="/resources/images/frog.png" />
-                       <h2><a href="/goods/clientProductList">베스트상품</a></h2>
+                       <h2><a href="/goods/clientProductList?p_type=Lizard">베스트상품</a></h2>
 	                   <p>반려동물을 직접 느껴보세요</p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">
                     <div class="single_service wow fadeInUp" data-wow-delay="2s">
                         <img src="/resources/images/snake.png" />
-                         <h2><a href="/">신상품소개</a></h2>
+                         <h2><a href="/goods/clientProductList?p_type=Gecko">신상품소개</a></h2>
 	                     <p>'색'다른 친구를 원한다면</p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">
                     <div class="single_service wow fadeInUp" data-wow-delay="3s">
                         <img src="/resources/images/turtle.png" />
-                        <h2><a href="/">운영자추천</a></h2>
+                        <h2><a href="/goods/clientProductList?p_type=Amphibian">운영자추천</a></h2>
 	                    <p>누구나 쉽게 새 가족을 맞이할 수 있도록 구성했습니다</p>
                     </div>
                 </div>

@@ -25,7 +25,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                  </button>
-	                  <a class="navbar-brand" href="/main/main"><img src="/resources/include/dist2/images/logo.png" alt="">MSIXpet</a>
+	                  <a class="navbar-brand" href="/main/main"><!-- <img src="/resources/include/dist2/images/logo.png" alt=""> -->MSIXpet</a>
 	                </div>
 					 <%
 					if (session.getAttribute("login") == null){
