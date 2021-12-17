@@ -22,6 +22,7 @@
 				$("#refundInsertBtn").click(function(){
 					if(!chkData("#rf_title","글 제목을")) return;
 					else if(!chkData("#rf_reason","환불 사유를")) return;
+					else if(!chkData("#file","상품 이미지를")) return;
 					else {
 						if($("#file").val() != ""){
 							if (!chkFile($("#file"))) return;

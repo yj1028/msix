@@ -100,7 +100,7 @@
             <a href="/main/main" class="list-group-item active">메인페이지</a>
             <a href="/goods/clientProductList?p_type=Lizard" class="list-group-item">Lizard</a>
             <a href="/goods/clientProductList?p_type=Gecko" class="list-group-item">Gedco</a>
-            <a href="/goods/clientProductList?p_type=Snake" class="list-group-item">Snake</a>
+            <!-- <a href="/goods/clientProductList?p_type=Snake" class="list-group-item">Snake</a> -->
             <a href="/goods/clientProductList?p_type=Turtle" class="list-group-item">Turtle</a>
             <a href="/goods/clientProductList?p_type=Amphibian" class="list-group-item">양서류</a>
             <a href="/goods/clientProductList?p_type=Supplies" class="list-group-item">사육용품</a>

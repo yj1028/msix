@@ -69,7 +69,7 @@
 				});
 				
 				$("#List").click(function(){
-					location.href="/goods/clientProductList"
+					location.href="/goods/clientProductList?p_type=Gecko"
 				});
 				
 				/* 바로구매 버튼 클릭시 제어 
