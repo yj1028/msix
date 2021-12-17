@@ -19,6 +19,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<ProductVO> productList(ProductVO pvo) {
+		pvo.setAmount(10);
 		
 		List<ProductVO> list = productDAO.productList(pvo);
 		return list;

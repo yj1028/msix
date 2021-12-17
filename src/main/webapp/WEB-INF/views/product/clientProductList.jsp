@@ -104,8 +104,6 @@
 					e.preventDefault();
 					$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 					
-					let p_type = $(this).parents("div").attr("data-type");
-					$("#p_type").val(p_type);
 					goPage();
 				});
 			});
@@ -114,10 +112,11 @@
 				if($("#search").val() == "all"){
 					$("#keyword").val("");
 				}
-			
+				let p_type = $(".col-lg-4").attr("data-type");
+				$("#p_type").val(p_type);
 				$("#f_search").attr({
 					"method":"get",
-					"action":"/goods/p"
+					"action":"/goods/clientProductList"
 				});
 				$("#f_search").submit();
 			}
@@ -150,7 +149,7 @@
 			<p class="text-center tatle">베스트 상품</p>
 			
 			<form id="f_search" name="f_search">
-				<input type="hidden" name="p_type" value="">
+				<input type="hidden" name="p_type" id="p_type">
 				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 				<br />
@@ -171,7 +170,7 @@
 				<c:choose>
 					<c:when test="${not empty productList}">
 						<c:forEach var="product" items="${productList}" varStatus="status">
-							<div class="col-lg-4"  data-num="${product.p_no}" data-type="${product.p_type }">
+							<div class="col-lg-4"  data-num="${product.p_no}" data-type="${product.p_type}">
 								<c:if test="${not empty product.i_thumb}">
 									 <img class=" goDetail img" src="/uploadStorage/product/thumbnail/${product.i_thumb}" alt="msix" width="225" height="225">
 								</c:if>

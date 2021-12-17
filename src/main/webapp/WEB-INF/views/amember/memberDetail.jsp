@@ -16,8 +16,8 @@
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
 		<style type="text/css">
-			.aMemberDetail{ color : blue; padding :20px; 
-							font-size: 20px; text-align: center;}
+			.aMemberDetail{ color : blue; padding :15px; 
+							font-size: 15px; text-align: center;}
 		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>

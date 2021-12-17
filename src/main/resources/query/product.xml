@@ -58,14 +58,14 @@
 			        rownum as rnum, p_no, p_name, p_price, p_code, p_type,
 			    p_cnt, p_info, p_date, p_update, p_isdelete
 			    from product
-			    where rownum <= #{pageNum} * #{amount} 
+			    where rownum <= #{pageNum} * #{amount} and p_type = #{p_type}
 			) pd, image img 
-			where pd.p_no = img.p_no and i_thumb is not null
+			where pd.p_no = img.p_no and i_thumb is not null 
 				and rnum > (#{pageNum} - 1) * #{amount}
 		]]>
-			<trim prefix=" and (" suffix=") " prefixOverrides="and">
+			<!-- <trim prefix=" and (" suffix=") " prefixOverrides="and">
 		    	<include refid="productType"></include>
-		    </trim>
+		    </trim> -->
 		    <trim prefix=" and (" suffix=") " prefixOverrides="and">
 		    	<include refid="productSearch"></include>
 		    </trim>

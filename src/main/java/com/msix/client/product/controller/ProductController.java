@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.msix.common.vo.PageDTO;
 import com.msix.client.product.service.ImageService;
 import com.msix.client.product.service.ProductService;
@@ -29,7 +30,7 @@ public class ProductController {
 	
 	/* 상품목록 구현하기 */
 	@RequestMapping(value = "/clientProductList", method = RequestMethod.GET)
-	public String productList(@ModelAttribute("data") ProductVO pvo, Model model) {
+	public String productList(ProductVO pvo, Model model) {
 		log.info("productList 호출 성공");
 		
 		// 레코드 조회

@@ -40,7 +40,4 @@ public class PageDTO {
 		this.next = this.endPage < realEnd;
 	}
 
-	public PageDTO(AOrdersVO ovo, int total2) {
-		// TODO Auto-generated constructor stub
-	}
 }
