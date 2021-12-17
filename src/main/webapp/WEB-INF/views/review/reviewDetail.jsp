@@ -169,7 +169,7 @@
 						</tr>
 						<c:if test="${not empty detail.rv_image }">
 							<td>이미지</td>
-							<td><img src="/uploadStorage/${detail.rv_image }" class="rounded mx-auto d-block"></td>
+							<td><img src="/uploadStorage/product/${detail.rv_image }" class="rounded mx-auto d-block"></td>
 						</c:if> 
 						<tr>
 							<td>작성일</td>
