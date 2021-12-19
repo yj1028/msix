@@ -153,7 +153,7 @@
 							<option value="p_name">상품명</option>
 							<option value="p_type">카테고리</option>
 							<option value="p_info">상품정보</option>
-							<option value="p_update">등록일</option>
+							<option value="p_date">등록일</option>
 							<option value="p_no">상품번호</option>		
 						</select>
 						<select class="form-control" name="type" id="type">

@@ -120,6 +120,7 @@
 				<td>7월 8일 생물 수입 안내입니다.</td>
 			</tr>
 		</table>
+		<br /><br /><br />
 		<table class="table table-condensed">
 			<caption>리뷰게시판</caption>
 			<tr>
